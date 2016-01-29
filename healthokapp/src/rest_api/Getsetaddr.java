@@ -29,9 +29,9 @@ public class Getsetaddr  {
     	a.ps=(PreparedStatement) a.Con.prepareStatement(s1);
     	a.ps.setString(1,st.address1);
         a.ps.setString(2, st.address2);
-        a.ps.setString(2, st.address3);
-    	a.ps.setInt(3,st.cityid);
-    	a.ps.setString(4, st.pincode);
+        a.ps.setString(3, st.address3);
+    	a.ps.setInt(4,st.cityid);
+    	a.ps.setString(5, st.pincode);
     	a.ps.executeUpdate();
     	
     	}
@@ -47,7 +47,7 @@ public class Getsetaddr  {
     
   // method to update address
     @Path("/update")
-    @GET
+    @POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateAddress(Adrs st)	
@@ -61,9 +61,9 @@ public class Getsetaddr  {
     	a.ps=(PreparedStatement) a.Con.prepareStatement(s1);
     	a.ps.setString(1,st.address1);
         a.ps.setString(2, st.address2);
-        a.ps.setString(2, st.address3);
-    	a.ps.setInt(3,st.cityid);
-    	a.ps.setString(4, st.pincode);
+        a.ps.setString(3, st.address3);
+    	a.ps.setInt(4,st.cityid);
+    	a.ps.setString(5, st.pincode);
     	a.ps.executeUpdate();
     	
     	}
