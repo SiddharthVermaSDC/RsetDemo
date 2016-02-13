@@ -1,12 +1,12 @@
-package FinalPackage;
+package rest_api;
 
 public class GetSetLogin {
 
 	public String email=null;
 	public String password=null;
-	//public String firstName=null;
-	//public String lastName=null;
-	//public String phone=null;
+	public String firstName=null;
+	public String lastName=null;
+	public String phone=null;
 	
 	
 	public String getEmail() {
@@ -21,7 +21,7 @@ public class GetSetLogin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/*public String getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
@@ -38,5 +38,5 @@ public class GetSetLogin {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}*/
+	}
 }

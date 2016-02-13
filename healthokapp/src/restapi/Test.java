@@ -25,11 +25,6 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 //import com.sun.jersey.core.header.FormDataContentDisposition;
 //import com.sun.jersey.multipart.FormDataParam;
 
-
-
-
-
-
 @Path("/create")
 public class Test {
 	@Path("/1")

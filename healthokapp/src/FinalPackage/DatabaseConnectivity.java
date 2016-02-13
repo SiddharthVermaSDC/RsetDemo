@@ -9,7 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-public class DatabaseConnectivity 
+class DatabaseConnectivity
 {
 	public  final String USERNAME ="root";
 	public  final String PASSWORD ="9559287622";
