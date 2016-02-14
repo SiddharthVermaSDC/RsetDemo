@@ -14,9 +14,9 @@ public class DatabaseConnectivity {
     private DatabaseConnectivity() throws IOException, SQLException, PropertyVetoException {
         ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUsername("root");
-        ds.setPassword("9559287622");
-        ds.setUrl("jdbc:mysql://localhost:3306/healthok");
+        ds.setUsername("adminuzuSCxp");
+        ds.setPassword("GQBXVWgreeuA");
+        ds.setUrl("jdbc:mysql://127.3.104.130:3306/healthok");
         // the settings below are optional -- dbcp can work with defaults
         //ds.setMinIdle(5);
         //ds.setMaxIdle(20);
