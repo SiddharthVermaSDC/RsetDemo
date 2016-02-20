@@ -45,7 +45,7 @@ public class Test {
 	@Produces (MediaType.TEXT_PLAIN)
 	public String rTurn(){
 		
-		return "hello string second";
+		return "hello second";
 	}
 	          
 	
