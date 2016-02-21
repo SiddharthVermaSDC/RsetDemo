@@ -1,4 +1,4 @@
-package notifications;
+package rest_api;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
