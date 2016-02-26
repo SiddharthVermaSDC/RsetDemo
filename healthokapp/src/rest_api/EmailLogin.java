@@ -52,11 +52,11 @@ public class EmailLogin
 		return mg;
 	}
 	
-	@Path("/{msg}")
+	@Path("/msg")
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getMethod(@PathParam("msg") String s)
-	{
+	public String getMethod()
+	{String s="bbb";
 		return s;
 	}
 }
