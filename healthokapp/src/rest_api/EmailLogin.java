@@ -33,7 +33,7 @@ public class EmailLogin
 		    String query2="select * from user where Mobile=\""+gs.getPhone()+"\" and password=\""+gs.getPassword()+"\"";
 		   if(gs.getEmail()==null)
 		   {
-			   preparedStatement =(PreparedStatement)connection.prepareStatement(query2);	
+			   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
 		   }
 		   else
 		   {
