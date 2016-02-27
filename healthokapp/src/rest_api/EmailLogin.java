@@ -33,7 +33,7 @@ public class EmailLogin
 		    String query2="select * from user where Mobile=\""+gs.getPhone()+"\" and password=\""+gs.getPassword()+"\"";
 		   if(gs.getEmail()==null)
 		   {
-			   preparedStatement =(PreparedStatement)connection.prepareStatement(query2);	
+			   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
 		   }
 		   else
 		   {
@@ -56,7 +56,12 @@ public class EmailLogin
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getMethod()
+<<<<<<< HEAD
 	{
 		return "hgkjh";
+=======
+	{String s="bbb";
+		return s;
+>>>>>>> origin/master
 	}
 }
