@@ -20,7 +20,7 @@ public class DatabaseConnectivity {
         // the settings below are optional -- dbcp can work with defaults
         //ds.setMinIdle(5);
         //ds.setMaxIdle(20);
-        //ds.setMaxOpenPreparedStatements(180);
+           //ds.setMaxOpenPreparedStatements(180);
 
     }
 
