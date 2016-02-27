@@ -1,4 +1,4 @@
-package FinalPackage;
+package rest_api;
 
 public class GetSetFamilyRegistration {
 
