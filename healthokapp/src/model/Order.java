@@ -1,73 +1,58 @@
 package model;
-import java.sql.Date;
 
 public class Order {
-private int OrderId;
-private int UserId;
-private int OrderTypeId;
-private Date OrderDate;
-private int OrderStatusTypeId;
-private Date OrderCompetionDate;
-private String OrderDescription;
-private int TotalCost;
-private int Discount;
-private int CashBonusApplies
-private String Comments;
-public Order(int OrderId,int OrderTypeId,String OrderDate,String OrderCompetionDate,int OrderStatusTypeId,String Comments,int UserId){
-	super();
-	this.OrderId = OrderId;
-	this.OrderTypeId = OrderTypeId;
-	this.OrderDate = OrderDate;
-	this.OrderCompetionDate = OrderCompetionDate;
-	this.OrderStatusTypeId = OrderStatusTypeId;
-	this.Comments = Comments;
-	this.UserId = UserId;
+
+	private int orderId;
+	private float amount;
+	private int tax;
+	private int status;
+	private int shippingcost;
+	private int userid;
+	private String address;
+
+	public int getOrderId() {
+		return orderId;
 	}
-
-
-
-
-public int getOrderId() {
-	return OrderId;
-}
-public void setOrderId(int orderId) {
-	OrderId = orderId;
-}
-public int getOrderTypeId() {
-	return OrderTypeId;
-}
-public void setOrderTypeId(int orderTypeId) {
-	OrderTypeId = orderTypeId;
-}
-public String getOrderDate() {
-	return OrderDate;
-}
-public void setOrderDate(String orderDate) {
-	OrderDate = orderDate;
-}
-public String getOrderCompetionDate() {
-	return OrderCompetionDate;
-}
-public void setOrderCompetionDate(String orderCompetionDate) {
-	OrderCompetionDate = orderCompetionDate;
-}
-public int getOrderStatusTypeId() {
-	return OrderStatusTypeId;
-}
-public void setOrderStatusTypeId(int orderStatusTypeId) {
-	OrderStatusTypeId = orderStatusTypeId;
-}
-public String getComments() {
-	return Comments;
-}
-public void setComments(String comments) {
-	Comments = comments;
-}
-public int getUserId() {
-	return UserId;
-}
-public void setUserId(int userId) {
-	UserId = userId;
-}
-
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+	public float getAmount() {
+		return amount;
+	}
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
+	public int getTax() {
+		return tax;
+	}
+	public void setTax(int tax) {
+		this.tax = tax;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getShippingcost() {
+		return shippingcost;
+	}
+	public void setShippingcost(int shippingcost) {
+		this.shippingcost = shippingcost;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
+	
 }
