@@ -19,12 +19,12 @@ public class Order {
 	public static int createOrder(model.Order order,String username){
 		int userid=0;
 		int result=0;
-		java.util.Date dt=new java.util.Date();
-		java.sql.Date sd=new java.sql.Date(dt.getDate());
-		userid=dal.GetUserId.userid(username);
+		//java.util.Date dt=new java.util.Date();
+		//java.sql.Date sd=new java.sql.Date(dt.getDate());
+		//userid=dal.GetUserId.userid(username);
 		Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
-		String str="insert into healthok.order (amount,status,Tax,ShippingCost,UserId,Address,Date) values (?,?,?,?,?,?,?)";
+		String str="insert into Order(OrderId,UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderCompletionDate,OrderDescription,TotalCost,Discount,CashbackBonusApplied,NetAmount) values (?,?,?,?,?,?,?)";
 		
 		try{
 			ps1=(PreparedStatement) con.prepareStatement(str);
