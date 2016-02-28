@@ -19,7 +19,7 @@ public class Laborderdetail {
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
-		String str1="insert into laborderdetails(LabOrderId,TestName,Price) values (?,?,?)";
+		String str1="insert into LabOrderDetails(LabOrderId,TestName,Price) values (?,?,?)";
 		try{
 			 ps=(PreparedStatement) con.prepareStatement(str1,result);
 			   ps.setInt(1,laborderd.getLaborderId());

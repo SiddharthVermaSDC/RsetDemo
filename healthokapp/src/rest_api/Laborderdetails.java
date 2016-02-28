@@ -28,7 +28,7 @@ public class Laborderdetails {
      res.setStatus(dal.Laborderdetail.placeLabOrderd(laborderdetails));
 	 return res;
 	}	
-	 @Path("/{medicineorderdetailsid}")
+	 @Path("")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
 		public static ArrayList<model.MedicineOrderDetails> responseMedicineOrderDetails(@PathParam("medicineorderdetailsid") int medicineorderdetailsid){
