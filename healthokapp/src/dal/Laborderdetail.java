@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
 
 import servlet.Crudoperation;
 
@@ -21,7 +22,7 @@ public class Laborderdetail {
 		con=(Connection) crudoperation.createConnection();
 		String str1="insert into LabOrderDetails(LabOrderId,TestName,Price) values (?,?,?)";
 		try{
-			 ps=(PreparedStatement) con.prepareStatement(str1,result);
+			 ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
 			   ps.setInt(1,laborderd.getLaborderId());
 			   ps.setString(2,laborderd.getTestname());
 			   ps.setFloat(3,laborderd.getPrice());
@@ -41,7 +42,8 @@ public class Laborderdetail {
 		}
 		catch(SQLException se)
 		   {
-			   
+			System.out.print(se.getMessage());
+			result = 10;
 		   }
 		return result;
     }
