@@ -8,38 +8,50 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-
+import java.sql.Date;
 
 
 @Path("/order")
 public class Order {
 
-	@Path("/1/{UserId}/{commnent}/{image}")
+	@Path("/{OrderTypeId}/{UserId}/{comment}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Result order(@PathParam("UserId") int userid){
+	public static model.Result order(@PathParam("OrderTypeId") int ordertypeid,@PathParam("UserId") int userid,@PathParam("comment") String comment){
 		model.Order order=new model.Order();
 		model.Result result=new model.Result();
 		order.setUserId(userid);
-		order.setTax(tax);
-		order.setShippingcost(shcost);
-		order.setStatus(1);
-		String add=dal.Address.getAddressById(addid);
-		order.setAddress(add);
-		result.setStatus(biz.Order.sendOrder(order, username));
+		switch(ordertypeid)
+		{
+		case 1:order.setOrderTypeId(1);break;
+		case 2:order.setOrderTypeId(2);break;
+		case 3:order.setOrderTypeId(3);break;
+		case 4:order.setOrderTypeId(4);break;
+		case 5:order.setOrderTypeId(5);break;
+		default:System.out.println("Wrong service type");
+		}
+		order.setOrderDescription(comment);
+		order.setOrderStatusTypeId(1);
+		result.setStatus(biz.Order.sendOrder(order));
 		return result;
 		
 	}
-	
-	@Path("/2/{UserId}/{Description}/{Image}")
+	@Path("/1")
 	@GET
-	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Order getOrderedItems(@PathParam("orderid") int orderid){
-		model.Order order=new model.Order();
-		order=dal.Order.getOrderDetail(orderid);
-		return order;
-		
+	@Produces (MediaType.TEXT_PLAIN)
+	public String f(){
+		return "djlakjdflk";
 		
 	}
+	
+
+	@Path("/s")
+	@GET
+	@Produces (MediaType.TEXT_PLAIN)
+	public String rTurn(){
+		
+		return "hello second";
+	}
+	
+
 }

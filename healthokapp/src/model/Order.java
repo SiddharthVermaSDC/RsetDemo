@@ -12,6 +12,7 @@ private int TotalCost;
 private int Discount;
 private int CashbackBonusApplied;
 private int NetAmount;
+public Order(){}
 public Order(int OrderId,int UserId,
 		int OrderTypeId,Date OrderDate,int OrderStatusTypeId,
 		Date OrderCompetionDate,String OrderDescription,
