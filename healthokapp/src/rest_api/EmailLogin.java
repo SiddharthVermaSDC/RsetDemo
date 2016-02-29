@@ -21,16 +21,16 @@ public class EmailLogin
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Message loginCheck(GetSetLogin gs)
+	public int loginCheck(GetSetLogin gs)
 	{
 		  Connection connection = null;
 		  PreparedStatement preparedStatement=null;
 		  ResultSet resultSet=null;
-		  Message mg=new Message();
+		  int status;
 		  try {
 			connection = DatabaseConnectivity.getInstance().getConnection();
-		    String query1="select * from User where EmailId=\""+gs.getEmail()+"\" and password=\""+gs.getPassword()+"\"";
-		    String query2="select * from User where Mobile=\""+gs.getPhone()+"\" and password=\""+gs.getPassword()+"\"";
+		    String query1="select UserId from User where EmailId=\""+gs.getEmail()+"\" and password=\""+gs.getPassword()+"\"";
+		    String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and password=\""+gs.getPassword()+"\"";
 		   if(gs.getEmail()==null)
 		   {
 			   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
@@ -40,24 +40,18 @@ public class EmailLogin
 			   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
 		   }
 			 resultSet=preparedStatement.executeQuery();
+			 
 			 if(resultSet.next()==true)
-				 mg.setMessage("Logged in successfully!");
+				  status=resultSet.getInt("UserId");
 			 else
-				 mg.setMessage("New User. Please register first.");
+				status=-1;
 	     }
 	     catch(Exception e)
 	     {
-	    	 mg.setMessage(e.getMessage());
+	    	status=500;
 	     }
-		return mg;
+		return status;
 	}
 	
-	@Path("/msg")
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getMethod()
-	{
-	    String s="bbb";
-		return s;
-}
+	
 }
