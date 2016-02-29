@@ -41,7 +41,7 @@ public class EmailLogin
 		   }
 			 resultSet=preparedStatement.executeQuery();
 			 
-			 if(resultSet.next()==true)
+			 if(resultSet.next())
 				  status=resultSet.getInt("UserId");
 			 else
 				status=-1;
