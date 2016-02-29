@@ -40,19 +40,13 @@ public class EmailLogin
 			   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
 		   }
 			 resultSet=preparedStatement.executeQuery();
-<<<<<<< HEAD
-<<<<<<< HEAD
-			 
-			 if(resultSet.next())
-				  status=resultSet.getInt("UserId");
-=======
-			 if(resultSet.next()==true)
+
+			
+
+		 if(resultSet.next()==true)
 				 mg.setMessage("Logged in successfully!");
->>>>>>> parent of af8d69e... new
-=======
-			 if(resultSet.next()==true)
-				 mg.setMessage("Logged in successfully!");
->>>>>>> parent of af8d69e... new
+
+
 			 else
 				 mg.setMessage("New User. Please register first.");
 	     }
