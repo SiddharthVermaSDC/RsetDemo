@@ -33,14 +33,13 @@ public class Laborderdetail {
 			   if(rw>0)
 			   {
 				   rs = ps.getGeneratedKeys();
-	                if(rs.next())
-	                    result = rs.getInt(1);
-	 }
-			   else{
+	               if(rs.next())
+	                   result = rs.getInt(1);
+				   
+	            }else{
 				   result=-1;
-			   }
-		}
-		catch(SQLException se)
+			          }
+	       }catch(SQLException se)
 		   {
 			System.out.print(se.getMessage());
 			result = 10;

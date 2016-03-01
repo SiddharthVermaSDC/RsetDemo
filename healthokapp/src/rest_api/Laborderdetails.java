@@ -29,5 +29,20 @@ public class Laborderdetails {
 	 return res;
 	}	
 	
+	
+	@Path("/update/{LabOrderId}/{ResultImage}")
+	@GET
+	@Produces (MediaType.APPLICATION_JSON)
+	public static model.Result updatelaborder(@PathParam("LabOrderId") int laborderid,@PathParam("ResultImage") String image){
+		model.ImageData image1 = new model.ImageData(3,image);
+		
+		int resultimageid = dal.ImageData.imageupload(image1);
+	   model.Result res=new model.Result();
+	
+	
+	 res.setStatus(1);
+	 return res;
+	}	
+	
 
 }
