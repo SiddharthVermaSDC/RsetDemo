@@ -6,7 +6,7 @@ private int UserId;
 private int OrderTypeId;
 private Date OrderDate;
 private int OrderStatusTypeId;
-private Date OrderCompetionDate;
+private Date OrderCompletionDate;
 private String OrderDescription;
 private int TotalCost;
 private int Discount;
@@ -15,7 +15,7 @@ private int NetAmount;
 public Order(){}
 public Order(int OrderId,int UserId,
 		int OrderTypeId,Date OrderDate,int OrderStatusTypeId,
-		Date OrderCompetionDate,String OrderDescription,
+		Date OrderCompletionDate,String OrderDescription,
 		int TotalCost,int Discount,
 		int CashbackBonusApplied,int NetAmount)
 {
@@ -25,7 +25,7 @@ public Order(int OrderId,int UserId,
 	this.OrderTypeId = OrderTypeId;
 	this.OrderDate = OrderDate;
 	this.OrderStatusTypeId = OrderStatusTypeId;
-	this.OrderCompetionDate = OrderCompetionDate;
+	this.OrderCompletionDate = OrderCompletionDate;
 	this.OrderDescription = OrderDescription;
 	this.TotalCost=TotalCost;
 	this.Discount=Discount;
@@ -61,11 +61,11 @@ public int getOrderStatusTypeId() {
 public void setOrderStatusTypeId(int orderStatusTypeId) {
 	OrderStatusTypeId = orderStatusTypeId;
 }
-public Date getOrderCompetionDate() {
-	return OrderCompetionDate;
+public Date getOrderCompletionDate() {
+	return OrderCompletionDate;
 }
-public void setOrderCompetionDate(Date orderCompetionDate) {
-	OrderCompetionDate = orderCompetionDate;
+public void setOrderCompletionDate(Date orderCompletionDate) {
+	OrderCompletionDate = orderCompletionDate;
 }
 public String getOrderDescription() {
 	return OrderDescription;

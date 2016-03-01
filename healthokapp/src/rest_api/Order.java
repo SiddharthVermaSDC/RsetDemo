@@ -1,5 +1,6 @@
 package rest_api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,15 @@ public class Order {
 		return result;
 		
 	}
+	 @Path("/{OrderId}")
+		@GET
+		@Produces (MediaType.APPLICATION_JSON)
+		public static ArrayList<model.Order> responsorder(@PathParam("OrderId") int orderid){
+			ArrayList<model.Order> ord=new ArrayList<model.Order>();
+			ord=biz.Order.respondOrder(orderid);
+			
+			return ord;
+		}
 	@Path("/1")
 	@GET
 	@Produces (MediaType.TEXT_PLAIN)
