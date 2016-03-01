@@ -46,6 +46,7 @@ public class EmailLogin
 			   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
 		   }
 			 resultSet=preparedStatement.executeQuery();
+
 			 if(resultSet.next()==true)
 			 {
 				 //cognito.put(gsmr.setUserId(resultSet.getInt("UserId")));
@@ -71,6 +72,7 @@ public class EmailLogin
 				
 				 //mg.setMessage("Logged in successfully! "+id);
 			 }
+
 			 else
 			 {
 				gsmr.setUserId(-1);

@@ -6,8 +6,11 @@ import servlet.Crudoperation;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.ResultSet;
 
+import java.util.Date;
+//import com.mysql.jdbc.ResultSet;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 public class Order {
 	
 	static Connection con=null;
@@ -15,47 +18,46 @@ public class Order {
 	//
 	static Connection con2=null;
 	static PreparedStatement ps2=null;
-	static ResultSet rs2=null;
-	public static int createOrder(model.Order order,String username){
-		int userid=0;
+	static ResultSet rs=null;
+	public static int createOrder(model.Order order){
 		int result=0;
-		java.util.Date dt=new java.util.Date();
-		java.sql.Date sd=new java.sql.Date(dt.getDate());
-		userid=dal.GetUserId.userid(username);
 		Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
-		String str="insert into healthok.order (amount,status,Tax,ShippingCost,UserId,Address,Date) values (?,?,?,?,?,?,?)";
+	/*	Date date = new Date();
+	    SimpleDateFormat sdf;
+	    sdf = new SimpleDateFormat("MMM dd yyyy");
+	    System.out.println(sdf.format(date));
+	 */ 
+		String str="insert into Order(UserId,OrderTypeId,OrderStatusTypeId,OrderDescription) values (?,?,?,?)";
 		
 		try{
 			ps1=(PreparedStatement) con.prepareStatement(str);
-			ps1.setFloat(1, order.getAmount());
-			ps1.setInt(2, order.getStatus());
-			ps1.setInt(3, order.getTax());
-			ps1.setInt(4, order.getShippingcost());
-			ps1.setInt(5, userid);
-			ps1.setString(6, order.getAddress()); 
-			ps1.setDate(7, sd);
+			ps1.setInt(1, order.getUserId());
+		    ps1.setInt(2, order.getOrderTypeId());
+			//ps1.setDate(3, order.getOrderDate());
+			ps1.setInt(3, order.getOrderStatusTypeId());
+			ps1.setString(4, order.getOrderDescription());
 			int rw=ps1.executeUpdate();
-			
-			if(rw>0)
+
+			   if(rw>0)
 			   {
-				  result=1; 
-			   }
+				   rs = ps1.getGeneratedKeys();
+	                if(rs.next())
+	                    result = rs.getInt(1);
+	 }
 			   else{
 				   result=-1;
 			   }
+		
 		}
 		catch(SQLException se)
 		{
 			
 		}
-		biz.OrderedItems.addItems(username);
-		dal.Buffer.deleteBufferByid(username);
-		 result=dal.GetOrderId.getRecentOrderid(username);
 		return result;
 	}
 	
-	public static model.Order getOrderDetail(int orderid){
+	/*public static model.Order getOrderDetail(int orderid){
 		model.Order order=new model.Order();
 		Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
@@ -79,6 +81,6 @@ public class Order {
 			
 		}
 		return order;
-	}
+	}*/
 
 }

@@ -21,7 +21,7 @@ public class Order {
 	public static model.Result order(@PathParam("Username") String username,@PathParam("Amount") float amount,@PathParam("Tax") int tax,@PathParam("ShippingCost") int shcost,@PathParam("addressid") int addid){
 		model.Order order=new model.Order();
 		model.Result result=new model.Result();
-		order.setAmount(amount);
+		 order.setAmount(amount);
 		order.setTax(tax);
 		order.setShippingcost(shcost);
 		order.setStatus(1);

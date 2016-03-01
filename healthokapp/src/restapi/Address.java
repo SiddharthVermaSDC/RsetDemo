@@ -16,7 +16,7 @@ import model.Result;
 @Path("/address")
 public class Address {
 	
-	@Path("/{housenumber}/{street}/{city}/{state}/{country}/{pincode}/{username}/{fullname}/{phone}")
+	@Path("/{hdousenumber}/{street}/{city}/{state}/{country}/{pincode}/{username}/{fullname}/{phone}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
 	public static model.Result address(@PathParam("housenumber") String House,@PathParam("street") String Street,@PathParam("city") String City,@PathParam("state") String State,@PathParam("country") String Country,@PathParam("pincode") String Pincode,@PathParam("username") String Username,@PathParam("fullname") String full,@PathParam("phone") String ph){
