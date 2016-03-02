@@ -2,18 +2,10 @@ package rest_api;
 
 public class GetSetMemberRegistration {
 
-	public int UserId;
-	public int MembershipTypeId;
-	public int AddressId;
-	public int PrimaryDoctor;
-	public int PrepaidBalance;
-	public int TotalDiscount;
-	public int CashBonousBalance;
 	public String MemberID=null;
 	public String FirstName=null;
 	public String LastName=null;
-	public String Mobile;
-	public String password;
+	public long Mobile;
 	public int PinCode;
 	public String EmailId=null;
 	public String AddressLine1=null;
@@ -25,8 +17,6 @@ public class GetSetMemberRegistration {
 	//public String labTest=null;
 	//public String longCare=null;
 	public String otherCare=null;
-	
-	
 	public String getFirstName() {
 		return FirstName;
 	}
@@ -39,10 +29,10 @@ public class GetSetMemberRegistration {
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
-	public String getMobile() {
+	public long getMobile() {
 		return Mobile;
 	}
-	public void setMobile(String mobile) {
+	public void setMobile(long mobile) {
 		Mobile = mobile;
 	}
 	public int getPinCode() {
@@ -86,60 +76,6 @@ public class GetSetMemberRegistration {
 	}
 	public void setOtherCare(String otherCare) {
 		this.otherCare = otherCare;
-	}
-	public int getUserId() {
-		return UserId;
-	}
-	public void setUserId(int userId) {
-		UserId = userId;
-	}
-	public int getMembershipTypeId() {
-		return MembershipTypeId;
-	}
-	public void setMembershipTypeId(int membershipTypeId) {
-		MembershipTypeId = membershipTypeId;
-	}
-	public int getAddressId() {
-		return AddressId;
-	}
-	public void setAddressId(int addressId) {
-		AddressId = addressId;
-	}
-	public int getPrimaryDoctor() {
-		return PrimaryDoctor;
-	}
-	public void setPrimaryDoctor(int primaryDoctor) {
-		PrimaryDoctor = primaryDoctor;
-	}
-	public int getPrepaidBalance() {
-		return PrepaidBalance;
-	}
-	public void setPrepaidBalance(int prepaidBalance) {
-		PrepaidBalance = prepaidBalance;
-	}
-	public int getTotalDiscount() {
-		return TotalDiscount;
-	}
-	public void setTotalDiscount(int totalDiscount) {
-		TotalDiscount = totalDiscount;
-	}
-	public int getCashBonousBalance() {
-		return CashBonousBalance;
-	}
-	public void setCashBonousBalance(int cashBonousBalance) {
-		CashBonousBalance = cashBonousBalance;
-	}
-	public String getMemberID() {
-		return MemberID;
-	}
-	public void setMemberID(String memberID) {
-		MemberID = memberID;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 	

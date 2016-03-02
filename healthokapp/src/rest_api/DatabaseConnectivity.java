@@ -34,7 +34,11 @@ public class DatabaseConnectivity {
         //ds.setMinIdle(5);
         //ds.setMaxIdle(20);
            //ds.setMaxOpenPreparedStatements(180);
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> parent of 866520b... commit
     }
 
     public static DatabaseConnectivity getInstance() throws IOException, SQLException, PropertyVetoException {
