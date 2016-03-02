@@ -22,15 +22,14 @@
   <env-entry> 
     <env-entry-name>connectionName</env-entry-name> 
     <env-entry-type>java.lang.String</env-entry-type> 
-<<<<<<< HEAD
-    <!--  
+
+     <!-- 
     <env-entry-value>"jdbc:mysql://localhost:3306/healthok","root","9559287622"</env-entry-value> 
-        
-    -->
+        -->
+    
+     
     <env-entry-value>"jdbc:mysql://127.3.104.130:3306/healthok","adminuzuSCxp","GQBXVWgreeuA"</env-entry-value> 
     
-=======
-    <env-entry-value>"jdbc:mysql://127.3.104.130:3306/healthok","adminuzuSCxp","GQBXVWgreeuA"</env-entry-value> 
->>>>>>> parent of 866520b... commit
+    
 </env-entry>
 </web-app>

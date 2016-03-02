@@ -45,19 +45,19 @@ public class EmailRegistration {
 	    	resultSet=preparedstatement.executeQuery();
 	    	if(resultSet.next()==true)
 	    	{
-	    		mg.setMessage("Already registered");
+	    		mg.setStatus(-1);
 	    	}
 	    	else
 	    	{
 	    		preparedstatement=null;
 	    		preparedstatement=(PreparedStatement) connection.prepareStatement(s1);
 	    		preparedstatement.executeUpdate();
-	    	   	mg.setMessage("successfully registered "+gs.getEmail());
+	    		mg.setStatus(1);
 	    	}	
 		}
 		catch(Exception e)
 	     {
-			mg.setMessage("can't register!!!....\nError\n"+ e.getMessage());
+			mg.setStatus(-1);
 	     }
 		return mg;
 	 }
