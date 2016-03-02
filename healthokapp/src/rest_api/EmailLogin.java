@@ -44,7 +44,8 @@ public class EmailLogin
 			
 
 		 if(resultSet.next()==true)
-				 mg.setStatus(resultSet.getInt("UserId"));
+				
+			 mg.setStatus(resultSet.getInt("UserId"));
 
 
 			 else
