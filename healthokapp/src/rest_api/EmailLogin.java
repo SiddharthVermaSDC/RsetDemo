@@ -43,7 +43,7 @@ public class EmailLogin
 
 			 if(resultSet.next()==true)
 			 {
-				 mg.setStatus(1);
+				 mg.setStatus(resultSet.getInt("UserId"));
 			 }
 			 else
 				 mg.setStatus(-1);
