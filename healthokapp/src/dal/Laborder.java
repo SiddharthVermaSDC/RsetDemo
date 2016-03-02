@@ -19,13 +19,12 @@ public class Laborder {
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
-		String str1="insert into laborder(OrderId,PrescriptionImageId,LabResultImageid,Description) values (?,?,?,?)";
+		String str1="insert into laborder(OrderId,PrescriptionImageId,Description) values (?,?,?)";
 		try{
 			 ps=(PreparedStatement) con.prepareStatement(str1,result);
 			   ps.setInt(1,laborder.getOrderId());
 			   ps.setInt(2, laborder.getPrescriptionimageId());
-			   ps.setInt(3, laborder.getLabresultimageId());
-			   ps.setString(4,laborder.getDisription());
+			   ps.setString(3,laborder.getDisription());
 			   
 			   rw=ps.executeUpdate();
 			  

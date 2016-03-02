@@ -8,6 +8,22 @@ public class GetSetMemberRegistration {
 	public long Mobile;
 	public int PinCode;
 	public String EmailId=null;
+	public GetSetMemberRegistration(String memberID, String firstName, String lastName, long mobile, int pinCode,
+			String emailId, String addressLine1, String addressLine2, int cityId, String doctorGenerallyVisited,
+			String otherCare) {
+		super();
+		MemberID = memberID;
+		FirstName = firstName;
+		LastName = lastName;
+		Mobile = mobile;
+		PinCode = pinCode;
+		EmailId = emailId;
+		AddressLine1 = addressLine1;
+		AddressLine2 = addressLine2;
+		CityId = cityId;
+		DoctorGenerallyVisited = doctorGenerallyVisited;
+		this.otherCare = otherCare;
+	}
 	public String AddressLine1=null;
 	public String AddressLine2=null;
 	public int CityId;

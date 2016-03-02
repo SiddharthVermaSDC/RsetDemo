@@ -29,8 +29,8 @@ public class EmailLogin
 		  Message mg=new Message();
 		  try {
 			connection = DatabaseConnectivity.getInstance().getConnection();
-		    String query1="select * from User where EmailId=\""+gs.getEmail()+"\" and password=\""+gs.getPassword()+"\"";
-		    String query2="select * from User where Mobile=\""+gs.getPhone()+"\" and password=\""+gs.getPassword()+"\"";
+		    String query1="select UserId from User where EmailId=\""+gs.getEmail()+"\" and password=\""+gs.getPassword()+"\"";
+		    String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and password=\""+gs.getPassword()+"\"";
 		   if(gs.getEmail()==null)
 		   {
 			   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
@@ -42,51 +42,18 @@ public class EmailLogin
 			 resultSet=preparedStatement.executeQuery();
 
 			 if(resultSet.next()==true)
-<<<<<<< HEAD
 			 {
-				 //cognito.put(gsmr.setUserId(resultSet.getInt("UserId")));
-				gsmr.setUserId(resultSet.getInt("UserId"));
-				gsmr.setMembershipTypeId(resultSet.getInt("MembershipTypeId"));
-				gsmr.setMemberID(resultSet.getString("MemberID"));
-				gsmr.setFirstName(resultSet.getString("FirstName"));
-				gsmr.setLastName(resultSet.getString("LastName"));
-				gsmr.setAddressId(resultSet.getInt("AddressId"));
-				gsmr.setEmailId(resultSet.getString("EmailId"));
-				gsmr.setPassword(resultSet.getString("Password"));
-				gsmr.setMobile(resultSet.getString("Mobile"));
-				gsmr.setPrimaryDoctor(resultSet.getInt("PrimaryDoctor"));
-				gsmr.setDoctorGenerallyVisited(resultSet.getString("DoctorGenerallyVisited"));
-				gsmr.setOtherCare(resultSet.getString("Comment"));
-				gsmr.setAddressLine1(resultSet.getString("AddressLine1"));
-				gsmr.setAddressLine2(resultSet.getString("AddressLine2"));
-				gsmr.setCashBonousBalance(resultSet.getInt("CashBonousBalance"));
-				gsmr.setCityId(resultSet.getInt("CityId"));
-				gsmr.setPinCode(resultSet.getInt("PinCode"));
-				gsmr.setPrepaidBalance(resultSet.getInt("PrepaidBalance"));
-				gsmr.setTotalDiscount(resultSet.getInt("TotalDiscount"));
-				
-				 //mg.setMessage("Logged in successfully! "+id);
+				 mg.setStatus(1);
 			 }
-
-=======
-				 mg.setMessage("Logged in successfully!");
->>>>>>> parent of 866520b... commit
 			 else
-				 mg.setMessage("New User. Please register first.");
+				 mg.setStatus(-1);
 	     }
 	     catch(Exception e)
 	     {
-	    	 mg.setMessage(e.getMessage());
+	    	 mg.setStatus(500);
 	     }
 		return mg;
 	}
 	
-	@Path("/msg")
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getMethod()
-	{
-	    String s="bbb";
-		return s;
-}
+	
 }

@@ -27,8 +27,7 @@ public class Order {
 		case 2:order.setOrderTypeId(2);break;
 		case 3:order.setOrderTypeId(3);break;
 		case 4:order.setOrderTypeId(4);break;
-		case 5:order.setOrderTypeId(5);break;
-		default:System.out.println("Wrong service type");
+		default:order.setOrderTypeId(5);
 		}
 		order.setOrderDescription(comment);
 		order.setOrderStatusTypeId(1);
@@ -40,7 +39,7 @@ public class Order {
 	@GET
 	@Produces (MediaType.TEXT_PLAIN)
 	public String f(){
-		return "djlakjdflk";
+		return "NEW1";
 		
 	}
 	
