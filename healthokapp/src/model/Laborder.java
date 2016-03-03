@@ -1,11 +1,27 @@
 package model;
 
+import java.sql.Date;
+
 public class Laborder {
 	private int labresultimageId;
 	private int prescriptionimageId;
 	private String disription;
 	private int orderId;
 	private int laborderId;
+	
+	public Laborder(){}
+	public Laborder(  int laborderId,int orderId,int prescriptionimageId,int labresultimageId,String disription)
+	{
+		super();
+		this.labresultimageId = labresultimageId;
+		this.prescriptionimageId=prescriptionimageId;
+		this.disription = disription;
+		this.orderId=orderId;
+		this.laborderId=laborderId;
+		//this.CashbackBonusApplied=CashbackBonusApplied;
+		}
+
+	
 	public int getLabresultimageId() {
 		return labresultimageId;
 	}
