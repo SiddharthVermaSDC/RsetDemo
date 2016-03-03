@@ -8,7 +8,7 @@ public class Order {
 		
 		return dal.Order.createOrder(order);
 	}
-	public static ArrayList<model.Order> respondOrder(int orderid)
+	public static model.Order respondOrder(int orderid)
 	{
 		return dal.Order.getOrderDetail(orderid);
 	}

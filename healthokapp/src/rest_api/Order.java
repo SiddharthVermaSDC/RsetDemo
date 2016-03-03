@@ -18,7 +18,8 @@ public class Order {
 	@Path("/{OrderTypeId}/{UserId}/{comment}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Result order(@PathParam("OrderTypeId") int ordertypeid,@PathParam("UserId") int userid,@PathParam("comment") String comment){
+	public static model.Result order(@PathParam("OrderTypeId") int ordertypeid,@PathParam("UserId") int userid,@PathParam("comment") String comment)
+	{
 		model.Order order=new model.Order();
 		model.Result result=new model.Result();
 		order.setUserId(userid);
@@ -36,22 +37,15 @@ public class Order {
 		return result;
 		
 	}
-	 @Path("/{OrderId}")
+	 @Path("/gt/{OrderId}")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
-		public static ArrayList<model.Order> responsorder(@PathParam("OrderId") int orderid){
-			ArrayList<model.Order> ord=new ArrayList<model.Order>();
-			ord=biz.Order.respondOrder(orderid);
+		public static model.Order responsorder(@PathParam("OrderId") int orderid){
+		    //model.Order ord=new model.Order();
+			//ord=biz.Order.respondOrder(orderid);
 			
-			return ord;
+			return biz.Order.respondOrder(orderid);
 		}
-	@Path("/1")
-	@GET
-	@Produces (MediaType.TEXT_PLAIN)
-	public String f(){
-		return "NEW1";
-		
-	}
 	
 
 	@Path("/s")
