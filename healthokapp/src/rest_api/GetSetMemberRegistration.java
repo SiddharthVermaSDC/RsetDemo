@@ -2,37 +2,28 @@ package rest_api;
 
 public class GetSetMemberRegistration {
 
+	public int UserId;
 	public String MemberID=null;
+	public int MembershipTypeId;
 	public String FirstName=null;
 	public String LastName=null;
-	public long Mobile;
-	public int PinCode;
+	public int AddressId;
 	public String EmailId=null;
-	public GetSetMemberRegistration(String memberID, String firstName, String lastName, long mobile, int pinCode,
-			String emailId, String addressLine1, String addressLine2, int cityId, String doctorGenerallyVisited,
-			String otherCare) {
-		super();
-		MemberID = memberID;
-		FirstName = firstName;
-		LastName = lastName;
-		Mobile = mobile;
-		PinCode = pinCode;
-		EmailId = emailId;
-		AddressLine1 = addressLine1;
-		AddressLine2 = addressLine2;
-		CityId = cityId;
-		DoctorGenerallyVisited = doctorGenerallyVisited;
-		this.otherCare = otherCare;
-	}
+	public long Mobile;
+	public String Password=null;
+	public int PrimaryDoctor;
+	public String DoctorGenerallyVisited=null;
+	public String Comments=null;
+	public int PrepaidBalance;
+	public int CashbackBousBalance;
+	public int TotalDiscount;
 	public String AddressLine1=null;
 	public String AddressLine2=null;
+	public String AddressLine3=null;
 	public int CityId;
-	//public String state=null;
-	//public String country=null;
-	public String DoctorGenerallyVisited=null;
-	//public String labTest=null;
-	//public String longCare=null;
-	public String otherCare=null;
+	public int PinCode;
+	
+	
 	public String getFirstName() {
 		return FirstName;
 	}
@@ -87,11 +78,72 @@ public class GetSetMemberRegistration {
 	public void setDoctorGenerallyVisited(String doctorGenerallyVisited) {
 		DoctorGenerallyVisited = doctorGenerallyVisited;
 	}
-	public String getOtherCare() {
-		return otherCare;
+	
+	public int getUserId() {
+		return UserId;
 	}
-	public void setOtherCare(String otherCare) {
-		this.otherCare = otherCare;
+	public void setUserId(int userId) {
+		UserId = userId;
+	}
+	public String getMemberID() {
+		return MemberID;
+	}
+	public void setMemberID(String memberID) {
+		MemberID = memberID;
+	}
+	public int getMembershipTypeId() {
+		return MembershipTypeId;
+	}
+	public void setMembershipTypeId(int membershipTypeId) {
+		MembershipTypeId = membershipTypeId;
+	}
+	public int getAddressId() {
+		return AddressId;
+	}
+	public void setAddressId(int addressId) {
+		AddressId = addressId;
+	}
+	public String getPassword() {
+		return Password;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	public int getPrimaryDoctor() {
+		return PrimaryDoctor;
+	}
+	public void setPrimaryDoctor(int primaryDoctor) {
+		PrimaryDoctor = primaryDoctor;
+	}
+	public String getComments() {
+		return Comments;
+	}
+	public void setComments(String comments) {
+		Comments = comments;
+	}
+	public int getPrepaidBalance() {
+		return PrepaidBalance;
+	}
+	public void setPrepaidBalance(int prepaidBalance) {
+		PrepaidBalance = prepaidBalance;
+	}
+	public int getCashbackBousBalance() {
+		return CashbackBousBalance;
+	}
+	public void setCashbackBousBalance(int cashbackBousBalance) {
+		CashbackBousBalance = cashbackBousBalance;
+	}
+	public int getTotalDiscount() {
+		return TotalDiscount;
+	}
+	public void setTotalDiscount(int totalDiscount) {
+		TotalDiscount = totalDiscount;
+	}
+	public String getAddressLine3() {
+		return AddressLine3;
+	}
+	public void setAddressLine3(String addressLine3) {
+		AddressLine3 = addressLine3;
 	}
 	
 	
