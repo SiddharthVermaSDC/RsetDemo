@@ -27,6 +27,11 @@ public class Laborder {
 	static Connection con3=null;
 	static PreparedStatement ps3=null;
 	
+	static Connection con4=null;
+	static PreparedStatement ps4=null;
+	static ResultSet rs4=null;
+	
+	
 	//place  laborder
 	
     public static int placeLabOrder(model.Laborder laborder){
@@ -61,7 +66,7 @@ public class Laborder {
 		return result;
     }
    // Update lab Order 
-    public static int updateLabOrder(int laborderid,int resultimage){
+    public static int updateResultLabOrder(int laborderid,int resultimage){
     	int rw= 0;
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
@@ -161,4 +166,38 @@ try{
 		}
 
 	 
+	public static int updateLabOrder(model.Laborder laborder){
+    	int rw= 0;
+    	int result=0;
+    	Crudoperation crudoperation = new Crudoperation();
+		con4=(Connection) crudoperation.createConnection();
+		 String str2="update LabOrder set OrderId = ?PrescriptionImageId= ?Description = ? Where LabOrderId = ?";
+try{
+			 ps4=(PreparedStatement) con4.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
+			   ps4.setInt(1,laborder.getOrderId());
+			   ps4.setInt(2,laborder.getPrescriptionimageId());
+			   ps4.setString(3,laborder.getDisription());
+			   ps4.setInt(4,laborder.getLaborderId());
+				  
+			   rw=ps4.executeUpdate();
+			  
+			   if(rw>0)
+			   {
+				   rs4 = ps4.getGeneratedKeys();
+	                if(rs4.next())
+	                    result = rs4.getInt(1);
+	     
+	 
+			   }
+			   else{
+				   
+				   result=-1;
+			   }
+		
+      }catch(SQLException se)
+		   {
+			   result = 500;
+		   }
+		return result;
+}
 }

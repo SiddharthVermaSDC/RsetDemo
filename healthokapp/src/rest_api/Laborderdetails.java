@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 public class Laborderdetails {
 	
-	//create laborder healthok
+	//create laborderdetails healthok
 	
 	@Path("/create/{LabOrderId}/{TestName}/{Price}")
 	@GET
@@ -43,10 +43,10 @@ public class Laborderdetails {
 	    model.Result res=new model.Result();
 	
 	
-	 res.setStatus(biz.Laborder.updateLabOrder(laborderid,resultimageid));
+	 res.setStatus(biz.Laborder.updateResultLabOrder(laborderid,resultimageid));
 	 return res;
 	}	
-	 // deleting laborder healthok
+	 // deleting laborderdetails healthok
 	@Path("/delete/{LabOrderId}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)

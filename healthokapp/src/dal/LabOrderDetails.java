@@ -48,8 +48,8 @@
 				          }
 		       }catch(SQLException se)
 			   {
-				System.out.print(se.getMessage());
-				result = 10;
+				//System.out.print(se.getMessage());
+				result = 500;
 			   }
 			return result;
 	    }

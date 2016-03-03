@@ -21,8 +21,8 @@ public class Laborder {
 		return dal.Laborder.deleteLaborder(orderid);
 	}
 
-	public static int updateLabOrder(int laborderid, int resultimageid) {
+	public static int updateResultLabOrder(int laborderid, int resultimageid) {
 		
-		return dal.Laborder.updateLabOrder(laborderid,resultimageid);
+		return dal.Laborder.updateResultLabOrder(laborderid,resultimageid);
 	}
 }
