@@ -20,8 +20,8 @@ public class DatabaseConnectivity {
         ds.setUsername("root");
         ds.setPassword("9559287622");
         ds.setUrl("jdbc:mysql://localhost:3306/healthok");
-        
         */
+    
         // the settings below are optional -- dbcp can work with defaults
         //ds.setMinIdle(5);
         //ds.setMaxIdle(20);

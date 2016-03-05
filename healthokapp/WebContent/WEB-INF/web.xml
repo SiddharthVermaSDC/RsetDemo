@@ -12,6 +12,11 @@
     <param-name>jersey.config.server.provider.classnames</param-name>
     <param-value>org.glassfish.jersey.filter.LoggingFilter;org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>
 </init-param>
+
+<init-param>
+          <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+          <param-value>true</param-value>
+        </init-param>
     
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -23,13 +28,13 @@
     <env-entry-name>connectionName</env-entry-name> 
     <env-entry-type>java.lang.String</env-entry-type> 
 
-    <!-- 
+     
     <env-entry-value>"jdbc:mysql://localhost:3306/healthok","root","9559287622"</env-entry-value> 
-     -->
      
      
+     <!-- 
     <env-entry-value>"jdbc:mysql://127.3.104.130:3306/healthok","adminuzuSCxp","GQBXVWgreeuA"</env-entry-value> 
-     
+     -->
     
 </env-entry>
 </web-app>

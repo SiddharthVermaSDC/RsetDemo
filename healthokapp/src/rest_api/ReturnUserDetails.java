@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,17 +20,36 @@ import org.json.JSONObject;
 @Path("/ReturnUserDetails")
 public class ReturnUserDetails {
 
-	@Path("/userDetails/{a}")
-	@POST
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Path("/userDetails")
+	//@POST
+	//@Consumes(MediaType.TEXT_PLAIN)
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject userDetails(@PathParam("a") String UserId)
+	public JSONObject userDetails(/*String UserId*/)
 	{
+		JSONObject uj=null,ju,error = null;
+	    
+   	 uj = new JSONObject();
+   	 ju = new JSONObject();
+   	 error = new JSONObject();
+try
+{
+		uj.put("ab", "no data");
+		 error.put("error","-1");
+		 return uj;
+}
+catch (JSONException e)
+{
+return error;	
+}
+	}
+
+/*
+		 
 		 Connection connection = null;
 	     Statement statement = null;
 	     ResultSet resultset = null;
 	     PreparedStatement preparedStatement=null;
-	     JSONObject uj,ju,error = null;
 	     JSONArray arr;
 	     Message mg=new Message();
 	     GetSetMemberRegistration gss=new GetSetMemberRegistration();
@@ -41,11 +61,11 @@ public class ReturnUserDetails {
 	    	 error = new JSONObject();
 	    	 arr = new JSONArray();
 			 connection = DatabaseConnectivity.getInstance().getConnection();
-			 query1="Select * from User where UserId=\""+UserId+"\";";
-			 query2="Select * from MemberDetails where UserId=\""+UserId+"\";";
+			 query1="Select * from User where UserId="+UserId+";";
+			 query2="Select * from MemberDetails where UserId="+UserId+";";
 			 preparedStatement = (PreparedStatement)connection.prepareStatement(query1);
 			 resultset=preparedStatement.executeQuery();
-
+			 uj.put("ab", "no data");
 			 error.put("error","-1");
 			 
 			 if(resultset.next()==true)
@@ -115,10 +135,12 @@ public class ReturnUserDetails {
 	     }
 	     
 	}
-	
+
 	public static void  main(String ar[])
 	{
 		ReturnUserDetails r=new ReturnUserDetails();
-		System.out.println(r.userDetails("1"));
+		System.out.println(r.userDetails());
 	}
+	*/
 }
+

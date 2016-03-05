@@ -50,7 +50,7 @@ public class test {
 			        int addid=resultSet.getInt("AddressId");
 			        String fname=resultSet.getString("fullname");
 			        String phone=resultSet.getString("phone");
-			        memberdetails.add(new model.Address(house, street, city, state, country, pin, addid, user, fname, phone));
+			        //memberdetails.add(new model.Address(house, street, city, state, country, pin, addid, user, fname, phone));
 			        
 					}
 		     }
