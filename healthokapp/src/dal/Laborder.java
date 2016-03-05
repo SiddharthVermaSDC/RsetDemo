@@ -38,10 +38,10 @@ public class Laborder {
     	int rw= 0;
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
 		String str1="insert into laborder(OrderId,PrescriptionImageId,Description) values (?,?,?)";
 		try{
-			 ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
+			   con=(Connection) crudoperation.createConnection();
+			   ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
 			   ps.setInt(1,laborder.getOrderId());
 			   ps.setInt(2, laborder.getPrescriptionimageId());
 			   ps.setString(3,laborder.getDisription());
@@ -58,6 +58,7 @@ public class Laborder {
 			   else{
 				   result=-1;
 			   }
+			   con.close();
 		}
 		catch(SQLException se)
 		   {
@@ -70,10 +71,11 @@ public class Laborder {
     	int rw= 0;
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
-		con1=(Connection) crudoperation.createConnection();
 		 String str2="update LabOrder set LabResultImageId=? Where LabOrderId = ?";
-try{
-			 ps1=(PreparedStatement) con1.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
+try{         
+	         con1=(Connection) crudoperation.createConnection();
+	
+			   ps1=(PreparedStatement) con1.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
 			   ps1.setInt(1,resultimage);
 			   ps1.setInt(2,laborderid);
 				  
@@ -90,6 +92,7 @@ try{
 			   else{
 				   result=-1;
 			   }
+			   con1.close();
 		}
 		catch(SQLException se)
 		   {
@@ -106,10 +109,10 @@ try{
 		//int i= 0;
     	//int result=0;
     	Crudoperation crudoperation = new Crudoperation();
-		con2=(Connection) crudoperation.createConnection();
 		 String str3="select * from LabOrder where OrderId IN(select OrderId from Order where OrderStatusTypeId=1 and OrderTypeId =2 )";
-try{
-			 ps2=(PreparedStatement) con2.prepareStatement(str3);
+try{          
+	         con2=(Connection) crudoperation.createConnection();
+	         ps2=(PreparedStatement) con2.prepareStatement(str3);
 			 	  
 			   rs2=ps2.executeQuery();
 			   
@@ -126,7 +129,7 @@ try{
 
                 }
 			   
-			  
+			  con2.close();
 		}
 		catch(SQLException se)
 		   {
@@ -142,9 +145,10 @@ try{
 		int  rw=0;
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
-		con3=(Connection) crudoperation.createConnection();
 		String str2="delete feom LabOrder where OrderId =?";
-		try{
+		try{  
+			 con3=(Connection) crudoperation.createConnection();
+		
 			 ps3=(PreparedStatement) con3.prepareStatement(str2);
 			   ps3.setInt(1,orderid);
 			  
@@ -157,6 +161,7 @@ try{
 	            }else{
 				   result=-1;
 			          }
+			   con3.close();
 	       }catch(SQLException se)
 		   {
 			//System.out.print(se.getMessage());
@@ -170,10 +175,11 @@ try{
     	int rw= 0;
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
-		con4=(Connection) crudoperation.createConnection();
 		 String str2="update LabOrder set OrderId = ?PrescriptionImageId= ?Description = ? Where LabOrderId = ?";
 try{
-			 ps4=(PreparedStatement) con4.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
+	           con4=(Connection) crudoperation.createConnection();
+	
+	           ps4=(PreparedStatement) con4.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
 			   ps4.setInt(1,laborder.getOrderId());
 			   ps4.setInt(2,laborder.getPrescriptionimageId());
 			   ps4.setString(3,laborder.getDisription());
@@ -193,6 +199,7 @@ try{
 				   
 				   result=-1;
 			   }
+			   con4.close();
 		
       }catch(SQLException se)
 		   {

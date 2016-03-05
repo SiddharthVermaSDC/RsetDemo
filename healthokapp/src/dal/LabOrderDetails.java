@@ -26,10 +26,11 @@
 	    	int  rw=0;
 	    	int result=0;
 	    	Crudoperation crudoperation = new Crudoperation();
-			con=(Connection) crudoperation.createConnection();
 			String str1="insert into LabOrderDetails(LabOrderId,TestName,Price) values (?,?,?)";
 			try{
-				 ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
+
+				 con=(Connection) crudoperation.createConnection(); 
+			   	 ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
 				 ps.setInt(1,laborderd.getLaborderId());
 				 ps.setString(2,laborderd.getTestname());
 				 ps.setFloat(3,laborderd.getPrice());
@@ -45,13 +46,17 @@
 					   
 		            }else{
 					   result=-1;
-				          }
+				  con.close(); 
+				  }
 		       }catch(SQLException se)
 			   {
 				//System.out.print(se.getMessage());
 				result = 500;
+			   }finally{
+				  
 			   }
 			return result;
+			
 	    }
 	 
 	    
@@ -59,9 +64,10 @@
 	    	int  rw=0;
 	    	int result=0;
 	    	Crudoperation crudoperation = new Crudoperation();
-			con1=(Connection) crudoperation.createConnection();
+			
 			String str2="delete feom LabOrderDetails where id =?";
 			try{
+				con1=(Connection) crudoperation.createConnection();
 				 ps=(PreparedStatement) con.prepareStatement(str2);
 				   ps.setInt(1,id);
 				  
@@ -74,6 +80,7 @@
 		            }else{
 					   result=-1;
 				          }
+				   con1.close();
 		       }catch(SQLException se)
 			   {
 				//System.out.print(se.getMessage());
@@ -86,9 +93,10 @@
 	    	int  rw=0;
 	    	int result=0;
 	    	Crudoperation crudoperation = new Crudoperation();
-			con2=(Connection) crudoperation.createConnection();
 			String str2="update LabOrderDetails(LabOrderId,TestName,Price) values (?,?,?) where id = ?";
 			try{
+				con2=(Connection) crudoperation.createConnection();
+				
 				 ps2=(PreparedStatement) con2.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
 				 ps2.setInt(1,laborderd.getLaborderId());
 				 ps2.setString(2,laborderd.getTestname());
@@ -107,6 +115,7 @@
 		            }else{
 					   result=-1;
 				          }
+				   con2.close();
 		       }catch(SQLException se)
 			   {
 				System.out.print(se.getMessage());

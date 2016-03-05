@@ -16,7 +16,6 @@ public class Laborder {
 	}
 
 	public static int deleteLabOrder(int orderid) {
-		// TODO Auto-generated method stub
 		
 		return dal.Laborder.deleteLaborder(orderid);
 	}
