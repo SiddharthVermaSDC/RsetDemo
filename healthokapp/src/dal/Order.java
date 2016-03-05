@@ -31,7 +31,7 @@ public class Order {
 	    sdf = new SimpleDateFormat("MMM dd yyyy");
 	    System.out.println(sdf.format(date));
 	 */ 
-		String str="insert into Order(UserId,OrderTypeId,OrderStatusTypeId,OrderDescription) values (?,?,?,?)";
+		 String str="insert into Order(UserId,OrderTypeId,OrderStatusTypeId,OrderDescription) values (?,?,?,?)";
 		
 		try{
 			ps=(PreparedStatement) con2.prepareStatement(str);result=1;
