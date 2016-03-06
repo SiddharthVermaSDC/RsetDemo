@@ -1,5 +1,6 @@
 package rest_api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,8 @@ public class Order {
 	@Path("/{OrderTypeId}/{UserId}/{comment}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Result order(@PathParam("OrderTypeId") int ordertypeid,@PathParam("UserId") int userid,@PathParam("comment") String comment){
+	public static model.Result order(@PathParam("OrderTypeId") int ordertypeid,@PathParam("UserId") int userid,@PathParam("comment") String comment)
+	{
 		model.Order order=new model.Order();
 		model.Result result=new model.Result();
 		order.setUserId(userid);
@@ -35,13 +37,15 @@ public class Order {
 		return result;
 		
 	}
-	@Path("/1")
-	@GET
-	@Produces (MediaType.TEXT_PLAIN)
-	public String f(){
-		return "NEW1";
-		
-	}
+	 @Path("/gt/{OrderId}")
+		@GET
+		@Produces (MediaType.APPLICATION_JSON)
+		public static model.Order responsorder(@PathParam("OrderId") int orderid){
+		    //model.Order ord=new model.Order();
+			//ord=biz.Order.respondOrder(orderid);
+			
+			return biz.Order.respondOrder(orderid);
+		}
 	
 
 	@Path("/s")

@@ -32,10 +32,10 @@ public class MedicineOrderDetails {
 	 res.setStatus(dal.MedicineOrderDetails.insertMedicineOrderDetails(medicineorderdetails));
 	 return res;
 	}	
-	 @Path("/{medicineorderdetailsid}")
+	 @Path("/{medicineorderid}")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
-		public static ArrayList<model.MedicineOrderDetails> responseMedicineOrderDetails(@PathParam("medicineorderdetailsid") int medicineorderdetailsid){
+		public static ArrayList<model.MedicineOrderDetails> responseMedicineOrderDetails(@PathParam("medicineorderid") int medicineorderid){
 			ArrayList<model.MedicineOrderDetails> add=new ArrayList<model.MedicineOrderDetails>();
 			add=dal.MedicineOrderDetails.responseMedicineOrderDetails(medicineorderdetailsid);
 			
