@@ -19,39 +19,29 @@ import org.json.JSONObject;
 
 @Path("/ReturnUserDetails")
 public class ReturnUserDetails {
+	Connection connection = null;
+    Statement statement = null;
+    ResultSet resultset = null;
+    PreparedStatement preparedStatement=null;
+	
 
 	@Path("/userDetails")
-	//@POST
-	//@Consumes(MediaType.TEXT_PLAIN)
-	@GET
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	//@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject userDetails(/*String UserId*/)
+	public String userDetails(GetSetMemberRegistration userId) 
 	{
-		JSONObject uj=null,ju,error = null;
-	    
-   	 uj = new JSONObject();
-   	 ju = new JSONObject();
-   	 error = new JSONObject();
-try
-{
-		uj.put("ab", "no data");
-		 error.put("error","-1");
-		 return uj;
-}
-catch (JSONException e)
-{
-return error;	
-}
-	}
-
-/*
+		 JSONArray arr;
+		 JSONObject uj,ju,error = null;
+		 /*Connection connection = null;
+	       Statement statement = null;
+	       ResultSet resultset = null;
+	       PreparedStatement preparedStatement=null;*/
 		 
-		 Connection connection = null;
-	     Statement statement = null;
-	     ResultSet resultset = null;
-	     PreparedStatement preparedStatement=null;
-	     JSONArray arr;
-	     Message mg=new Message();
+		 DatabaseConnectivity databaseConnectivity=null;
+		 
+		 
 	     GetSetMemberRegistration gss=new GetSetMemberRegistration();
 	     String query1,query2;
 	     try
@@ -60,42 +50,43 @@ return error;
 	    	 ju = new JSONObject();
 	    	 error = new JSONObject();
 	    	 arr = new JSONArray();
-			 connection = DatabaseConnectivity.getInstance().getConnection();
-			 query1="Select * from User where UserId="+UserId+";";
-			 query2="Select * from MemberDetails where UserId="+UserId+";";
+	   	     error.put("error","-1");
+			 
+	    	 connection=DatabaseConnectivity.getInstance().getConnection();			 
+			 query1="Select * from User where UserId="+userId.getUserId()+";";
+			 query2="Select * from MemberDetails where UserId="+userId.getUserId()+";";
+			 
 			 preparedStatement = (PreparedStatement)connection.prepareStatement(query1);
 			 resultset=preparedStatement.executeQuery();
-			 uj.put("ab", "no data");
-			 error.put("error","-1");
 			 
 			 if(resultset.next()==true)
 			 {
 				 uj.put("UserId", resultset.getInt("UserId"));
-				 uj.put("MemberID", resultset.getString("MemberID"));
-				 uj.put("MembershipTypeId", resultset.getInt("MembershipTypeId"));
-				 uj.put("FirstName", resultset.getString("FirstName"));
+				 uj.put("MemberID",resultset.getString("MemberID"));
+				 uj.put("MembershipTypeId",resultset.getInt("MembershipTypeId"));
+				 uj.put("FirstName",resultset.getString("FirstName"));
 				 uj.put("LastName", resultset.getString("LastName"));
 				 //uj.put("AddressId", resultset.getInt("AdressId"));
-				 uj.put("EmailId", resultset.getString("EmailId"));
-				 uj.put("Mobile", resultset.getString("Mobile"));
-				 uj.put("Password", resultset.getString("Password"));
-				 uj.put("PrimaryDoctor", resultset.getInt("PrimaryDoctor"));
+				 uj.put("EmailId",resultset.getString("EmailId"));
+				 uj.put("Mobile",resultset.getString("Mobile"));
+				 uj.put("Password",resultset.getString("Password"));
+				 uj.put("PrimaryDoctor",resultset.getInt("PrimaryDoctor"));
 				 //uj.put("DoctorGenerallyVisited", resultset.getString("DoctorGenerallyVisited"));
-				 uj.put("Comments", resultset.getString("Comments"));
-				 uj.put("PrepaidBalance", resultset.getInt("PrepaidBalance"));
+				 uj.put("Comments",resultset.getString("Comments"));
+				 uj.put("PrepaidBalance",resultset.getInt("PrepaidBalance"));
 				 //uj.put("CashBousBalance", resultset.getInt("CashBousBalance"));
-				 uj.put("TotalDiscount", resultset.getInt("TotalDiscount"));
-				 uj.put("AddressLine1", resultset.getString("AddressLine1"));
-				 uj.put("AddressLine2", resultset.getString("AddressLine2"));
-				 uj.put("AddressLine3", resultset.getString("AddressLine3"));
-				 uj.put("CityId", resultset.getInt("CityId"));
-				 uj.put("PinCode", resultset.getString("PinCode"));
+				 uj.put("TotalDiscount",resultset.getInt("TotalDiscount"));
+				 uj.put("AddressLine1",resultset.getString("AddressLine1"));
+				 uj.put("AddressLine2",resultset.getString("AddressLine2"));
+				 uj.put("AddressLine3",resultset.getString("AddressLine3"));
+				 uj.put("CityId",resultset.getInt("CityId"));
+				 uj.put("PinCode",resultset.getString("PinCode"));
 				 
-				 preparedStatement=null;
-				 resultset=null;
+				// preparedStatement=null;
+				 
 				 preparedStatement = (PreparedStatement)connection.prepareStatement(query2);
 				 resultset=preparedStatement.executeQuery();
-				
+			 
 				 while(resultset.next()==true)	
 				 {
 					 ju.put("MemberdetailId", resultset.getInt("MemberdetailId"));
@@ -121,26 +112,21 @@ return error;
 			 }
 			 else
 			 {
-				 return error;
+				 return error.toString();
 			 }
 			 
-			 return uj;
+			 return uj.toString();
 			 
 	     }
 	     
 	     catch(Exception e)
-	     { 
-	    	 System.out.println(e.getMessage());
-	    	 return error;
+	     {    
+	    	 return e.getMessage();
+	     }
+	     finally 
+	     { DatabaseConnectivity.closeDatabase(connection);   }
+	     
 	     }
 	     
 	}
-
-	public static void  main(String ar[])
-	{
-		ReturnUserDetails r=new ReturnUserDetails();
-		System.out.println(r.userDetails());
-	}
-	*/
-}
 

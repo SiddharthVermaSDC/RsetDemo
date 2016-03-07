@@ -65,6 +65,13 @@ public class EmailRegistration {
 	     {
 			mg.setStatus(-3);
 	     }
-		return mg;
+		
+		
+		 finally 
+	     { 
+			 DatabaseConnectivity.closeDatabase(connection); 
+	         return mg;   
+	      }
+	     
+	     }
 	 }
-}
