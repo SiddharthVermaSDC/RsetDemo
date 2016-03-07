@@ -104,7 +104,7 @@ public class EmailLogin
 	@Produces (MediaType.TEXT_PLAIN)
 	public String rTurn(){
 		
-		return "hello second latest";
+		return "hello second latest new with pom";
 	}
 	          
 	

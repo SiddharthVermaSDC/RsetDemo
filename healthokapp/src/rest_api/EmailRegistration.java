@@ -54,7 +54,12 @@ public class EmailRegistration {
 	    		preparedstatement=(PreparedStatement) connection.prepareStatement(s1);
 	    		preparedstatement.executeUpdate();
 	    		mg.setStatus(1);
-	    	}	
+	    	}
+	    	
+	    	preparedstatement.close();
+	    	resultSet.close();
+	    	connection.close();
+	    	
 		}
 		catch(Exception e)
 	     {

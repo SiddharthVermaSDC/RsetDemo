@@ -48,6 +48,7 @@ public class DatabaseConnectivity {
 
     public Connection getConnection() throws SQLException {
         return this.ds.getConnection();
+        
     }
     
     // use this statement for establishing connection to database 
