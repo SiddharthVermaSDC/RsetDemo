@@ -34,7 +34,7 @@ public class Laborder {
 	
 	//place  laborder
 	
-    public static int placeLabOrder(model.Laborder laborder){
+    public static int placeLabOrder(model.Order order){
     	int rw= 0;
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
@@ -42,9 +42,9 @@ public class Laborder {
 		try{
 			   con=(Connection) crudoperation.createConnection();
 			   ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
-			   ps.setInt(1,laborder.getOrderId());
-			   ps.setInt(2, laborder.getPrescriptionimageId());
-			   ps.setString(3,laborder.getDisription());
+			   ps.setInt(1,order.getOrderId());
+			   ps.setInt(2, 1);
+			   ps.setString(3,order.getOrderDescription());
 			   
 			   rw=ps.executeUpdate();
 			  
