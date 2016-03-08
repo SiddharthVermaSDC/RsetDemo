@@ -28,24 +28,25 @@ public class EmailRegistration {
 		PreparedStatement preparedstatement=null;
 		ResultSet resultSet=null;
 		String query2;
-		if(gs.getPhone()==null );
+		if(gs.getPhone()==null )
+			mg.setStatus(-1);
 			//return "empty";
 		
 		try{
 		  connection = DatabaseConnectivity.getInstance().getConnection();
-		  String query1="select Mobile from user where Mobile=?";
-		  String s1="insert into user(FirstName,LastName,EmailId,Mobile,Password) values("
-		  		+ "\'"+gs.getFirstName()+"\',"+
-		  		"\'"+gs.getLastName()+"\',"+
-		  		"\'"+gs.getEmail()+"\',"+
-		  		"\'"+gs.getPhone()+"\',"+
-		  		"\'"+gs.getPassword()+"\');";
+		  String query1="select Mobile from User where Mobile=?";
+		  String s1="insert into User(FirstName,LastName,EmailId,Mobile,Password) values("
+		  		+ "\""+gs.getFirstName()+"\","+
+		  		"\""+gs.getLastName()+"\","+
+		  		"\""+gs.getEmail()+"\","+
+		  		"\""+gs.getPhone()+"\","+
+		  		"\""+gs.getPassword()+"\");";
 		    preparedstatement=(PreparedStatement) connection.prepareStatement(query1);
 	    	preparedstatement.setString(1,gs.getPhone());
 	    	resultSet=preparedstatement.executeQuery();
 	    	if(resultSet.next()==true)
 	    	{
-	    		mg.setStatus(-1);
+	    		mg.setStatus(-2);
 	    	}
 	    	else
 	    	{
@@ -53,12 +54,24 @@ public class EmailRegistration {
 	    		preparedstatement=(PreparedStatement) connection.prepareStatement(s1);
 	    		preparedstatement.executeUpdate();
 	    		mg.setStatus(1);
-	    	}	
+	    	}
+	    	
+	    	preparedstatement.close();
+	    	resultSet.close();
+	    	connection.close();
+	    	
 		}
 		catch(Exception e)
 	     {
-			mg.setStatus(-1);
+			mg.setStatus(-3);
 	     }
-		return mg;
+		
+		
+		 finally 
+	     { 
+			 DatabaseConnectivity.closeDatabase(connection); 
+	         return mg;   
+	      }
+	     
+	     }
 	 }
-}

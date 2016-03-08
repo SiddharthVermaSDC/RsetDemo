@@ -96,4 +96,16 @@ public class EmailLogin
 	     }
 		return mg;
 	}
+	
+	
+	
+	@Path("/s")
+	@GET
+	@Produces (MediaType.TEXT_PLAIN)
+	public String rTurn(){
+		
+		return "hello second latest new with pom";
+	}
+	          
+	
 }

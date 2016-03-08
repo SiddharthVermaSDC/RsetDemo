@@ -28,13 +28,13 @@ public class Personalinfo {
 			rs2=(ResultSet) ps2.executeQuery();
 			while(rs2.next()){
 				model.Order order=new model.Order();
-				order.setAddress( rs2.getString("Address"));
+				/*order.setAddress( rs2.getString("Address"));
 				order.setAmount(rs2.getFloat("amount"));
 				order.setOrderId(rs2.getInt("orderid"));
 				order.setShippingcost(rs2.getInt("ShippingCost"));
 				order.setStatus(rs2.getInt("status"));
 				order.setTax(rs2.getInt("tax"));
-				order.setUserid(rs2.getInt("userid"));
+				order.setUserid(rs2.getInt("userid"));*/
 				//order.setDate(rs2.getDate("date"));
 				orders.add(order);
 			}
