@@ -21,34 +21,33 @@ public class Doctor {
 
 		try {
 			connection = DatabaseConnectivity.getInstance().getConnection();
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
-			java.sql.Date d= new java.sql.Date(format.parse(doctor.getDoctorRegDate()).getTime());
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			java.sql.Date d = new java.sql.Date(format.parse(doctor.getDoctorRegDate()).getTime());
 			FileInputStream fin = new FileInputStream(doctor.getImages());
 			String sql = "INSERT INTO Images (ImageTypeId,Image) values (?,?)";
 			ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, doctor.getImageTypeId());
 			ps.setBinaryStream(2, fin, fin.available());
-			result = 9;
 			int row = ps.executeUpdate();
 			if (row == 1)
 				rs = ps.getGeneratedKeys();
 			if (rs.next())
 				doctor.setImageid(rs.getInt(1));
-		//	String q1 = "insert into doctor(PinCode) values(?);";
-			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,Speciality,Degree,DoctorRegistrationDate,ClinicTiming,offDay,Fees,EmergancyFees,IsPharmacy,IsProvideHomeCare,IsBelongToAnyHospital,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsPostCareEnabled,DoctorImageId,YearsofExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			ps = connection.prepareStatement(q,Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1,doctor.getPincode());
+			// String q1 = "insert into doctor(PinCode) values(?);";
+			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,Speciality,Degree,DoctorRegistrationDate,ClinicTiming,offDay,Fees,EmergencyFees,IsPharmacy,IsProvideHomeCare,IsBelongToAnyHospital,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsPostCareEnabled,DoctorImageId,YearsofExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			ps = connection.prepareStatement(q, Statement.RETURN_GENERATED_KEYS);
+			// ps.setString(1,doctor.getPincode());
 			ps.setString(1, doctor.getFirstName());
 			ps.setString(2, doctor.getMiddleName());
 			ps.setString(3, doctor.getLastName());
-			System.out.println("DoctorFrist name"+doctor.getFirstName());
+			System.out.println("DoctorFrist name" + doctor.getFirstName());
 			ps.setString(4, doctor.getEmailId());
 			ps.setInt(5, doctor.getSpeciality());
 			ps.setString(6, doctor.getDegree());
-		//	ps.setInt(7, doctor.getDoctorPhoneId());
-		//	ps.setDate(7,doctor.getDoctorRegDate());
-			ps.setDate(1,(java.sql.Date) d);
-			System.out.println("Date="+doctor.getDoctorRegDate());
+			// ps.setInt(7, doctor.getDoctorPhoneId());
+			// ps.setDate(7,doctor.getDoctorRegDate());
+			ps.setDate(7, (java.sql.Date) d);
+			System.out.println("Date=" + doctor.getDoctorRegDate());
 			ps.setString(8, doctor.getClinicTiming());
 			ps.setString(9, doctor.getOffDay());
 			ps.setInt(10, doctor.getFees());
@@ -61,13 +60,12 @@ public class Doctor {
 			ps.setBoolean(17, doctor.isVirtualReceptionist());
 			ps.setBoolean(18, doctor.isPostcare());
 			ps.setInt(19, doctor.getImageid());
-		//	System.out.println("ImageId="+doctor.getImageid());
+			// System.out.println("ImageId="+doctor.getImageid());
 			ps.setInt(20, doctor.getYearofExperience());
 			ps.setString(21, doctor.getAddressLine1());
 			ps.setString(22, doctor.getAddressLine2());
 			ps.setString(23, doctor.getAddressLine3());
 			ps.setInt(24, doctor.getCityId());
-		//	System.out.println("cityId="+doctor.getCityId());
 			ps.setString(25, doctor.getPincode());
 			result = 10;
 			int row1 = ps.executeUpdate();
@@ -75,27 +73,22 @@ public class Doctor {
 				rs = ps.getGeneratedKeys();
 			if (rs.next())
 				doctor.setDoctorId(rs.getInt(1));
+			String q1 = "insert into DoctorPhoneNumbers(DoctorId,PhoneNumberType,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
+			ps = connection.prepareStatement(q1);
+			ps.setInt(1,doctor.getDoctorId() );
+			ps.setInt(2, doctor.getPhoneNumberType());
+			ps.setString(3, doctor.getPhoneNumber());
+			ps.setString(4, doctor.getContact());
+			ps.setString(5, doctor.getComment());
+			ps.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println(e);
 			result = 500;
-		}
-		try {
-		String q1="insert into DoctorPhoneNumber(DoctorId,PhoneNumberType,PhoneNumber,Contact,Comment) values(?,?,?,?.?)";
-		
-		ps = connection.prepareStatement(q1);
-		ps.setInt(1,doctor.getDoctorId() );
-		ps.setInt(2,doctor.getPhoneNumberType());
-		ps.setInt(3,doctor.getPhoneNumber());
-		ps.setString(4,doctor.getContact());
-		ps.setString(5,doctor.getComment());
-		ps.executeUpdate();
-				
-		} catch (SQLException e) {
-			System.out.println(e);
-			e.printStackTrace();
+
+			
 		}
 		return result;
 	}
-
+	
 }

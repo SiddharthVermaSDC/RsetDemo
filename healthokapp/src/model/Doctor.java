@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-
 public class Doctor {
 	private int doctorId;
 	public int getDoctorId() {
@@ -21,7 +19,6 @@ public class Doctor {
 	private String emailId;
 	private int speciality;
 	private String degree;
-	private int doctorPhoneId;
 	private String doctorRegDate;
 	private String clinicTiming;
 	private String offDay;
@@ -40,14 +37,14 @@ public class Doctor {
 	private String addressLine3;
 	private int cityId;
 	private String pincode;
-	private int phoneNumber;
+	private String phoneNumber;
 	private int phoneNumberType;
 	private String contact;
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -282,14 +279,6 @@ public class Doctor {
 
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
-	}
-
-	public int getDoctorPhoneId() {
-		return doctorPhoneId;
-	}
-
-	public void setDoctorPhoneId(int doctorPhoneId) {
-		this.doctorPhoneId = doctorPhoneId;
 	}
 
 	public String getDoctorRegDate() {
