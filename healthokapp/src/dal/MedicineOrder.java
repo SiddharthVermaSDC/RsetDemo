@@ -2,6 +2,7 @@ package dal;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,22 +20,26 @@ public class MedicineOrder{
 	static Connection con3=null;
 	static PreparedStatement ps3=null;
 	static ResultSet rs3=null;
-public static int insertMedicineOrder(model.MedicineOrder medicineorder, int orderId){
+  
+	public static int insertMedicineOrder(model.Order order){
 		int result=0;
 		Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
-		String str1="insert into MedicineOrder(MedicineOrderId,OrderId,PrescriptionImageId,Comments) values (?,?,?,?)";
+		String str1="insert into MedicineOrder(OrderId,PrescriptionImageId,Comments) values (?,?,?,?)";
 		try{
-			 ps=(PreparedStatement) con.prepareStatement(str1);
-			   ps.setInt(1, medicineorder.getMedicineOrderId());
-			   ps.setInt(2, medicineorder.getOrderId());
-			   ps.setInt(3, medicineorder.getPrescriptionImageId());
-			   ps.setString(4, medicineorder.getComments());
+			   ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
+			   ps.setInt(1, order.getOrderId());
+			   ps.setInt(2, 1);//order.getPrescriptionImageId());
+			   ps.setString(3, order.getOrderDescription());
 			   int rw=ps.executeUpdate();
 			  
 			   if(rw>0)
 			   {
-				   result = 2;
+				   rs=ps.getGeneratedKeys();
+				   if(rs.next())
+				   {
+					   result=rs.getInt(1);
+				   }
 			   }
 			   else{
 				   result=-1;
@@ -51,9 +56,9 @@ public static ArrayList<model.MedicineOrder> responseMedicineOrder(int orderid)
 	ArrayList<model.MedicineOrder> medicineorder=new ArrayList<model.MedicineOrder>();
 	Crudoperation crudoperation = new Crudoperation();
 	con=(Connection) crudoperation.createConnection();
-	String str3="select * from MedicineOrder where OrderId=?";
+	String str2="select * from MedicineOrder where OrderId=?";
 	try{
-		ps3=(PreparedStatement) con.prepareStatement(str3); 
+		ps3=(PreparedStatement) con.prepareStatement(str2); 
 		ps3.setInt(1,orderid);
 		rs3=ps3.executeQuery();
 		while(rs3.next()){
@@ -72,6 +77,32 @@ public static ArrayList<model.MedicineOrder> responseMedicineOrder(int orderid)
 	   }
 	return medicineorder; 
 }
-
-	 }
+//to delete medicine order 
+	public static int deleteMedicineOrder(int orderid) {
+		int  rw=0;
+ 	int result=0;
+ 	Crudoperation crudoperation = new Crudoperation();
+		con3=(Connection) crudoperation.createConnection();
+		String str3="delete from MedicineOrder where OrderId =?";
+		try{
+			 ps3=(PreparedStatement) con3.prepareStatement(str3);
+			   ps3.setInt(1,orderid);
+			  
+			   
+			   rw=ps3.executeUpdate();
+			  
+			   if(rw>0)
+			   {
+				  result = 1;
+	            }else{
+				   result=-1;
+			          }
+	       }catch(SQLException se)
+		   {
+			//System.out.print(se.getMessage());
+			result = 5;
+		   }
+		return result;
+		}
+	}
 	

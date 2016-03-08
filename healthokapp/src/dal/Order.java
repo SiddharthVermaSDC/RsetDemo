@@ -9,7 +9,7 @@ import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 //import com.mysql.jdbc.ResultSet;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -22,26 +22,31 @@ public class Order {
 	static PreparedStatement ps2=null;
 	static ResultSet rs=null;
 	static ResultSet rs2=null;
+	
+	static PreparedStatement ps4=null;
+	static Connection con3=null;
     public static int createOrder(model.Order order){
 		int result=0;
 		Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
-	/*	Date date = new Date();
+     	//for date
+		Date date = new Date();
 	    SimpleDateFormat sdf;
-	    sdf = new SimpleDateFormat("MMM dd yyyy");
-	    System.out.println(sdf.format(date));
-	 */ 
-		 String str="insert into Order(UserId,OrderTypeId,OrderStatusTypeId,OrderDescription) values (?,?,?,?)";
+	    sdf = new SimpleDateFormat("MM dd yyyy");
+	 //   System.out.println(sdf.format(date));
+	    
+		String str="insert into Order(UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderDescription) values (?,?,?,?,?)";
 		
-		try{
-			ps=(PreparedStatement) con2.prepareStatement(str);result=1;
+		try
+		{
+			ps=(PreparedStatement) con.prepareStatement(str);result=1;
 			ps.setInt(1,order.getUserId());result=2;
-		    ps.setInt(2,3);// order.getOrderTypeId());
+		    ps.setInt(2, order.getOrderTypeId());
 		    result=3;
-			//ps1.setDate(3, order.getOrderDate());
-			ps.setInt(3,1); //order.getOrderStatusTypeId());
+			ps.setString(3, sdf.format(date));
+			ps.setInt(4,order.getOrderStatusTypeId());
 					result=4;
-			ps.setString(4,"vikash"); //order.getOrderDescription());
+			ps.setString(5,order.getOrderDescription());
 			result=5;
 			int rw=ps.executeUpdate();result=6;
 
@@ -58,7 +63,7 @@ public class Order {
 		}
 		catch(SQLException se)
 		{
-			
+			result=40;
 		}
 		return result;
 	}
@@ -66,19 +71,19 @@ public class Order {
 	public static model.Order getOrderDetail(int orderid){
 		model.Order order=null;
 		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		con2=(Connection) crudoperation.createConnection();
 		String str1="select * from Order where OrderId=?";
 		try{
-			ps2=(PreparedStatement) con.prepareStatement(str1);
+			ps2=(PreparedStatement) con2.prepareStatement(str1);
 			ps2.setInt(1,orderid);
 			rs2=ps2.executeQuery();
 		     rs2.next();
 				int OrderId= rs2.getInt("OrderId");
 				int UserId=rs2.getInt("UserId");
 				int OrderTypeId=rs2.getInt("OrderTypeId");
-				Date OrderDate=rs2.getDate("OrderDate");
+				String OrderDate=rs2.getString("OrderDate");
 			    int	OrderStatusTypeId=rs2.getInt("OrderStatusTypeId");
-				Date OrderCompletionDate=rs2.getDate("OrderCompletionDate");
+				String OrderCompletionDate=rs2.getString("OrderCompletionDate");
 			    String OrderDescription=rs2.getString("OrderDescription");
 			    int TotalCost=rs2.getInt("TotalCost");
 			    int Discount=rs2.getInt("Discount");
@@ -86,7 +91,7 @@ public class Order {
 			    int NetAmount=rs2.getInt("NetAmount");
 				 order =  new model.Order(OrderId,UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderCompletionDate,OrderDescription,TotalCost, Discount,CashbackBonusApplied,NetAmount);
 			
-		}//////
+		}
 		catch(SQLException se)
 		{
 		order = new model.Order(1,1,1,null,1,null,"as",45,65,40,78);	
@@ -95,21 +100,20 @@ public class Order {
 	}
 	 public static void updateOrder(model.Order order,int orderid){
 			Crudoperation crudoperation = new Crudoperation();
-			con=(Connection) crudoperation.createConnection();
+			con3=(Connection) crudoperation.createConnection();
 		 String str3="update address set TotalCost=?,Discount=?,CashbackBonusApplied=?,NetAmount=? where OrderId=?";
 		 try{
-			 ps4=(PreparedStatement) con.prepareStatement(str3);
+			 ps4=(PreparedStatement) con3.prepareStatement(str3);
 			 ps4.setInt(1,order.getTotalCost());
 			 ps4.setInt(1,order.getDiscount());
 			 ps4.setInt(1,order.getCashbackBonusApplied());
 			 ps4.setInt(1,order.getNetAmount());
 			 ps4.setInt(1,orderid);
-			 int rw=ps4.executeUpdate();
+			 ps4.executeUpdate();
 		 }
 		 catch(SQLException se)
 		 {
 			 
 		 }
 	 }
-
 }

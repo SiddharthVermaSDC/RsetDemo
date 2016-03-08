@@ -43,9 +43,7 @@
     <groupId>org.glassfish.jersey.core</groupId>
     <artifactId>jersey-client</artifactId>
     <version>2.22</version>
-    
-    
-  <!--   <scope>provided</scope> -->
+    <scope>provided</scope>
 </dependency>
 <dependency>
     <groupId>org.glassfish.jersey.media</groupId>
@@ -67,6 +65,12 @@
     <artifactId>jersey-media-moxy</artifactId>
     <version>2.22</version>
 </dependency>
+<dependency>
+	<groupId>com.sendgrid</groupId>
+	<artifactId>sendgrid-java</artifactId>
+	<version>2.2.2</version>
+</dependency>
+
 
 <dependency>
 	<groupId>org.json</groupId>
@@ -83,13 +87,6 @@
 	<artifactId>commons-pool</artifactId>
 	<version>1.6</version>
 </dependency>
-<dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-json</artifactId>
-      <version>1.8</version>
- </dependency>
- 
- 
 
 </dependencies>
 	
