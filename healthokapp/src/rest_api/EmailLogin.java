@@ -8,12 +8,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.json.JSONObject;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 @Path("/EmailRegister")
 public class EmailLogin 
 {
@@ -21,16 +27,20 @@ public class EmailLogin
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Message loginCheck(GetSetLogin gs)
-	{
+	public String loginCheck(GetSetLogin gs)
+	{     String s=null;
 		  Connection connection = null;
 		  PreparedStatement preparedStatement=null;
 		  ResultSet resultSet=null;
 		  Message mg=new Message();
+		  GetSetMemberRegistration gss=new GetSetMemberRegistration();
+		  ReturnUserDetails r=new ReturnUserDetails();
+		  JSONObject  error = new JSONObject();
+		  
 		  try {
 			connection = DatabaseConnectivity.getInstance().getConnection();
-		    String query1="select UserId from User where EmailId=\""+gs.getEmail()+"\" and password=\""+gs.getPassword()+"\"";
-		    String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and password=\""+gs.getPassword()+"\"";
+		    String query1="select UserId from User where EmailId=\""+gs.getEmail()+"\" and Password=\""+gs.getPassword()+"\"";
+		    String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\"";
 		   if(gs.getEmail()==null)
 		   {
 			   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
@@ -42,17 +52,33 @@ public class EmailLogin
 			 resultSet=preparedStatement.executeQuery();
 
 			 if(resultSet.next()==true)
-			 {
+			 {   
 				 mg.setStatus(resultSet.getInt("UserId"));
+				 gss.UserId=resultSet.getInt("UserId");
+				 s=r.userDetails(gss);
 			 }
-			 else
+			 else{
 				 mg.setStatus(-1);
+				 error.put("error","-1");
+			     return error.toString();     }
 	     }
 	     catch(Exception e)
 	     {
 	    	 mg.setStatus(500);
+	    	 try{
+	    	      error.put("error","500");;
+	    	      return error.toString();
+	    	     }
+	    	 catch(Exception e1)
+	    	 {   e1.getMessage();}
 	     }
-		return mg;
+		  
+		
+		 finally 
+	     { 
+			 DatabaseConnectivity.closeDatabase(connection); 
+	         return s; 
+	      }
 	}
 	
 	
@@ -94,7 +120,12 @@ public class EmailLogin
 	     {
 	    	 mg.setStatus(500);
 	     }
-		return mg;
+		  
+		  finally 
+		     { 
+				 DatabaseConnectivity.closeDatabase(connection); 
+		         return mg; 
+		      }
 	}
 	
 	

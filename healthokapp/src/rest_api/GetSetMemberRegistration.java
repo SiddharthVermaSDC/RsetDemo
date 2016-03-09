@@ -9,7 +9,7 @@ public class GetSetMemberRegistration {
 	public String LastName=null;
 	public int AddressId;
 	public String EmailId=null;
-	public long Mobile;
+	public String Mobile;
 	public String Password=null;
 	public int PrimaryDoctor;
 	public String DoctorGenerallyVisited=null;
@@ -21,7 +21,7 @@ public class GetSetMemberRegistration {
 	public String AddressLine2=null;
 	public String AddressLine3=null;
 	public int CityId;
-	public int PinCode;
+	public String PinCode;
 	
 	
 	public String getFirstName() {
@@ -36,16 +36,16 @@ public class GetSetMemberRegistration {
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
-	public long getMobile() {
+	public String getMobile() {
 		return Mobile;
 	}
-	public void setMobile(long mobile) {
+	public void setMobile(String mobile) {
 		Mobile = mobile;
 	}
-	public int getPinCode() {
+	public String getPinCode() {
 		return PinCode;
 	}
-	public void setPinCode(int pinCode) {
+	public void setPinCode(String pinCode) {
 		PinCode = pinCode;
 	}
 	public String getEmailId() {

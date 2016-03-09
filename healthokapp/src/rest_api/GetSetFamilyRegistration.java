@@ -9,7 +9,7 @@ public class GetSetFamilyRegistration {
 	public String sex=null;
 	public String DOB=null;
 	public String BloodGroup=null;
-	public int Daibetic;
+	public int Diabetic;
 	public int BP;
 	public int HeartProblems;
 	public String CurrentMedication=null;
@@ -63,10 +63,10 @@ public class GetSetFamilyRegistration {
 		BloodGroup = bloodGroup;
 	}
 	public int getDaibetic() {
-		return Daibetic;
+		return Diabetic;
 	}
 	public void setDaibetic(int daibetic) {
-		Daibetic = daibetic;
+		Diabetic = this.Diabetic;
 	}
 	public int getBP() {
 		return BP;

@@ -26,14 +26,5 @@ public class Doctor {
 	return rs;
 	}	
 
-	@Path("/{cityId}/{specilityId}/{appointment}")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	public static model.Result appointment(model.Doctor apt)
-	{	
-		
-		return null;
-		
-	}
 	
 }

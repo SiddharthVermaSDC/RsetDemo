@@ -24,12 +24,13 @@ public class FinalRegistration {
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String accpet(String jsonString) throws SQLException
+	public Message accept(String jsonString) throws SQLException
 	{
 		 Connection connection = null;
 	     Statement statement = null;
 	     ResultSet resultset = null;
 	     PreparedStatement preparedstatement=null;
+	     Message m=new Message();
 		
 		try {
 			connection = DatabaseConnectivity.getInstance().getConnection();
@@ -41,7 +42,7 @@ public class FinalRegistration {
 			for(int i=0;i<family.length();i++)
 			  {
 				 obj = family.getJSONObject(i);
-				 query=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedication)"
+				 query=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments,CityId)"
 				 		+ " values(\""
 					  +obj.getString("FirstName")+"\",\""
 					  +obj.getString("LastName")+"\",\""
@@ -49,19 +50,31 @@ public class FinalRegistration {
 					  +obj.getString("DOB")+"\",\""
 					  +obj.getString("BloodGroup")+"\",\""
 					  +obj.getString("Allergies")+"\",\""
-					 // +obj.getString("MedicalCondition")+"\",\""
-					  +obj.getString("CurrentMedication")+"\");");
+					  +obj.getString("CurrentMedications")+"\",\""
+					  +obj.getInt("Diabetic")+"\",\""
+					  +obj.getInt("BP")+"\",\""
+					  +obj.getInt("HeartProblems")+"\",\""
+					  +obj.getString("RecurringTests")+"\",\""
+					  +obj.getString("LongTermCareNeed")+"\",\""
+					  +obj.getString("Comments")+"\",\""
+					  +obj.getInt("CityId")+"\");" );
 				preparedstatement =(PreparedStatement)connection.prepareStatement(query);	 
 				preparedstatement.executeUpdate();
-				
+				m.setStatus(1);
 			  }  
 			  
-			return "got it right";
+			
 		   	} 
 		catch (Exception e) 
-		{ 
-		   	return e.getMessage();	
+		{   m.setStatus(-1);
+		   	m.setMessage(e.getMessage());
 		   	}
+		
+		 finally 
+	     { 
+			 DatabaseConnectivity.closeDatabase(connection); 
+			 return m;	  
+	      }
 		//return jsonString;
 	}
 //}
