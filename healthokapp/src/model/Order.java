@@ -4,9 +4,9 @@ public class Order {
 private int OrderId;
 private int UserId;
 private int OrderTypeId;
-private Date OrderDate;
+private String OrderDate;
 private int OrderStatusTypeId;
-private Date OrderCompletionDate;
+private String OrderCompletionDate;
 private String OrderDescription;
 private int TotalCost;
 private int Discount;
@@ -14,8 +14,8 @@ private int CashbackBonusApplied;
 private int NetAmount;
 public Order(){}
 public Order(int OrderId,int UserId,
-		int OrderTypeId,Date OrderDate,int OrderStatusTypeId,
-		Date OrderCompletionDate,String OrderDescription,
+		int OrderTypeId,String OrderDate,int OrderStatusTypeId,
+		String OrderCompletionDate,String OrderDescription,
 		int TotalCost,int Discount,
 		int CashbackBonusApplied,int NetAmount)
 {
@@ -49,10 +49,10 @@ public int getOrderTypeId() {
 public void setOrderTypeId(int orderTypeId) {
 	OrderTypeId = orderTypeId;
 }
-public Date getOrderDate() {
+public String getOrderDate() {
 	return OrderDate;
 }
-public void setOrderDate(Date orderDate) {
+public void setOrderDate(String orderDate) {
 	OrderDate = orderDate;
 }
 public int getOrderStatusTypeId() {
@@ -61,10 +61,10 @@ public int getOrderStatusTypeId() {
 public void setOrderStatusTypeId(int orderStatusTypeId) {
 	OrderStatusTypeId = orderStatusTypeId;
 }
-public Date getOrderCompletionDate() {
+public String getOrderCompletionDate() {
 	return OrderCompletionDate;
 }
-public void setOrderCompletionDate(Date orderCompletionDate) {
+public void setOrderCompletionDate(String orderCompletionDate) {
 	OrderCompletionDate = orderCompletionDate;
 }
 public String getOrderDescription() {

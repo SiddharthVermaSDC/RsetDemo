@@ -27,7 +27,7 @@ public class MedicineOrder {
 	medicineorder.setOrderId(orderid);
 	medicineorder.setPrescriptionImageId(prescriptionimageid);
 	medicineorder.setComments(comments);
-	 res.setStatus(dal.MedicineOrder.insertMedicineOrder(medicineorder,orderid));
+	 //res.setStatus(dal.MedicineOrder.insertMedicineOrder(medicineorder,orderid));
 	 return res;
 	}	
 	 @Path("/{OrderId}")

@@ -22,30 +22,40 @@ public class MemberRegister
 	@Path("/register")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String register(String g)
-	{
+	@Produces(MediaType.APPLICATION_JSON)
+	public Message register(String g)
+	{      Message m=new Message(); 
+	    //   m.setMessage("j");
+	    //   m.setStatus(1);
+	    //    return m;    
+          FinalRegistration  f=new FinalRegistration();
 		Connection connection = null;
 	     Statement statement = null;
 	     ResultSet resultset = null;
 	     PreparedStatement preparedstatement=null;
-		try {
+	   		try {
 			JSONObject json = new JSONObject(g);
 			connection = DatabaseConnectivity.getInstance().getConnection();
-      	  	String  query2="insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,Comments)"
+      	  	String  query2="insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
+      	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBousBalance,TotalDiscount,Comments)"
       	  			
       	  			+ " values(\""
-      	  			 +json.getString("MemberID")+"\",\""
+      	  			 +json.getInt("MemberID")+"\",\""
 					 +json.getString("FirstName")+"\",\""
 					 +json.getString("LastName")+"\",\""
-					 +json.getInt("Mobile")+"\",\""
+					 +json.getString("Mobile")+"\",\""
 					 +json.getString("EmailId")+"\",\""
 					 +json.getString("AddressLine1")+"\",\""
 					 +json.getString("AddressLine2")+"\",\""
 					 +json.getInt("CityId")+"\",\""
 					 +json.getString("PinCode")+"\",\""
 					 +json.getString("DoctorsGenerallyVisited")+"\",\""
-					 +json.getString("MembershipTypeId")+"\",\""
+					 +json.getInt("MembershipTypeId")+"\",\""
+					 +json.getString("Password")+"\",\""
+					 +json.getInt("PrimaryDoctor")+"\",\""
+					 +json.getInt("PrepaidBalance")+"\",\""
+					 +json.getInt("CashbackBousBalance")+"\",\""
+					 +json.getInt("TotalDiscount")+"\",\""
 	    	 		 +json.getString("OtherCare")+"\");";
 			
       	  	 System.out.println(query2);
@@ -53,14 +63,20 @@ public class MemberRegister
 			 preparedstatement.executeUpdate();
 			 
 			 
-			 
-			 
-			  return "You are Registered!"; 
-	     }
+			m=(f.accept(g));
+	   }
 	     catch(Exception e)
 	     {
-	    	 return e.getMessage();
+	    	 m.setStatus(-1);
+	    	 m.setMessage(e.getMessage());
 	     }
+		
+		finally 
+	     { 
+			DatabaseConnectivity.closeDatabase(connection); 
+			return m;
+			}  
+	     
 		 //return "You are not Registered!";	 
 	}
 	

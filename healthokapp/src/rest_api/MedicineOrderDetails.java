@@ -37,7 +37,7 @@ public class MedicineOrderDetails {
 		@Produces (MediaType.APPLICATION_JSON)
 		public static ArrayList<model.MedicineOrderDetails> responseMedicineOrderDetails(@PathParam("medicineorderid") int medicineorderid){
 			ArrayList<model.MedicineOrderDetails> add=new ArrayList<model.MedicineOrderDetails>();
-			add=dal.MedicineOrderDetails.responseMedicineOrderDetails(medicineorderdetailsid);
+		//	add=dal.MedicineOrderDetails.responseMedicineOrderDetails(medicineorderdetailsid);
 			
 			return add;
 		}
