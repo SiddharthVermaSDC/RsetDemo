@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Laborder {
 
-	public static int placeLabOrder(model.Laborder laborder ){ 
+	public static int placeLabOrder(model.Order order ){ 
 		
 		
-		return dal.Laborder.placeLabOrder( laborder);
+		return dal.Laborder.placeLabOrder( order);
 	}
 
 	public static ArrayList<model.Laborder> pendinglorder() {

@@ -65,14 +65,14 @@
 	    	int result=0;
 	    	Crudoperation crudoperation = new Crudoperation();
 			
-			String str2="delete feom LabOrderDetails where id =?";
+			String str2="delete from LabOrderDetails where LabOrderId =?";
 			try{
 				con1=(Connection) crudoperation.createConnection();
-				 ps=(PreparedStatement) con.prepareStatement(str2);
-				   ps.setInt(1,id);
+				 ps1=(PreparedStatement) con1.prepareStatement(str2);
+				   ps1.setInt(1,id);
 				  
 				   
-				   rw=ps.executeUpdate();
+				   rw=ps1.executeUpdate();
 				  
 				   if(rw>0)
 				   {
@@ -93,32 +93,29 @@
 	    	int  rw=0;
 	    	int result=0;
 	    	Crudoperation crudoperation = new Crudoperation();
-			String str2="update LabOrderDetails(LabOrderId,TestName,Price) values (?,?,?) where id = ?";
+			String str2="update LabOrderDetails set TestName =?, Price=? where LabOrderId = ?";
 			try{
 				con2=(Connection) crudoperation.createConnection();
 				
-				 ps2=(PreparedStatement) con2.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
-				 ps2.setInt(1,laborderd.getLaborderId());
-				 ps2.setString(2,laborderd.getTestname());
-				 ps2.setFloat(3,laborderd.getPrice());
-				 ps2.setInt(4,laborderd.getLaborderdetailId());
+				 ps2=(PreparedStatement) con2.prepareStatement(str2);
+				 ps2.setInt(3,laborderd.getLaborderId());
+				 ps2.setString(1,laborderd.getTestname());
+				 ps2.setFloat(2,laborderd.getPrice());
+				// ps2.setInt(4,laborderd.getLaborderdetailId());
 					 
 				   
 				   rw=ps2.executeUpdate();
 				  
 				   if(rw>0)
 				   {
-					   rs2 = ps2.getGeneratedKeys();
-		               if(rs2.next())
-		                   result = rs2.getInt(1);
-					   
-		            }else{
+					   result=1;
+				   }else{
 					   result=-1;
 				          }
 				   con2.close();
 		       }catch(SQLException se)
 			   {
-				System.out.print(se.getMessage());
+				//System.out.print(se.getMessage());
 				result = 500;
 			   }
 			return result;
