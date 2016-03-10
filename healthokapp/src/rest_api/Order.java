@@ -37,13 +37,10 @@ public class Order {
 		return result;
 		
 	}
-	 @Path("/gt/{OrderId}")
+	 @Path("/{OrderId}")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
 		public static model.Order responsorder(@PathParam("OrderId") int orderid){
-		    //model.Order ord=new model.Order();
-			//ord=biz.Order.respondOrder(orderid);
-			
 			return biz.Order.respondOrder(orderid);
 		}
 	

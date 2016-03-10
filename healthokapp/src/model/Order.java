@@ -12,12 +12,13 @@ private int TotalCost;
 private int Discount;
 private int CashbackBonusApplied;
 private int NetAmount;
+private String OrderFulfillDate;
 public Order(){}
 public Order(int OrderId,int UserId,
 		int OrderTypeId,String OrderDate,int OrderStatusTypeId,
 		String OrderCompletionDate,String OrderDescription,
 		int TotalCost,int Discount,
-		int CashbackBonusApplied,int NetAmount)
+		int CashbackBonusApplied,int NetAmount,String OrderFulfillDate)
 {
 	super();
 	this.OrderId = OrderId;
@@ -30,7 +31,9 @@ public Order(int OrderId,int UserId,
 	this.TotalCost=TotalCost;
 	this.Discount=Discount;
 	this.CashbackBonusApplied=CashbackBonusApplied;
-	}
+	this.NetAmount=NetAmount;
+	this.OrderFulfillDate=OrderFulfillDate;
+}
 public int getOrderId() {
 	return OrderId;
 }
@@ -98,5 +101,11 @@ public void setNetAmount(int netAmount) {
 	NetAmount = netAmount;
 }
 
-
+public void setOrderFulfillDate(String orderFulfillDate){
+	OrderFulfillDate=orderFulfillDate;
+}
+public String getOrderFulfillDate(){
+	
+	return OrderFulfillDate;
+}
 }

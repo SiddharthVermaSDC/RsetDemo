@@ -32,10 +32,10 @@ public class Order {
      	//for date
 		Date date = new Date();
 	    SimpleDateFormat sdf;
-	    sdf = new SimpleDateFormat("MM dd yyyy");
+	    sdf = new SimpleDateFormat("yyyy-MM-dd");
 	 //   System.out.println(sdf.format(date));
 	    
-		String str="insert into Order(UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderDescription) values (?,?,?,?,?)";
+		String str="insert into Order(UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderDescription,OrderFulfillDate) values (?,?,?,?,?,?)";
 		
 		try
 		{
@@ -48,6 +48,7 @@ public class Order {
 					result=4;
 			ps.setString(5,order.getOrderDescription());
 			result=5;
+			ps.setString(6, "2018-05-15");
 			int rw=ps.executeUpdate();result=6;
 
 			   if(rw>0)
@@ -89,12 +90,13 @@ public class Order {
 			    int Discount=rs2.getInt("Discount");
 			    int CashbackBonusApplied=rs2.getInt("CashbackBonusApplied");
 			    int NetAmount=rs2.getInt("NetAmount");
-				 order =  new model.Order(OrderId,UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderCompletionDate,OrderDescription,TotalCost, Discount,CashbackBonusApplied,NetAmount);
+			    String OrderFulfillDate=rs2.getString("OrderFulfillDate");
+				 order =  new model.Order(OrderId,UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderCompletionDate,OrderDescription,TotalCost, Discount,CashbackBonusApplied,NetAmount,OrderFulfillDate);
 			
 		}
 		catch(SQLException se)
 		{
-		order = new model.Order(1,1,1,null,1,null,"as",45,65,40,78);	
+		order = new model.Order(1,1,1,null,1,null,"as",45,65,40,78,"2017-04-12");	
 		}
 		return order;
 	}
