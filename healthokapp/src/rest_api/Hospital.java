@@ -23,9 +23,9 @@ public class Hospital {
 		return rs;
 		
 	}
-	
+	/*
 	@Path("/{hospitalId}")
-	@PUT
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public static model.Result hospitalUpdate(@PathParam("hospitalId") int id, model.Hospital hsptl1)
@@ -35,5 +35,5 @@ public class Hospital {
 		int result1=biz.Hospital.updateHospital(hsptl1,id);
 		rs1.setStatus(result1);
 		return rs1;
-	} 
+	}           */
 }

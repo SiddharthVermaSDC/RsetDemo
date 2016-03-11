@@ -39,51 +39,49 @@ public class EmailLogin
 		  
 		  try {
 			connection = DatabaseConnectivity.getInstance().getConnection();
-		    String query1="select UserId from User where EmailId=\""+gs.getEmail()+"\" and Password=\""+gs.getPassword()+"\"";
-		    String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\"";
+		    String query1="select UserId from User where EmailId=\""+gs.getEmail()+"\" and Password=\""+gs.getPassword()+"\";";
+		    String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\";";
 		   if(gs.getEmail()==null)
-		   {
-			   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
+		   {   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
 		   }
 		   else
-		   {
-			   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
+		   {   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
 		   }
 			 resultSet=preparedStatement.executeQuery();
 
 			 if(resultSet.next()==true)
 			 {   
-				 mg.setStatus(resultSet.getInt("UserId"));
 				 gss.UserId=resultSet.getInt("UserId");
 				 s=r.userDetails(gss);
+			     return s; 
+				   
 			 }
 			 else{
-				 mg.setStatus(-1);
 				 error.put("error","-1");
 			     return error.toString();     }
 	     }
 	     catch(Exception e)
 	     {
-	    	 mg.setStatus(500);
 	    	 try{
-	    	      error.put("error","500");;
+	    	      error.put("error","-500");
 	    	      return error.toString();
 	    	     }
 	    	 catch(Exception e1)
-	    	 {   e1.getMessage();}
+	    	 {   return " {\"error\":\"-100\"}" ;
+	    	    }
 	     }
 		  
 		
 		 finally 
 	     { 
 			 DatabaseConnectivity.closeDatabase(connection); 
-	         return s; 
 	      }
+	//	return s;
 	}
 	
 	
 	
-	
+	/*
 	
 	@Path("/PathCheck/{email}/{password}")
 	@POST
@@ -127,7 +125,7 @@ public class EmailLogin
 		         return mg; 
 		      }
 	}
-	
+	*/
 	
 	
 	@Path("/s")
@@ -138,5 +136,6 @@ public class EmailLogin
 		return "hello second latest new with pom";
 	}
 	          
+	
 	
 }
