@@ -6,10 +6,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/Add")
+@Path("/Hospital")
 public class Hospital {
 
-	@Path("/Hospital")
+	@Path("/Add")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
