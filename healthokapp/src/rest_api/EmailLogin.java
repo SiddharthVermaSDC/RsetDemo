@@ -57,7 +57,7 @@ public class EmailLogin
 				   
 			 }
 			 else{
-				 error.put("error","-1");
+				 error.put("status","-1");
 			     return error.toString();     }
 	     }
 	     catch(Exception e)
