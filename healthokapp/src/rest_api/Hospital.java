@@ -23,8 +23,8 @@ public class Hospital {
 		return rs;
 		
 	}
-/*	
-	@Path("/Update/{hospitalId}")
+	
+	@Path("/{hospitalId}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -35,5 +35,5 @@ public class Hospital {
 		int result1=biz.Hospital.updateHospital(hsptl1,id);
 		rs1.setStatus(result1);
 		return rs1;
-	}  */
+	} 
 }

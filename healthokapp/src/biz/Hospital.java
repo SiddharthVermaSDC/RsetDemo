@@ -8,7 +8,7 @@ public class Hospital {
 	
 
 	public static int updateHospital(model.Hospital hsptl1, int id) {
-		return  dal.Hospital.updateHospital(id,hsptl1);
+		return  dal.Hospital.updateHospital(hsptl1,id);
 	}
 
 }

@@ -10,8 +10,11 @@ import rest_api.DatabaseConnectivity;
 public class Hospital {
 
 	static Connection connection;
+	static Connection connection1;
 	static PreparedStatement ps;
+	static PreparedStatement ps1;
 	static ResultSet rs;
+	static ResultSet rs1;
 	
 	public static int addHospital(model.Hospital hsptl) {
 		int result=0;
@@ -55,38 +58,38 @@ public class Hospital {
 	}
 
 
-	public static int updateHospital(int id,model.Hospital hsptl1) {
+	public static int updateHospital(model.Hospital hsptl1,int id) {
 	  
 		int result1=0;
 		try
 		{
-			Connection connection1 = DatabaseConnectivity.getInstance().getConnection();
+		    connection1 = DatabaseConnectivity.getInstance().getConnection();
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
 			java.sql.Date d= new java.sql.Date(format.parse(hsptl1.getRegDate()).getTime());
 			String query="Update Hospital set (Name,AddressId,HasER,Facilities,OPDFees,Beds,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,Website,Hospitalphonenumber,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) where HospitalId=\""+id+"\"";
-			ps=connection1.prepareStatement(query);
-			ps.setString(1, hsptl1.getHospitalname());
-			ps.setInt(2, hsptl1.getAddressId());
-			ps.setBoolean(3,hsptl1.isHasER());
-			ps.setString(4,hsptl1.getFacilities());
-			ps.setInt(5,hsptl1.getOpdFees());
+			ps1=connection1.prepareStatement(query);
+			ps1.setString(1, hsptl1.getHospitalname());
+			ps1.setInt(2, hsptl1.getAddressId());
+			ps1.setBoolean(3,hsptl1.isHasER());
+			ps1.setString(4,hsptl1.getFacilities());
+			ps1.setInt(5,hsptl1.getOpdFees());
 			System.out.println("Opd Fees"+hsptl1.getOpdFees());
-			ps.setInt(6,hsptl1.getBed());
-			ps.setString(7,hsptl1.getAddressLine1());
-			ps.setString(8,hsptl1.getAddressLine2());
-			ps.setString(9,hsptl1.getAddressLine3());
-			ps.setInt(10,hsptl1.getCityId());
-			ps.setString(11,hsptl1.getPincode());
-			ps.setDate(12,(java.sql.Date) d);
+			ps1.setInt(6,hsptl1.getBed());
+			ps1.setString(7,hsptl1.getAddressLine1());
+			ps1.setString(8,hsptl1.getAddressLine2());
+			ps1.setString(9,hsptl1.getAddressLine3());
+			ps1.setInt(10,hsptl1.getCityId());
+			ps1.setString(11,hsptl1.getPincode());
+			ps1.setDate(12,(java.sql.Date) d);
 		//	ps.setDate(12,hsptl.getRegDate());
-			ps.setString(13,hsptl1.getWebsite());
-			ps.setString(14,hsptl1.getPhonenumber());
-			ps.setBoolean(15,hsptl1.isHasRadiology());
-			ps.setBoolean(16,hsptl1.isHasDiagnistics());
-			ps.setBoolean(17,hsptl1.isHasAmbulance());
-			ps.setString(18,hsptl1.getAddmissionProcess());
+			ps1.setString(13,hsptl1.getWebsite());
+			ps1.setString(14,hsptl1.getPhonenumber());
+			ps1.setBoolean(15,hsptl1.isHasRadiology());
+			ps1.setBoolean(16,hsptl1.isHasDiagnistics());
+			ps1.setBoolean(17,hsptl1.isHasAmbulance());
+			ps1.setString(18,hsptl1.getAddmissionProcess());
 			
-			ps.executeUpdate();
+			ps1.executeUpdate();
 			result1 = 1;
 		}
 		catch(Exception e)
