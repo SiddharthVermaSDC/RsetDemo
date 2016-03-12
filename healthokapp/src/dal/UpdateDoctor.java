@@ -33,7 +33,7 @@ package dal;
 				if (rs.next())
 					doctor.setImageid(rs.getInt(1));
 				// String q1 = "insert into doctor(PinCode) values(?);"; */
-				String q = "update into doctor (EmergencyFees,IsBelongToAnyHospital,DoctorRegistrationDate,EmailId,IsProvideHomeCare,IsPharmacy,FirstName,MiddleName,LastName,Speciality,Degree,ClinicTiming,OffDay,Fees,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsPostCareEnabled,DoctorImageId,YearsOfExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) where DoctorId=\""+val+"\"";              
+				String q = "update doctor set (EmergencyFees,IsBelongToAnyHospital,DoctorRegistrationDate,EmailId,IsProvideHomeCare,IsPharmacy,FirstName,MiddleName,LastName,Speciality,Degree,ClinicTiming,OffDay,Fees,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsPostCareEnabled,DoctorImageId,YearsOfExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) where DoctorId=\""+val+"\"";              
 				ps = connection.prepareStatement(q, Statement.RETURN_GENERATED_KEYS);
 				// ps.setString(1,doctor.getPincode());
 				ps.setString(7, doctor.getFirstName());

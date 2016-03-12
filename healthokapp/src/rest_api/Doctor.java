@@ -25,6 +25,16 @@ public class Doctor {
 	rs.setStatus(rsult);
 	return rs;
 	}	
-
-	
+/*
+	@Path("/{cityId}/{specilityId}/{appointment}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public static model.Result appointment(model.Doctor apt)
+	{	
+		
+		return null;
+		
+	}
+	*/
 }

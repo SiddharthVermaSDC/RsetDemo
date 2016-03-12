@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-
 public class Hospital {
 
 	
@@ -18,7 +16,7 @@ public class Hospital {
 	private String pincode;
 	private String regDate;
 	private String website;
-	private int phonenumber;
+	private String phonenumber;
 	private boolean hasRadiology;
 	private boolean hasDiagnistics;
 	private boolean hasAmbulance;
@@ -35,10 +33,10 @@ public class Hospital {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	public int getPhonenumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
-	public void setPhonenumber(int phonenumber) {
+	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
 	public boolean isHasRadiology() {

@@ -9,7 +9,7 @@ public class Doctor {
 	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
-
+	
 	private String images;
 	private int imageid;
 	private int imageTypeId;
