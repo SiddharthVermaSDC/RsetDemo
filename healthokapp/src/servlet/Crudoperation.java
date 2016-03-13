@@ -1,8 +1,6 @@
 package servlet;
 import java.sql.*;
 
-import javax.naming.InitialContext;
-
 
 public class Crudoperation 
 {
