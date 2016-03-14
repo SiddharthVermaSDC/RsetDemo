@@ -38,7 +38,7 @@ public class Laborder {
     	int rw= 0;
     	int result=0;
     	Crudoperation crudoperation = new Crudoperation();
-		String str1="insert into laborder(OrderId,PrescriptionImageId,Description) values (?,?,?)";
+		String str1="insert into LabOrder(OrderId,PrescriptionImageId,Description) values (?,?,?)";
 		try{
 			   con=(Connection) crudoperation.createConnection();
 			   ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
