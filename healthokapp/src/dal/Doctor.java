@@ -75,7 +75,7 @@ public class Doctor {
 				doctor.setDoctorId(rs.getInt(1));
 			String q1 = "insert into DoctorPhoneNumbers(DoctorId,PhoneNumberType,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
 			ps = connection.prepareStatement(q1);
-			ps.setInt(1,doctor.getDoctorId() );
+			ps.setInt(1, doctor.getDoctorId());
 			ps.setInt(2, doctor.getPhoneNumberType());
 			ps.setString(3, doctor.getPhoneNumber());
 			ps.setString(4, doctor.getContact());
@@ -86,9 +86,8 @@ public class Doctor {
 			System.out.println(e);
 			result = 500;
 
-			
 		}
 		return result;
 	}
-	
+
 }

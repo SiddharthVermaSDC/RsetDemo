@@ -18,9 +18,9 @@ public class HospitalRetrival {
 	@Produces(MediaType.APPLICATION_JSON)
 	public static ArrayList<model.Hospital> getHospital(@PathParam("HospitalId") String HospitalId) {
 		ArrayList<model.Hospital> hosptl = new ArrayList<model.Hospital>();
-		hosptl= biz.HospitalRetrival.responseHospital(HospitalId);
+		hosptl = biz.HospitalRetrival.responseHospital(HospitalId);
 		return hosptl;
-		
+
 	}
 
 	// for retrieving just the hospital ids in the hospital table
@@ -29,10 +29,8 @@ public class HospitalRetrival {
 	@Produces(MediaType.APPLICATION_JSON)
 	public static ArrayList<model.Hospital> getHospitalId() {
 		ArrayList<model.Hospital> hosptl1 = new ArrayList<model.Hospital>();
-		hosptl1= biz.HospitalRetrival.responseHospitalId();
+		hosptl1 = biz.HospitalRetrival.responseHospitalId();
 		return hosptl1;
 	}
-	
-	
-	
+
 }

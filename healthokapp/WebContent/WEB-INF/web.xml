@@ -29,15 +29,15 @@
     <env-entry-type>java.lang.String</env-entry-type> 
 
      
-  <!--    
+     
 	 
-    <env-entry-value>"jdbc:mysql://localhost:3306/healthok","root","9559287622"</env-entry-value> 
-   -->
+    <env-entry-value>"jdbc:mysql://localhost:3306/healthok","root","1october"</env-entry-value> 
+  
      
-     
+     <!--  
 
     <env-entry-value>"jdbc:mysql://127.3.104.130:3306/healthok","adminuzuSCxp","GQBXVWgreeuA"</env-entry-value> 
-   
+   -->
    
 </env-entry>
 </web-app>

@@ -1,33 +1,26 @@
 package model;
 
-public class Doctor {
-	private int doctorId;
+public class DoctorRetrival {
 
-	public int getDoctorId() {
-		return doctorId;
-	}
-
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
-	}
-
+	private int rank;
 	private String images;
-	private int imageid;
+	private int doctorId;
+	private int emergencyFees;
+	private int isBelongToAnyHospital;
+	private String doctorRegistrationDate;
+	private String emailId;
+	private int isProvideHomeCare;
+	private int isPharmacy;
+	private int imageId;
 	private int imageTypeId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	private String emailId;
 	private int speciality;
 	private String degree;
-	private String doctorRegDate;
 	private String clinicTiming;
 	private String offDay;
-	private int emergencyFees;
 	private int fees;
-	private boolean isPharamacy;
-	private boolean isProvideHomecare;
-	private boolean isBelongToHospital;
 	private boolean inPanel;
 	private boolean appointmnet;
 	private boolean virtualReceptionist;
@@ -38,68 +31,53 @@ public class Doctor {
 	private String addressLine3;
 	private int cityId;
 	private String pincode;
-	private String phoneNumber;
-	private int phoneNumberType;
-	private String contact;
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public int getPhoneNumberType() {
-		return phoneNumberType;
-	}
-
-	public void setPhoneNumberType(int phoneNumberType) {
-		this.phoneNumberType = phoneNumberType;
-	}
-
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	private String comment;
-
-	public Doctor() {
+	public DoctorRetrival() {
 
 	}
 
-	/*
-	 * public Doctor(String images, int imageTypeId, String firstName, String
-	 * middleName, String lastName, int speciality, String degree, String
-	 * clinicTiming, String offDay, int fees, boolean inPanel, boolean
-	 * appointmnet, boolean virtualReceptionist, boolean postcare, int
-	 * yearofExperience, String addressLine1, String addressLine2, String
-	 * addressLine3, int cityId, String pincode) { super(); this.images =
-	 * images;
-	 * 
-	 * this.imageTypeId = imageTypeId; this.firstName = firstName ;
-	 * this.middleName = middleName; this.lastName = lastName; this.speciality =
-	 * speciality; this.clinicTiming = clinicTiming; this.offDay= offDay;
-	 * this.fees = fees; this.inPanel = inPanel; this.appointmnet = appointmnet;
-	 * this.virtualReceptionist = virtualReceptionist; this.postcare = postcare;
-	 * this.yearofExperience = yearofExperience; this.addressLine1 =
-	 * addressLine1; this.addressLine2 = addressLine2; this.addressLine3 =
-	 * addressLine3; this.cityId = cityId; this.pincode = pincode;
-	 * 
-	 * }
-	 */
+	public DoctorRetrival(int rank, int doctorId, int emergencyFees, int isBelongToAnyHospital,
+			String doctorRegistrationDate, String emailId, int isProvideHomeCare, int isPharmacy, String firstName,
+			String middleName, String lastName, int speciality, String degree, String clinicTiming, String offDay,
+			int fees, boolean inPanel, boolean appointmnet, boolean virtualReceptionist, boolean postcare,
+			int yearofExperience, String addressLine1, String addressLine2, String addressLine3, int cityId,
+			String pincode) {
+		super();
+		this.rank = rank;
+		this.emergencyFees = emergencyFees;
+		this.isBelongToAnyHospital = isBelongToAnyHospital;
+		this.doctorRegistrationDate = doctorRegistrationDate;
+		this.emailId = emailId;
+		this.isProvideHomeCare = isProvideHomeCare;
+		this.isPharmacy = isPharmacy;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.speciality = speciality;
+		this.degree = degree;
+		this.clinicTiming = clinicTiming;
+		this.offDay = offDay;
+		this.fees = fees;
+		this.inPanel = inPanel;
+		this.appointmnet = appointmnet;
+		this.virtualReceptionist = virtualReceptionist;
+		this.postcare = postcare;
+		this.yearofExperience = yearofExperience;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.addressLine3 = addressLine3;
+		this.cityId = cityId;
+		this.pincode = pincode;
+
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 
 	public String getImages() {
 		return images;
@@ -109,12 +87,68 @@ public class Doctor {
 		this.images = images;
 	}
 
-	public int getImageid() {
-		return imageid;
+	public int getDoctorId() {
+		return doctorId;
 	}
 
-	public void setImageid(int imageid) {
-		this.imageid = imageid;
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
+	}
+
+	public int getEmergencyFees() {
+		return emergencyFees;
+	}
+
+	public void setEmergencyFees(int emergencyFees) {
+		this.emergencyFees = emergencyFees;
+	}
+
+	public int getIsBelongToAnyHospital() {
+		return isBelongToAnyHospital;
+	}
+
+	public void setIsBelongToAnyHospital(int isBelongToAnyHospital) {
+		this.isBelongToAnyHospital = isBelongToAnyHospital;
+	}
+
+	public String getDoctorRegistrationDate() {
+		return doctorRegistrationDate;
+	}
+
+	public void setDoctorRegistrationDate(String doctorRegistrationDate) {
+		this.doctorRegistrationDate = doctorRegistrationDate;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public int getIsProvideHomeCare() {
+		return isProvideHomeCare;
+	}
+
+	public void setIsProvideHomeCare(int isProvideHomeCare) {
+		this.isProvideHomeCare = isProvideHomeCare;
+	}
+
+	public int getIsPharmacy() {
+		return isPharmacy;
+	}
+
+	public void setIsPharmacy(int isPharmacy) {
+		this.isPharmacy = isPharmacy;
+	}
+
+	public int getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(int imageId) {
+		this.imageId = imageId;
 	}
 
 	public int getImageTypeId() {
@@ -269,51 +303,4 @@ public class Doctor {
 		this.pincode = pincode;
 	}
 
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	public String getDoctorRegDate() {
-		return doctorRegDate;
-	}
-
-	public void setDoctorRegDate(String doctorRegDate) {
-		this.doctorRegDate = doctorRegDate;
-	}
-
-	public int getEmergencyFees() {
-		return emergencyFees;
-	}
-
-	public void setEmergencyFees(int emergencyFees) {
-		this.emergencyFees = emergencyFees;
-	}
-
-	public boolean isPharamacy() {
-		return isPharamacy;
-	}
-
-	public void setPharamacy(boolean isPharamacy) {
-		this.isPharamacy = isPharamacy;
-	}
-
-	public boolean isProvideHomecare() {
-		return isProvideHomecare;
-	}
-
-	public void setProvideHomecare(boolean isProvideHomecare) {
-		this.isProvideHomecare = isProvideHomecare;
-	}
-
-	public boolean isBelongToHospital() {
-		return isBelongToHospital;
-	}
-
-	public void setBelongToHospital(boolean isBelongToHospital) {
-		this.isBelongToHospital = isBelongToHospital;
-	}
 }
