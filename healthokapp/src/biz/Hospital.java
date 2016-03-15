@@ -6,9 +6,4 @@ public class Hospital {
 		return dal.Hospital.addHospital(hsptl);
 	}
 	
-
-	public static int updateHospital(model.Hospital hsptl1, int id) {
-		return  dal.Hospital.updateHospital(hsptl1,id);
-	}
-
 }

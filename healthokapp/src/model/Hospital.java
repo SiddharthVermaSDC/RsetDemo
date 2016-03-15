@@ -2,7 +2,7 @@ package model;
 
 public class Hospital {
 
-	
+	private int hospitalId;
 	private String hospitalname;
 	private int addressId;
 	private boolean hasER;
@@ -21,6 +21,42 @@ public class Hospital {
 	private boolean hasDiagnistics;
 	private boolean hasAmbulance;
 	private String addmissionProcess;
+	
+	public Hospital() {
+	}
+	
+	
+	
+	public Hospital(int hospitalId, String hospitalname, int addressId, boolean hasER, String facilities, int opdFees, int bed, String addressLine1, String addressLine2, String addressLine3, int cityId, String pincode, String regDate, String website, String phonenumber, boolean hasRadiology, boolean hasDiagnistics, boolean hasAmbulance, String addmissionProcess){
+		this.hospitalId = hospitalId;
+		this.hospitalname = hospitalname;
+		this.addressId = addressId;
+		this.hasER = hasER;
+		this.facilities = facilities;
+		this.opdFees = opdFees;
+		this.bed = bed;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.addressLine3 = addressLine3;
+		this.cityId =  cityId;
+		this.pincode = pincode;
+		this.regDate = regDate;
+		this.website = website;
+		this.phonenumber = phonenumber;
+		this.hasRadiology = hasRadiology;
+		this.hasDiagnistics = hasDiagnistics;
+		this.hasAmbulance = hasAmbulance;
+		this.addmissionProcess = addmissionProcess;
+	}
+	
+	public Hospital(int hospitalId){
+		this.hospitalId = hospitalId;
+	}
+	
+	
+	public int getHospitalId() {
+		return hospitalId;
+	}
 	public String getRegDate() {
 		return regDate;
 	}
