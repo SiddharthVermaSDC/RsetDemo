@@ -25,7 +25,7 @@ public class MedicineOrder{
 		int result=0;
 		Crudoperation crudoperation = new Crudoperation();
 		con=(Connection) crudoperation.createConnection();
-		String str1="insert into MedicineOrder(OrderId,PrescriptionImageId,Comments) values (?,?,?,?)";
+		String str1="insert into MedicineOrder(OrderId,PrescriptionImageId,Comments) values (?,?,?)";
 		try{
 			   ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
 			   ps.setInt(1, order.getOrderId());
@@ -47,10 +47,11 @@ public class MedicineOrder{
 		}
 		catch(SQLException se)
 		   {
-			   
+			   result=500;
 		   }
 		return result; 
 	}
+	
 public static ArrayList<model.MedicineOrder> responseMedicineOrder(int orderid)
 {
 	ArrayList<model.MedicineOrder> medicineorder=new ArrayList<model.MedicineOrder>();
