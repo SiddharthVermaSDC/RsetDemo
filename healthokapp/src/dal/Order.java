@@ -26,6 +26,7 @@ public class Order {
 	
 	static PreparedStatement ps4=null;
 	static Connection con3=null;
+	static ResultSet rs3=null;
     public static int createOrder(model.Order order){
 		int result=0;
 		Crudoperation crudoperation = new Crudoperation();
@@ -58,6 +59,7 @@ public class Order {
 	                if(rs.next())
 	                    result =rs.getInt(1);
 	 }
+		
 			   else{
 				   result=-1;
 			   }
@@ -103,10 +105,10 @@ public class Order {
 		}
 		return order;
 	}
-	 public static void updateOrder(model.Order order,int orderid){
+	 public static int updateOrder(model.Order order,int orderid){
 			Crudoperation crudoperation = new Crudoperation();
 			con3=(Connection) crudoperation.createConnection();
-		 String str3="update `order` set TotalCost=?,Discount=?,CashbackBonusApplied=?,NetAmount=? where OrderId=?";
+		 String str3="update `Order` set TotalCost=?,Discount=?,CashbackBonusApplied=?,NetAmount=? where OrderId=?";
 		 try{
 			 ps4=(PreparedStatement) con3.prepareStatement(str3);
 			 ps4.setInt(1,order.getTotalCost());
@@ -115,10 +117,12 @@ public class Order {
 			 ps4.setInt(4,order.getNetAmount());
 			 ps4.setInt(5,orderid);
 			 ps4.executeUpdate();
+            return 1;
 		 }
 		 catch(SQLException se)
 		 {
-			 
+			 return -1;	 
 		 }
+		
 	 }
 }

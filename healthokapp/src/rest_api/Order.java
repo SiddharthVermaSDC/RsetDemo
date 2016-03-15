@@ -15,7 +15,7 @@ import java.sql.Date;
 @Path("/order")
 public class Order {
 
-	@Path("/{OrderTypeId}/{UserId}/{comment}")
+	@Path("place/{OrderTypeId}/{UserId}/{comment}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
 	public static model.Result order(@PathParam("OrderTypeId") int ordertypeid,@PathParam("UserId") int userid,@PathParam("comment") String comment)
@@ -37,7 +37,7 @@ public class Order {
 		return result;
 		
 	}
-	 @Path("/{OrderId}")
+	 @Path("fetch/{OrderId}")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
 		public static model.Order responsorder(@PathParam("OrderId") int orderid){
@@ -51,6 +51,21 @@ public class Order {
 	public String rTurn(){
 		
 		return "hello second";
+	}
+	@Path("update/{orderid}/{totalcost}/{discount}/{cashbackbonusapplied}/{netamount}")
+	@GET
+	@Produces (MediaType.APPLICATION_JSON)
+	public static model.Result uporder(@PathParam("orderid") int orderid,@PathParam("totalcost") int totalcost,@PathParam("discount") int discount,@PathParam("cashbackbonusapplied") int cashbackbonusapplied,@PathParam("netamount") int netamount)
+	{
+		model.Order order=new model.Order();
+		model.Result result=new model.Result();
+		order.setTotalCost(totalcost);
+		order.setDiscount(discount);
+		order.setCashbackBonusApplied(cashbackbonusapplied);
+		order.setNetAmount(netamount);
+		result.setStatus(dal.Order.updateOrder(order,orderid));
+		return result;
+		
 	}
 	
 
