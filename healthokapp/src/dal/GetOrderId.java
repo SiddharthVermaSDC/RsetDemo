@@ -15,8 +15,8 @@ public class GetOrderId {
 		int userid=0;
 		int orderid=0;
 		userid=dal.GetUserId.userid(username);
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str="select max(orderid) from healthok.order where UserId=?";
 		try{
 			ps=(PreparedStatement) con.prepareStatement(str); 

@@ -19,8 +19,8 @@ public class ImageData {
 		  int result = 0 ;
 		  try{
 			  
-		 Crudoperation crudoperation = new Crudoperation();
-		 con=(Connection) crudoperation.createConnection();
+		 Database database = new Database();
+		 con=(Connection) database.createConnection();
 	    FileInputStream fin = new FileInputStream(image.getImage());
      	String str1 = "INSERT INTO Images (ImageTypeId,Image) values (?,?)";
 	    ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);

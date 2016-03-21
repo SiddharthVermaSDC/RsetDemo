@@ -21,8 +21,8 @@ public class MedicineOrder{
   
 	public static int insertMedicineOrder(model.Order order){
 		int result=0;
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str1="insert into MedicineOrder(OrderId,PrescriptionImageId,Comments) values (?,?,?)";
 		try{
 			   ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
@@ -53,8 +53,8 @@ public class MedicineOrder{
 public static ArrayList<model.MedicineOrder> responseMedicineOrder(int orderid)
 {
 	ArrayList<model.MedicineOrder> medicineorder=new ArrayList<model.MedicineOrder>();
-	Crudoperation crudoperation = new Crudoperation();
-	con=(Connection) crudoperation.createConnection();
+	Database database = new Database();
+	con=(Connection) database.createConnection();
 	String str2="select * from MedicineOrder where OrderId=?";
 	try{
 		ps3=(PreparedStatement) con.prepareStatement(str2); 
@@ -80,8 +80,8 @@ public static ArrayList<model.MedicineOrder> responseMedicineOrder(int orderid)
 	public static int deleteMedicineOrder(int orderid) {
 		int  rw=0;
  	int result=0;
- 	Crudoperation crudoperation = new Crudoperation();
-		con3=(Connection) crudoperation.createConnection();
+ 	Database database = new Database();
+		con3=(Connection) database.createConnection();
 		String str3="delete from MedicineOrder where OrderId =?";
 		try{
 			 ps3=(PreparedStatement) con3.prepareStatement(str3);

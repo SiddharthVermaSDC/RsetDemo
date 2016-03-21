@@ -14,7 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import rest_api.DatabaseConnectivity;
+import dal.DatabaseConnectivity;
 @Path("/Image")
 public class ImageInsert {
 	private Connection connection = null;

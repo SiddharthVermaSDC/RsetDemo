@@ -15,6 +15,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.json.JSONObject;
 
+import dal.Database;
+import dal.DatabaseConnectivity;
+
 @Path("/MemberRegistration")
 public class MemberRegister 
 {
@@ -35,7 +38,7 @@ public class MemberRegister
 	     PreparedStatement preparedstatement=null;
 	   		try {
 			JSONObject json = new JSONObject(g);
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();
       	  	String  query2="insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
       	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBousBalance,TotalDiscount,Comments)"
       	  			
@@ -73,7 +76,7 @@ public class MemberRegister
 		
 		finally 
 	     { 
-			DatabaseConnectivity.closeDatabase(connection); 
+			Database.closeConnection(connection);
 			return m;
 			}  
 	     

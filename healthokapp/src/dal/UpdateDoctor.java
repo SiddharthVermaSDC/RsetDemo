@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
-import rest_api.DatabaseConnectivity;
-
 public class UpdateDoctor {
 
 	static Connection connection;
@@ -20,7 +18,7 @@ public class UpdateDoctor {
 		int result = 0;
 
 		try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();;
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			java.sql.Date d = new java.sql.Date(format.parse(doctor.getDoctorRegDate()).getTime());
 			
@@ -74,6 +72,7 @@ public class UpdateDoctor {
 			ps5.setString(5, doctor.getComment());
 			ps5.executeUpdate();
 
+			Database.closeConnection(connection);
 		} catch (Exception e) {
 			System.out.println(e);
 			result = 500;

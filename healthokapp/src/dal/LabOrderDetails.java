@@ -23,11 +23,11 @@
 	    public static int placeLabOrderd(model.Laborderdetails laborderd){
 	    	int  rw=0;
 	    	int result=0;
-	    	Crudoperation crudoperation = new Crudoperation();
+	    	Database database = new Database();
 			String str1="insert into LabOrderDetails(LabOrderId,TestName,Price) values (?,?,?)";
 			try{
 
-				 con=(Connection) crudoperation.createConnection(); 
+				 con=(Connection) database.createConnection(); 
 			   	 ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
 				 ps.setInt(1,laborderd.getLaborderId());
 				 ps.setString(2,laborderd.getTestname());
@@ -61,11 +61,11 @@
 	    public static int deleteLabOrder(int id){
 	    	int  rw=0;
 	    	int result=0;
-	    	Crudoperation crudoperation = new Crudoperation();
+	    	Database database = new Database();
 			
 			String str2="delete from LabOrderDetails where LabOrderId =?";
 			try{
-				con1=(Connection) crudoperation.createConnection();
+				con1=(Connection) database.createConnection();
 				 ps1=(PreparedStatement) con1.prepareStatement(str2);
 				   ps1.setInt(1,id);
 				  
@@ -90,10 +90,10 @@
 	    public static int updateLabOrderd(model.Laborderdetails laborderd){
 	    	int  rw=0;
 	    	int result=0;
-	    	Crudoperation crudoperation = new Crudoperation();
+	    	Database database = new Database();
 			String str2="update LabOrderDetails set TestName =?, Price=? where LabOrderId = ?";
 			try{
-				con2=(Connection) crudoperation.createConnection();
+				con2=(Connection) database.createConnection();
 				
 				 ps2=(PreparedStatement) con2.prepareStatement(str2);
 				 ps2.setInt(3,laborderd.getLaborderId());

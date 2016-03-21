@@ -2,12 +2,12 @@ package dal;
 import java.sql.*;
 
 
-public class Crudoperation 
+public class Database 
 {
-private  Connection Con=null; 
+private  Connection connection=null; 
 ResultSet rs=null;
 PreparedStatement ps=null;
-public  Connection createConnection()
+public static  Connection createConnection()
 {
 	try
 	{
@@ -64,7 +64,7 @@ public  Connection createConnection()
 	
 		
 		
-		Con=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+dbname,username,password);	}
+		connection =DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+dbname,username,password);	}
 	catch(SQLException se)
 	{
 		System.out.println(se);
@@ -73,6 +73,15 @@ public  Connection createConnection()
 	{
 		System.out.println(cnf);
 	}
-	return Con;
+	return connection;
 }
+
+public static void closeConnection(Connection connection) {
+	try {
+		if (connection != null)
+			connection.close();
+	} catch (Exception e) {
+	}
+}
+
 }

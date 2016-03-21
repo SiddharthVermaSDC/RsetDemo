@@ -6,6 +6,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 //import com.mysql.jdbc.PreparedStatement;
 
+import dal.Database;
+import dal.DatabaseConnectivity;
+
 
 @Path("/address") 
 public class Getsetaddr  {
@@ -46,7 +49,7 @@ public class Getsetaddr  {
     	String s1="update "+s+" set AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=? where UserId=?";
     	try
     	{
-    	connection = DatabaseConnectivity.getInstance().getConnection();		
+    	connection = Database.createConnection();		
     	preparedstatement=(PreparedStatement) connection.prepareStatement(s1);
     	preparedstatement.setString(1,st.addressline1);
     	preparedstatement.setString(2, st.addressline2);
@@ -114,7 +117,7 @@ public class Getsetaddr  {
         	//a.createConnection();
         	String n="select * from address where address id=;";
         	try
-        	{  connection = DatabaseConnectivity.getInstance().getConnection();
+        	{  connection = Database.createConnection();
         	   preparedstatement=(PreparedStatement) connection.prepareStatement(n);
         	  // preparedstatement.setInt(1,returnAddressid(s));
         	   resultset=preparedstatement.executeQuery();

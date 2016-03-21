@@ -12,6 +12,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import dal.Database;
+import dal.DatabaseConnectivity;
+
 @Path("/Add")
 public class DoctorProfile {
 	private Connection connection = null;
@@ -24,7 +27,7 @@ public class DoctorProfile {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String GetData(GetSetDoctorProfile ds) {
 		try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();;
 			FileInputStream fin = new FileInputStream(ds.getImage());
 			String sql = "INSERT INTO Images (ImageTypeId,Image) values (?,?)";
 			ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -60,6 +63,7 @@ public class DoctorProfile {
 			ps.setString(19, ds.getPinCode());
 
 			ps.executeUpdate();
+			Database.closeConnection(connection);
 			return "Doctor SuccessFully Registered";
 
 		} catch (Exception e) {

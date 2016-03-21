@@ -17,6 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import dal.Database;
+import dal.DatabaseConnectivity;
+
 @Path("/ReturnUserDetails")
 public class ReturnUserDetails {
 	Connection connection = null;
@@ -39,7 +42,7 @@ public class ReturnUserDetails {
 	       ResultSet resultset = null;
 	       PreparedStatement preparedStatement=null;*/
 		 
-		 DatabaseConnectivity databaseConnectivity=null;
+		 
 		 
 		 
 	     GetSetMemberRegistration gss=new GetSetMemberRegistration();
@@ -52,7 +55,7 @@ public class ReturnUserDetails {
 	    	 arr = new JSONArray();
 	   	     error.put("error","-1");
 			 
-	    	 connection=DatabaseConnectivity.getInstance().getConnection();			 
+	    	 connection=Database.createConnection();		 
 			 query1="Select * from User where UserId="+userId.getUserId()+";";
 			 query2="Select * from MemberDetails where UserId="+userId.getUserId()+";";
 			 
@@ -125,7 +128,7 @@ public class ReturnUserDetails {
 	    	 return e.getMessage();
 	     }
 	     finally 
-	     { DatabaseConnectivity.closeDatabase(connection);   }
+	     { Database.closeConnection(connection);   }
 	     
 	     }
 	     

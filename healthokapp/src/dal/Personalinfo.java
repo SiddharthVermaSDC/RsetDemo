@@ -17,8 +17,8 @@ public class Personalinfo {
 		//model.Order order=new model.Order();
 		ArrayList<model.Order> orders =new ArrayList<model.Order>();
 		int userid=dal.GetUserId.userid(username);
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str1="select * from healthok.order where UserId=?";
 		try{
 			ps2=(PreparedStatement) con.prepareStatement(str1);

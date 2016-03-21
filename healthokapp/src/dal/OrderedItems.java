@@ -27,8 +27,8 @@ public class OrderedItems {
 		ArrayList<model.Buffer> buffers=new ArrayList<>();
 		buffers=dal.Buffer.getAllbufferItem(username);
 		orderid=dal.GetOrderId.getRecentOrderid(username);
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		try
 		{
 		for(model.Buffer buff: buffers)
@@ -47,8 +47,8 @@ public class OrderedItems {
 	public static Map<Long, model.Medicine> getOrderItems(int orderid){
 		Map<Long, model.Medicine> medicine =new HashMap<>();
 		long i=1;
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str1="SELECT * FROM healthok.ordereditems,healthok.medicine where healthok.ordereditems.orderid=? and healthok.ordereditems.medicineid=healthok.medicine.medicineid";
 		try{
 		ps1=(PreparedStatement) con.prepareStatement(str1);

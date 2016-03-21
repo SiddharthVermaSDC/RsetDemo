@@ -17,6 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import dal.Database;
+import dal.DatabaseConnectivity;
+
 @Path("/FinalRegister")
 public class FinalRegistration {
 
@@ -33,7 +36,7 @@ public class FinalRegistration {
 	     Message m=new Message();
 		
 		try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();
       	  	JSONObject json = new JSONObject(jsonString);
 			MemberRegister mr=new MemberRegister();
 			JSONArray family = json.getJSONArray("family");
@@ -72,7 +75,7 @@ public class FinalRegistration {
 		
 		 finally 
 	     { 
-			 DatabaseConnectivity.closeDatabase(connection); 
+			 Database.closeConnection(connection);
 			 return m;	  
 	      }
 		//return jsonString;

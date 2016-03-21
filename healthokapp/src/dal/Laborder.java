@@ -35,10 +35,10 @@ public class Laborder {
     public static int placeLabOrder(model.Order order){
     	int rw= 0;
     	int result=0;
-    	Crudoperation crudoperation = new Crudoperation();
+    	Database database = new Database();
 		String str1="insert into LabOrder(OrderId,PrescriptionImageId,Description) values (?,?,?)";
 		try{
-			   con=(Connection) crudoperation.createConnection();
+			   con=(Connection) database.createConnection();
 			   ps=(PreparedStatement) con.prepareStatement(str1,Statement.RETURN_GENERATED_KEYS);
 			   ps.setInt(1,order.getOrderId());
 			   ps.setInt(2, 1);
@@ -68,10 +68,10 @@ public class Laborder {
     public static int updateResultLabOrder(int laborderid,int resultimage){
     	int rw= 0;
     	int result=0;
-    	Crudoperation crudoperation = new Crudoperation();
+    	Database database = new Database();
 		 String str2="update LabOrder set LabResultImageId=? Where LabOrderId = ?";
 try{         
-	         con1=(Connection) crudoperation.createConnection();
+	         con1=(Connection) database.createConnection();
 	
 			   ps1=(PreparedStatement) con1.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
 			   ps1.setInt(1,resultimage);
@@ -106,10 +106,10 @@ try{
 		 ArrayList<model.Laborder> lorder=new  ArrayList<model.Laborder>();
 		//int i= 0;
     	//int result=0;
-    	Crudoperation crudoperation = new Crudoperation();
+    	Database database = new Database();
 		 String str3="select * from LabOrder where OrderId IN(select OrderId from Order where OrderStatusTypeId=1 and OrderTypeId =2 )";
 try{          
-	         con2=(Connection) crudoperation.createConnection();
+	         con2=(Connection) database.createConnection();
 	         ps2=(PreparedStatement) con2.prepareStatement(str3);
 			 	  
 			   rs2=ps2.executeQuery();
@@ -142,10 +142,10 @@ try{
 	public static int deleteLaborder(int orderid) {
 		int  rw=0;
     	int result=0;
-    	Crudoperation crudoperation = new Crudoperation();
+    	Database database = new Database();
 		String str2="delete feom LabOrder where OrderId =?";
 		try{  
-			 con3=(Connection) crudoperation.createConnection();
+			 con3=(Connection) database.createConnection();
 		
 			 ps3=(PreparedStatement) con3.prepareStatement(str2);
 			   ps3.setInt(1,orderid);
@@ -172,10 +172,10 @@ try{
 	public static int updateLabOrder(model.Laborder laborder){
     	int rw= 0;
     	int result=0;
-    	Crudoperation crudoperation = new Crudoperation();
+    	Database database = new Database();
 		 String str2="update LabOrder set OrderId = ?PrescriptionImageId= ?Description = ? Where LabOrderId = ?";
 try{
-	           con4=(Connection) crudoperation.createConnection();
+	           con4=(Connection) database.createConnection();
 	
 	           ps4=(PreparedStatement) con4.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
 			   ps4.setInt(1,laborder.getOrderId());

@@ -12,8 +12,8 @@ public class GetUserId {
 	static ResultSet rs=null;
 	public static int userid(String username){
 		int userid=0;
-		Crudoperation crudoperation = new Crudoperation();
-		con =(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con =(Connection) database.createConnection();
 		String str="select * from user where emailid=?";
 		try{
 			ps=(PreparedStatement) con.prepareStatement(str); 

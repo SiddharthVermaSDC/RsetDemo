@@ -10,6 +10,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.json.JSONObject;
 
+import dal.Database;
+import dal.DatabaseConnectivity;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,7 +41,7 @@ public class EmailLogin
 		  JSONObject  error = new JSONObject();
 		  
 		  try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();
 		    String query1="select UserId from User where EmailId=\""+gs.getEmail()+"\" and Password=\""+gs.getPassword()+"\";";
 		    String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\";";
 		   if(gs.getEmail()==null)
@@ -77,7 +80,7 @@ public class EmailLogin
 		
 		 finally 
 	     { 
-			 DatabaseConnectivity.closeDatabase(connection); 
+			 Database.closeConnection(connection); 
 	      }
 	//	return s;
 	}

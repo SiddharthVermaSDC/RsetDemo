@@ -22,8 +22,8 @@ static ResultSet rs1=null;
 	
 	public static model.Medicine sendMedicine(String name){
 		
-		Crudoperation crudoperation = new Crudoperation();
-		con =(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con =(Connection) database.createConnection();
 		model.Medicine medicine=new model.Medicine();
 		String str="select * from medicine where medicineName=?";
 		try
@@ -57,8 +57,8 @@ static ResultSet rs1=null;
 		Map<Long, String> medilist=new HashMap<>();
 		long i=1;
 		String data;
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str="select * from medicine where medicineName like ?";
 		try{
 			ps1=(PreparedStatement) con.prepareStatement(str); 

@@ -32,8 +32,8 @@ public class Address {
 		int result=0;
 		int userid=dal.GetUserId.userid(username);
 		address.setUserId(userid);
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str1="insert into address(housenumber,street,city,state,country,pincode,userid,fullname,phone) values (?,?,?,?,?,?,?,?,?)";
 		try{
 			 ps=(PreparedStatement) con.prepareStatement(str1);
@@ -69,8 +69,8 @@ public class Address {
 		int userid=dal.GetUserId.userid(username);
 		ArrayList<model.Address> addresses=new ArrayList<model.Address>();
 		long i=1;
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str3="select * from address where UserId=?";
 		try{
 			ps3=(PreparedStatement) con.prepareStatement(str3); 
@@ -100,8 +100,8 @@ public class Address {
 	}
 	//get address by id in string format to insert in order table
 	public static String getAddressById(int addressid){
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str="select * from Address where AddressId=?";
 		String address="";
 		try{
@@ -123,8 +123,8 @@ public class Address {
 		
 	}
 	public static void deleteAddress(int addressid){
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str2="delete from address where addressid=?";
 		try{
 			ps1=(PreparedStatement) con.prepareStatement(str2);
@@ -137,8 +137,8 @@ public class Address {
 	}
 	
 	 public static void updateAddress(model.Address address,int addressid){
-			Crudoperation crudoperation = new Crudoperation();
-			con=(Connection) crudoperation.createConnection();
+			Database database = new Database();
+			con=(Connection) database.createConnection();
 		 String str4="update address set housenumber=?,street=?,City=?,State=?,Country=?,pincode=?,fullname=?,phone=? where Addressid=?";
 		 try{
 			 ps4=(PreparedStatement) con.prepareStatement(str4);

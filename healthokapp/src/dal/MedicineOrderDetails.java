@@ -19,8 +19,8 @@ public class MedicineOrderDetails{
 	static ResultSet rs3=null;
 public static int insertMedicineOrderDetails(model.MedicineOrderDetails medicineorderdetails){
 		int result=0;
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str1="insert into MedicineOrderDetails(MedicineOrderDetailsId,MedicineOrderId,MedicineName,Dosage,Quantity,Price) values (?,?,?,?,?,?)";
 		try{
 			 ps=(PreparedStatement) con.prepareStatement(str1);
@@ -50,8 +50,8 @@ public static ArrayList<model.MedicineOrderDetails> responseMedicineOrderDetails
 {
 	ArrayList<model.MedicineOrderDetails> medicineorderdetails=new ArrayList<model.MedicineOrderDetails>();
 	long i=1;
-	Crudoperation crudoperation = new Crudoperation();
-	con=(Connection) crudoperation.createConnection();
+	Database database = new Database();
+	con=(Connection) database.createConnection();
 	String str3="select * from address where MedicineOrderDetailsId=?";
 	try{
 		ps3=(PreparedStatement) con.prepareStatement(str3); 

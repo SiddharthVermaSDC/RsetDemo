@@ -22,8 +22,8 @@ public class Test {
 	public static ArrayList<model.Medicine> testCartItems(String username){
 		int userid=dal.GetUserId.userid(username);
 		ArrayList<model.Medicine> medicine =new ArrayList<model.Medicine>();
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str1="SELECT * FROM healthok.buffer,healthok.medicine where healthok.buffer.userid=? and healthok.buffer.medicineid=healthok.medicine.medicineid";
 
 		try{
@@ -50,8 +50,8 @@ public class Test {
 		int userid=dal.GetUserId.userid(username);
 		ArrayList<model.Address> addresses=new ArrayList<model.Address>();
 		
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		String str3="select * from address where UserId=?";
 		try{
 			ps3=(PreparedStatement) con.prepareStatement(str3); 

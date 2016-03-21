@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
-import rest_api.DatabaseConnectivity;
-
 public class Doctor {
 
 	static Connection connection;
@@ -20,7 +18,7 @@ public class Doctor {
 		int result = 0;
 
 		try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.;
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			java.sql.Date d = new java.sql.Date(format.parse(doctor.getDoctorRegDate()).getTime());
 			FileInputStream fin = new FileInputStream(doctor.getImages());

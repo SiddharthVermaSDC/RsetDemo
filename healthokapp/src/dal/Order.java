@@ -27,8 +27,8 @@ public class Order {
 	static ResultSet rs3=null;
     public static int createOrder(model.Order order){
 		int result=0;
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
      	//for date
 		Date date = new Date();
 	    SimpleDateFormat sdf;
@@ -72,8 +72,8 @@ public class Order {
 	
 	public static model.Order getOrderDetail(int orderid){
 		model.Order order=null;
-		Crudoperation crudoperation = new Crudoperation();
-		con2=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con2=(Connection) database.createConnection();
 		String str1="select * from `Order` where OrderId=?";
 		try{
 			ps2=(PreparedStatement) con2.prepareStatement(str1);
@@ -104,8 +104,8 @@ public class Order {
 		return order;
 	}
 	 public static int updateOrder(model.Order order,int orderid){
-			Crudoperation crudoperation = new Crudoperation();
-			con3=(Connection) crudoperation.createConnection();
+			Database database = new Database();
+			con3=(Connection) database.createConnection();
 		 String str3="update `Order` set TotalCost=?,Discount=?,CashbackBonusApplied=?,NetAmount=? where OrderId=?";
 		 try{
 			 ps4=(PreparedStatement) con3.prepareStatement(str3);

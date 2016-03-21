@@ -21,8 +21,8 @@ public class User {
 	public static int Save (model.User user)
 	{
 		int result=-1;
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 	   String str="insert into User(emailid,firstName,phone,password,lastName) values (?,?,?,?,?)";
 	   try
 	   {
@@ -49,8 +49,8 @@ public class User {
 	
 
 	public static int ValidateCredentials(String username,String password){
-		Crudoperation crudoperation = new Crudoperation();
-		con=(Connection) crudoperation.createConnection();
+		Database database = new Database();
+		con=(Connection) database.createConnection();
 		int result=0;
 		String str="select * from user where emailid=? and password=?";
 		try

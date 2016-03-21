@@ -3,7 +3,6 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
-import rest_api.DatabaseConnectivity;
 
 public class Hospital {
 
@@ -13,7 +12,7 @@ public class Hospital {
 	public static int addHospital(model.Hospital hsptl) {
 		int result = 0;
 		try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			java.sql.Date d = new java.sql.Date(format.parse(hsptl.getRegDate()).getTime());
 			String query = "Insert Into Hospital(Name,AddressId,HasER,Facilities,OPDFees,Beds,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,Website,Hospitalphonenumber,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -41,6 +40,7 @@ public class Hospital {
 
 			ps.executeUpdate();
 			result = 1;
+			Database.closeConnection(connection);
 		} catch (Exception e) {
 			System.out.println(e);
 			result = 500;
