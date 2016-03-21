@@ -7,7 +7,6 @@ import javax.ws.rs.core.MediaType;
 //import com.mysql.jdbc.PreparedStatement;
 
 import dal.Database;
-import dal.DatabaseConnectivity;
 
 
 @Path("/address") 

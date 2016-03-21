@@ -16,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONObject;
 
 import dal.Database;
-import dal.DatabaseConnectivity;
 
 @Path("/MemberRegistration")
 public class MemberRegister 

@@ -18,7 +18,7 @@ public class Doctor {
 		int result = 0;
 
 		try {
-			connection = Database.;
+			connection = Database.createConnection();
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			java.sql.Date d = new java.sql.Date(format.parse(doctor.getDoctorRegDate()).getTime());
 			FileInputStream fin = new FileInputStream(doctor.getImages());

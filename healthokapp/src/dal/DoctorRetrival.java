@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import rest_api.DatabaseConnectivity;
+
 
 public class DoctorRetrival {
 
@@ -25,16 +25,8 @@ public class DoctorRetrival {
 		// connection = DatabaseConnectivity.getInstance().getConnection();
 
 		try {
-			try {
-				connection = DatabaseConnectivity.getInstance().getConnection();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (PropertyVetoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+				connection = Database.createConnection();
+			
 			System.out.println("Connection Is Created");
 			String sql = null;
 			if (count == 3) {
@@ -106,7 +98,7 @@ public class DoctorRetrival {
 	public static ArrayList<model.DoctorRetrival> responseDoctorBySpeciality(int searchSpeciality) {
 		ArrayList<model.DoctorRetrival> doc1 = new ArrayList<model.DoctorRetrival>();
 		try {
-			connection1 = DatabaseConnectivity.getInstance().getConnection();
+			connection1 = Database.createConnection();
 			System.out.println("Connection Is Created");
 			// int temp1= new int();
 			// temp1 = searchSpeciality;

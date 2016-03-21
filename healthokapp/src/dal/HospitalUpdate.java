@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 
-import rest_api.DatabaseConnectivity;
+
 
 public class HospitalUpdate {
 
@@ -15,7 +15,7 @@ public class HospitalUpdate {
 
 		int result1 = 0;
 		try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			java.sql.Date d = new java.sql.Date(format.parse(hsptl1.getRegDate()).getTime());
 			String query = "Update Hospital set Name=?,AddressId=?,HasER=?,Facilities=?,OPDFees=?,Beds=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?,RegistrationDate=?,Website=?,Hospitalphonenumber=?,Hasradiology=?,Hasdiagnistics=?,Hasambulance=?,AdmissionProcess=? where HospitalId=\""

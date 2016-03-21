@@ -14,7 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import dal.DatabaseConnectivity;
+import dal.Database;
 @Path("/Image")
 public class ImageInsert {
 	private Connection connection = null;
@@ -29,7 +29,7 @@ public class ImageInsert {
 	public String getImage(GetSetImage i) {
 	//int doctorId=0;
 		try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
+			connection = Database.createConnection();
 			//String filePath = "D:/Image/bhu.jpg";
 	//		System.out.println(i.getImage());
 			FileInputStream fin=new FileInputStream(i.getImage());

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Hospital;
-import rest_api.DatabaseConnectivity;
 
 public class HospitalRetrival {
 	static Connection connection;
@@ -23,12 +22,7 @@ public class HospitalRetrival {
 	public static ArrayList<Hospital> responseHospital(String HospitalId) {
 		ArrayList<model.Hospital> hosptl = new ArrayList<model.Hospital>();
 		try {
-			try {
-				connection = DatabaseConnectivity.getInstance().getConnection();
-			} catch (SQLException | IOException | PropertyVetoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				connection = Database.createConnection();
 			String sql = "Select * from hospital where HospitalId=\"" + HospitalId + "\"";
 			ps = connection.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -74,7 +68,7 @@ public class HospitalRetrival {
 		ArrayList<model.Hospital> hosptl1 = new ArrayList<model.Hospital>();
 
 		try {
-			connection1 = DatabaseConnectivity.getInstance().getConnection();
+			connection1 = Database.createConnection();
 			String sql1 = "Select HospitalId from hospital";
 			ps1 = connection.prepareStatement(sql1);
 			rs1 = ps1.executeQuery();
@@ -83,7 +77,7 @@ public class HospitalRetrival {
 				int hospitalId = rs1.getInt("HospitalId");
 				hosptl1.add(new model.Hospital(hospitalId));
 			}
-		} catch (SQLException | IOException | PropertyVetoException e) {
+		} catch (SQLException  e) {
 			System.out.println("SQL EXCEPTION**2");
 		}
 		return hosptl1;

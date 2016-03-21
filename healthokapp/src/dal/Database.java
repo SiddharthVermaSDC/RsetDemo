@@ -4,13 +4,14 @@ import java.sql.*;
 
 public class Database 
 {
-private  Connection connection=null; 
 ResultSet rs=null;
 PreparedStatement ps=null;
-public static  Connection createConnection()
+public  static  Connection createConnection()
 {
+	Connection connection=null; 
 	try
 	{
+		
 		Class.forName("com.mysql.jdbc.Driver");
 		
 		// use this when you are connecting to a local database on your laptop

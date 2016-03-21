@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import dal.Database;
-import dal.DatabaseConnectivity;
 
 @Path("/FinalRegister")
 public class FinalRegistration {

@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import dal.Database;
-import dal.DatabaseConnectivity;
 
 @Path("/Add")
 public class DoctorProfile {

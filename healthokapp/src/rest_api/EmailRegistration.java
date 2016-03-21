@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import com.mysql.jdbc.ResultSetMetaData;
 
 import dal.Database;
-import dal.DatabaseConnectivity;
 
 @Path("/EmailRegistration")
 public class EmailRegistration {
@@ -36,7 +35,9 @@ public class EmailRegistration {
 			//return "empty";
 		
 		try{
-		  connection = Database.createConnection();
+			  Database db = new Database();
+			connection = db.createConnection();
+
 		  String query1="select Mobile from User where Mobile=?";
 		  String s1="insert into User(FirstName,LastName,EmailId,Mobile,Password) values("
 		  		+ "\""+gs.getFirstName()+"\","+
