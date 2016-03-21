@@ -7,8 +7,6 @@ import java.sql.Statement;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import servlet.Crudoperation;
-
 public class ImageData {
 	
 	static Connection con=null;

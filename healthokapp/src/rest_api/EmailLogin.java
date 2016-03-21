@@ -63,11 +63,14 @@ public class EmailLogin
 	     catch(Exception e)
 	     {
 	    	 try{
+	    		 util.Logging.Debug("Login", e.getMessage());
 	    	      error.put("error","-500");
 	    	      return error.toString();
 	    	     }
 	    	 catch(Exception e1)
-	    	 {   return " {\"error\":\"-100\"}" ;
+	    	 {  
+	    		 util.Logging.Debug("Login Ex", e.getMessage());
+	    		 return " {\"error\":\"-100\"}" ;
 	    	    }
 	     }
 		  
@@ -133,7 +136,7 @@ public class EmailLogin
 	@Produces (MediaType.TEXT_PLAIN)
 	public String rTurn(){
 		
-		return "hello second latest new with pom";
+		return "hello 2";
 	}
 	          
 	

@@ -121,6 +121,7 @@ public class ReturnUserDetails {
 	     
 	     catch(Exception e)
 	     {    
+	    	 util.Logging.Debug("Return User Details", e.getMessage());
 	    	 return e.getMessage();
 	     }
 	     finally 

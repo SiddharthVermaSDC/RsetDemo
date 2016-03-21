@@ -4,7 +4,6 @@ package dal;
 import java.sql.*;
 
 import model.Result;
-import servlet.Crudoperation;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;

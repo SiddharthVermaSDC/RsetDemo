@@ -8,8 +8,6 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
-import servlet.Crudoperation;
-
 public class Laborder {
 	
 	static Connection con=null;

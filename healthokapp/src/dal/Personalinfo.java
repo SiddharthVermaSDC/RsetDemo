@@ -3,8 +3,6 @@ package dal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import servlet.Crudoperation;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.ResultSet;

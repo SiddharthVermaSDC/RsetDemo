@@ -6,8 +6,6 @@
 	import com.mysql.jdbc.PreparedStatement;
 	import com.mysql.jdbc.Statement;
 
-	import servlet.Crudoperation;
-
 	public class LabOrderDetails {
 		static Connection con=null;
 		static PreparedStatement ps=null;

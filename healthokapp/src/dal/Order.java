@@ -2,8 +2,6 @@ package dal;
 
 import java.sql.SQLException;
 
-import servlet.Crudoperation;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;

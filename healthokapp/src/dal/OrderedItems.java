@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import servlet.Crudoperation;
 import model.Buffer;
 
 import com.mysql.jdbc.Connection;

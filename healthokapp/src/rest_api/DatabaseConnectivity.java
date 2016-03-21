@@ -19,19 +19,22 @@ public class DatabaseConnectivity {
 		ds = new BasicDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
 
-		ds.setUsername("root");
-		ds.setPassword("1october");
-		ds.setUrl("jdbc:mysql://localhost:3306/healthok");
+		//ds.setUsername("root");
+		//ds.setPassword("1october");
+		//ds.setUrl("jdbc:mysql://localhost:3306/healthok");
 
 		// the settings below are optional -- dbcp can work with defaults
 		// ds.setMinIdle(5);
 		// ds.setMaxIdle(20);
 		// ds.setMaxOpenPreparedStatements(180);
 
-		/*
-		 * ds.setUsername("adminuzuSCxp"); ds.setPassword("GQBXVWgreeuA");
-		 * ds.setUrl("jdbc:mysql://127.3.104.130:3306/healthok");
-		 */
+		
+		 ds.setUsername("adminuzuSCxp"); 
+		 ds.setPassword("GQBXVWgreeuA");
+			ds.setUrl("jdbc:mysql://127.0.0.1:3306/healthok"); // port forward
+			// ds.setUrl("jdbc:mysql://127.3.104.130:3306/healthok");
+		 
+		 
 		// the settings below are optional -- dbcp can work with defaults
 		// ds.setMinIdle(5);
 		// ds.setMaxIdle(20);
