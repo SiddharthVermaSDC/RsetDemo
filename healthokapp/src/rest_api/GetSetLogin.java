@@ -1,5 +1,11 @@
 package rest_api;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+//import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class GetSetLogin {
 
 	public String email=null;
@@ -7,6 +13,7 @@ public class GetSetLogin {
 	public String firstName=null;
 	public String lastName=null;
 	public String phone=null;
+	public String loginid = null; // this could be the emailId or mobile
 	
 	
 	public String getEmail() {
@@ -38,5 +45,13 @@ public class GetSetLogin {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	@JsonProperty("loginid")
+	public String getLoginId() {
+		return loginid;
+	}
+	@JsonProperty("loginid")
+	public void setLoginId(String loginId) {
+		this.loginid = loginId;
 	}
 }

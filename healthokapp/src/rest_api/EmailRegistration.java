@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import com.mysql.jdbc.ResultSetMetaData;
 
 import dal.Database;
+import util.Logging;
 
 @Path("/EmailRegistration")
 public class EmailRegistration {
@@ -35,10 +36,10 @@ public class EmailRegistration {
 			//return "empty";
 		
 		try{
-			  Database db = new Database();
-			connection = db.createConnection();
+			  
+			connection = Database.createConnection();
 
-		  String query1="select Mobile from User where Mobile=?";
+		  String query1="select EmailId, Mobile from User where Mobile=? or EmailId = ?";
 		  String s1="insert into User(FirstName,LastName,EmailId,Mobile,Password) values("
 		  		+ "\""+gs.getFirstName()+"\","+
 		  		"\""+gs.getLastName()+"\","+
@@ -47,9 +48,12 @@ public class EmailRegistration {
 		  		"\""+gs.getPassword()+"\");";
 		    preparedstatement=(PreparedStatement) connection.prepareStatement(query1);
 	    	preparedstatement.setString(1,gs.getPhone());
+	    	preparedstatement.setString(1,gs.getEmail());
+	    	
 	    	resultSet=preparedstatement.executeQuery();
 	    	if(resultSet.next()==true)
 	    	{
+	    		Logging.Debug("QuickRegister", "Email or mobile already exists" + gs.getEmail() + ":"+ gs.getPhone());
 	    		mg.setStatus(-2);
 	    	}
 	    	else
@@ -62,15 +66,17 @@ public class EmailRegistration {
 		}
 		catch(Exception e)
 	     {
-			mg.setStatus(-3);
+			Logging.Debug("Registration", e.getMessage());
+			mg.setStatus(1);
 	     }
 		
 		
 		 finally 
 	     { 
 			 Database.closeConnection(connection); 
-	         return mg;   
+ 
 	      }
-	     
+
+		return mg;
 	     }
 	 }

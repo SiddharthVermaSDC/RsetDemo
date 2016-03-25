@@ -3,17 +3,16 @@ package dal;
 
 import java.sql.*;
 
-import model.Result;
+import util.Logging;
+import util.StatusCode;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 
 
 
 public class User {
 	
-	static Connection con=null;
+	static Connection connection=null;
 	static PreparedStatement ps=null;
   static ResultSet rs=null;
   
@@ -21,12 +20,12 @@ public class User {
 	public static int Save (model.User user)
 	{
 		int result=-1;
-		Database database = new Database();
-		con=(Connection) database.createConnection();
+		
+		connection=Database.createConnection();
 	   String str="insert into User(emailid,firstName,phone,password,lastName) values (?,?,?,?,?)";
 	   try
 	   {
-		   ps=(PreparedStatement) con.prepareStatement(str);
+		   ps=connection.prepareStatement(str);
 		   ps.setString(1,user.getEmailId());
 		   ps.setString(2,user.getFirstName());
 		   ps.setString(3,user.getPhone());
@@ -43,19 +42,23 @@ public class User {
 	   {
 		   
 	   }
+		finally
+		{
+			Database.closeConnection(connection);
+		}
 	return result;
 	}
 	
 	
 
 	public static int ValidateCredentials(String username,String password){
-		Database database = new Database();
-		con=(Connection) database.createConnection();
+		
+		connection=Database.createConnection();
 		int result=0;
 		String str="select * from user where emailid=? and password=?";
 		try
 		{
-			ps=(PreparedStatement) con.prepareStatement(str); 
+			ps= connection.prepareStatement(str); 
 			ps.setString(1,username);
 			ps.setString(2,password);
 			rs=ps.executeQuery();
@@ -72,7 +75,91 @@ public class User {
 		{
 			
 		}
+		finally
+		{
+			Database.closeConnection(connection);
+		}
 		return result;
 		
 	}
+	
+	public StatusCode RegisterDevice (int userId, String token)
+	{
+		
+		
+		connection=Database.createConnection();
+		StatusCode result= StatusCode.UnknownError;
+		
+		String str="update User set GCMToken =? where userid = ?";
+		try
+		{
+			ps=connection.prepareStatement(str); 
+			ps.setString(1,token);
+			ps.setInt(2,userId);
+			
+			Logging.Debug("UserDal", ps.toString());
+			
+			int updateStatus=ps.executeUpdate();
+			if(updateStatus > 0)
+			{
+				result= StatusCode.Success;
+			}
+			else
+			{
+				result=StatusCode.Error;
+				Logging.Error("UserDal-RegisterDevice", "No rows updated for userid" + userId);
+			}
+			
+			Logging.Debug("USERDAL", "Successfully registered device for userid " + Integer.toString(userId));
+		}
+		catch(SQLException se)
+		{
+			Logging.Exception("UserDal-RegisterDevice", se.getMessage());
+			result = StatusCode.UnknownError;
+		}
+		finally
+		{
+			Database.closeConnection(connection);
+		}
+		return result;
+		
+		
+	}
+
+
+	public String GetToken (int userId)
+	{
+		
+		
+		connection=Database.createConnection();
+		
+		String str="select GCMToken from User where userid = ?";
+		String token = null;
+
+		try
+		{
+			ps=connection.prepareStatement(str); 
+			ps.setInt(1,userId);
+			
+			Logging.Debug("UserDal", ps.toString());
+			ResultSet rs = ps.executeQuery(); 
+			while (rs.next()) {
+				token = rs.getString("GCMToken");
+			}
+			
+			Logging.Debug("User-Dal", "token retreived is " + token);
+		}
+		catch(SQLException se)
+		{
+			Logging.Exception("UserDal-GetToken", se.getMessage());
+		}
+		finally
+		{
+			Database.closeConnection(connection);
+		}
+		return token;
+		
+		
+	}
+
 }

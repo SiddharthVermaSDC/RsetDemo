@@ -8,4 +8,19 @@ public class Logging {
 
 	System.out.println ( tag + ":" + text);
 	}
+	public static void Error(String tag, String text)
+	{
+
+	System.out.println ( tag + ":" + text);
+	}
+	public static void Exception(String tag, String text)
+	{
+
+	System.out.println ( tag + ":" + text);
+	}
+	public static void Warning(String tag, String text)
+	{
+
+	System.out.println ( tag + ":" + text);
+	}
 }
