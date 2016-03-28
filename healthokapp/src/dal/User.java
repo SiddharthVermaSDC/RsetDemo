@@ -12,13 +12,15 @@ import util.StatusCode;
 
 public class User {
 	
-	static Connection connection=null;
-	static PreparedStatement ps=null;
-  static ResultSet rs=null;
   
 
 	public static int Save (model.User user)
 	{
+
+		 Connection connection=null;
+		 PreparedStatement ps=null;
+	   ResultSet rs=null;
+
 		int result=-1;
 		
 		connection=Database.createConnection();
@@ -52,12 +54,16 @@ public class User {
 	
 
 	public static int ValidateCredentials(String username,String password){
-		
-		connection=Database.createConnection();
+
+		 Connection connection=null;
+		 PreparedStatement ps=null;
+	   ResultSet rs=null;
+
 		int result=0;
 		String str="select * from user where emailid=? and password=?";
 		try
 		{
+			connection=Database.createConnection();
 			ps= connection.prepareStatement(str); 
 			ps.setString(1,username);
 			ps.setString(2,password);
@@ -86,13 +92,17 @@ public class User {
 	public StatusCode RegisterDevice (int userId, String token)
 	{
 		
-		
-		connection=Database.createConnection();
+
+		 Connection connection=null;
+		 PreparedStatement ps=null;
+	   ResultSet rs=null;
+
 		StatusCode result= StatusCode.UnknownError;
 		
 		String str="update User set GCMToken =? where userid = ?";
 		try
 		{
+			connection=Database.createConnection();
 			ps=connection.prepareStatement(str); 
 			ps.setString(1,token);
 			ps.setInt(2,userId);
@@ -130,19 +140,22 @@ public class User {
 	public String GetToken (int userId)
 	{
 		
+		 Connection connection=null;
+		 PreparedStatement ps=null;
+	   ResultSet rs=null;
 		
-		connection=Database.createConnection();
 		
 		String str="select GCMToken from User where userid = ?";
 		String token = null;
 
 		try
 		{
+			connection=Database.createConnection();
 			ps=connection.prepareStatement(str); 
 			ps.setInt(1,userId);
 			
 			Logging.Debug("UserDal", ps.toString());
-			ResultSet rs = ps.executeQuery(); 
+			 rs = ps.executeQuery(); 
 			while (rs.next()) {
 				token = rs.getString("GCMToken");
 			}
@@ -162,4 +175,58 @@ public class User {
 		
 	}
 
-}
+	
+	public model.User getUser (int userId)
+	{
+		
+		 Connection connection=null;
+		 PreparedStatement ps=null;
+	   ResultSet rs=null;
+		
+		
+		String str="select * from User where userid = ?";
+		String token = null;
+
+		model.User user = null;
+		
+		try
+		{
+			connection=Database.createConnection();
+			ps=connection.prepareStatement(str); 
+			ps.setInt(1,userId);
+			
+			Logging.Debug("UserDal", ps.toString());
+			
+			 rs = ps.executeQuery(); 
+			
+			while (rs.next()) {
+				
+				user = new model.User(); // since this is query by PK will get only one row. 
+				
+				user.setUserId(userId);
+				user.setFirstName(rs.getString("FirstName"));
+				user.setLastName(rs.getString("LastName"));
+				user.setEmailId(rs.getString("EmailId"));
+				user.setPhone(rs.getString("Mobile"));
+				user.setPassword(rs.getString("Password"));
+						
+			}
+			
+			Logging.Debug("User-Dal", "user is " + user.getFirstName() + " " + user.getLastName());
+		}
+		catch(SQLException se)
+		{
+			Logging.Exception("UserDal-GetToken", se.getMessage());
+			return null;
+		}
+		finally
+		{
+			Database.closeConnection(connection);
+		}
+		
+		return user;
+		
+		
+	}
+	
+	}

@@ -1,50 +1,86 @@
 package rest_api;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.sql.Date;
+
+import util.StatusCode;
 
 
 @Path("/order")
 public class Order {
 
-	@Path("/place/{OrderTypeId}/{UserId}/{comment}")
-	@GET
+	@Path("/new")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Result order(@PathParam("OrderTypeId") int ordertypeid,@PathParam("UserId") int userid,@PathParam("comment") String comment)
+	// new order needs the following fields
+	// userId, orderType, fulfillDate, description, image, doctorId
+	public model.Result placeOrder(model.OrderBase order)
 	{
-		model.Order order=new model.Order();
 		model.Result result=new model.Result();
-		order.setUserId(userid);
-		switch(ordertypeid)
-		{
-		case 1:order.setOrderTypeId(1);break;
-		case 2:order.setOrderTypeId(2);break;
-		case 3:order.setOrderTypeId(3);break;
-		case 4:order.setOrderTypeId(4);break;
-		default:order.setOrderTypeId(5);
-		}
-		order.setOrderDescription(comment);
-		order.setOrderStatusTypeId(1);
-		result.setStatus(biz.Order.sendOrder(order));
+		biz.Order orderBiz = new biz.Order();
+	
+		StatusCode status = orderBiz.createOrder(order);
+		
+		result.setStatus(status.getStatusCode());
+		
 		return result;
 		
 	}
+	
+	
+
+	@Path("/setStatus")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces (MediaType.APPLICATION_JSON)
+	// new order needs the following fields
+	// userId, orderType, fulfillDate, description, image, doctorId
+	public model.Result setOrderStatus(model.OrderBase order)
+	{
+		model.Result result=new model.Result();
+		biz.Order orderBiz = new biz.Order();
+	
+		StatusCode status = orderBiz.setOrderStatus(order);
+		
+		result.setStatus(status.getStatusCode());
+		
+		return result;
+		
+	}
+	
+
+	
+	
+	
+	
 	 @Path("/fetch/{OrderId}")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
-		public static model.Order responsorder(@PathParam("OrderId") int orderid){
-			return biz.Order.respondOrder(orderid);
+		public  model.Order responsorder(@PathParam("OrderId") int orderid){
+			return new biz.Order().respondOrder(orderid);
 		}
 	
 
+	 
+	 @Path("/getuserorders/{userId}")
+		@GET
+		@Produces (MediaType.APPLICATION_JSON)
+		public  ArrayList<model.OrderBase> getOrdersForUser (@PathParam("userId") int userId){
+			return new biz.Order().getUserOrders(userId);
+		}
+	
+
+	 
+	 
+	 
 	@Path("/s")
 	@GET
 	@Produces (MediaType.TEXT_PLAIN)
@@ -52,10 +88,14 @@ public class Order {
 		
 		return "hello second";
 	}
+	
+	
+	
+	// who is the consumer? what is the use case? Porbably not needed now. 
 	@Path("/update/{orderid}/{totalcost}/{discount}/{cashbackbonusapplied}/{netamount}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Result uporder(@PathParam("orderid") int orderid,@PathParam("totalcost") int totalcost,@PathParam("discount") int discount,@PathParam("cashbackbonusapplied") int cashbackbonusapplied,@PathParam("netamount") int netamount)
+	public  model.Result uporder(@PathParam("orderid") int orderid,@PathParam("totalcost") int totalcost,@PathParam("discount") int discount,@PathParam("cashbackbonusapplied") int cashbackbonusapplied,@PathParam("netamount") int netamount)
 	{
 		model.Order order=new model.Order();
 		model.Result result=new model.Result();
@@ -63,7 +103,9 @@ public class Order {
 		order.setDiscount(discount);
 		order.setCashbackBonusApplied(cashbackbonusapplied);
 		order.setNetAmount(netamount);
-		result.setStatus(dal.Order.updateOrder(order,orderid));
+		dal.Order orderDal = new dal.Order();
+		
+		result.setStatus(orderDal.updateOrder(order,orderid).getStatusCode());
 		return result;
 		
 	}

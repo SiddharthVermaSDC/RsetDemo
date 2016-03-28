@@ -2,6 +2,11 @@ package rest_api;
 
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
+
+import model.Result;
+import notification.Notification;
+import util.StatusCode;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,24 +25,18 @@ public class sendMail {
 	  @Consumes (MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 
-  public static String sendMail(@PathParam("recipient") String r,@PathParam("message") String m) {
-    SendGrid sendgrid = new SendGrid("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");
-     SendGrid.Email email = new SendGrid.Email();
-    String str;
-    email.addTo(r);
-    email.setFrom("info@health-ok.in");
-    email.setFromName("HealthOK");
-    email.setSubject("Important message from HealthOK");
-    email.setHtml(m);
-    
+  public  Result sendMailMessage(@PathParam("recipient") String r,@PathParam("message") String m) {
+  
+		StatusCode status = StatusCode.UnknownError;
+		
+		Notification notification = new Notification();
+		
+		status = notification.sendMail(new String[]{r}, m, "Important Message From Health-OK");
+		
+		Result result =  new Result();
+		result.setStatus(status.getStatusCode());
+		return result;
 
-    try {
-        SendGrid.Response response = sendgrid.send(email);
-        str=response.getMessage();
-      }
-      catch (SendGridException e) {
-        str=e.getMessage();
-      }
-    return str;
-  }
+	
+	}
 }

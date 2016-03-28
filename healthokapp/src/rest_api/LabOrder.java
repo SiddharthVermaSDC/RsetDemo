@@ -17,7 +17,7 @@ public class LabOrder {
 	@Produces (MediaType.APPLICATION_JSON)
 	public static ArrayList<model.Laborder> pendinglaborder(){
 		ArrayList<model.Laborder> add=new ArrayList<model.Laborder>();
-		add=biz.Laborder.pendinglorder();
+//		add=biz.Laborder.pendinglorder();
 		
 		return add;
 		
@@ -32,7 +32,7 @@ public class LabOrder {
 	    model.Result res=new model.Result();
 	
 	
-	 res.setStatus(biz.Laborder.deleteLabOrder(orderid));
+//	 res.setStatus(biz.Laborder.deleteLabOrder(orderid));
 	 return res;
 	}	
 	

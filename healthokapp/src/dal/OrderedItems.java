@@ -1,15 +1,13 @@
 package dal;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import model.Buffer;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.ResultSet;
+
 
 public class OrderedItems {
 	//for add to ordered items

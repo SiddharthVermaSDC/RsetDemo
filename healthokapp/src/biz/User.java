@@ -18,4 +18,15 @@ dal.User userDal = new dal.User();
 		
 return userDal.RegisterDevice(userId, token);		
 	}
+	
+	
+	public model.User GetUser ( int userId)
+	{
+		
+		dal.User userDal = new dal.User();		
+		
+		return userDal.getUser(userId);	
+		
+	}
+	
 }

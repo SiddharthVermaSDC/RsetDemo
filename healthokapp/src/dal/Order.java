@@ -1,54 +1,106 @@
 package dal;
 
-import java.sql.SQLException;
+import java.sql.*;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import model.OrderStatusType;
+import model.OrderType;
+import util.Logging;
+import util.StatusCode;
+
 import java.io.Console;
-//import com.mysql.jdbc.ResultSet;
-import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+
 public class Order {
 	
-	static Connection con=null;
-	static PreparedStatement ps=null;
 	
-	static Connection con2=null;
-	static PreparedStatement ps2=null;
-	static ResultSet rs=null;
-	static ResultSet rs2=null;
 	
-	static PreparedStatement ps4=null;
-	static Connection con3=null;
-	static ResultSet rs3=null;
-    public static int createOrder(model.Order order){
-		int result=0;
-		Database database = new Database();
-		con=(Connection) database.createConnection();
+    public  int createOrder(model.OrderBase order){
+		int orderId = -1;
+
+		Connection connection= null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
      	//for date
-		Date date = new Date();
+		java.sql.Date orderDate = new java.sql.Date(order.getOrderDate().getTime());
+		java.sql.Date orderFulfillDate = new java.sql.Date(order.getOrderFulfillDate().getTime());
+		
+		
+		try
+		{
+			String str="insert into `Order`(UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderFulfillDate) values (?,?,?,?,?)";
+
+			connection =  Database.createConnection();
+
+			ps=(PreparedStatement) connection.prepareStatement(str,Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1,order.getUserId());
+		    ps.setInt(2, order.getOrderType().getOrderType());
+			ps.setDate(3, orderDate);
+			ps.setInt(4,order.getOrderStatusType().getOrderStatusType());
+			ps.setString(5,order.getOrderDescription());
+			ps.setDate(6, orderFulfillDate );
+			int rw=ps.executeUpdate();
+
+			   if(rw>0)
+			   {
+				  rs = ps.getGeneratedKeys();
+	                if(rs.next())
+	                    orderId =rs.getInt(1);
+	 }
+		
+	
+		}
+		catch(SQLException se)
+		{
+			Logging.Exception("OrderDAL", "Error Creating Order " + ps.toString() + " Exception " + se.getMessage());
+		}
+		finally{
+			Database.closeConnection(connection);
+		}
+		return orderId;
+	}
+
+	
+	
+	
+	
+    public  int createOrder(model.Order order){
+		int result=0;
+
+		Connection connection= null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+     	//for date
+		java.sql.Date orderDate = new java.sql.Date(order.getOrderDate().getTime());
+		java.sql.Date orderFulfillDate = new java.sql.Date(order.getOrderFulfillDate().getTime());
+		
 	    SimpleDateFormat sdf;
 	    sdf = new SimpleDateFormat("yyyy-MM-dd");
 	 //   System.out.println(sdf.format(date));
 	    
-		String str="insert into `Order`(UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderDescription,OrderFulfillDate) values (?,?,?,?,?,?)";
 		
 		try
 		{
-			ps=(PreparedStatement) con.prepareStatement(str,Statement.RETURN_GENERATED_KEYS);result=1;
+			String str="insert into `Order`(UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderDescription,OrderFulfillDate) values (?,?,?,?,?,?)";
+
+			connection =  Database.createConnection();
+
+			ps=(PreparedStatement) connection.prepareStatement(str,Statement.RETURN_GENERATED_KEYS);result=1;
 			ps.setInt(1,order.getUserId());result=2;
-		    ps.setInt(2, order.getOrderTypeId());
+		    ps.setInt(2, order.getOrderType().getOrderType());
 		    result=3;
-			ps.setString(3, sdf.format(date));
-			ps.setInt(4,order.getOrderStatusTypeId());
+			ps.setDate(3, orderDate);
+			ps.setInt(4,order.getOrderStatusType().getOrderStatusType());
 					result=4;
 			ps.setString(5,order.getOrderDescription());
 			result=5;
-			ps.setString(6, "2018-05-15");
+			ps.setDate(6, orderFulfillDate );
 			int rw=ps.executeUpdate();result=6;
 
 			   if(rw>0)
@@ -67,60 +119,169 @@ public class Order {
 		{
 			result=40;
 		}
+		finally{
+			Database.closeConnection(connection);
+		}
 		return result;
 	}
 	
-	public static model.Order getOrderDetail(int orderid){
+	public  model.Order getOrderDetail(int orderid) {
 		model.Order order=null;
-		Database database = new Database();
-		con2=(Connection) database.createConnection();
-		String str1="select * from `Order` where OrderId=?";
+		Connection connection= null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
 		try{
-			ps2=(PreparedStatement) con2.prepareStatement(str1);
-			ps2.setInt(1,orderid);
-			rs2=ps2.executeQuery();
-		     rs2.next();
-				int OrderId= rs2.getInt("OrderId");
-				int UserId=rs2.getInt("UserId");
-				int OrderTypeId=rs2.getInt("OrderTypeId");
-				String OrderDate=rs2.getString("OrderDate");
-			    int	OrderStatusTypeId=rs2.getInt("OrderStatusTypeId");
-				String OrderCompletionDate=rs2.getString("OrderCompletionDate");
-			    String OrderDescription=rs2.getString("OrderDescription");
-			    int TotalCost=rs2.getInt("TotalCost");
-			    int Discount=rs2.getInt("Discount");
-			    int CashbackBonusApplied=rs2.getInt("CashbackBonusApplied");
-			    int NetAmount=rs2.getInt("NetAmount");
-			    String OrderFulfillDate=rs2.getString("OrderFulfillDate");
-				 order =  new model.Order(OrderId,UserId,OrderTypeId,OrderDate,OrderStatusTypeId,OrderCompletionDate,OrderDescription,TotalCost, Discount,CashbackBonusApplied,NetAmount,OrderFulfillDate);
+			String str1="select * from `Order` where OrderId=?";
+			
+			connection =  Database.createConnection();
+			ps=(PreparedStatement) connection.prepareStatement(str1);
+			ps.setInt(1,orderid);
+			rs=ps.executeQuery();
+		     rs.next();
+				int orderId= rs.getInt("OrderId");
+				int userId=rs.getInt("UserId");
+				OrderType orderType=OrderType.item(rs.getInt("OrderTypeId"));
+				Date orderDate=rs.getDate("OrderDate");
+			    OrderStatusType orderStatusType= OrderStatusType.item( rs.getInt("OrderStatusTypeId"));
+				Date orderCompletionDate=rs.getDate("OrderCompletionDate");
+			    String comments=rs.getString("Comments");
+			    int totalCost=rs.getInt("TotalCost");
+			    int discount=rs.getInt("Discount");
+			    int cashbackBonusApplied=rs.getInt("CashbackBonusApplied");
+			    int netAmount=rs.getInt("NetAmount");
+			    Date orderFulfillDate=rs.getDate("OrderFulfillDate");
+			    
+				 order =  new model.Order(orderId,userId,orderType,orderDate,orderStatusType,orderCompletionDate, comments,totalCost, discount,cashbackBonusApplied,netAmount,orderFulfillDate,null);
 			
 		}
 		catch(SQLException se)
 		{
-			System.out.println("statement is " + str1);
-			System.out.println("Error in get order details" + se.getMessage());
-		order = new model.Order(1,1,1,null,1,null,"as",1,1,1,1,"0000-00-00");	
+			Logging.Error("ORDERDAL","Error in get order details" + se.getMessage());
+	  	    // Dont send a fake order object order = new model.Order(1,1,1,null,1,null,"as",1,1,1,1,"0000-00-00");	
 		}
+		finally{
+			Database.closeConnection(connection);
+		}
+
 		return order;
 	}
-	 public static int updateOrder(model.Order order,int orderid){
-			Database database = new Database();
-			con3=(Connection) database.createConnection();
-		 String str3="update `Order` set TotalCost=?,Discount=?,CashbackBonusApplied=?,NetAmount=? where OrderId=?";
+	
+	 public  StatusCode updateOrder(model.Order order,int orderid) // seems limited use. Need to fix this to update all fields in order table. 
+	 {
+
+		 
+			Connection connection= null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			StatusCode status = StatusCode.UnknownError;
+
 		 try{
-			 ps4=(PreparedStatement) con3.prepareStatement(str3);
-			 ps4.setInt(1,order.getTotalCost());
-			 ps4.setInt(2,order.getDiscount());
-			 ps4.setInt(3,order.getCashbackBonusApplied());
-			 ps4.setInt(4,order.getNetAmount());
-			 ps4.setInt(5,orderid);
-			 ps4.executeUpdate();
-            return 1;
+			 String str="update `Order` set TotalCost=?,Discount=?,CashbackBonusApplied=?,NetAmount=? where OrderId=?";
+
+				connection =  Database.createConnection();
+			 ps=(PreparedStatement) connection.prepareStatement(str);
+			 ps.setInt(1,order.getTotalCost());
+			 ps.setInt(2,order.getDiscount());
+			 ps.setInt(3,order.getCashbackBonusApplied());
+			 ps.setInt(4,order.getNetAmount());
+			 ps.setInt(5,orderid);
+			 ps.executeUpdate();
+            status = StatusCode.Success;
+            
 		 }
 		 catch(SQLException se)
 		 {
-			 return -1;	 
+				Logging.Error("ORDERDAL","Error in update order" + se.getMessage());
+				status = StatusCode.UnknownError;
+				
 		 }
+			finally{
+				Database.closeConnection(connection);
+			}
+		 
+		 return status;
 		
 	 }
+
+
+
+
+		public  ArrayList<model.OrderBase> getUserOrders(int userId) {
+
+			Connection connection= null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			try{
+				
+						
+				
+				String str1="SELECT o.OrderId, o.OrderDate, o.OrderFulfillDate, o.OrderCompletionDate, o.OrderTypeId,o.OrderStatusTypeId,"
+						    + " MO.PrescriptionImageId, MO.Description mdesc, LO.PrescriptionImageId labPrescription, LO.Description ldesc, DA.DoctorId, DA.Description ddesc, AO.Description adesc, NO.Description ndesc FROM `Order` "
+						    + "  AS o Left Join (MedicineOrder AS MO, LabOrder as LO, AmbulanceOrder as AO, NurseOrder as NO, DoctorAppointment as DA) " 
+				            + "  on MO.OrderId = o.orderId and LO.OrderId = o.OrderId and AO.OrderId = o.OrderId and   NO.OrderId = o.orderid and DA.OrderId = o.OrderId "
+				            +  " WHERE userid = ?";
+				
+				
+				connection =  Database.createConnection();
+				ps=(PreparedStatement) connection.prepareStatement(str1);
+				ps.setInt(1,userId);
+				rs=ps.executeQuery();
+
+				ArrayList<model.OrderBase> orderList = new ArrayList<model.OrderBase>();
+				model.OrderBase order = null;
+				while ( rs.next())
+				{
+				order = new model.OrderBase();
+					order.setOrderId(rs.getInt("OrderId"));
+					order.setOrderDate(rs.getDate("OrderDate"));
+					order.setOrderFulfillDate(rs.getDate("OrderFulfillDate"));
+					order.setOrderCompletionDate(rs.getDate("OrderCompletionDate"));
+					order.setOrderStatusType(OrderStatusType.item(rs.getInt("OrderStatusTypeId")));
+					order.setOrderType(OrderType.item(rs.getInt("OrderTypeId")));
+				
+					switch ( order.getOrderType() )
+					{
+					case AMBULANCE:
+						order.setOrderDescription(rs.getString("adesc"));
+						break;
+					case APPT:
+						order.setOrderDescription(rs.getString("adesc"));
+						break;
+					case LAB:
+						order.setOrderDescription(rs.getString("ldesc"));
+						order.setImageId(rs.getInt("LabPrescription") );
+						break;
+					case MEDICINE:
+						order.setOrderDescription(rs.getString("mdesc"));
+						order.setImageId(rs.getInt("PrescriptionImageId") );
+						break;
+					case NURSE:
+						break;
+					default:
+						break;
+					
+					
+					}
+					
+					orderList.add(order);
+					
+				}
+				
+				return orderList;
+			}
+			catch(SQLException se)
+			{
+				Logging.Error("ORDERDAL","Error in get order details" + se.getMessage());
+		  	    // Dont send a fake order object order = new model.Order(1,1,1,null,1,null,"as",1,1,1,1,"0000-00-00");	
+			}
+			finally{
+				Database.closeConnection(connection);
+			}
+
+			return null;
+		}
+
+
 }

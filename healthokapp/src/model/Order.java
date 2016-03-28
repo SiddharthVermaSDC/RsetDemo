@@ -1,111 +1,76 @@
 package model;
-import java.sql.Date;
-public class Order {
-private int OrderId;
-private int UserId;
-private int OrderTypeId;
-private String OrderDate;
-private int OrderStatusTypeId;
-private String OrderCompletionDate;
-private String OrderDescription;
-private int TotalCost;
-private int Discount;
-private int CashbackBonusApplied;
-private int NetAmount;
-private String OrderFulfillDate;
-public Order(){}
-public Order(int OrderId,int UserId,
-		int OrderTypeId,String OrderDate,int OrderStatusTypeId,
-		String OrderCompletionDate,String OrderDescription,
-		int TotalCost,int Discount,
-		int CashbackBonusApplied,int NetAmount,String OrderFulfillDate)
+
+import java.util.Date;
+
+public class Order extends OrderBase {
+private String comments; // This is entered by admin 
+private int totalCost;
+private int discount;
+private int cashbackBonusApplied;
+private int netAmount;
+private Date orderFulfillDate;
+
+public Order()
 {
-	super();
-	this.OrderId = OrderId;
-	this.UserId=UserId;
-	this.OrderTypeId = OrderTypeId;
-	this.OrderDate = OrderDate;
-	this.OrderStatusTypeId = OrderStatusTypeId;
-	this.OrderCompletionDate = OrderCompletionDate;
-	this.OrderDescription = OrderDescription;
-	this.TotalCost=TotalCost;
-	this.Discount=Discount;
-	this.CashbackBonusApplied=CashbackBonusApplied;
-	this.NetAmount=NetAmount;
-	this.OrderFulfillDate=OrderFulfillDate;
+
 }
-public int getOrderId() {
-	return OrderId;
-}
-public void setOrderId(int orderId) {
-	OrderId = orderId;
-}
-public int getUserId() {
-	return UserId;
-}
-public void setUserId(int userId) {
-	UserId = userId;
-}
-public int getOrderTypeId() {
-	return OrderTypeId;
-}
-public void setOrderTypeId(int orderTypeId) {
-	OrderTypeId = orderTypeId;
-}
-public String getOrderDate() {
-	return OrderDate;
-}
-public void setOrderDate(String orderDate) {
-	OrderDate = orderDate;
-}
-public int getOrderStatusTypeId() {
-	return OrderStatusTypeId;
-}
-public void setOrderStatusTypeId(int orderStatusTypeId) {
-	OrderStatusTypeId = orderStatusTypeId;
-}
-public String getOrderCompletionDate() {
-	return OrderCompletionDate;
-}
-public void setOrderCompletionDate(String orderCompletionDate) {
-	OrderCompletionDate = orderCompletionDate;
-}
-public String getOrderDescription() {
-	return OrderDescription;
-}
-public void setOrderDescription(String orderDescription) {
-	OrderDescription = orderDescription;
-}
-public int getTotalCost() {
-	return TotalCost;
-}
-public void setTotalCost(int totalCost) {
-	TotalCost = totalCost;
-}
-public int getDiscount() {
-	return Discount;
-}
-public void setDiscount(int discount) {
-	Discount = discount;
-}
-public int getCashbackBonusApplied() {
-	return CashbackBonusApplied;
-}
-public void setCashbackBonusApplied(int cashbackBonusApplied) {
-	CashbackBonusApplied = cashbackBonusApplied;
-}
-public int getNetAmount() {
-	return NetAmount;
-}
-public void setNetAmount(int netAmount) {
-	NetAmount = netAmount;
+public Order(int orderId,int userId,
+		OrderType orderType,Date orderDate,OrderStatusType orderStatusType,
+		Date orderCompletionDate,String comments,
+		int totalCost,int discount,
+		int cashbackBonusApplied,int netAmount,Date orderFulfillDate
+		,String orderDescription)
+{
+	super(userId, orderType, orderDate, orderStatusType,
+			 orderCompletionDate, orderFulfillDate,  orderDescription);
+	
+	this.comments = comments;
+	this.totalCost=totalCost;
+	this.discount=discount;
+	this.cashbackBonusApplied=cashbackBonusApplied;
+	this.netAmount=netAmount;
+	this.orderFulfillDate=orderFulfillDate;
 }
 
-public void setOrderFulfillDate(String orderFulfillDate){
-	OrderFulfillDate=orderFulfillDate;
+public String getComments() {
+	return comments;
 }
-public String getOrderFulfillDate(){
+public void setComments(String comments) {
+	this.comments = comments;
+}
+public int getTotalCost() {
+	return totalCost;
+}
+public void setTotalCost(int totalCost) {
+	this.totalCost = totalCost;
+}
+public int getDiscount() {
+	return discount;
+}
+public void setDiscount(int discount) {
+	this.discount = discount;
+}
+public int getCashbackBonusApplied() {
+	return cashbackBonusApplied;
+}
+public void setCashbackBonusApplied(int cashbackBonusApplied) {
+	this.cashbackBonusApplied = cashbackBonusApplied;
+}
+public int getNetAmount() {
+	return netAmount;
+}
+public void setNetAmount(int netAmount) {
+	this.netAmount = netAmount;
+}
+
+public void setOrderFulfillDate(Date orderFulfillDate){
+	this.orderFulfillDate=orderFulfillDate;
+}
+public Date getOrderFulfillDate(){
 	
-	return OrderFulfillDate;
+	return orderFulfillDate;
 }
+
+
+
 }

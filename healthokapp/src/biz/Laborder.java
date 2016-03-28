@@ -7,12 +7,14 @@ public class Laborder {
 	public static int placeLabOrder(model.Order order ){ 
 		
 		
-		return dal.Laborder.placeLabOrder( order);
+		return new dal.Laborder().placeOrder( order);
 	}
+	
+	/*
 
 	public static ArrayList<model.Laborder> pendinglorder() {
 		
-		return dal.Laborder.pendinglorder();
+		return new dal.Laborder().pendinglorder();
 	}
 
 	public static int deleteLabOrder(int orderid) {
@@ -24,4 +26,5 @@ public class Laborder {
 		
 		return dal.Laborder.updateResultLabOrder(laborderid,resultimageid);
 	}
+	*/
 }

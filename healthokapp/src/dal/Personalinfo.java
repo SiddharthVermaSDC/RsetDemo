@@ -1,24 +1,21 @@
 package dal;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.ResultSet;
+
 
 public class Personalinfo {
 	
 	static Connection con=null;
 	static PreparedStatement ps2=null;
-	static ResultSet rs2=null;
 	
 	public static ArrayList<model.Order> getAllOrderDetail(String username){
 		//model.Order order=new model.Order();
 		ArrayList<model.Order> orders =new ArrayList<model.Order>();
 		int userid=dal.GetUserId.userid(username);
-		Database database = new Database();
-		con=(Connection) database.createConnection();
+ResultSet rs2 = null;
+		con=Database.createConnection();
 		String str1="select * from healthok.order where UserId=?";
 		try{
 			ps2=(PreparedStatement) con.prepareStatement(str1);

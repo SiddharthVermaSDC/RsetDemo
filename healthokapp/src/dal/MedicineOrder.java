@@ -1,16 +1,69 @@
 package dal;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
+
+
+import util.Logging;
 
 public class MedicineOrder{
+	
+	
+	
+	
+	
+	public int placeOrder(model.OrderBase order){
+
+		Connection connection=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+
+		int rw= 0;
+		int labOrderId = -1;
+		String str="insert into MedicineOrder(OrderId,PrescriptionImageId,Description) values (?,?,?)";
+
+		try{
+
+
+			connection=Database.createConnection();
+
+			ps=(PreparedStatement) connection.prepareStatement(str,Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1,order.getOrderId());
+			ps.setInt(2, order.getImageId());
+			ps.setString(3,order.getOrderDescription());
+
+			rw=ps.executeUpdate();
+
+			if(rw>0)
+			{
+				rs = ps.getGeneratedKeys();
+				if(rs.next())
+					labOrderId = rs.getInt(1);
+
+			}
+		}
+		catch(SQLException se)
+		{
+			Logging.Exception("MedicineOrderDAL", "Error Creating Order " + ps.toString() + " Exception " + se.getMessage());
+		}
+		finally 
+		{
+
+			Database.closeConnection(connection);
+		}
+
+		return labOrderId;
+	}
+	
+
+	
+	
+	
+	
+	
 //for insert order
 	static Connection con=null;
 	static PreparedStatement ps=null;

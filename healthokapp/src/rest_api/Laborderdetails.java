@@ -43,7 +43,7 @@ public class Laborderdetails {
 	    model.Result res=new model.Result();
 	
 	
-	 res.setStatus(biz.Laborder.updateResultLabOrder(laborderid,resultimageid));
+//	 res.setStatus(biz.Laborder.updateResultLabOrder(laborderid,resultimageid));
 	 return res;
 	}	
 	 // deleting laborderdetails healthok
