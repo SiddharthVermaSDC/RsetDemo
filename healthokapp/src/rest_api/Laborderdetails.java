@@ -20,13 +20,13 @@ public class Laborderdetails {
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
 	public static model.Result createlaborder(@PathParam("LabOrderId") int laborderid,@PathParam("TestName") String testname,@PathParam("Price") float price){
-	model.Laborderdetails laborderdetails=new model.Laborderdetails();
+	model.LabOrderDetail labOrderDetail=new model.LabOrderDetail();
 	model.Result res=new model.Result();
 	
-	laborderdetails.setLaborderId(laborderid);
-	laborderdetails.setTestname(testname);
-	laborderdetails.setPrice(price);
-    res.setStatus(biz.LabOrderDetails.placeLabOrderd(laborderdetails));
+	labOrderDetail.setLaborderId(laborderid);
+	labOrderDetail.setTestname(testname);
+	labOrderDetail.setPrice(price);
+    res.setStatus(biz.LabOrderDetails.placeLabOrderd(labOrderDetail));
 	 return res;
 	}	
 	
@@ -67,13 +67,13 @@ public class Laborderdetails {
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
 	public static model.Result updatelaborder(@PathParam("LabOrderId") int laborderid,@PathParam("TestName") String testname,@PathParam("Price") float price){
-	model.Laborderdetails laborderdetails=new model.Laborderdetails();
+	model.LabOrderDetail labOrderDetail=new model.LabOrderDetail();
 	model.Result res=new model.Result();
 	
-	laborderdetails.setLaborderId(laborderid);
-	laborderdetails.setTestname(testname);
-	laborderdetails.setPrice(price);
-    res.setStatus(biz.LabOrderDetails.updateLabOrder(laborderdetails));
+	labOrderDetail.setLaborderId(laborderid);
+	labOrderDetail.setTestname(testname);
+	labOrderDetail.setPrice(price);
+    res.setStatus(biz.LabOrderDetails.updateLabOrder(labOrderDetail));
 	 return res;
 	}	
 	

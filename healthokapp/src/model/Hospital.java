@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class Hospital {
 
 	private int hospitalId;
@@ -14,7 +16,7 @@ public class Hospital {
 	private String addressLine3;
 	private int cityId;
 	private String pincode;
-	private String regDate;
+	private Date regDate;
 	private String website;
 	private String phonenumber;
 	private boolean hasRadiology;
@@ -27,7 +29,7 @@ public class Hospital {
 
 	public Hospital(int hospitalId, String hospitalname, int addressId, boolean hasER, String facilities, int opdFees,
 			int bed, String addressLine1, String addressLine2, String addressLine3, int cityId, String pincode,
-			String regDate, String website, String phonenumber, boolean hasRadiology, boolean hasDiagnistics,
+			Date regDate, String website, String phonenumber, boolean hasRadiology, boolean hasDiagnistics,
 			boolean hasAmbulance, String addmissionProcess) {
 		this.hospitalId = hospitalId;
 		this.hospitalname = hospitalname;
@@ -58,11 +60,11 @@ public class Hospital {
 		return hospitalId;
 	}
 
-	public String getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(String regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
 

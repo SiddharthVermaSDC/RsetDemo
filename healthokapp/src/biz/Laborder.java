@@ -10,13 +10,14 @@ public class Laborder {
 		return new dal.Laborder().placeOrder( order);
 	}
 	
-	/*
 
-	public static ArrayList<model.Laborder> pendinglorder() {
+
+	public static ArrayList<model.Laborder> pendingLabOrders() {
 		
-		return new dal.Laborder().pendinglorder();
+		return new dal.Laborder().pendingLabOrders();
 	}
 
+	/*
 	public static int deleteLabOrder(int orderid) {
 		
 		return dal.Laborder.deleteLaborder(orderid);

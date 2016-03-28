@@ -1,5 +1,9 @@
 package biz;
 
+import java.util.ArrayList;
+
+import util.StatusCode;
+
 public class LabOrderDetails {
 
 	public static int deleteLabOrder(int laborderid) {
@@ -7,14 +11,14 @@ public class LabOrderDetails {
 		return dal.LabOrderDetails.deleteLabOrder(laborderid);
 	}
 
-	public static int placeLabOrderd(model.Laborderdetails laborderdetails) {
+	public StatusCode placeLabOrderdetails(ArrayList<model.LabOrderDetail> labOrderDetails) {
 		
-		return dal.LabOrderDetails.placeLabOrderd(laborderdetails);
+		return new dal.LabOrderDetails().placeLabOrderdetails(labOrderDetails);
 	}
 
-	public static int updateLabOrder(model.Laborderdetails laborderdetails) {
+	public static int updateLabOrder(model.LabOrderDetail labOrderDetail) {
 		
-		return dal.LabOrderDetails.updateLabOrderd(laborderdetails);
+		return new dal.LabOrderDetails().updateLabOrderdetail(labOrderDetail);
 	}
 
 	

@@ -7,20 +7,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.Hospital;
+import util.Logging;
 
 public class HospitalRetrival {
-	static Connection connection;
-	// private Statement st=null;
-	static PreparedStatement ps = null;
-	static ResultSet rs = null;
-	static Connection connection1;
-	static PreparedStatement ps1 = null;
-	static ResultSet rs1 = null;
 
-	public static ArrayList<Hospital> responseHospital(String HospitalId) {
-		ArrayList<model.Hospital> hosptl = new ArrayList<model.Hospital>();
+
+	public  model.Hospital responseHospital(int hospitalId) {
+		
+		 Connection connection;
+		 PreparedStatement ps;
+		 ResultSet rs;
+
 		try {
 				connection = Database.createConnection();
 			String sql = "Select * from hospital where HospitalId=\"" + HospitalId + "\"";
@@ -28,7 +28,7 @@ public class HospitalRetrival {
 			rs = ps.executeQuery();
 			System.out.println(rs);
 			while (rs.next()) {
-				int hospitalId = rs.getInt("HospitalId");
+				int dbHospitalId = rs.getInt("HospitalId"); // this is useless as this is same as passed in hospitalId
 				String hospitalname = rs.getString("Name");
 				int addressId = rs.getInt("AddressId");
 				boolean hasER = rs.getBoolean("HasER");
@@ -40,16 +40,16 @@ public class HospitalRetrival {
 				String addressLine3 = rs.getString("AddressLine3");
 				int cityId = rs.getInt("CityId");
 				String pincode = rs.getString("PinCode");
-				String regDate = rs.getString("RegistrationDate");
+				Date regDate = rs.getDate("RegistrationDate");
 				String website = rs.getString("Website");
 				String phonenumber = rs.getString("Hospitalphonenumber");
 				boolean hasRadiology = rs.getBoolean("Hasradiology");
 				boolean hasDiagnistics = rs.getBoolean("Hasdiagnistics");
 				boolean hasAmbulance = rs.getBoolean("Hasambulance");
 				String addmissionProcess = rs.getString("AdmissionProcess");
-				hosptl.add(new model.Hospital(hospitalId, hospitalname, addressId, hasER, facilities, opdFees, bed,
+				return new model.Hospital(hospitalId, hospitalname, addressId, hasER, facilities, opdFees, bed,
 						addressLine1, addressLine2, addressLine3, cityId, pincode, regDate, website, phonenumber,
-						hasRadiology, hasDiagnistics, hasAmbulance, addmissionProcess));
+						hasRadiology, hasDiagnistics, hasAmbulance, addmissionProcess);
 
 				// hosptl.add(new model.Hospital(cityId, hospitalname,addressId,
 				// hasER, facilities, opdFees, bed, addressLine1, addressLine2,
@@ -58,14 +58,24 @@ public class HospitalRetrival {
 				// addmissionProcess));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL EXCEPTION**1");
+			Logging.Exception("HOSPITALDAL", "SQL Error " + e.getMessage());
 
 		}
-		return hosptl;
+		finally
+		{
+			Database.closeConnection(connection);
+		}
+		return null;
 	}
 
-	public static ArrayList<Hospital> responseHospitalId() {
+	// return all hospitals - Needs to be fixed to return arraylist of all hospitals. 
+/*	
+	public  ArrayList<Hospital> allHospitals() {
 		ArrayList<model.Hospital> hosptl1 = new ArrayList<model.Hospital>();
+
+		 Connection connection;
+		 PreparedStatement ps;
+		 ResultSet rs;
 
 		try {
 			connection1 = Database.createConnection();
@@ -82,5 +92,5 @@ public class HospitalRetrival {
 		}
 		return hosptl1;
 	}
-
+*/
 }

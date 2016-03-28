@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class Doctor {
 	private int doctorId;
 
@@ -11,7 +13,7 @@ public class Doctor {
 		this.doctorId = doctorId;
 	}
 
-	private String images;
+	//private String images;
 	private int imageid;
 	private int imageTypeId;
 	private String firstName;
@@ -20,7 +22,7 @@ public class Doctor {
 	private String emailId;
 	private int speciality;
 	private String degree;
-	private String doctorRegDate;
+	private Date doctorRegDate;
 	private String clinicTiming;
 	private String offDay;
 	private int emergencyFees;
@@ -101,6 +103,7 @@ public class Doctor {
 	 * }
 	 */
 
+	/*
 	public String getImages() {
 		return images;
 	}
@@ -108,7 +111,7 @@ public class Doctor {
 	public void setImages(String images) {
 		this.images = images;
 	}
-
+*/
 	public int getImageid() {
 		return imageid;
 	}
@@ -277,11 +280,11 @@ public class Doctor {
 		this.emailId = emailId;
 	}
 
-	public String getDoctorRegDate() {
+	public Date getDoctorRegDate() {
 		return doctorRegDate;
 	}
 
-	public void setDoctorRegDate(String doctorRegDate) {
+	public void setDoctorRegDate(Date doctorRegDate) {
 		this.doctorRegDate = doctorRegDate;
 	}
 

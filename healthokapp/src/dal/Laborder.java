@@ -101,81 +101,100 @@ public class Laborder {
 
 	// pending lab order or newly created
 
-/*
+
 	public static ArrayList<model.Laborder> pendinglorder() {
+
+		
+		
 		ArrayList<model.Laborder> lorder=new  ArrayList<model.Laborder>();
-		//int i= 0;
-		//int result=0;
-		Database database = new Database();
+		Connection connection=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+
 		String str3="select * from LabOrder where OrderId IN(select OrderId from Order where OrderStatusTypeId=1 and OrderTypeId =2 )";
 		try{          
-			con2=(Connection) database.createConnection();
-			ps2=(PreparedStatement) con2.prepareStatement(str3);
+			connection=Database.createConnection();
+			ps= connection.prepareStatement(str3);
 
-			rs2=ps2.executeQuery();
+			rs=ps.executeQuery();
 
-			while(rs2.next())
+			while(rs.next())
 			{
-				int laborderid=rs2.getInt("LabOrderId");
-				int orderid=rs2.getInt("OrderId");
-				int pimageid=rs2.getInt("PrescriptionImageId");
-				int lrimageid=rs2.getInt("LabResultImageId");
-				String description=rs2.getString("Description");
+				// TODO - FIx this to set properties instead of calling constructor. 
+				int laborderid=rs.getInt("LabOrderId");
+				int orderid=rs.getInt("OrderId");
+				int pimageid=rs.getInt("PrescriptionImageId");
+				int lrimageid=rs.getInt("LabResultImageId");
+				String description=rs.getString("Description");
 
 				lorder.add(new model.Laborder(laborderid,orderid,pimageid,lrimageid,description));
 
 
 			}
-
-			con2.close();
 		}
 		catch(SQLException se)
 		{
 			lorder.add(new model.Laborder(0,0,0,0,"")); 
 		}
 
-
+finally 
+{
+Database.closeConnection(connection);	
+}
 		return lorder;
 	}
 
 	// delete lab order 
-	public static int deleteLaborder(int orderid) {
+	public  util.StatusCode deleteLaborder(int orderid) {
 		int  rw=0;
-		int result=0;
+
+		Connection connection=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+
+		StatusCode status = StatusCode.UnknownError;
+		
 		Database database = new Database();
 		String str2="delete feom LabOrder where OrderId =?";
 		try{  
-			con3=(Connection) database.createConnection();
+			connection=Database.createConnection();
 
-			ps3=(PreparedStatement) con3.prepareStatement(str2);
-			ps3.setInt(1,orderid);
+			ps=connection.prepareStatement(str2);
+			ps.setInt(1,orderid);
 
 
-			rw=ps3.executeUpdate();
+			rw=ps.executeUpdate();
 
 			if(rw>0)
 			{
-				result = 1;
+				status = StatusCode.Success;
 			}else{
-				result=-1;
-			}
-			con3.close();
+status = StatusCode.Error;
+
+}
 		}catch(SQLException se)
 		{
-			//System.out.print(se.getMessage());
-			result = 500;
+status = StatusCode.UnknownError;		}
+		
+		finally {
+			Database.closeConnection(connection);
 		}
-		return result;
+		
+		return status;
 	}
 
 
-	public static int updateLabOrder(model.Laborder laborder){
+	public  int updateLabOrder(model.Laborder laborder){
 		int rw= 0;
 		int result=0;
 		Database database = new Database();
+		Connection con4=null;
+		PreparedStatement ps4=null;
+		ResultSet rs4=null;
+
 		String str2="update LabOrder set OrderId = ?PrescriptionImageId= ?Description = ? Where LabOrderId = ?";
 		try{
-			con4=(Connection) database.createConnection();
+			con4=Database.createConnection();
 
 			ps4=(PreparedStatement) con4.prepareStatement(str2,Statement.RETURN_GENERATED_KEYS);
 			ps4.setInt(1,laborder.getOrderId());
@@ -205,5 +224,5 @@ public class Laborder {
 		}
 		return result;
 	}
-*/
+
 }

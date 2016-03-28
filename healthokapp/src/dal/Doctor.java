@@ -1,6 +1,5 @@
 package dal;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,19 +9,22 @@ import java.text.SimpleDateFormat;
 
 public class Doctor {
 
-	static Connection connection;
-	static PreparedStatement ps;
-	static ResultSet rs;
 
 	public static int insertDoctor(model.Doctor doctor) {
 		int result = 0;
 
+		 Connection connection;
+		 PreparedStatement ps;
+		 ResultSet rs;
+
 		try {
 			connection = Database.createConnection();
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			java.sql.Date d = new java.sql.Date(format.parse(doctor.getDoctorRegDate()).getTime());
-			FileInputStream fin = new FileInputStream(doctor.getImages());
-			String sql = "INSERT INTO Images (ImageTypeId,Image) values (?,?)";
+			//java.sql.Date d = new java.sql.Date(doctor.getDoctorRegDate().getTime());
+			//FileInputStream fin = new FileInputStream(doctor.getImages()); not needed. This will be handled in a different call. 
+/*
+ *			NO NEED TO DO THIS. 
+ * 
+ * 			String sql = "INSERT INTO Images (ImageTypeId,Image) values (?,?)";
 			ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, doctor.getImageTypeId());
 			ps.setBinaryStream(2, fin, fin.available());
@@ -31,6 +33,9 @@ public class Doctor {
 				rs = ps.getGeneratedKeys();
 			if (rs.next())
 				doctor.setImageid(rs.getInt(1));
+
+*/
+			
 			// String q1 = "insert into doctor(PinCode) values(?);";
 			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,Speciality,Degree,DoctorRegistrationDate,ClinicTiming,offDay,Fees,EmergencyFees,IsPharmacy,IsProvideHomeCare,IsBelongToAnyHospital,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsPostCareEnabled,DoctorImageId,YearsofExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(q, Statement.RETURN_GENERATED_KEYS);
@@ -44,8 +49,7 @@ public class Doctor {
 			ps.setString(6, doctor.getDegree());
 			// ps.setInt(7, doctor.getDoctorPhoneId());
 			// ps.setDate(7,doctor.getDoctorRegDate());
-			ps.setDate(7, (java.sql.Date) d);
-			System.out.println("Date=" + doctor.getDoctorRegDate());
+			ps.setDate(7, new java.sql.Date(doctor.getDoctorRegDate().getTime()));
 			ps.setString(8, doctor.getClinicTiming());
 			ps.setString(9, doctor.getOffDay());
 			ps.setInt(10, doctor.getFees());

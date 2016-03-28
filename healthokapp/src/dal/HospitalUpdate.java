@@ -2,24 +2,23 @@ package dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.text.SimpleDateFormat;
+
 
 
 
 public class HospitalUpdate {
 
-	static Connection connection;
-	static PreparedStatement ps3;
 
-	public static int updateHospital(model.Hospital hsptl1, int id) {
+	public static int updateHospital(model.Hospital hsptl1) {
+		 Connection connection;
+		 PreparedStatement ps3;
 
 		int result1 = 0;
 		try {
 			connection = Database.createConnection();
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			java.sql.Date d = new java.sql.Date(format.parse(hsptl1.getRegDate()).getTime());
-			String query = "Update Hospital set Name=?,AddressId=?,HasER=?,Facilities=?,OPDFees=?,Beds=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?,RegistrationDate=?,Website=?,Hospitalphonenumber=?,Hasradiology=?,Hasdiagnistics=?,Hasambulance=?,AdmissionProcess=? where HospitalId=\""
-					+ id + "\"";
+//			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			java.sql.Date d = new java.sql.Date(hsptl1.getRegDate().getTime());
+			String query = "Update Hospital set Name=?,AddressId=?,HasER=?,Facilities=?,OPDFees=?,Beds=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?,RegistrationDate=?,Website=?,Hospitalphonenumber=?,Hasradiology=?,Hasdiagnistics=?,Hasambulance=?,AdmissionProcess=? where HospitalId=?";
 			ps3 = connection.prepareStatement(query);
 			ps3.setString(1, hsptl1.getHospitalname());
 			ps3.setInt(2, hsptl1.getAddressId());
@@ -41,8 +40,9 @@ public class HospitalUpdate {
 			ps3.setBoolean(16, hsptl1.isHasDiagnistics());
 			ps3.setBoolean(17, hsptl1.isHasAmbulance());
 			ps3.setString(18, hsptl1.getAddmissionProcess());
+			ps3.setInt(19, hsptl1.getHospitalId());
 
-			ps3.executeUpdate();
+			ps3.executeUpdate();// fix code to use standard template. Check for rows updated > 0
 			result1 = 1;
 		} catch (Exception e) {
 			System.out.println(e);

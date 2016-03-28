@@ -1,6 +1,6 @@
 package model;
 
-public class Laborderdetails {
+public class LabOrderDetail {
 
 	private int laborderdetailId;
 	private String testname;

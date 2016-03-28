@@ -6,9 +6,9 @@ import model.Hospital;
 
 public class HospitalRetrival {
 
-	public static ArrayList<Hospital> responseHospital(String HospitalId) {
-		ArrayList<model.Hospital> hosptl;
-		hosptl = dal.HospitalRetrival.responseHospital(HospitalId);
+	public  ArrayList<Hospital> responseHospital(int hospitalId) {
+		ArrayList<model.Hospital> hospitals;
+		hospitals = dal.HospitalRetrival.responseHospital(HospitalId);
 		return hosptl;
 	}
 

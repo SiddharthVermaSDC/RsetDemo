@@ -17,7 +17,7 @@ public class LabOrder {
 	@Produces (MediaType.APPLICATION_JSON)
 	public static ArrayList<model.Laborder> pendinglaborder(){
 		ArrayList<model.Laborder> add=new ArrayList<model.Laborder>();
-//		add=biz.Laborder.pendinglorder();
+		add=biz.Laborder.pendingLabOrders();
 		
 		return add;
 		
