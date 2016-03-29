@@ -502,7 +502,7 @@ public model.UserFull getUserDetails ( int userId)
 	
 	
  	String queryUser="select * from User where userid = ?";
-	String queryMemberDetail ="select * from MemberDetail where userid = ?";
+	String queryMemberDetail ="select * from MemberDetails where userid = ?";
 
 
 	model.UserFull user = null;
