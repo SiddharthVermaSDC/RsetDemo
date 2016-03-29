@@ -4,6 +4,9 @@ package dal;
 import java.sql.*;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import model.GetSetLogin;
 import model.MemberDetail;
 import util.Logging;
@@ -15,7 +18,204 @@ import util.StatusCode;
 
 public class User {
 	
+	
+	public int fullRegister(String jsonString)
+	{     
+		
+		PreparedStatement preparedstatement=null;
+		Connection connection = null;
+	    Statement statement = null;
+	    ResultSet resultset = null;
+	    int status;
+	    try {
+	    	
+	    	connection = Database.createConnection();
+	    	
+			JSONObject json = new JSONObject(jsonString);
+			
+      	  	String  queryToInsert="insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
+      	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBousBalance,TotalDiscount,Comments)"
+      	  			
+      	  			+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+      	  			
+      	  			
+			 preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);	 
+			 
+			 preparedstatement.setInt(1,json.getInt("MemberID"));
+			 preparedstatement.setString(2,json.getString("FirstName"));
+			 preparedstatement.setString(3,json.getString("LastName"));
+			 preparedstatement.setString(4,json.getString("Mobile"));
+			 preparedstatement.setString(5,json.getString("EmailId"));
+			 preparedstatement.setString(6,json.getString("AddressLine1"));
+			 preparedstatement.setString(7,json.getString("AddressLine2"));
+			 preparedstatement.setInt(8,json.getInt("CityId"));
+			 preparedstatement.setString(9,json.getString("PinCode"));
+			 preparedstatement.setString(10,json.getString("DoctorsGenerallyVisited"));
+			 preparedstatement.setInt(11,json.getInt("MembershipTypeId"));
+			 preparedstatement.setString(12,json.getString("Password"));
+			 preparedstatement.setInt(13,json.getInt("PrimaryDoctor"));
+			 preparedstatement.setInt(14,json.getInt("PrepaidBalance"));
+			 preparedstatement.setInt(15,json.getInt("CashbackBousBalance"));
+			 preparedstatement.setInt(16,json.getInt("TotalDiscount"));
+			 preparedstatement.setString(17,json.getString("OtherCare"));
+			 
+			 preparedstatement.executeUpdate();
+			 
+			 status=1;
+			 status=familyRegister(jsonString);
+	    }
+	  
+	     catch(Exception e)
+	     {
+	    	status=-500;
+	     }
+		
+		finally 
+		{ 
+			Database.closeConnection(connection);
+			
+		}  
+	     
+		 return status;	 
+	}
+	
+	
+	
   
+	public int familyRegister(String jsonString)
+	{
+		
+		 PreparedStatement preparedstatement=null;
+		 Connection connection = null;
+	     Statement statement = null;
+	     ResultSet resultset = null;
+		 int status;
+	     
+		try {
+			
+			connection = Database.createConnection();
+			
+     	  	JSONObject json = new JSONObject(jsonString);
+			JSONArray family = json.getJSONArray("family");
+			
+			String queryToInsert;
+			JSONObject obj;
+			
+			for(int i=0;i<family.length();i++)
+			  {
+				 obj = family.getJSONObject(i);
+				 queryToInsert=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments,CityId)"
+				 		+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+						 
+				 		
+				 
+				preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);	
+				
+				preparedstatement.setString(1,obj.getString("FirstName"));
+				preparedstatement.setString(2,obj.getString("LastName"));
+				preparedstatement.setString(3,obj.getString("Sex"));
+				preparedstatement.setString(4,obj.getString("DOB"));
+				preparedstatement.setString(5,obj.getString("BloodGroup"));
+				preparedstatement.setString(6,obj.getString("Allergies"));
+				preparedstatement.setString(7,obj.getString("CurrentMedications"));
+				preparedstatement.setInt(8,obj.getInt("Diabetic"));
+				preparedstatement.setInt(9,obj.getInt("BP"));
+				preparedstatement.setInt(10,obj.getInt("HeartProblems"));
+				preparedstatement.setString(11,obj.getString("RecurringTests"));
+				preparedstatement.setString(12,obj.getString("LongTermCareNeed"));
+				preparedstatement.setString(13,obj.getString("Comments"));
+				preparedstatement.setInt(14,obj.getInt("CityId"));
+				
+				
+				preparedstatement.executeUpdate();
+				
+			  }  
+			
+			status=1;
+			  
+		   	} 
+		catch (Exception e)
+		{
+			status=-500;
+		}
+		
+		 finally 
+	     { 
+			 Database.closeConnection(connection);  
+	      }
+		
+		return status;
+	}
+	
+	
+	
+	
+	
+	
+	public int quickEmailRegister(model.GetSetLogin gs)
+	{
+		
+		PreparedStatement preparedstatement=null;
+		Connection connection=null;
+		ResultSet resultSet=null;
+		int status;
+		
+		try{
+			
+			connection = Database.createConnection();
+
+			String queryToCheck="select EmailId, Mobile from User where Mobile=? or EmailId = ?";
+			String queryToInsert="insert into User(FirstName,LastName,EmailId,Mobile,Password) values(?,?,?,?,?);";
+		  	
+		    preparedstatement=(PreparedStatement) connection.prepareStatement(queryToCheck);
+	    	preparedstatement.setString(1,gs.getPhone());
+	    	preparedstatement.setString(1,gs.getEmail());
+	    	resultSet=preparedstatement.executeQuery();
+	    	
+	    	if(resultSet.next()==true)
+	    	{
+	    		Logging.Debug("QuickRegister", "Email or mobile already exists" + gs.getEmail() + ":"+ gs.getPhone());
+	    		status=-1;
+	    	}
+	    	
+	    	else
+	    	{
+	    		preparedstatement=null;
+	    		preparedstatement=(PreparedStatement) connection.prepareStatement(queryToInsert);
+	    		preparedstatement.setString(1,gs.getFirstName());
+	    		preparedstatement.setString(2,gs.getLastName());
+	    		preparedstatement.setString(3,gs.getEmail());
+	    		preparedstatement.setString(4,gs.getPhone());
+	    		preparedstatement.setString(5,gs.getPassword());
+	    		preparedstatement.executeUpdate();
+	    		
+	    		status=1;
+	    	}
+	    	
+		}
+		
+		catch(Exception e)
+	     {
+			Logging.Debug("Registration", e.getMessage());
+			status=-500;
+	     }
+		
+		 finally 
+	     { 
+			 Database.closeConnection(connection); 
+	     }
+	
+		return status;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public static int Save (model.User user)
 	{
@@ -302,7 +502,7 @@ public model.UserFull getUserDetails ( int userId)
 	
 	
  	String queryUser="select * from User where userid = ?";
-	String queryMemberDetail ="select * from MemberDetails where userid = ?";
+	String queryMemberDetail ="select * from MemberDetail where userid = ?";
 
 
 	model.UserFull user = null;

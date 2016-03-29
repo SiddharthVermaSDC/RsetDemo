@@ -1,6 +1,6 @@
 package rest_api;
 
-public class Message {
+public class mMessage {
 
 	int status;
     String msg=null;
