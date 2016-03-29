@@ -16,21 +16,21 @@ public class HospitalRetrival {
 	@Path("/Retrieval/{HospitalId}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static ArrayList<model.Hospital> getHospital(@PathParam("HospitalId") String HospitalId) {
-		ArrayList<model.Hospital> hosptl = new ArrayList<model.Hospital>();
-		hosptl = biz.HospitalRetrival.responseHospital(HospitalId);
-		return hosptl;
+	public static model.Hospital getHospital(@PathParam("HospitalId") int hospitalId) {
+		model.Hospital hospital = null;
+		hospital = new biz.HospitalRetrival().responseHospital(hospitalId);
+		return hospital;
 
 	}
 
-	// for retrieving just the hospital ids in the hospital table
+	// for retrieving all hospitals
 	@Path("/Retrieval")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static ArrayList<model.Hospital> getHospitalId() {
-		ArrayList<model.Hospital> hosptl1 = new ArrayList<model.Hospital>();
-		hosptl1 = biz.HospitalRetrival.responseHospitalId();
-		return hosptl1;
+	public static ArrayList<model.Hospital> getHospitals() {
+		ArrayList<model.Hospital> hospitals = null;
+		hospitals = new biz.HospitalRetrival().allHospitals();
+		return hospitals;
 	}
 
 }

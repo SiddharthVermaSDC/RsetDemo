@@ -19,8 +19,6 @@ public class UpdateDoctor {
 
 		try {
 			connection = Database.createConnection();;
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			java.sql.Date d = new java.sql.Date(format.parse(doctor.getDoctorRegDate()).getTime());
 			
 			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospital=?,DoctorRegistrationDate=?,EmailId=?,IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,Speciality=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsPostCareEnabled=?,DoctorImageId=?,YearsOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?) where DoctorId=\""
 					+ val + "\"";
@@ -36,7 +34,7 @@ public class UpdateDoctor {
 			ps5.setInt(10, doctor.getSpeciality());
 			ps5.setString(11, doctor.getDegree());
 
-			ps5.setDate(3, (java.sql.Date) d);
+			ps5.setDate(3, new java.sql.Date(doctor.getDoctorRegDate().getTime()));
 			System.out.println("Date=" + doctor.getDoctorRegDate());
 			ps5.setString(12, doctor.getClinicTiming());
 			ps5.setString(13, doctor.getOffDay());

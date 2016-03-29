@@ -6,15 +6,15 @@ import model.Hospital;
 
 public class HospitalRetrival {
 
-	public  ArrayList<Hospital> responseHospital(int hospitalId) {
-		ArrayList<model.Hospital> hospitals;
-		hospitals = dal.HospitalRetrival.responseHospital(HospitalId);
-		return hosptl;
+	public  model.Hospital responseHospital(int hospitalId) {
+		model.Hospital hospital;
+		hospital = new dal.HospitalRetrival().responseHospital(hospitalId);
+		return hospital;
 	}
 
-	public static ArrayList<Hospital> responseHospitalId() {
+	public  ArrayList<Hospital> allHospitals() {
 		ArrayList<model.Hospital> hosptl1;
-		hosptl1 = dal.HospitalRetrival.responseHospitalId();
+		hosptl1 = new dal.HospitalRetrival().allHospitals();
 		return hosptl1;
 	}
 

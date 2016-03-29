@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 public class Laborderdetails {
 	
 	//create laborderdetails healthok
+	// This needs to change to accept a POST and an Array. 
 	
 	@Path("/create/{LabOrderId}/{TestName}/{Price}")
 	@GET
@@ -26,7 +27,7 @@ public class Laborderdetails {
 	labOrderDetail.setLaborderId(laborderid);
 	labOrderDetail.setTestname(testname);
 	labOrderDetail.setPrice(price);
-    res.setStatus(biz.LabOrderDetails.placeLabOrderd(labOrderDetail));
+//    res.setStatus(biz.LabOrderDetails.placeLabOrderd(labOrderDetail));
 	 return res;
 	}	
 	

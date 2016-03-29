@@ -17,13 +17,13 @@ public class HospitalRetrival {
 
 	public  model.Hospital responseHospital(int hospitalId) {
 		
-		 Connection connection;
-		 PreparedStatement ps;
-		 ResultSet rs;
+		 Connection connection = null;
+		 PreparedStatement ps  = null;
+		 ResultSet rs  = null;
 
 		try {
 				connection = Database.createConnection();
-			String sql = "Select * from hospital where HospitalId=\"" + HospitalId + "\"";
+			String sql = "Select * from hospital where HospitalId=\"" + hospitalId + "\"";
 			ps = connection.prepareStatement(sql);
 			rs = ps.executeQuery();
 			System.out.println(rs);
@@ -69,7 +69,7 @@ public class HospitalRetrival {
 	}
 
 	// return all hospitals - Needs to be fixed to return arraylist of all hospitals. 
-/*	
+	
 	public  ArrayList<Hospital> allHospitals() {
 		ArrayList<model.Hospital> hosptl1 = new ArrayList<model.Hospital>();
 
@@ -78,19 +78,20 @@ public class HospitalRetrival {
 		 ResultSet rs;
 
 		try {
-			connection1 = Database.createConnection();
-			String sql1 = "Select HospitalId from hospital";
-			ps1 = connection.prepareStatement(sql1);
-			rs1 = ps1.executeQuery();
-			System.out.println(rs1);
-			while (rs1.next()) {
-				int hospitalId = rs1.getInt("HospitalId");
+			connection = Database.createConnection();
+			String sql = "Select * from hospital";
+			ps = connection.prepareStatement(sql);
+			rs = ps.executeQuery();
+			//System.out.println(rs1);
+			while (rs.next()) {
+				int hospitalId = rs.getInt("HospitalId");
 				hosptl1.add(new model.Hospital(hospitalId));
+				// add code to fill all details of hospital
 			}
 		} catch (SQLException  e) {
 			System.out.println("SQL EXCEPTION**2");
 		}
 		return hosptl1;
 	}
-*/
+
 }

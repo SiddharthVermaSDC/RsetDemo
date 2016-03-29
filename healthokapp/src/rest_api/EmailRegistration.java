@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import com.mysql.jdbc.ResultSetMetaData;
 
 import dal.Database;
+import model.GetSetLogin;
 import util.Logging;
 
 @Path("/EmailRegistration")

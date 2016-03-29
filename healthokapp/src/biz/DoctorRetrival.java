@@ -8,7 +8,7 @@ public class DoctorRetrival {
 	public static ArrayList<model.DoctorRetrival> getDoctor(String fname, String mname, String lname, int count) {
 		ArrayList<model.DoctorRetrival> docs;
 		int rank;
-		docs = dal.DoctorRetrival.responseDoctor(fname, mname, lname, count);
+		docs = new dal.DoctorRetrival().responseDoctor(fname, mname, lname, count);
 		// int n=docs.size;
 		if (count == 3) {
 			for (model.DoctorRetrival doc : docs) {

@@ -1,4 +1,4 @@
-package rest_api;
+package model;
 
 public class GetSetMemberRegistration {
 

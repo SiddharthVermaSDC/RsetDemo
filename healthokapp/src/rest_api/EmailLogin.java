@@ -11,6 +11,8 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONObject;
 
 import dal.Database;
+import model.GetSetLogin;
+import model.GetSetMemberRegistration;
 import sun.util.logging.resources.logging;
 import util.Logging;
 
@@ -90,6 +92,19 @@ public class EmailLogin
 		  
 	}
 	
+	
+	@Path("/Check1")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public model.UserFull loginCheck1(GetSetLogin gs)
+	{     
+
+		return new biz.User().loginCheck(gs);
+		  
+	}
+	
+
 	
 	
 	/*

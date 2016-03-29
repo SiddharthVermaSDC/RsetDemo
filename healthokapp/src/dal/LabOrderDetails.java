@@ -34,7 +34,7 @@ import util.StatusCode;
 				psInsert=connection.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
 				psUpdate=connection.prepareStatement(update);
 
-				for ( model.Laborderdetails labOrderDetail : labOrderDetails )
+				for ( model.LabOrderDetail labOrderDetail : labOrderDetails )
 					
 				{
 					

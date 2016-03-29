@@ -2,7 +2,10 @@ package dal;
 
 
 import java.sql.*;
+import java.util.ArrayList;
 
+import model.GetSetLogin;
+import model.MemberDetail;
 import util.Logging;
 import util.StatusCode;
 
@@ -229,4 +232,193 @@ public class User {
 		
 	}
 	
+
+public int  loginCheck (GetSetLogin gs)
+
+{
+Connection connection = null;
+PreparedStatement preparedStatement=null;
+ResultSet resultSet=null;
+
+int userId = -1;
+
+try {
+
+//		 error.put("UserId","-1");
+//		 s = error.toString();
+
+	connection = Database.createConnection();
+  String query="select UserId from User where (EmailId=\""+gs.getLoginId()+"\" or Mobile=\""+gs.getLoginId()+"\") and Password=\""+gs.getPassword()+"\";";
+  //String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\";";
+ //if(gs.getEmail()==null)
+ //{   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
+ //}
+ //else
+ //{   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
+ //}
+ 
+  Logging.Debug("Login", query);
+ preparedStatement =(PreparedStatement)connection.prepareStatement(query);
+	 resultSet=preparedStatement.executeQuery();
+
+	 if(resultSet.next()==true)
+	 {   
+		 Logging.Debug("Login","Found matching record " + resultSet.getInt("UserId")  );
+		 userId = resultSet.getInt("UserId");
+//		 gss.UserId=resultSet.getInt("UserId");
+//		 s=r.userDetails(gss);
+	       
+	 }
+	 else
+	 {
+		 
+		 Logging.Debug("Login","Found no matching record for " + query);
+		 userId = -1;
+	 }
+}
+catch(Exception e)
+{
+		 util.Logging.Debug("Login", e.getMessage());
+}
+
+
+finally 
+{ 
+	 Database.closeConnection(connection); 
+}
+   
+return userId;   
+
+}
+
+
+public model.UserFull getUserDetails ( int userId)
+{
+
+	 Connection connection=null;
+	 PreparedStatement psUser=null;
+	 PreparedStatement psMemberDetail=null;
+     ResultSet rs=null;
+	
+	
+ 	String queryUser="select * from User where userid = ?";
+	String queryMemberDetail ="select * from MemberDetail where userid = ?";
+
+
+	model.UserFull user = null;
+	
+	try
+	{
+		connection=Database.createConnection();
+		psUser=connection.prepareStatement(queryUser); 
+		psUser.setInt(1,userId);
+		psMemberDetail=connection.prepareStatement(queryMemberDetail); 
+		psMemberDetail.setInt(1,userId);
+		
+		Logging.Debug("UserDal", psUser.toString());
+		
+		 rs = psUser.executeQuery(); 
+		
+		while (rs.next()) {
+			
+			user = new model.UserFull(); // since this is query by PK will get only one row. 
+			
+			user.setUserId(userId);
+			user.setMemberID(rs.getString("MemberId"));
+			user.setFirstName(rs.getString("FirstName"));
+			user.setLastName(rs.getString("LastName"));
+			user.setEmailId(rs.getString("EmailId"));
+// Fill in rest of the fields accordingly. 					
+			
+/*			
+			 uj.put("UserId", resultset.getInt("UserId"));
+			 uj.put("MemberID",resultset.getString("MemberID"));
+			 uj.put("MembershipTypeId",resultset.getInt("MembershipTypeId"));
+			 uj.put("FirstName",resultset.getString("FirstName"));
+			 uj.put("LastName", resultset.getString("LastName"));
+			 //uj.put("AddressId", resultset.getInt("AdressId"));
+			 uj.put("EmailId",resultset.getString("EmailId"));
+			 uj.put("Mobile",resultset.getString("Mobile"));
+			 uj.put("Password",resultset.getString("Password"));
+			 uj.put("PrimaryDoctor",resultset.getInt("PrimaryDoctor"));
+			 //uj.put("DoctorGenerallyVisited", resultset.getString("DoctorGenerallyVisited"));
+			 uj.put("Comments",resultset.getString("Comments"));
+			 uj.put("PrepaidBalance",resultset.getInt("PrepaidBalance"));
+			 //uj.put("CashBousBalance", resultset.getInt("CashBousBalance"));
+			 uj.put("TotalDiscount",resultset.getInt("TotalDiscount"));
+			 uj.put("AddressLine1",resultset.getString("AddressLine1"));
+			 uj.put("AddressLine2",resultset.getString("AddressLine2"));
+			 uj.put("AddressLine3",resultset.getString("AddressLine3"));
+			 uj.put("CityId",resultset.getInt("CityId"));
+			 uj.put("PinCode",resultset.getString("PinCode"));
+
+*/			
+			
+			
+		}
+		
+		Logging.Debug("User-Dal", "user is " + user.getFirstName() + " " + user.getLastName());
+		
+		// now fill the details 
+
+		 rs = psMemberDetail.executeQuery(); 
+		
+		 ArrayList<model.MemberDetail> memberDetails = new ArrayList<model.MemberDetail>();
+		 
+		 model.MemberDetail memberDetail = null;
+		 
+		while (rs.next()) {
+			memberDetail = new MemberDetail ();
+			
+			memberDetail.setMemberDetailId(rs.getInt("Userid"));
+			memberDetail.setUserid(rs.getInt("Userid"));
+			memberDetail.setFirstName(rs.getString("FIrstName"));
+			
+			// FILL IN ALL REST OF THE FIELDS
+			
+			/*
+			 * 					 ju.put("MemberdetailId", resultset.getInt("MemberdetailId"));
+					 ju.put("UserId", resultset.getInt("UserId"));
+					 ju.put("FirstName", resultset.getString("FirstName"));
+					 ju.put("LastName", resultset.getString("LastName"));
+					 ju.put("Sex", resultset.getString("Sex"));
+					 ju.put("DOB", resultset.getString("DOB"));
+					 ju.put("BloodGroup", resultset.getString("BloodGroup"));
+					 ju.put("Diabetic", resultset.getInt("Diabetic"));
+					 ju.put("BP", resultset.getInt("BP"));
+					 ju.put("HeartProblems", resultset.getInt("HeartProblems"));
+					 ju.put("Allergies", resultset.getString("Allergies"));
+					 ju.put("recurringTests", resultset.getString("recurringTests"));
+					// ju.put("LongtermCareNeed", resultset.getString("LongtermCareNeed"));
+					 ju.put("Comments", resultset.getString("Comments"));
+					 ju.put("CityId", resultset.getInt("CityId"));
+
+			 */
+			
+		}
+		
+		user.setMemberDetail(memberDetails); // Assign member details array to user object
+		
+		return user;
+		
 	}
+	catch(SQLException se)
+	{
+		Logging.Exception("UserDal-GetToken", se.getMessage());
+
+	}
+	finally
+	{
+		Database.closeConnection(connection);
+	}
+	
+	return user;
+	
+	
+	
+	
+
+}
+
+
+}

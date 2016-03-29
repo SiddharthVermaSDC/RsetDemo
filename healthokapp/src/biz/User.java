@@ -1,5 +1,10 @@
 package biz;
 
+import org.json.JSONObject;
+
+import model.GetSetLogin;
+import model.GetSetMemberRegistration;
+import rest_api.ReturnUserDetails;
 import util.StatusCode;
 
 public class User {
@@ -27,6 +32,36 @@ return userDal.RegisterDevice(userId, token);
 		
 		return userDal.getUser(userId);	
 		
+	}
+	
+	
+	public model.UserFull loginCheck(GetSetLogin gs)
+	{
+				  
+		  dal.User userDal = new dal.User();
+		  
+		  int userId = -1;
+		  
+		  userId = userDal.loginCheck(gs);
+		  
+		  if ( userId > 0 )
+		  {
+			  
+				return new dal.User().getUserDetails(userId);
+
+		  }
+		  else
+		  {
+			  return null;
+		  }
+		  
+	}
+	
+	public model.UserFull getUserDetails (int userId)
+
+	{
+		
+		return new dal.User().getUserDetails(userId);
 	}
 	
 }

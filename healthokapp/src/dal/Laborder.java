@@ -102,7 +102,7 @@ public class Laborder {
 	// pending lab order or newly created
 
 
-	public static ArrayList<model.Laborder> pendinglorder() {
+	public static ArrayList<model.Laborder> pendingLabOrders() {
 
 		
 		

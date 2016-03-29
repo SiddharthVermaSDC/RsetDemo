@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import dal.Database;
+import model.GetSetMemberRegistration;
 
 @Path("/ReturnUserDetails")
 public class ReturnUserDetails {

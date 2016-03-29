@@ -72,9 +72,13 @@ public class Doctor {
 			result = 10;
 			int row1 = ps.executeUpdate();
 			if (row1 == 1)
+			{
 				rs = ps.getGeneratedKeys();
+			
 			if (rs.next())
 				doctor.setDoctorId(rs.getInt(1));
+			}
+			
 			String q1 = "insert into DoctorPhoneNumbers(DoctorId,PhoneNumberType,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
 			ps = connection.prepareStatement(q1);
 			ps.setInt(1, doctor.getDoctorId());
