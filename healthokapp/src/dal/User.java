@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import model.GetSetLogin;
+import model.MedicalCondition;
 import model.MemberDetail;
 import util.Logging;
 import util.StatusCode;
@@ -529,6 +530,21 @@ public model.UserFull getUserDetails ( int userId)
 			user.setFirstName(rs.getString("FirstName"));
 			user.setLastName(rs.getString("LastName"));
 			user.setEmailId(rs.getString("EmailId"));
+			user.setAddressLine1(rs.getString("Addressline1"));
+			user.setAddressLine2(rs.getString("Addressline2"));
+			user.setAddressLine3(rs.getString("Addressline3"));
+			user.setCashbackBousBalance(rs.getInt("CashbackBonusBalance"));
+			user.setCityId(rs.getInt("CityId"));
+			user.setComments(rs.getString("Comments"));
+			user.setDoctorGenerallyVisited(rs.getString("DoctorGenerallyVisited"));
+			user.setMobile(rs.getString("Mobile"));
+			user.setPinCode(rs.getString("PinCode"));
+			user.setPrepaidBalance(rs.getInt("PrepaidBalance"));
+			user.setPrimaryDoctor(rs.getInt("PrimaryDoctor"));
+			user.setTotalDiscount(rs.getInt("TotalDiscount"));
+			user.setMembershipTypeId(rs.getInt("MembershipTypeId"));
+			user.setMemberID(rs.getString("MemberId"));
+			
 // Fill in rest of the fields accordingly. 					
 			
 /*			
@@ -574,8 +590,22 @@ public model.UserFull getUserDetails ( int userId)
 			memberDetail.setMemberDetailId(rs.getInt("Userid"));
 			memberDetail.setUserid(rs.getInt("Userid"));
 			memberDetail.setFirstName(rs.getString("FIrstName"));
-			
+			memberDetail.setAllergies(rs.getString("Allergies"));
+			memberDetail.setBloodGroup(rs.getString("BloodGroup"));
+			memberDetail.setBP(MedicalCondition.item(rs.getInt("BP")));
+			memberDetail.setComments(rs.getString("Comments"));
+			memberDetail.setCurrentMedications(rs.getString("CurrentMedication"));
+			memberDetail.setDateOfBirth(rs.getDate("DateOfBirth"));
+			memberDetail.setDiabetic(MedicalCondition.item(rs.getInt("Diabetic")));
+			memberDetail.setHeartProblems(MedicalCondition.item(rs.getInt("HeartProblems")));
+			memberDetail.setLastName(rs.getString("LastName"));
+			memberDetail.setLongTermCareNeeds(rs.getString("LongTermCareNeeds"));
+			memberDetail.setMemberDetailId(rs.getInt("MemberDetails"));
+			memberDetail.setRecurringTests(rs.getString("RecurringTests"));
+			memberDetail.setSex(rs.getString("Sex"));
 			// FILL IN ALL REST OF THE FIELDS
+			
+			memberDetails.add(memberDetail);
 			
 			/*
 			 * 					 ju.put("MemberdetailId", resultset.getInt("MemberdetailId"));
