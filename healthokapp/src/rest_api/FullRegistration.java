@@ -19,9 +19,33 @@ import org.json.JSONObject;
 
 import dal.Database;
 
-@Path("/FinalRegister")
-public class FinalRegistration {
+@Path("/FullRegistration")
+public class FullRegistration {
 
+	
+	@Path("/register")
+	@POST
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
+	public model.Message fullRegister(String jsonString)
+	{
+		
+		model.Message message=new model.Message();
+		message.setStatus(biz.User.fullRegister(jsonString));
+		
+		return message;
+		
+	}
+	
+	
+	
+}
+
+
+
+	
+	
+	/*
 	@Path("/accept")
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
@@ -79,6 +103,11 @@ public class FinalRegistration {
 	      }
 		//return jsonString;
 	}
+	
+	*/
+	
+	
+	
 //}
 /*public static void main(String ar[]) throws SQLException
 {
@@ -87,7 +116,7 @@ public class FinalRegistration {
 	fr.accpet(jsonString);
 	
 }*/
-}
+
 /*String jsonString = "{
 "libraryname":"My Library",
 "mymusic":[{"Artist Name":"Aaron","Song Name":"Beautiful"},

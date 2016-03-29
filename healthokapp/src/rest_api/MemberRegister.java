@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONObject;
 
 import dal.Database;
-
+/*
 @Path("/MemberRegistration")
 public class MemberRegister 
 {
@@ -82,6 +82,9 @@ public class MemberRegister
 		 //return "You are not Registered!";	 
 	}
 	
+	*/
+	
+	
 	/*public static void main(String arg[])
 	{
 		MemberRegister mr=new MemberRegister();
@@ -112,5 +115,6 @@ public class MemberRegister
 					}]
 					}";
 		mr.register(g);
-	}*/
+	}
 }
+*/

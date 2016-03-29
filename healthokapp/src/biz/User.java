@@ -57,11 +57,24 @@ return userDal.RegisterDevice(userId, token);
 		  
 	}
 	
+	
 	public model.UserFull getUserDetails (int userId)
 
 	{
 		
 		return new dal.User().getUserDetails(userId);
+	}
+	
+	
+	public static int quickEmailRegister(model.GetSetLogin gs)
+	{
+		return new  dal.User().quickEmailRegister(gs);
+	}
+	
+	
+	public static int fullRegister(String jsonString)
+	{
+		return new  dal.User().fullRegister(jsonString);
 	}
 	
 }

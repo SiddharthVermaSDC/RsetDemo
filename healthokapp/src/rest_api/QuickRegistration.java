@@ -18,10 +18,30 @@ import dal.Database;
 import model.GetSetLogin;
 import util.Logging;
 
-@Path("/EmailRegistration")
-public class EmailRegistration {
+@Path("/QuickEmailRegistration")
+public class QuickRegistration {
+	
+	
+	@Path("/Register")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public model.Message quickEmailRegister(model.GetSetLogin gs)
+	{
+		
+		model.Message message=new model.Message();
+		
+		message.setStatus(biz.User.quickEmailRegister(gs));
+		
+		return message;
+		
+	}
+	
+	
+}
+	
 
-	@Path("/access")
+	/*@Path("/access")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -80,4 +100,5 @@ public class EmailRegistration {
 
 		return mg;
 	     }
-	 }
+	     */
+	

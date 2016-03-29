@@ -38,7 +38,7 @@ public class EmailLogin
 		  Connection connection = null;
 		  PreparedStatement preparedStatement=null;
 		  ResultSet resultSet=null;
-		  Message mg=new Message();
+		  model.Message mg=new model.Message();
 		  GetSetMemberRegistration gss=new GetSetMemberRegistration();
 		  ReturnUserDetails r=new ReturnUserDetails();
 		  JSONObject  error = new JSONObject();
