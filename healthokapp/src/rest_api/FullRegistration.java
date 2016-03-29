@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import biz.User;
 import dal.Database;
 
 @Path("/FullRegistration")
@@ -27,13 +28,12 @@ public class FullRegistration {
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public model.Message fullRegister(String jsonString)
+	public model.Message fullRegister(model.UserFull us)
 	{
 		
-		model.Message message=new model.Message();
-		message.setStatus(biz.User.fullRegister(jsonString));
 		
-		return message;
+		
+		return new biz.User().fullRegister(us);
 		
 	}
 	

@@ -72,9 +72,10 @@ return userDal.RegisterDevice(userId, token);
 	}
 	
 	
-	public static int fullRegister(String jsonString)
+	public static model.Message fullRegister(model.UserFull us)
 	{
-		return new  dal.User().fullRegister(jsonString);
+		
+		return new  dal.User().fullRegister(us);
 	}
 	
 }

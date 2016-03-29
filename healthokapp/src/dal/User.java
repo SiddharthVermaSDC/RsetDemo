@@ -3,6 +3,7 @@ package dal;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ import util.StatusCode;
 public class User {
 	
 	
-	public int fullRegister(String jsonString)
+	public static model.Message fullRegister(model.UserFull us)
 	{     
 		
 		PreparedStatement preparedstatement=null;
@@ -31,7 +32,7 @@ public class User {
 	    	
 	    	connection = Database.createConnection();
 	    	
-			JSONObject json = new JSONObject(jsonString);
+			//JSONObject json = new JSONObject(jsonString);
 			
       	  	String  queryToInsert="insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
       	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBousBalance,TotalDiscount,Comments)"
@@ -41,28 +42,29 @@ public class User {
       	  			
 			 preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);	 
 			 
-			 preparedstatement.setInt(1,json.getInt("MemberID"));
-			 preparedstatement.setString(2,json.getString("FirstName"));
-			 preparedstatement.setString(3,json.getString("LastName"));
-			 preparedstatement.setString(4,json.getString("Mobile"));
-			 preparedstatement.setString(5,json.getString("EmailId"));
-			 preparedstatement.setString(6,json.getString("AddressLine1"));
-			 preparedstatement.setString(7,json.getString("AddressLine2"));
-			 preparedstatement.setInt(8,json.getInt("CityId"));
-			 preparedstatement.setString(9,json.getString("PinCode"));
-			 preparedstatement.setString(10,json.getString("DoctorsGenerallyVisited"));
-			 preparedstatement.setInt(11,json.getInt("MembershipTypeId"));
-			 preparedstatement.setString(12,json.getString("Password"));
-			 preparedstatement.setInt(13,json.getInt("PrimaryDoctor"));
-			 preparedstatement.setInt(14,json.getInt("PrepaidBalance"));
-			 preparedstatement.setInt(15,json.getInt("CashbackBousBalance"));
-			 preparedstatement.setInt(16,json.getInt("TotalDiscount"));
-			 preparedstatement.setString(17,json.getString("OtherCare"));
+			 preparedstatement.setString(1,us.getMemberID());
+			 preparedstatement.setString(2,us.getFirstName());
+			 preparedstatement.setString(3,us.getLastName());
+			 preparedstatement.setString(4,us.getMobile());
+			 preparedstatement.setString(5,us.getEmailId());
+			 preparedstatement.setString(6,us.getAddressLine1());
+			 preparedstatement.setString(7,us.getAddressLine2());
+			 preparedstatement.setInt(8,us.getCityId());
+			 preparedstatement.setString(9,us.getPinCode());
+			 preparedstatement.setString(10,us.getDoctorGenerallyVisited());
+			 preparedstatement.setInt(11,us.getMembershipTypeId());
+			 preparedstatement.setString(12,us.getPassword());
+			 preparedstatement.setInt(13,us.getPrimaryDoctor());
+			 preparedstatement.setInt(14,us.getPrepaidBalance());
+			 preparedstatement.setInt(15,us.getCashbackBousBalance());
+			 preparedstatement.setInt(16,us.getTotalDiscount());
+			 preparedstatement.setString(17,us.getComments());
+			 
 			 
 			 preparedstatement.executeUpdate();
 			 
 			 status=1;
-			 status=familyRegister(jsonString);
+			 status=familyRegister(us);
 	    }
 	  
 	     catch(Exception e)
@@ -76,13 +78,15 @@ public class User {
 			
 		}  
 	     
-		 return status;	 
+		 model.Message mg=new model.Message();
+		 mg.setStatus(status);
+		 return mg;
 	}
 	
 	
 	
   
-	public int familyRegister(String jsonString)
+	public static int familyRegister(model.UserFull us)
 	{
 		
 		 PreparedStatement preparedstatement=null;
@@ -95,36 +99,33 @@ public class User {
 			
 			connection = Database.createConnection();
 			
-     	  	JSONObject json = new JSONObject(jsonString);
-			JSONArray family = json.getJSONArray("family");
-			
 			String queryToInsert;
-			JSONObject obj;
 			
-			for(int i=0;i<family.length();i++)
-			  {
-				 obj = family.getJSONObject(i);
-				 queryToInsert=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments,CityId)"
+			Iterator itr=us.getMemberDetail().iterator();  
+			  while(itr.hasNext())
+			  { 
+			     model.MemberDetail memberdetail=(model.MemberDetail)itr.next();
+				 
+				 queryToInsert=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments)"
 				 		+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 						 
 				 		
 				 
 				preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);	
 				
-				preparedstatement.setString(1,obj.getString("FirstName"));
-				preparedstatement.setString(2,obj.getString("LastName"));
-				preparedstatement.setString(3,obj.getString("Sex"));
-				preparedstatement.setString(4,obj.getString("DOB"));
-				preparedstatement.setString(5,obj.getString("BloodGroup"));
-				preparedstatement.setString(6,obj.getString("Allergies"));
-				preparedstatement.setString(7,obj.getString("CurrentMedications"));
-				preparedstatement.setInt(8,obj.getInt("Diabetic"));
-				preparedstatement.setInt(9,obj.getInt("BP"));
-				preparedstatement.setInt(10,obj.getInt("HeartProblems"));
-				preparedstatement.setString(11,obj.getString("RecurringTests"));
-				preparedstatement.setString(12,obj.getString("LongTermCareNeed"));
-				preparedstatement.setString(13,obj.getString("Comments"));
-				preparedstatement.setInt(14,obj.getInt("CityId"));
+				preparedstatement.setString(1,memberdetail.getFirstName());
+				preparedstatement.setString(2,memberdetail.getLastName());
+				preparedstatement.setString(3,memberdetail.getSex());
+				preparedstatement.setDate(4,memberdetail.getDateOfBirth());
+				preparedstatement.setString(5,memberdetail.getBloodGroup());
+				preparedstatement.setString(6,memberdetail.getAllergies());
+				preparedstatement.setString(7,memberdetail.getCurrentMedications());
+				preparedstatement.setInt(8,memberdetail.getDiabetic().getMedicalCondition());
+				preparedstatement.setInt(9,memberdetail.getBP().getMedicalCondition());
+				preparedstatement.setInt(10,memberdetail.getHeartProblems().getMedicalCondition());
+				preparedstatement.setString(11,memberdetail.getRecurringTests());
+				preparedstatement.setString(12,memberdetail.getLongTermCareNeeds());
+				preparedstatement.setString(13,memberdetail.getComments());
 				
 				
 				preparedstatement.executeUpdate();
