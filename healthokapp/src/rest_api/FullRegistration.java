@@ -23,7 +23,7 @@ import dal.Database;
 public class FullRegistration {
 
 	
-	@Path("/register")
+	@Path("/Register")
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
