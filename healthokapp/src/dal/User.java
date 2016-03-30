@@ -531,7 +531,7 @@ public model.UserFull getUserDetails ( int userId)
 			user.setCashbackBousBalance(rs.getInt("CashbackBonusBalance"));
 			user.setCityId(rs.getInt("CityId"));
 			user.setComments(rs.getString("Comments"));
-			user.setDoctorGenerallyVisited(rs.getString("DoctorGenerallyVisited"));
+			user.setDoctorGenerallyVisited(rs.getString("DoctorsGenerallyVisited"));
 			user.setMobile(rs.getString("Mobile"));
 			user.setPinCode(rs.getString("PinCode"));
 			user.setPrepaidBalance(rs.getInt("PrepaidBalance"));
@@ -582,22 +582,23 @@ public model.UserFull getUserDetails ( int userId)
 		while (rs.next()) {
 			memberDetail = new MemberDetail ();
 			
-			memberDetail.setMemberDetailId(rs.getInt("Userid"));
+			memberDetail.setMemberDetailId(rs.getInt("MemberDetailId"));
 			memberDetail.setUserid(rs.getInt("Userid"));
 			memberDetail.setFirstName(rs.getString("FIrstName"));
 			memberDetail.setAllergies(rs.getString("Allergies"));
 			memberDetail.setBloodGroup(rs.getString("BloodGroup"));
 			memberDetail.setBP(MedicalCondition.item(rs.getInt("BP")));
 			memberDetail.setComments(rs.getString("Comments"));
-			memberDetail.setCurrentMedications(rs.getString("CurrentMedication"));
-			memberDetail.setDateOfBirth(rs.getDate("DateOfBirth"));
+			memberDetail.setCurrentMedications(rs.getString("CurrentMedications"));
+			memberDetail.setDateOfBirth(rs.getDate("DOB"));
 			memberDetail.setDiabetic(MedicalCondition.item(rs.getInt("Diabetic")));
 			memberDetail.setHeartProblems(MedicalCondition.item(rs.getInt("HeartProblems")));
 			memberDetail.setLastName(rs.getString("LastName"));
 			memberDetail.setLongTermCareNeeds(rs.getString("LongTermCareNeeds"));
-			memberDetail.setMemberDetailId(rs.getInt("MemberDetails"));
 			memberDetail.setRecurringTests(rs.getString("RecurringTests"));
 			memberDetail.setSex(rs.getString("Sex"));
+			memberDetail.setComments(rs.getString("Comments"));
+			
 			// FILL IN ALL REST OF THE FIELDS
 			
 			memberDetails.add(memberDetail);
@@ -631,6 +632,7 @@ public model.UserFull getUserDetails ( int userId)
 	catch(SQLException se)
 	{
 		Logging.Exception("UserDal-GetToken", se.getMessage());
+		user = null;
 
 	}
 	finally
