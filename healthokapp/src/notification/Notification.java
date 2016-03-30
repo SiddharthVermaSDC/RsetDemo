@@ -174,10 +174,10 @@ int i = 0;
         StringBuilder recipientList = new StringBuilder();
         
 int i = 0;
-        for ( String phone : recipient )
+        for ( String emailId : recipient )
         {
         	if ( i> 1) recipientList.append(',');
-        	recipientList.append(phone);
+        	recipientList.append(emailId);
         	i++;
         	
         }
