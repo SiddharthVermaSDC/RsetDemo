@@ -89,7 +89,7 @@ public class Notification {
 		
 		// send SMS
 		
-		sendSms ( new String[]{user.getPhone()},message );
+		sendSms ( new String[]{user.getPhone()},"Dear "+user.getFirstName()+"\n"+message );
 		
 		// send Email
 		
@@ -97,7 +97,7 @@ public class Notification {
 		{
 			
 		
-		sendMail ( new String[]{ user.getEmailId()}, message, subject);
+		sendMail ( new String[]{ user.getEmailId()}, "Dear "+user.getFirstName()+"\n"+message, subject);
 		
 		}
 		// send GCM
