@@ -66,13 +66,13 @@ return userDal.RegisterDevice(userId, token);
 	}
 	
 	
-	public static int quickEmailRegister(model.GetSetLogin gs)
+	public  int quickEmailRegister(model.GetSetLogin gs)
 	{
 		return new  dal.User().quickEmailRegister(gs);
 	}
 	
 	
-	public static model.Message fullRegister(model.UserFull us)
+	public  StatusCode fullRegister(model.UserFull us)
 	{
 		
 		return new  dal.User().fullRegister(us);

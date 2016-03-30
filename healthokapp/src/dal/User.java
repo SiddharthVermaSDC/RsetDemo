@@ -21,14 +21,14 @@ import util.StatusCode;
 public class User {
 	
 	
-	public static model.Message fullRegister(model.UserFull us)
+	public  StatusCode fullRegister(model.UserFull us)
 	{     
 		
 		PreparedStatement preparedstatement=null;
 		Connection connection = null;
 	    Statement statement = null;
 	    ResultSet resultset = null;
-	    int status;
+	    StatusCode status = StatusCode.UnknownError;
 	    try {
 	    	
 	    	connection = Database.createConnection();
@@ -64,13 +64,14 @@ public class User {
 			 
 			 preparedstatement.executeUpdate();
 			 
-			 status=1;
 			 status=familyRegister(us);
+			 
+			 return status;
 	    }
 	  
 	     catch(Exception e)
 	     {
-	    	status=-500;
+	    	 status = StatusCode.UnknownError;
 	     }
 		
 		finally 
@@ -79,45 +80,39 @@ public class User {
 			
 		}  
 	     
-		 model.Message mg=new model.Message();
-		 mg.setStatus(status);
-		 return mg;
+return status;
+
 	}
 	
 	
 	
   
-	public static int familyRegister(model.UserFull us)
+	public StatusCode familyRegister(model.UserFull us)
 	{
 		
 		 PreparedStatement preparedstatement=null;
 		 Connection connection = null;
-	     Statement statement = null;
-	     ResultSet resultset = null;
-		 int status;
+		 StatusCode status = StatusCode.UnknownError;
 	     
 		try {
 			
 			connection = Database.createConnection();
 			
 			String queryToInsert;
-			
-			Iterator itr=us.getMemberDetail().iterator();  
-			  while(itr.hasNext())
-			  { 
-			     model.MemberDetail memberdetail=(model.MemberDetail)itr.next();
-				 
-				 queryToInsert=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments)"
+
+			 queryToInsert=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments)"
 				 		+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-						 
-				 		
+
+			  for (model.MemberDetail memberdetail : us.getMemberDetail())
+			  { 
 				 
+						 
 				preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);	
 				
 				preparedstatement.setString(1,memberdetail.getFirstName());
 				preparedstatement.setString(2,memberdetail.getLastName());
 				preparedstatement.setString(3,memberdetail.getSex());
-				preparedstatement.setDate(4,memberdetail.getDateOfBirth());
+				preparedstatement.setDate(4,new java.sql.Date(memberdetail.getDateOfBirth().getTime()));
 				preparedstatement.setString(5,memberdetail.getBloodGroup());
 				preparedstatement.setString(6,memberdetail.getAllergies());
 				preparedstatement.setString(7,memberdetail.getCurrentMedications());
@@ -133,12 +128,12 @@ public class User {
 				
 			  }  
 			
-			status=1;
+			status= StatusCode.Success;
 			  
 		   	} 
 		catch (Exception e)
 		{
-			status=-500;
+			status= StatusCode.UnknownError;
 		}
 		
 		 finally 
@@ -153,7 +148,7 @@ public class User {
 	
 	
 	
-	
+	// TODO change this to return userId;
 	public int quickEmailRegister(model.GetSetLogin gs)
 	{
 		

@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import biz.User;
 import dal.Database;
+import util.StatusCode;
 
 @Path("/FullRegistration")
 public class FullRegistration {
@@ -28,12 +29,17 @@ public class FullRegistration {
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public model.Message fullRegister(model.UserFull us)
+	public model.Result fullRegister(model.UserFull us)
 	{
 		
 		
 		
-		return new biz.User().fullRegister(us);
+		StatusCode status = new biz.User().fullRegister(us);
+		
+		model.Result result=new model.Result();
+		result.setStatus(status.getStatusCode());
+		
+		return result;
 		
 	}
 	

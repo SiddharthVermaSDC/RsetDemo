@@ -1,22 +1,12 @@
 package rest_api;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.mysql.jdbc.ResultSetMetaData;
-
-import dal.Database;
-import model.GetSetLogin;
-import util.Logging;
+import model.Result;
 
 @Path("/QuickEmailRegistration")
 public class QuickRegistration {
@@ -26,14 +16,14 @@ public class QuickRegistration {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public model.Message quickEmailRegister(model.GetSetLogin gs)
+	public model.Result quickEmailRegister(model.GetSetLogin gs)
 	{
 		
-		model.Message message=new model.Message();
+		Result result = new Result();
 		
-		message.setStatus(biz.User.quickEmailRegister(gs));
+		result.setStatus(new biz.User().quickEmailRegister(gs));
 		
-		return message;
+		return result;
 		
 	}
 	
