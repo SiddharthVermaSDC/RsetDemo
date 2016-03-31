@@ -36,12 +36,12 @@ public class User {
 			//JSONObject json = new JSONObject(jsonString);
 			
       	  	String  queryToInsert="insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
-      	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBousBalance,TotalDiscount,Comments)"
+      	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBonusBalance,TotalDiscount,Comments)"
       	  			
       	  			+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
       	  			
       	  			
-			 preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);	 
+			 preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert, Statement.RETURN_GENERATED_KEYS);	 
 			 
 			 preparedstatement.setString(1,us.getMemberID());
 			 preparedstatement.setString(2,us.getFirstName());
@@ -57,20 +57,24 @@ public class User {
 			 preparedstatement.setString(12,us.getPassword());
 			 preparedstatement.setInt(13,us.getPrimaryDoctor());
 			 preparedstatement.setInt(14,us.getPrepaidBalance());
-			 preparedstatement.setInt(15,us.getCashbackBousBalance());
+			 preparedstatement.setInt(15,us.getCashbackBonusBalance());
 			 preparedstatement.setInt(16,us.getTotalDiscount());
 			 preparedstatement.setString(17,us.getComments());
 			 
 			 
-			 preparedstatement.executeUpdate();
+			 preparedstatement.executeUpdate();  
+			 ResultSet keys = preparedstatement.getGeneratedKeys();    
+			 keys.next();  
+			 int userid = keys.getInt(1);
 			 
-			 status=familyRegister(us);
+			 status=familyRegister(us,userid);
 			 
 			 return status;
 	    }
 	  
 	     catch(Exception e)
-	     {
+	     {   
+	    	 Logging.Debug("UserFullregistration",e.getMessage());
 	    	 status = StatusCode.UnknownError;
 	     }
 		
@@ -87,7 +91,7 @@ return status;
 	
 	
   
-	public StatusCode familyRegister(model.UserFull us)
+	public StatusCode familyRegister(model.UserFull us,int userid)
 	{
 		
 		 PreparedStatement preparedstatement=null;
@@ -100,7 +104,7 @@ return status;
 			
 			String queryToInsert;
 
-			 queryToInsert=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments)"
+			 queryToInsert=new String("insert into memberdetails(FirstName,LastName,Sex,DOB,BloodGroup,Allergies,CurrentMedications,Diabetic,BP,HeartProblems,RecurringTests,LongTermCareNeeds,Comments,UserId)"
 				 		+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
 			  for (model.MemberDetail memberdetail : us.getMemberDetail())
@@ -122,6 +126,7 @@ return status;
 				preparedstatement.setString(11,memberdetail.getRecurringTests());
 				preparedstatement.setString(12,memberdetail.getLongTermCareNeeds());
 				preparedstatement.setString(13,memberdetail.getComments());
+				preparedstatement.setInt(14,userid);
 				
 				
 				preparedstatement.executeUpdate();
@@ -132,7 +137,8 @@ return status;
 			  
 		   	} 
 		catch (Exception e)
-		{
+		{   
+			Logging.Debug("MemberFullregistration",e.getMessage());
 			status= StatusCode.UnknownError;
 		}
 		
@@ -528,7 +534,7 @@ public model.UserFull getUserDetails ( int userId)
 			user.setAddressLine1(rs.getString("Addressline1"));
 			user.setAddressLine2(rs.getString("Addressline2"));
 			user.setAddressLine3(rs.getString("Addressline3"));
-			user.setCashbackBousBalance(rs.getInt("CashbackBonusBalance"));
+			user.setCashbackBonusBalance(rs.getInt("CashbackBonusBalance"));
 			user.setCityId(rs.getInt("CityId"));
 			user.setComments(rs.getString("Comments"));
 			user.setDoctorGenerallyVisited(rs.getString("DoctorsGenerallyVisited"));

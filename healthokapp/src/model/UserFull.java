@@ -18,7 +18,7 @@ public class UserFull {
 		private String DoctorGenerallyVisited=null;
 		private String Comments=null;
 		private int PrepaidBalance;
-		private int CashbackBousBalance;
+		private int CashbackBonusBalance;
 		private int TotalDiscount;
 		private String AddressLine1=null;
 		private String AddressLine2=null;
@@ -131,11 +131,11 @@ public class UserFull {
 		public void setPrepaidBalance(int prepaidBalance) {
 			PrepaidBalance = prepaidBalance;
 		}
-		public int getCashbackBousBalance() {
-			return CashbackBousBalance;
+		public int getCashbackBonusBalance() {
+			return CashbackBonusBalance;
 		}
-		public void setCashbackBousBalance(int cashbackBousBalance) {
-			CashbackBousBalance = cashbackBousBalance;
+		public void setCashbackBonusBalance(int CashbackBonusBalance) {
+			CashbackBonusBalance = CashbackBonusBalance;
 		}
 		public int getTotalDiscount() {
 			return TotalDiscount;
