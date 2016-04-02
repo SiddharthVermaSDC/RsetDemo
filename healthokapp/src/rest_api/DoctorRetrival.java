@@ -20,13 +20,13 @@ public class DoctorRetrival {
 	}
 
 	// searching doctor by speciality
-	@Path("/Specialityid/{specialityid}")
+	@Path("/speciality/{specialityid}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static ArrayList<model.DoctorRetrival> getDoctorBySpeciality(@PathParam("specialityid") int speciality) {
-		ArrayList<model.DoctorRetrival> doc1 = new ArrayList<model.DoctorRetrival>();
-		doc1 = biz.DoctorRetrival.getDoctorBySpeciality(speciality);
-		return doc1;
+	public  ArrayList<model.Doctor> getDoctorBySpeciality(@PathParam("specialityid") int speciality) {
+
+		return new biz.DoctorRetrival().getDoctorBySpeciality(speciality);
+		
 	}
 
 }

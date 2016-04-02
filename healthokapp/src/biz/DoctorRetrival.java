@@ -53,8 +53,8 @@ public class DoctorRetrival {
 		return docs;
 	}
 
-	public static ArrayList<model.DoctorRetrival> getDoctorBySpeciality(int speciality) {
-		return dal.DoctorRetrival.responseDoctorBySpeciality(speciality);
+	public  ArrayList<model.Doctor> getDoctorBySpeciality(int speciality) {
+		return new dal.DoctorRetrival().searchDoctorBySpeciality(speciality);
 	}
 }
 /*

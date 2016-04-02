@@ -54,7 +54,7 @@ public class Doctor {
 			ps.setString(9, doctor.getOffDay());
 			ps.setInt(10, doctor.getFees());
 			ps.setInt(11, doctor.getEmergencyFees());
-			ps.setBoolean(12, doctor.isPharamacy());
+			ps.setBoolean(12, doctor.isPharmacy());
 			ps.setBoolean(13, doctor.isProvideHomecare());
 			ps.setBoolean(14, doctor.isBelongToAnyHospital());
 			ps.setBoolean(15, doctor.isInPanel());
@@ -85,7 +85,7 @@ public class Doctor {
 			ps.setInt(2, doctor.getPhoneNumberType());
 			ps.setString(3, doctor.getPhoneNumber());
 			ps.setString(4, doctor.getContact());
-			ps.setString(5, doctor.getComment());
+			//ps.setString(5, doctor.getComment());
 			ps.executeUpdate();
 
 		} catch (Exception e) {

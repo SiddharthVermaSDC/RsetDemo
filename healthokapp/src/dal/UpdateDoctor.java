@@ -40,7 +40,7 @@ public class UpdateDoctor {
 			ps5.setString(13, doctor.getOffDay());
 			ps5.setInt(14, doctor.getFees());
 			ps5.setInt(1, doctor.getEmergencyFees());
-			ps5.setBoolean(6, doctor.isPharamacy());
+			ps5.setBoolean(6, doctor.isPharmacy());
 			ps5.setBoolean(5, doctor.isProvideHomecare());
 			ps5.setBoolean(2, doctor.isBelongToAnyHospital());
 			ps5.setBoolean(15, doctor.isInPanel());
@@ -67,7 +67,7 @@ public class UpdateDoctor {
 			ps5.setInt(2, doctor.getPhoneNumberType());
 			ps5.setString(3, doctor.getPhoneNumber());
 			ps5.setString(4, doctor.getContact());
-			ps5.setString(5, doctor.getComment());
+			//ps5.setString(5, doctor.getComment());
 			ps5.executeUpdate();
 
 			Database.closeConnection(connection);
