@@ -1,6 +1,11 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+
+
+// TODO Define class for Doctor Phone Numbers and Also for Doctor Hospital Association
+// Add ArrayList<DOctorPhoneNumber> and ArrayList<DoctorHospitalAssociation> to this class and populate from Dal whenever you query doctor data. 
 
 public class Doctor {
 	private int doctorId;
@@ -35,6 +40,8 @@ public class Doctor {
 	private String contact;
 	private String Speciality;
 
+	private ArrayList<DoctorPhoneNumber> doctorPhoneNumbers;
+	private ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation;
 	
 	public int getDoctorId() {
 		return doctorId;
@@ -221,6 +228,18 @@ public class Doctor {
 	}
 	public void setSpeciality(String speciality) {
 		Speciality = speciality;
+	}
+	public ArrayList<DoctorPhoneNumber> getDoctorPhoneNumbers() {
+		return doctorPhoneNumbers;
+	}
+	public void setDoctorPhoneNumbers(ArrayList<DoctorPhoneNumber> doctorPhoneNumbers) {
+		this.doctorPhoneNumbers = doctorPhoneNumbers;
+	}
+	public ArrayList<DoctorHospitalAffiliation> getDoctorHospitalAffiliation() {
+		return doctorHospitalAffiliation;
+	}
+	public void setDoctorHospitalAffiliation(ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation) {
+		this.doctorHospitalAffiliation = doctorHospitalAffiliation;
 	}
 
 	

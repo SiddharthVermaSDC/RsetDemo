@@ -24,9 +24,18 @@ public class DoctorProfile {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
+	
+	
+	//TODO
+	// No Need to innsert Image fromm here. It will be a seperate call. Consumer will make call to upload image and get the image Id and 
+	// then make a call to this method and pass in image id. 
+	
 	public String GetData(GetSetDoctorProfile ds) {
 		try {
 			connection = Database.createConnection();;
+
+/* FOllowinng code to insert image is not needed			
+			
 			FileInputStream fin = new FileInputStream(ds.getImage());
 			String sql = "INSERT INTO Images (ImageTypeId,Image) values (?,?)";
 			ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -39,6 +48,9 @@ public class DoctorProfile {
 			if (rs.next())
 				ds.id = rs.getInt(1);
 			System.out.println(ds.id);
+			
+*/
+			
 			String q = "insert into doctor (FirstName,MiddleName,LastName,Speciality,Degree,ClinicTiming,offDay,Fees,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsPostCareEnabled,DoctorImageId,YearsofExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(q);
 			ps.setString(1, ds.getFristName());
