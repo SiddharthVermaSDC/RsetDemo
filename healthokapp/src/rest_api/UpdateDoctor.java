@@ -20,7 +20,7 @@ public class UpdateDoctor {
 	public static model.Result update(@PathParam("var") int var, model.Doctor doctor) {
 		model.Result rs = new model.Result();
 		int rsult = biz.UpdateDoctor.update(doctor, var);
-		System.out.println(doctor.getDoctorRegDate());
+		System.out.println(doctor.getDoctorRegistrationDate());
 		rs.setStatus(rsult);
 		return rs;
 	}

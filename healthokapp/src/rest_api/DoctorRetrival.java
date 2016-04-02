@@ -8,30 +8,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/Doctor")
+@Path("/doctor")
 public class DoctorRetrival {
 	// Searching doctor by name
-	@Path("/Name/{username}")
+	@Path("/search/{searchstring}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static ArrayList<model.DoctorRetrival> getDoctor(@PathParam("username") String user) {
-		String[] temp = new String[3];
-		// String delimiter = " ";
-		// temp = user.split(delimiter);*/
-		StringTokenizer st = new StringTokenizer(user);
-		System.out.println("tokens count: " + st.countTokens());
-		int count = st.countTokens();
-		// iterate through st object to get more tokens from it
-		int i = 0;
-		while (st.hasMoreElements()) {
-			temp[i] = st.nextElement().toString();
-			System.out.println("token = " + temp[i]);
-			i++;
-		}
-		ArrayList<model.DoctorRetrival> doc = new ArrayList<model.DoctorRetrival>();
-		doc = biz.DoctorRetrival.getDoctor(temp[0], temp[1], temp[2], count);
-		System.out.println(temp[0] + temp[1] + temp[2]);
-		return doc;
+	public  ArrayList<model.Doctor> getDoctor(@PathParam("searchstring") String searchString) {
+	
+		return new biz.DoctorRetrival().searchDoctor(searchString);
 	}
 
 	// searching doctor by speciality

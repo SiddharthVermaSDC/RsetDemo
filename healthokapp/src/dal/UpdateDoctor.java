@@ -20,7 +20,7 @@ public class UpdateDoctor {
 		try {
 			connection = Database.createConnection();;
 			
-			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospital=?,DoctorRegistrationDate=?,EmailId=?,IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,Speciality=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsPostCareEnabled=?,DoctorImageId=?,YearsOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?) where DoctorId=\""
+			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospital=?,DoctorRegistrationDate=?,EmailId=?,IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,SpecialityId=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsPostCareEnabled=?,DoctorImageId=?,YearsOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?) where DoctorId=\""
 					+ val + "\"";
 			
 			
@@ -31,24 +31,24 @@ public class UpdateDoctor {
 			ps5.setString(9, doctor.getLastName());
 			System.out.println("DoctorFrist name" + doctor.getFirstName());
 			ps5.setString(4, doctor.getEmailId());
-			ps5.setInt(10, doctor.getSpeciality());
+			ps5.setInt(10, doctor.getSpecialityId());
 			ps5.setString(11, doctor.getDegree());
 
-			ps5.setDate(3, new java.sql.Date(doctor.getDoctorRegDate().getTime()));
-			System.out.println("Date=" + doctor.getDoctorRegDate());
+			ps5.setDate(3, new java.sql.Date(doctor.getDoctorRegistrationDate().getTime()));
+
 			ps5.setString(12, doctor.getClinicTiming());
 			ps5.setString(13, doctor.getOffDay());
 			ps5.setInt(14, doctor.getFees());
 			ps5.setInt(1, doctor.getEmergencyFees());
 			ps5.setBoolean(6, doctor.isPharamacy());
 			ps5.setBoolean(5, doctor.isProvideHomecare());
-			ps5.setBoolean(2, doctor.isBelongToHospital());
+			ps5.setBoolean(2, doctor.isBelongToAnyHospital());
 			ps5.setBoolean(15, doctor.isInPanel());
 			ps5.setBoolean(16, doctor.isAppointmnet());
 			ps5.setBoolean(17, doctor.isVirtualReceptionist());
 			ps5.setBoolean(18, doctor.isPostcare());
-			ps5.setInt(19, doctor.getImageid());
-		    System.out.println("ImageId="+doctor.getImageid());
+			ps5.setInt(19, doctor.getDoctorImageid());
+//		    System.out.println("ImageId="+doctor.getDoctorImageid());
 			ps5.setInt(20, doctor.getYearofExperience());
 			ps5.setString(21, doctor.getAddressLine1());
 			ps5.setString(22, doctor.getAddressLine2());

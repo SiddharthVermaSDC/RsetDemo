@@ -5,6 +5,15 @@ import java.util.ArrayList;
 //import java.util.Map;
 public class DoctorRetrival {
 
+	
+	
+	public  ArrayList<model.Doctor> searchDoctor( String searchString)
+	{
+		
+		return new dal.DoctorRetrival().searchDoctor(searchString);
+	}
+	
+	
 	public static ArrayList<model.DoctorRetrival> getDoctor(String fname, String mname, String lname, int count) {
 		ArrayList<model.DoctorRetrival> docs;
 		int rank;
