@@ -45,6 +45,7 @@ model.Doctor doctor = null;
 					
 					String fulltextSearchString = sb.toString(); 
 					
+					
 					String query = "select match(firstname, lastname ) against ( ? ) score1 , Doctor.*, Speciality.*"
 							 	+ " ,match(Speciality.SpecialityText ) against ( ? ) score2" 
 							 	+ " from Doctor"
@@ -172,4 +173,7 @@ model.Doctor doctor = null;
 		return doctor;
 	}
 
+	
+	// TODO Add methods to get ArrayList for DoctorPhoneNumbers and DoctorHospitalAssociation given DoctorId. 
+	
 }
