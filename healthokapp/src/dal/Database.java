@@ -17,22 +17,22 @@ public  static  Connection createConnection()
 		// use this when you are connecting to a local database on your laptop
 		
 		// Ideally this information should be in the config file so we dont need to change code to deploy
-		/*
+		
 		String host="localhost";
 		String port ="3306";
 		String dbname = "healthok";
 		String username = "root";
-		String password = "shiva";
-		*/		
+		String password = "1october";
+				
 		
 		// This is the connection string to use before you deploy to openshift
-		String host="127.0.0.1"; // with port forwarding -- This is the host to use when you run using port forwarding
+	//	String host="127.0.0.1"; // with port forwarding -- This is the host to use when you run using port forwarding
 				
 		       //String host="127.3.104.130"; // on Openshift
-				String port ="3306";
+		/*		String port ="3306";
 				String dbname = "healthok";
 				String username = "adminuzuSCxp";
-				String password = "GQBXVWgreeuA";
+				String password = "GQBXVWgreeuA";   */
            
 				/*
 				String host="127.0.0.1";

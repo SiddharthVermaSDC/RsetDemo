@@ -47,9 +47,11 @@ public class Doctor {
 			ps.setString(4, doctor.getEmailId());
 			ps.setInt(5, doctor.getSpecialityId());
 			ps.setString(6, doctor.getDegree());
+			System.out.println("Degree="+doctor.getDegree());
 			// ps.setInt(7, doctor.getDoctorPhoneId());
 			// ps.setDate(7,doctor.getDoctorRegDate());
-			ps.setDate(7, new java.sql.Date(doctor.getDoctorRegistrationDate().getTime()));
+			ps.setDate(7, new java.sql.Date(doctor.getDoctorRegistrationDate().getTime()));// here is problem
+			System.out.println("Date ="+doctor.getDoctorRegistrationDate().getTime());
 			ps.setString(8, doctor.getClinicTiming());
 			ps.setString(9, doctor.getOffDay());
 			ps.setInt(10, doctor.getFees());
