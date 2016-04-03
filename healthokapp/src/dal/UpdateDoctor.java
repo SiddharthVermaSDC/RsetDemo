@@ -62,13 +62,17 @@ public class UpdateDoctor {
 			if (rs.next())
 				doctor.setDoctorId(rs.getInt(1));
 			String q1 = "insert into DoctorPhoneNumbers(DoctorId,PhoneNumberType,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
-			ps5 = connection.prepareStatement(q1);
-			ps5.setInt(1, doctor.getDoctorId());
-			ps5.setInt(2, doctor.getPhoneNumberType());
-			ps5.setString(3, doctor.getPhoneNumber());
-			ps5.setString(4, doctor.getContact());
-			//ps5.setString(5, doctor.getComment());
-			ps5.executeUpdate();
+			for (model.DoctorPhoneNumber doctorphonenumber : doctor.getDoctorPhoneNumbers()) {
+				ps5 = connection.prepareStatement(q1);
+
+				ps5 = connection.prepareStatement(q1);
+				ps5.setInt(1, doctorphonenumber.getDoctorId());
+				ps5.setString(2, doctorphonenumber.getPhoneNumberType());
+				ps5.setString(3, doctorphonenumber.getPhoneNumber());
+				ps5.setString(4, doctorphonenumber.getContact());
+				ps5.setString(5, doctorphonenumber.getComments());
+				ps5.executeUpdate();
+			}
 
 			Database.closeConnection(connection);
 		} catch (Exception e) {

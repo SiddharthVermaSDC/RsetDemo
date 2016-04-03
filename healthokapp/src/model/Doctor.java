@@ -35,9 +35,6 @@ public class Doctor {
 	private String addressLine3;
 	private int cityId;
 	private String pincode;
-	private String phoneNumber;
-	private int phoneNumberType;
-	private String contact;
 	private String Speciality;
 
 	private ArrayList<DoctorPhoneNumber> doctorPhoneNumbers;
@@ -205,24 +202,7 @@ public class Doctor {
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	public int getPhoneNumberType() {
-		return phoneNumberType;
-	}
-	public void setPhoneNumberType(int phoneNumberType) {
-		this.phoneNumberType = phoneNumberType;
-	}
-	public String getContact() {
-		return contact;
-	}
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
+	
 	public String getSpeciality() {
 		return Speciality;
 	}
