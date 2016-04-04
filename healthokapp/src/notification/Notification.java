@@ -116,8 +116,8 @@ public class Notification {
     	
             try {
                     
-                    String username = "healthok";
-                    String password = "qwert123";
+                    String un = "2%*&^(113030233";
+                    String p = "sddqdqw";
                     String originator = "HLTHOK";
                     
                     StringBuilder recipientList = new StringBuilder();
@@ -132,8 +132,8 @@ int i = 0;
                     }
                     
                     String requestUrl  = "http://bhashsms.com/api/sendmsg.php?" +
-        "&user=" + URLEncoder.encode(username, "UTF-8") +
-        "&pass=" + URLEncoder.encode(password, "UTF-8") +
+        "&user=" + URLEncoder.encode(un, "UTF-8") +
+        "&pass=" + URLEncoder.encode(p, "UTF-8") +
          "&sender=" + URLEncoder.encode(originator, "UTF-8") +
         "&phone=" + URLEncoder.encode(recipientList.toString(), "UTF-8") +
         
@@ -166,7 +166,10 @@ int i = 0;
     public  StatusCode sendMail(String[] recipient,  String message, String subject)
     
     {
-        SendGrid sendgrid = new SendGrid("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");
+    	
+    	return StatusCode.Success;
+    	/*
+        SendGrid sendgrid = null ;
          SendGrid.Email email = new SendGrid.Email();
         String str;
     	StatusCode status = StatusCode.UnknownError;
@@ -201,6 +204,7 @@ int i = 0;
             str=e.getMessage();
           }
         return status;
+*/
       }
     
     
