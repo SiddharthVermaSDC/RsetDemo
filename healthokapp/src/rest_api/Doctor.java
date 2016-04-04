@@ -1,7 +1,6 @@
 package rest_api;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 //import javax.ws.rs.Consumes;
 //import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -19,7 +18,7 @@ public class Doctor {
 	public static model.Result doctor(model.Doctor doctor) {
 		model.Result rs = new model.Result();
 		int rsult = biz.Doctor.insertDoctor(doctor);
-		System.out.println(doctor.getDoctorRegistrationDate());
+	//	System.out.println(doctor.getDoctorRegistrationDate());
 		rs.setStatus(rsult);
 		return rs;
 	}
