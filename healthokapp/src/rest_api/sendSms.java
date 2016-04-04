@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import model.Result;
-import notification.Notification;
+import notification.Notify;
 import util.StatusCode;
 
 
@@ -24,7 +24,7 @@ public class sendSms {
 		
 		StatusCode status = StatusCode.UnknownError;
 		
-		Notification notification = new Notification();
+		Notify notification = new Notify();
 		
 		status = notification.sendSms(new String[]{r}, m);
 		

@@ -5,7 +5,7 @@ import java.util.Date;
 
 import model.OrderStatusType;
 import model.OrderType;
-import notification.Notification;
+import notification.Notify;
 import util.Logging;
 import util.StatusCode;
 
@@ -105,7 +105,7 @@ public class Order {
 		}
 		
 		// send notifications
-		Notification notification = new Notification();
+		Notify notification = new Notify();
 		notification.orderUpdate(order);
 		
 		status = StatusCode.Success;

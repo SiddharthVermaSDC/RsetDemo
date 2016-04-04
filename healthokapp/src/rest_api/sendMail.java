@@ -4,7 +4,7 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 
 import model.Result;
-import notification.Notification;
+import notification.Notify;
 import util.StatusCode;
 
 import javax.ws.rs.Consumes;
@@ -29,7 +29,7 @@ public class sendMail {
   
 		StatusCode status = StatusCode.UnknownError;
 		
-		Notification notification = new Notification();
+		Notify notification = new Notify();
 		
 		status = notification.sendMail(new String[]{r}, m, "Important Message From Health-OK");
 		

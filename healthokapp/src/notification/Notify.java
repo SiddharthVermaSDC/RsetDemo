@@ -13,7 +13,7 @@ import com.sendgrid.SendGridException;
 import util.Logging;
 import util.StatusCode;
 
-public class Notification {
+public class Notify {
 
 	private static String[] ADMIN_EMAIL = {"gorakhpurhealthok@gmail.com" ,"healthok.in@gmail.com"};
 	private static String[] ADMIN_PHONE = {"9794430208", "9971931767"};
