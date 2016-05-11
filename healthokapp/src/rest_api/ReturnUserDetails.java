@@ -22,17 +22,32 @@ import model.GetSetMemberRegistration;
 
 @Path("/ReturnUserDetails")
 public class ReturnUserDetails {
-	Connection connection = null;
+	
+	/*Connection connection = null;
     Statement statement = null;
     ResultSet resultset = null;
     PreparedStatement preparedStatement=null;
+	*/
 	
-
 	@Path("/userDetails")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	//@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	
+	public model.UserFull returnDetail(model.UserFull uf)
+	{
+		return new biz.User().getUserDetails (uf.getUserId());
+		
+		
+	}
+}
+	
+	
+	
+	
+	
+	
+	/*
 	public String userDetails(GetSetMemberRegistration userId) 
 	{
 		 JSONArray arr;
@@ -40,7 +55,7 @@ public class ReturnUserDetails {
 		 /*Connection connection = null;
 	       Statement statement = null;
 	       ResultSet resultset = null;
-	       PreparedStatement preparedStatement=null;*/
+	       PreparedStatement preparedStatement=null;
 		 
 		 
 		 
@@ -133,4 +148,4 @@ public class ReturnUserDetails {
 	     }
 	     
 	}
-
+*/

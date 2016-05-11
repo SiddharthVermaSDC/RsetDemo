@@ -31,6 +31,20 @@ public class QuickRegistration {
 }
 	
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*@Path("/access")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

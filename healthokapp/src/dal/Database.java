@@ -22,7 +22,7 @@ public  static  Connection createConnection()
 		String port ="3306";
 		String dbname = "healthok";
 		String username = "root";
-		String password = "1october";
+		String password = "9559287622";
 				
 		
 		// This is the connection string to use before you deploy to openshift

@@ -39,6 +39,10 @@ public class EmailLogin
 		  PreparedStatement preparedStatement=null;
 		  ResultSet resultSet=null;
 		  GetSetMemberRegistration gss=new GetSetMemberRegistration();
+		  
+		 // model.UserFull uf=new model.UserFull();
+		  
+		  
 		  ReturnUserDetails r=new ReturnUserDetails();
 		  JSONObject  error = new JSONObject();
 		  
@@ -65,7 +69,7 @@ public class EmailLogin
 			 {   
 				 Logging.Debug("Login","Found matching record " + resultSet.getInt("UserId")  );
 				 gss.UserId=resultSet.getInt("UserId");
-				 s=r.userDetails(gss);
+				// s=r.userDetails(gss);
 			       
 			 }
 			 else
