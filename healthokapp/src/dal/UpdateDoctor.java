@@ -1,5 +1,5 @@
 package dal;
-
+//import java.model.DoctorPhoneNumber;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,6 +61,8 @@ public class UpdateDoctor {
 				rs = ps5.getGeneratedKeys();
 			if (rs.next())
 				doctor.setDoctorId(rs.getInt(1));
+			if(new model.DoctorPhoneNumber().getDoctorPhoneNumberId()<=1)
+			{
 			String q1 = "insert into DoctorPhoneNumbers(DoctorId,PhoneNumberType,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
 			for (model.DoctorPhoneNumber doctorphonenumber : doctor.getDoctorPhoneNumbers()) {
 				ps5 = connection.prepareStatement(q1);
@@ -72,6 +74,7 @@ public class UpdateDoctor {
 				ps5.setString(4, doctorphonenumber.getContact());
 				ps5.setString(5, doctorphonenumber.getComments());
 				ps5.executeUpdate();
+			}
 			}
 
 			Database.closeConnection(connection);
