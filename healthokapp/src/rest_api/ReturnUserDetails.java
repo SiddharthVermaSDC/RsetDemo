@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import dal.Database;
 import model.GetSetMemberRegistration;
+import util.Logging;
 
 @Path("/ReturnUserDetails")
 public class ReturnUserDetails {
@@ -29,14 +30,17 @@ public class ReturnUserDetails {
     PreparedStatement preparedStatement=null;
 	*/
 	
-	@Path("/userDetails")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/userDetails/{id}")
+	//@POST
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	
-	public model.UserFull returnDetail(model.UserFull uf)
+	public model.UserFull returnDetail(@PathParam("id") String id)
 	{
-		return new biz.User().getUserDetails (uf.getUserId());
+		
+		Logging.Debug("RESTAPI", ""+Integer.parseInt(id));
+		return new biz.User().getUserDetails (Integer.parseInt(id));
 		
 		
 	}

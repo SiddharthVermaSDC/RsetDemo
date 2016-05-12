@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import model.GetSetLogin;
 import model.MedicalCondition;
 import model.MemberDetail;
+import model.MembershipType;
 import util.Logging;
 import util.StatusCode;
 
@@ -53,7 +54,7 @@ public class User {
 			 preparedstatement.setInt(8,us.getCityId());
 			 preparedstatement.setString(9,us.getPinCode());
 			 preparedstatement.setString(10,us.getDoctorGenerallyVisited());
-			 preparedstatement.setInt(11,us.getMembershipTypeId());
+			 preparedstatement.setInt(11,us.getMembershipTypeId().getmembershipType());
 			 preparedstatement.setString(12,us.getPassword());
 			 preparedstatement.setInt(13,us.getPrimaryDoctor());
 			 preparedstatement.setInt(14,us.getPrepaidBalance());
@@ -501,12 +502,14 @@ public model.UserFull getUserDetails ( int userId)
 	 Connection connection=null;
 	 PreparedStatement psUser=null;
 	 PreparedStatement psMemberDetail=null;
+	 //PreparedStatement psAddressDetail=null;
      ResultSet rs=null;
+    // ResultSet rsInternalData=null;
 	
 	
  	String queryUser="select * from User where userid = ?";
 	String queryMemberDetail ="select * from MemberDetails where userid = ?";
-
+	//String queryAddress="select * from Address where AddressId = ?";
 
 	model.UserFull user = null;
 	
@@ -543,8 +546,24 @@ public model.UserFull getUserDetails ( int userId)
 			user.setPrepaidBalance(rs.getInt("PrepaidBalance"));
 			user.setPrimaryDoctor(rs.getInt("PrimaryDoctor"));
 			user.setTotalDiscount(rs.getInt("TotalDiscount"));
-			user.setMembershipTypeId(rs.getInt("MembershipTypeId"));
-			user.setMemberID(rs.getString("MemberId"));
+			user.setMembershipTypeId(model.MembershipType.item(rs.getInt("MembershipTypeId")));
+			//user.setMembershipTypeId(rs.getInt("MembershipTypeId"));
+			
+			
+			/*psAddressDetail=connection.prepareStatement(queryAddress); 
+			psAddressDetail.setInt(1,rs.getInt("AddressId"));
+			rsInternalData = psAddressDetail.executeQuery();
+			
+			while(rsInternalData.next())
+			{
+				user.setAddressLine1(rsInternalData.getString("Addressline1"));
+				user.setAddressLine2(rsInternalData.getString("Addressline2"));
+				user.setAddressLine3(rsInternalData.getString("Addressline3"));
+				
+			}
+			
+			*/
+			
 			
 // Fill in rest of the fields accordingly. 					
 			
@@ -590,7 +609,7 @@ public model.UserFull getUserDetails ( int userId)
 			
 			memberDetail.setMemberDetailId(rs.getInt("MemberDetailId"));
 			memberDetail.setUserid(rs.getInt("Userid"));
-			memberDetail.setFirstName(rs.getString("FIrstName"));
+			memberDetail.setFirstName(rs.getString("FirstName"));
 			memberDetail.setAllergies(rs.getString("Allergies"));
 			memberDetail.setBloodGroup(rs.getString("BloodGroup"));
 			memberDetail.setBP(MedicalCondition.item(rs.getInt("BP")));
@@ -603,7 +622,7 @@ public model.UserFull getUserDetails ( int userId)
 			memberDetail.setLongTermCareNeeds(rs.getString("LongTermCareNeeds"));
 			memberDetail.setRecurringTests(rs.getString("RecurringTests"));
 			memberDetail.setSex(rs.getString("Sex"));
-			memberDetail.setComments(rs.getString("Comments"));
+			//memberDetail.setComments(rs.getString("Comments"));
 			
 			// FILL IN ALL REST OF THE FIELDS
 			
