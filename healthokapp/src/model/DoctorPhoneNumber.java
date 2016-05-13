@@ -15,7 +15,7 @@ public class DoctorPhoneNumber {
 	private String phoneNumber;
 	private String contact;
 	private String comments;
-	private String phoneNumberType;
+	private int phoneNumberType;
 	
 	public int getDoctorPhoneNumberId() {
 		return doctorPhoneNumberId;
@@ -53,10 +53,10 @@ public class DoctorPhoneNumber {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public String getPhoneNumberType() {
+	public int getPhoneNumberType() {
 		return phoneNumberType;
 	}
-	public void setPhoneNumberType(String phoneNumberType) {
+	public void setPhoneNumberType(int phoneNumberType) {
 		this.phoneNumberType = phoneNumberType;
 	}
 

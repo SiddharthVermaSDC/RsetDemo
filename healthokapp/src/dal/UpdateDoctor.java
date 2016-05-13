@@ -20,61 +20,92 @@ public class UpdateDoctor {
 		try {
 			connection = Database.createConnection();;
 			
-			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospital=?,DoctorRegistrationDate=?,EmailId=?,IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,SpecialityId=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsPostCareEnabled=?,DoctorImageId=?,YearsOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?) where DoctorId=\""
+			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospital=?,EmailId=?,IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,SpecialityId=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsPostCareEnabled=?,DoctorImageId=?,YearsOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=? where DoctorId=\""
 					+ val + "\"";
-			
-			
-			ps5 = connection.prepareStatement(q,Statement.RETURN_GENERATED_KEYS);
-			
-			ps5.setString(7, doctor.getFirstName());
-			ps5.setString(8, doctor.getMiddleName());
-			ps5.setString(9, doctor.getLastName());
-			System.out.println("DoctorFrist name" + doctor.getFirstName());
-			ps5.setString(4, doctor.getEmailId());
-			ps5.setInt(10, doctor.getSpecialityId());
-			ps5.setString(11, doctor.getDegree());
-
-			ps5.setDate(3, new java.sql.Date(doctor.getDoctorRegistrationDate().getTime()));
-
-			ps5.setString(12, doctor.getClinicTiming());
-			ps5.setString(13, doctor.getOffDay());
-			ps5.setInt(14, doctor.getFees());
+		//	ps5 = connection.prepareStatement(q,Statement.RETURN_GENERATED_KEYS);
+			ps5 = connection.prepareStatement(q);
 			ps5.setInt(1, doctor.getEmergencyFees());
-			ps5.setBoolean(6, doctor.isPharmacy());
-			ps5.setBoolean(5, doctor.isProvideHomecare());
+			System.out.println("EmergencyFees " + doctor.getEmergencyFees());
 			ps5.setBoolean(2, doctor.isBelongToAnyHospital());
-			ps5.setBoolean(15, doctor.isInPanel());
-			ps5.setBoolean(16, doctor.isAppointmnet());
-			ps5.setBoolean(17, doctor.isVirtualReceptionist());
-			ps5.setBoolean(18, doctor.isPostcare());
-			ps5.setInt(19, doctor.getDoctorImageid());
-//		    System.out.println("ImageId="+doctor.getDoctorImageid());
-			ps5.setInt(20, doctor.getYearofExperience());
-			ps5.setString(21, doctor.getAddressLine1());
-			ps5.setString(22, doctor.getAddressLine2());
-			ps5.setString(23, doctor.getAddressLine3());
-			ps5.setInt(24, doctor.getCityId());
-			ps5.setString(25, doctor.getPincode());
+		//	ps5.setDate(3, new java.sql.Date(doctor.getDoctorRegistrationDate().getTime()));
+			ps5.setString(3, doctor.getEmailId());
+			System.out.println("EmailId " + doctor.getEmailId());
+			ps5.setBoolean(4, doctor.isProvideHomecare());
+			ps5.setBoolean(5, doctor.isPharmacy());
+			ps5.setString(6, doctor.getFirstName());
+			ps5.setString(7, doctor.getMiddleName());
+			ps5.setString(8, doctor.getLastName());
+			System.out.println("DoctorFrist Name " + doctor.getFirstName());
+			ps5.setInt(9, doctor.getSpecialityId());
+			ps5.setString(10, doctor.getDegree());
+
+		//	ps5.setDate(3, new java.sql.Date(doctor.getDoctorRegistrationDate().getTime()));
+			ps5.setString(11, doctor.getClinicTiming());
+			ps5.setString(12, doctor.getOffDay());
+			ps5.setInt(13, doctor.getFees());
+			ps5.setBoolean(14, doctor.isInPanel());
+			ps5.setBoolean(15, doctor.isAppointmnet());
+			ps5.setBoolean(16, doctor.isVirtualReceptionist());
+			ps5.setBoolean(17, doctor.isPostcare());
+			ps5.setInt(18, doctor.getDoctorImageid());
+		    System.out.println("ImageId="+doctor.getDoctorImageid());
+			ps5.setInt(19, doctor.getYearofExperience());
+			ps5.setString(20, doctor.getAddressLine1());
+			ps5.setString(21, doctor.getAddressLine2());
+			ps5.setString(22, doctor.getAddressLine3());
+			ps5.setInt(23, doctor.getCityId());
+			ps5.setString(24, doctor.getPincode());
+			System.out.println("PinCode = "+doctor.getPincode());
 			result = 1;
 			int row1 = ps5.executeUpdate();
-			if (row1 == 1)
-				rs = ps5.getGeneratedKeys();
-			if (rs.next())
-				doctor.setDoctorId(rs.getInt(1));
+			System.out.println("22222222 = ");
+		//	if (row1 == 1)
+		//		rs = ps5.getGeneratedKeys();
+		//	if (rs.next())
+		//		doctor.setDoctorId(rs.getInt(1));
+			
 			if(new model.DoctorPhoneNumber().getDoctorPhoneNumberId()<=1)
-			{
-			String q1 = "insert into DoctorPhoneNumbers(DoctorId,PhoneNumberType,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
+			{ 
+			String q1 = "insert into DoctorPhoneNumbers(DoctorId,PhoneNumberTypeID,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
 			for (model.DoctorPhoneNumber doctorphonenumber : doctor.getDoctorPhoneNumbers()) {
 				ps5 = connection.prepareStatement(q1);
 
-				ps5 = connection.prepareStatement(q1);
 				ps5.setInt(1, doctorphonenumber.getDoctorId());
-				ps5.setString(2, doctorphonenumber.getPhoneNumberType());
+				ps5.setInt(2, doctorphonenumber.getPhoneNumberType());
 				ps5.setString(3, doctorphonenumber.getPhoneNumber());
 				ps5.setString(4, doctorphonenumber.getContact());
 				ps5.setString(5, doctorphonenumber.getComments());
 				ps5.executeUpdate();
+				System.out.println("11111111 = ");
 			}
+			}
+			
+			else
+			{   System.out.println("aaaaa = ");
+				String q1 = "Update DoctorPhoneNumbers set PhoneNumber=?,Contact=?,Comments=? where \""
+						+ val + "\"";
+				System.out.println("qi = "+q1);
+				for (model.DoctorPhoneNumber doctorphonenumber : doctor.getDoctorPhoneNumbers()) {
+					ps5 = connection.prepareStatement(q1);
+
+				//	ps5.setInt(1, doctorphonenumber.getDoctorId());
+				//	ps5.setInt(1, doctorphonenumber.getPhoneNumberType());
+					ps5.setString(1, doctorphonenumber.getPhoneNumber());
+					ps5.setString(2, doctorphonenumber.getContact());
+					ps5.setString(3, doctorphonenumber.getComments());
+					ps5.executeUpdate();
+			}
+				
+				if(doctor.getDoctorHospitalAffiliation()!=null)
+	            {
+				String q2 = "update doctorhospitalaffiliation set HospitalId=?,AdditionalDetails=? ";
+				for (model.DoctorHospitalAffiliation dochosappl : doctor.getDoctorHospitalAffiliation()) {
+					ps5 = connection.prepareStatement(q2);
+					ps5.setInt(1, dochosappl.getDoctorHospitalAffiliationId());
+					ps5.setString(2, dochosappl.getAdditionalDetails());
+					ps5.executeUpdate();
+				}
+	            }
 			}
 
 			Database.closeConnection(connection);

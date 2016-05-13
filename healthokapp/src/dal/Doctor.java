@@ -78,7 +78,7 @@ public class Doctor {
 				//ps = connection.prepareStatement(q1);
 				ps.setInt(1, doctor.getDoctorId());
 				System.out.println("DoctorPhone =" + doctor.getDoctorId());
-				ps.setString(2, doctorphonenumber.getPhoneNumberType());
+				ps.setInt(2, doctorphonenumber.getPhoneNumberType());
 				ps.setString(3, doctorphonenumber.getPhoneNumber());
 				ps.setString(4, doctorphonenumber.getContact());
 				ps.setString(5, doctorphonenumber.getComments());
@@ -97,7 +97,7 @@ public class Doctor {
 				ps = connection.prepareStatement(q2);
 				ps.setInt(1, doctor.getDoctorId());
 				// System.out.println("DoctorPhone ="+dochosappl.getDoctorId());
-				ps.setInt(2, dochosappl.getDoctorHospitalAffiliationId());
+				ps.setInt(2, dochosappl.getHospitalId());
 				ps.setString(3, dochosappl.getAdditionalDetails());
 
 				ps.executeUpdate();
