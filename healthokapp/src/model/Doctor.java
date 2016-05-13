@@ -36,7 +36,12 @@ public class Doctor {
 	private int cityId;
 	private String pincode;
 	private String Speciality;
+	private boolean provideEmergencyCare;
+	private boolean isTaleMedicineEnabled;
+	private int hasOwnHospital;
+	private String webSite;
 
+	
 	private ArrayList<DoctorPhoneNumber> doctorPhoneNumbers;
 	private ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation;
 	
@@ -220,6 +225,31 @@ public class Doctor {
 	}
 	public void setDoctorHospitalAffiliation(ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation) {
 		this.doctorHospitalAffiliation = doctorHospitalAffiliation;
+	}
+	
+	public boolean isProvideEmergencyCare() {
+		return provideEmergencyCare;
+	}
+	public void setProvideEmergencyCare(boolean provideEmergencyCare) {
+		this.provideEmergencyCare = provideEmergencyCare;
+	}
+	public boolean isTaleMedicineEnabled() {
+		return isTaleMedicineEnabled;
+	}
+	public void setTaleMedicineEnabled(boolean isTaleMedicineEnabled) {
+		this.isTaleMedicineEnabled = isTaleMedicineEnabled;
+	}
+	public int getHasOwnHospital() {
+		return hasOwnHospital;
+	}
+	public void setHasOwnHospital(int hasOwnHospital) {
+		this.hasOwnHospital = hasOwnHospital;
+	}
+	public String getWebSite() {
+		return webSite;
+	}
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
 	}
 
 	
