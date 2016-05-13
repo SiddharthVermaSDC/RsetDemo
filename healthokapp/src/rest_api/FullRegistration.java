@@ -32,8 +32,6 @@ public class FullRegistration {
 	public model.Result fullRegister(model.UserFull us)
 	{
 		
-		
-		
 		StatusCode status = new biz.User().fullRegister(us);
 		
 		model.Result result=new model.Result();
@@ -43,9 +41,11 @@ public class FullRegistration {
 		
 	}
 	
-	
-	
 }
+
+
+
+
 
 
 

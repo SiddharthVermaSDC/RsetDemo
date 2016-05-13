@@ -1,6 +1,5 @@
 package biz;
 
-import org.json.JSONObject;
 
 import model.GetSetLogin;
 import model.GetSetMemberRegistration;
@@ -9,6 +8,8 @@ import util.StatusCode;
 
 public class User {
 
+	
+	
 	public static int Save (model.User user)
 	{
 	 
@@ -17,13 +18,18 @@ public class User {
 	}
 
 	
+	
+	
 	public StatusCode RegisterDevice (int userId, String token)
 	{
-dal.User userDal = new dal.User();		
+		dal.User userDal = new dal.User();
 		
-return userDal.RegisterDevice(userId, token);		
+		return userDal.RegisterDevice(userId, token);	
 	}
 	
+	
+	
+		
 	
 	public model.User GetUser ( int userId)
 	{
@@ -58,6 +64,8 @@ return userDal.RegisterDevice(userId, token);
 	}
 	
 	
+	
+	
 	public model.UserFull getUserDetails (int userId)
 
 	{
@@ -66,10 +74,17 @@ return userDal.RegisterDevice(userId, token);
 	}
 	
 	
+	
+	
+	
 	public  int quickEmailRegister(model.GetSetLogin gs)
 	{
 		return new  dal.User().quickEmailRegister(gs);
 	}
+	
+	
+	
+	
 	
 	
 	public  StatusCode fullRegister(model.UserFull us)
