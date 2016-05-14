@@ -11,10 +11,9 @@ import org.json.JSONObject;
 import model.GetSetLogin;
 import model.MedicalCondition;
 import model.MemberDetail;
+import model.MembershipType;
 import util.Logging;
 import util.StatusCode;
-
-
 
 
 
@@ -25,24 +24,62 @@ public class User {
 	{     
 		
 		PreparedStatement preparedstatement=null;
+		PreparedStatement preparedstatementCheck=null;
 		Connection connection = null;
 	    Statement statement = null;
 	    ResultSet resultset = null;
+	    String  queryToInsert;
+	    
+	    int userid;
+	    
 	    StatusCode status = StatusCode.UnknownError;
 	    try {
 	    	
 	    	connection = Database.createConnection();
 	    	
-			//JSONObject json = new JSONObject(jsonString);
-			
-      	  	String  queryToInsert="insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
-      	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBonusBalance,TotalDiscount,Comments)"
+	    	
+	    	String whereToInsert="select UserId from user where Mobile=? and Password=?";
+      	  	
+      	  	
+      	  	
+      	  	 preparedstatementCheck =(PreparedStatement)connection.prepareStatement(whereToInsert);
+      	  	Logging.Debug("got first execution","line no 46");
+      	  	 preparedstatementCheck.setString(1,us.getMobile());
+      	  	Logging.Debug("got first execution","line no 48");
+      	  	 preparedstatementCheck.setString(2,us.getPassword());
+      	  	 
+      	  	 resultset=preparedstatementCheck.executeQuery(); 
+      	  	 
+      	  	 if(resultset.next())
+      	  		 
+      	  	 {
+      	  		Logging.Debug("got first execution","line no 54");
+      	  		 
+      	  		queryToInsert=new String("insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
+          	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBonusBalance,TotalDiscount,Comments)"
+          	  			
+          	  			+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) where UserId="+resultset.getInt("USerId"));
+      	  		
+      	  		preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);
+      	  		 
+      	  	 }
+      	  	 
+      	  	 else
+      	  	 {
+      	  		 
+      	  		Logging.Debug("got 2 execution","line no 68");
+      	  		 
+      	  		queryToInsert=new String("insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
+          	  			+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBonusBalance,TotalDiscount,Comments)"
+          	  			
+          	  			+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+      	  		
+      	  		
+      	  		preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert, Statement.RETURN_GENERATED_KEYS);	
+      	  		 
+      	  	 }
       	  			
-      	  			+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-      	  			
-      	  			
-			 preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert, Statement.RETURN_GENERATED_KEYS);	 
-			 
+						 
 			 preparedstatement.setString(1,us.getMemberID());
 			 preparedstatement.setString(2,us.getFirstName());
 			 preparedstatement.setString(3,us.getLastName());
@@ -53,7 +90,7 @@ public class User {
 			 preparedstatement.setInt(8,us.getCityId());
 			 preparedstatement.setString(9,us.getPinCode());
 			 preparedstatement.setString(10,us.getDoctorGenerallyVisited());
-			 preparedstatement.setInt(11,us.getMembershipTypeId());
+			 preparedstatement.setInt(11,us.getMembershipTypeId().getmembershipType());
 			 preparedstatement.setString(12,us.getPassword());
 			 preparedstatement.setInt(13,us.getPrimaryDoctor());
 			 preparedstatement.setInt(14,us.getPrepaidBalance());
@@ -63,12 +100,26 @@ public class User {
 			 
 			 
 			 preparedstatement.executeUpdate();  
-			 ResultSet keys = preparedstatement.getGeneratedKeys();    
-			 keys.next();  
-			 int userid = keys.getInt(1);
+			 Logging.Debug("got 3 execution","line no 101");
+			 if(resultset.next())
+			 {
+				 Logging.Debug("got 4 execution","line no 104");
+				 userid = resultset.getInt("UserId");
+				 
+			 }
 			 
-			 status=familyRegister(us,userid);
+			 else
+			 {
+				 
+				 ResultSet keys = preparedstatement.getGeneratedKeys();    
+				 keys.next();  
+				 userid = keys.getInt(1);
+				 
+			 }
 			 
+			 
+			// status=familyRegister(us,userid);
+			 status= StatusCode.Success;
 			 return status;
 	    }
 	  
@@ -83,11 +134,10 @@ public class User {
 			Database.closeConnection(connection);
 			
 		}  
-	     
-return status;
-
-	}
-	
+	    
+	    return status;
+	    
+	}	
 	
 	
   
@@ -109,7 +159,6 @@ return status;
 
 			  for (model.MemberDetail memberdetail : us.getMemberDetail())
 			  { 
-				 
 						 
 				preparedstatement =(PreparedStatement)connection.prepareStatement(queryToInsert);	
 				
@@ -127,7 +176,6 @@ return status;
 				preparedstatement.setString(12,memberdetail.getLongTermCareNeeds());
 				preparedstatement.setString(13,memberdetail.getComments());
 				preparedstatement.setInt(14,userid);
-				
 				
 				preparedstatement.executeUpdate();
 				
@@ -152,9 +200,6 @@ return status;
 	
 	
 	
-	
-	
-	// TODO change this to return userId;
 	public int quickEmailRegister(model.GetSetLogin gs)
 	{
 		
@@ -172,7 +217,7 @@ return status;
 		  	
 		    preparedstatement=(PreparedStatement) connection.prepareStatement(queryToCheck);
 	    	preparedstatement.setString(1,gs.getPhone());
-	    	preparedstatement.setString(1,gs.getEmail());
+	    	preparedstatement.setString(2,gs.getEmail());
 	    	resultSet=preparedstatement.executeQuery();
 	    	
 	    	if(resultSet.next()==true)
@@ -185,10 +230,10 @@ return status;
 	    	{
 	    		preparedstatement=null;
 	    		preparedstatement=(PreparedStatement) connection.prepareStatement(queryToInsert);
-	    		preparedstatement.setString(1,gs.getFirstName());
-	    		preparedstatement.setString(2,gs.getLastName());
-	    		preparedstatement.setString(3,gs.getEmail());
-	    		preparedstatement.setString(4,gs.getPhone());
+	    		preparedstatement.setString(1,gs.getFirstName());	    		
+	    		preparedstatement.setString(2,gs.getLastName());	    		
+	    		preparedstatement.setString(3,gs.getEmail());	    			
+	    		preparedstatement.setString(4,gs.getPhone());	    			
 	    		preparedstatement.setString(5,gs.getPassword());
 	    		preparedstatement.executeUpdate();
 	    		
@@ -211,10 +256,6 @@ return status;
 		return status;
 		
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -256,6 +297,8 @@ return status;
 		}
 	return result;
 	}
+	
+	
 	
 	
 
@@ -437,62 +480,61 @@ return status;
 	
 
 public int  loginCheck (GetSetLogin gs)
-
 {
-Connection connection = null;
-PreparedStatement preparedStatement=null;
-ResultSet resultSet=null;
-
-int userId = -1;
-
-try {
-
-//		 error.put("UserId","-1");
-//		 s = error.toString();
-
-	connection = Database.createConnection();
-  String query="select UserId from User where (EmailId=\""+gs.getLoginId()+"\" or Mobile=\""+gs.getLoginId()+"\") and Password=\""+gs.getPassword()+"\";";
-  //String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\";";
- //if(gs.getEmail()==null)
- //{   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
- //}
- //else
- //{   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
- //}
- 
-  Logging.Debug("Login", query);
- preparedStatement =(PreparedStatement)connection.prepareStatement(query);
-	 resultSet=preparedStatement.executeQuery();
-
-	 if(resultSet.next()==true)
-	 {   
-		 Logging.Debug("Login","Found matching record " + resultSet.getInt("UserId")  );
-		 userId = resultSet.getInt("UserId");
-//		 gss.UserId=resultSet.getInt("UserId");
-//		 s=r.userDetails(gss);
-	       
-	 }
-	 else
-	 {
+	Connection connection = null;
+	PreparedStatement preparedStatement=null;
+	ResultSet resultSet=null;
+	
+	int userId = -1;
+	
+	try {
+		
+		connection = Database.createConnection();
+		String query="select UserId from User where (EmailId=\""+gs.getLoginId()+"\" or Mobile=\""+gs.getLoginId()+"\") and Password=\""+gs.getPassword()+"\";";
+		
+		Logging.Debug("Login", query);
+		
+		preparedStatement =(PreparedStatement)connection.prepareStatement(query);
+		resultSet=preparedStatement.executeQuery();
+		
+		if(resultSet.next()==true)
+		{
+			
+			Logging.Debug("Login","Found matching record " + resultSet.getInt("UserId")  );
+			userId = resultSet.getInt("UserId");
+			
+		}
+		
+		else
+		{
+			
+			Logging.Debug("Login","Found no matching record for " + query);
+			userId = -1;
 		 
-		 Logging.Debug("Login","Found no matching record for " + query);
-		 userId = -1;
-	 }
-}
-catch(Exception e)
-{
-		 util.Logging.Debug("Login", e.getMessage());
+		}
+	}
+	
+	catch(Exception e)
+	{
+		
+		util.Logging.Debug("Login", e.getMessage());
+		
+	}
+	
+	finally 
+	{
+		
+		Database.closeConnection(connection);
+		
+	}
+	
+	return userId;  
+	
 }
 
 
-finally 
-{ 
-	 Database.closeConnection(connection); 
-}
-   
-return userId;   
 
-}
+
 
 
 public model.UserFull getUserDetails ( int userId)
@@ -501,29 +543,31 @@ public model.UserFull getUserDetails ( int userId)
 	 Connection connection=null;
 	 PreparedStatement psUser=null;
 	 PreparedStatement psMemberDetail=null;
-     ResultSet rs=null;
+	 ResultSet rs=null;
+    
+	 
+	 String queryUser="select * from User where userid = ?";
+	 String queryMemberDetail ="select * from MemberDetails where userid = ?";
 	
-	
- 	String queryUser="select * from User where userid = ?";
-	String queryMemberDetail ="select * from MemberDetails where userid = ?";
-
-
-	model.UserFull user = null;
-	
-	try
-	{
-		connection=Database.createConnection();
-		psUser=connection.prepareStatement(queryUser); 
-		psUser.setInt(1,userId);
-		psMemberDetail=connection.prepareStatement(queryMemberDetail); 
-		psMemberDetail.setInt(1,userId);
-		
-		Logging.Debug("UserDal", psUser.toString());
-		
+	 model.UserFull user = null;
+	 
+	 try
+	 {
+		 
+		 connection=Database.createConnection();
+		 psUser=connection.prepareStatement(queryUser); 
+		 psUser.setInt(1,userId);
+		 psMemberDetail=connection.prepareStatement(queryMemberDetail); 
+		 psMemberDetail.setInt(1,userId);
+		 
+		 Logging.Debug("UserDal", psUser.toString());
+		 
 		 rs = psUser.executeQuery(); 
-		
-		while (rs.next()) {
-			
+		 
+		 
+		 while (rs.next()) {
+			 
+			 			
 			user = new model.UserFull(); // since this is query by PK will get only one row. 
 			
 			user.setUserId(userId);
@@ -543,54 +587,26 @@ public model.UserFull getUserDetails ( int userId)
 			user.setPrepaidBalance(rs.getInt("PrepaidBalance"));
 			user.setPrimaryDoctor(rs.getInt("PrimaryDoctor"));
 			user.setTotalDiscount(rs.getInt("TotalDiscount"));
-			user.setMembershipTypeId(rs.getInt("MembershipTypeId"));
-			user.setMemberID(rs.getString("MemberId"));
-			
-// Fill in rest of the fields accordingly. 					
-			
-/*			
-			 uj.put("UserId", resultset.getInt("UserId"));
-			 uj.put("MemberID",resultset.getString("MemberID"));
-			 uj.put("MembershipTypeId",resultset.getInt("MembershipTypeId"));
-			 uj.put("FirstName",resultset.getString("FirstName"));
-			 uj.put("LastName", resultset.getString("LastName"));
-			 //uj.put("AddressId", resultset.getInt("AdressId"));
-			 uj.put("EmailId",resultset.getString("EmailId"));
-			 uj.put("Mobile",resultset.getString("Mobile"));
-			 uj.put("Password",resultset.getString("Password"));
-			 uj.put("PrimaryDoctor",resultset.getInt("PrimaryDoctor"));
-			 //uj.put("DoctorGenerallyVisited", resultset.getString("DoctorGenerallyVisited"));
-			 uj.put("Comments",resultset.getString("Comments"));
-			 uj.put("PrepaidBalance",resultset.getInt("PrepaidBalance"));
-			 //uj.put("CashBousBalance", resultset.getInt("CashBousBalance"));
-			 uj.put("TotalDiscount",resultset.getInt("TotalDiscount"));
-			 uj.put("AddressLine1",resultset.getString("AddressLine1"));
-			 uj.put("AddressLine2",resultset.getString("AddressLine2"));
-			 uj.put("AddressLine3",resultset.getString("AddressLine3"));
-			 uj.put("CityId",resultset.getInt("CityId"));
-			 uj.put("PinCode",resultset.getString("PinCode"));
-
-*/			
-			
-			
+			user.setMembershipTypeId(model.MembershipType.item(rs.getInt("MembershipTypeId")));
+						
 		}
-		
-		Logging.Debug("User-Dal", "user is " + user.getFirstName() + " " + user.getLastName());
-		
-		// now fill the details 
-
+		 
+		 
+		 Logging.Debug("User-Dal", "user is " + user.getFirstName() + " " + user.getLastName());
+		 
 		 rs = psMemberDetail.executeQuery(); 
 		
 		 ArrayList<model.MemberDetail> memberDetails = new ArrayList<model.MemberDetail>();
 		 
 		 model.MemberDetail memberDetail = null;
 		 
-		while (rs.next()) {
+		 while (rs.next()) {
+			 
 			memberDetail = new MemberDetail ();
 			
 			memberDetail.setMemberDetailId(rs.getInt("MemberDetailId"));
 			memberDetail.setUserid(rs.getInt("Userid"));
-			memberDetail.setFirstName(rs.getString("FIrstName"));
+			memberDetail.setFirstName(rs.getString("FirstName"));
 			memberDetail.setAllergies(rs.getString("Allergies"));
 			memberDetail.setBloodGroup(rs.getString("BloodGroup"));
 			memberDetail.setBP(MedicalCondition.item(rs.getInt("BP")));
@@ -603,31 +619,9 @@ public model.UserFull getUserDetails ( int userId)
 			memberDetail.setLongTermCareNeeds(rs.getString("LongTermCareNeeds"));
 			memberDetail.setRecurringTests(rs.getString("RecurringTests"));
 			memberDetail.setSex(rs.getString("Sex"));
-			memberDetail.setComments(rs.getString("Comments"));
-			
-			// FILL IN ALL REST OF THE FIELDS
 			
 			memberDetails.add(memberDetail);
-			
-			/*
-			 * 					 ju.put("MemberdetailId", resultset.getInt("MemberdetailId"));
-					 ju.put("UserId", resultset.getInt("UserId"));
-					 ju.put("FirstName", resultset.getString("FirstName"));
-					 ju.put("LastName", resultset.getString("LastName"));
-					 ju.put("Sex", resultset.getString("Sex"));
-					 ju.put("DOB", resultset.getString("DOB"));
-					 ju.put("BloodGroup", resultset.getString("BloodGroup"));
-					 ju.put("Diabetic", resultset.getInt("Diabetic"));
-					 ju.put("BP", resultset.getInt("BP"));
-					 ju.put("HeartProblems", resultset.getInt("HeartProblems"));
-					 ju.put("Allergies", resultset.getString("Allergies"));
-					 ju.put("recurringTests", resultset.getString("recurringTests"));
-					// ju.put("LongtermCareNeed", resultset.getString("LongtermCareNeed"));
-					 ju.put("Comments", resultset.getString("Comments"));
-					 ju.put("CityId", resultset.getInt("CityId"));
-
-			 */
-			
+						
 		}
 		
 		user.setMemberDetail(memberDetails); // Assign member details array to user object
@@ -647,12 +641,6 @@ public model.UserFull getUserDetails ( int userId)
 	}
 	
 	return user;
-	
-	
-	
-	
-
 }
-
 
 }

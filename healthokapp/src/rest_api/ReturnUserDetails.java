@@ -19,20 +19,39 @@ import org.json.JSONObject;
 
 import dal.Database;
 import model.GetSetMemberRegistration;
+import util.Logging;
 
 @Path("/ReturnUserDetails")
 public class ReturnUserDetails {
-	Connection connection = null;
+	
+	/*Connection connection = null;
     Statement statement = null;
     ResultSet resultset = null;
     PreparedStatement preparedStatement=null;
+	*/
 	
-
-	@Path("/userDetails")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	//@GET
+	@Path("/userDetails/{id}")
+	//@POST
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	
+	public model.UserFull returnDetail(@PathParam("id") String id)
+	{
+		
+		Logging.Debug("RESTAPI", ""+Integer.parseInt(id));
+		return new biz.User().getUserDetails (Integer.parseInt(id));
+		
+		
+	}
+}
+	
+	
+	
+	
+	
+	
+	/*
 	public String userDetails(GetSetMemberRegistration userId) 
 	{
 		 JSONArray arr;
@@ -40,7 +59,7 @@ public class ReturnUserDetails {
 		 /*Connection connection = null;
 	       Statement statement = null;
 	       ResultSet resultset = null;
-	       PreparedStatement preparedStatement=null;*/
+	       PreparedStatement preparedStatement=null;
 		 
 		 
 		 
@@ -133,4 +152,4 @@ public class ReturnUserDetails {
 	     }
 	     
 	}
-
+*/

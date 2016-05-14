@@ -7,7 +7,7 @@ public class UserFull {
 
 		private int UserId;
 		private String MemberID=null;
-		private int MembershipTypeId;
+		private MembershipType MembershipTypeId;
 		private String FirstName=null;
 		private String LastName=null;
 		private int AddressId;
@@ -95,10 +95,10 @@ public class UserFull {
 		public void setMemberID(String memberID) {
 			MemberID = memberID;
 		}
-		public int getMembershipTypeId() {
+		public MembershipType getMembershipTypeId() {
 			return MembershipTypeId;
 		}
-		public void setMembershipTypeId(int membershipTypeId) {
+		public void setMembershipTypeId(MembershipType membershipTypeId) {
 			MembershipTypeId = membershipTypeId;
 		}
 		public int getAddressId() {
@@ -135,7 +135,7 @@ public class UserFull {
 			return CashbackBonusBalance;
 		}
 		public void setCashbackBonusBalance(int CashbackBonusBalance) {
-			CashbackBonusBalance = CashbackBonusBalance;
+			this.CashbackBonusBalance = CashbackBonusBalance;
 		}
 		public int getTotalDiscount() {
 			return TotalDiscount;

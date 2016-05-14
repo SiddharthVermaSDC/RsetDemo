@@ -26,76 +26,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+
 @Path("/EmailRegister")
 public class EmailLogin 
 {
+	
 	@Path("/Check")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String loginCheck(GetSetLogin gs)
-	{     String s=null;
-		  Connection connection = null;
-		  PreparedStatement preparedStatement=null;
-		  ResultSet resultSet=null;
-		  GetSetMemberRegistration gss=new GetSetMemberRegistration();
-		  ReturnUserDetails r=new ReturnUserDetails();
-		  JSONObject  error = new JSONObject();
-		  
-		  try {
-
-				 error.put("UserId","-1");
-				 s = error.toString();
-
-			connection = Database.createConnection();
-		    String query="select UserId from User where (EmailId=\""+gs.getLoginId()+"\" or Mobile=\""+gs.getLoginId()+"\") and Password=\""+gs.getPassword()+"\";";
-		    //String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\";";
-		   //if(gs.getEmail()==null)
-		   //{   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
-		   //}
-		   //else
-		   //{   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
-		   //}
-		   
-		    Logging.Debug("Login", query);
-		   preparedStatement =(PreparedStatement)connection.prepareStatement(query);
-			 resultSet=preparedStatement.executeQuery();
-
-			 if(resultSet.next()==true)
-			 {   
-				 Logging.Debug("Login","Found matching record " + resultSet.getInt("UserId")  );
-				 gss.UserId=resultSet.getInt("UserId");
-				 s=r.userDetails(gss);
-			       
-			 }
-			 else
-			 {
-				 
-				 Logging.Debug("Login","Found no matching record for " + query);
-				 
-			 }
-	     }
-	     catch(Exception e)
-	     {
-	    		 util.Logging.Debug("Login", e.getMessage());
-	     }
-		  
-		
-		 finally 
-	     { 
-			 Database.closeConnection(connection); 
-	      }
-		     
-		  return s;   
-		  
-		  
-	}
 	
-	
-	@Path("/Check1")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public model.UserFull loginCheck1(GetSetLogin gs)
 	{     
 
@@ -103,64 +44,100 @@ public class EmailLogin
 		  
 	}
 	
+}
+	
 
-	
-	
-	/*
-	
-	@Path("/PathCheck/{email}/{password}")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Message loginCheck(@PathParam("email") String email,@PathParam("password") String password)
-	{
-		  Connection connection = null;
-		  PreparedStatement preparedStatement=null;
-		  ResultSet resultSet=null;
-		  Message mg=new Message();
-		  try {
-			connection = DatabaseConnectivity.getInstance().getConnection();
-		    String query1="select UserId from User where EmailId=\""+email+"\" and password=\""+password+"\"";
-		    //String query2="select UserId from User where Mobile=\""+phone()+"\" and password=\""+password()+"\"";
-		   //if(gs.getEmail()==null)
-		  // {
-			  // preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
-		  // }
-		   //else
-		   {
-			   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
-		   }
-			 resultSet=preparedStatement.executeQuery();
 
-			 if(resultSet.next()==true)
-			 {
-				 mg.setStatus(1);
-			 }
-			 else
-				 mg.setStatus(-1);
-	     }
-	     catch(Exception e)
-	     {
-	    	 mg.setStatus(500);
-	     }
-		  
-		  finally 
-		     { 
-				 DatabaseConnectivity.closeDatabase(connection); 
-		         return mg; 
-		      }
-	}
-	*/
-	
-	
-	@Path("/s")
+
+
+
+
+
+
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @Path("/s")
 	@GET
 	@Produces (MediaType.TEXT_PLAIN)
 	public String rTurn(){
 		
 		return "hello 2";
 	}
-	          
+ * 
+ * 
+ * 
+@Path("/Check")
+@POST
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public String loginCheck(GetSetLogin gs)
+{     String s=null;
+	  Connection connection = null;
+	  PreparedStatement preparedStatement=null;
+	  ResultSet resultSet=null;
+	  GetSetMemberRegistration gss=new GetSetMemberRegistration();
+	  
+	 // model.UserFull uf=new model.UserFull();
+	  
+	  
+	  ReturnUserDetails r=new ReturnUserDetails();
+	  JSONObject  error = new JSONObject();
+	  
+	  try {
+
+			 error.put("UserId","-1");
+			 s = error.toString();
+
+		connection = Database.createConnection();
+	    String query="select UserId from User where (EmailId=\""+gs.getLoginId()+"\" or Mobile=\""+gs.getLoginId()+"\") and Password=\""+gs.getPassword()+"\";";
+	    //String query2="select UserId from User where Mobile=\""+gs.getPhone()+"\" and Password=\""+gs.getPassword()+"\";";
+	   //if(gs.getEmail()==null)
+	   //{   preparedStatement = (PreparedStatement)connection.prepareStatement(query2);	
+	   //}
+	   //else
+	   //{   preparedStatement =(PreparedStatement)connection.prepareStatement(query1);
+	   //}
+	   
+	    Logging.Debug("Login", query);
+	   preparedStatement =(PreparedStatement)connection.prepareStatement(query);
+		 resultSet=preparedStatement.executeQuery();
+
+		 if(resultSet.next()==true)
+		 {   
+			 Logging.Debug("Login","Found matching record " + resultSet.getInt("UserId")  );
+			 gss.UserId=resultSet.getInt("UserId");
+			// s=r.userDetails(gss);
+		       
+		 }
+		 else
+		 {
+			 
+			 Logging.Debug("Login","Found no matching record for " + query);
+			 
+		 }
+     }
+     catch(Exception e)
+     {
+    		 util.Logging.Debug("Login", e.getMessage());
+     }
+	  
 	
-	
+	 finally 
+     { 
+		 Database.closeConnection(connection); 
+      }
+	     
+	  return s;   
+	  
+	  
 }
+
+
+*/
+
