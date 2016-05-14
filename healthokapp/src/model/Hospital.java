@@ -32,12 +32,10 @@ public class Hospital {
 		this.hospitalId = hospitalId;
 	}
 
-/*
- 	public Hospital(int hospitalId) {
- 
+	public Hospital(int hospitalId) {
 		this.hospitalId = hospitalId;
 	}
-*/
+
 	public ArrayList<HospitalPhoneNumber> getHospitalPhoneNumbers() {
 		return hospitalPhoneNumbers;
 	}

@@ -45,10 +45,10 @@ public class HospitalRetrival {
 				boolean hasDiagnistics = rs.getBoolean("Hasdiagnistics");
 				boolean hasAmbulance = rs.getBoolean("Hasambulance");
 				String addmissionProcess = rs.getString("AdmissionProcess");
-//				return new model.Hospital(hospitalId, hospitalname, addressId, hasER, facilities, opdFees, bed,
-//						addressLine1, addressLine2, addressLine3, cityId, pincode, regDate, website, phonenumber,
-//						hasRadiology, hasDiagnistics, hasAmbulance, addmissionProcess);
-return null;
+				return new model.Hospital(hospitalId, hospitalname, addressId, hasER, facilities, opdFees, bed,
+						addressLine1, addressLine2, addressLine3, cityId, pincode, regDate, website, phonenumber,
+						hasRadiology, hasDiagnistics, hasAmbulance, addmissionProcess);
+
 				// hosptl.add(new model.Hospital(cityId, hospitalname,addressId,
 				// hasER, facilities, opdFees, bed, addressLine1, addressLine2,
 				// addressLine3, cityId, pincode, regDate, website, phonenumber,
@@ -83,7 +83,7 @@ return null;
 			//System.out.println(rs1);
 			while (rs.next()) {
 				int hospitalId = rs.getInt("HospitalId");
-				//hosptl1.add(new model.Hospital(hospitalId));
+				hosptl1.add(new model.Hospital(hospitalId));
 				// add code to fill all details of hospital
 			}
 		} catch (SQLException  e) {
