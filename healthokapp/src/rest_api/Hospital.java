@@ -14,9 +14,9 @@ public class Hospital {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public static model.Result hospital(model.Hospital hsptl) {
+	public static model.Result hospital(model.Hospital hospital) {
 		model.Result rs = new model.Result();
-		int result = biz.Hospital.addHospital(hsptl);
+		int result = biz.Hospital.addHospital(hospital);
 		rs.setStatus(result);
 		return rs;
 

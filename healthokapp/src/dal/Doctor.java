@@ -98,7 +98,6 @@ public class Doctor {
 			for (model.DoctorHospitalAffiliation dochosappl : doctor.getDoctorHospitalAffiliation()) {
 				ps = connection.prepareStatement(q2);
 
-				ps = connection.prepareStatement(q2);
 				ps.setInt(1, doctor.getDoctorId());
 				// System.out.println("DoctorPhone ="+dochosappl.getDoctorId());
 				ps.setInt(2, dochosappl.getHospitalId());
