@@ -32,7 +32,7 @@ public class HospitalRetrival {
 				hospital=new model.Hospital(hospitalId);
 				hospital.setHospitalId(hospitalId);
 				hospital.setHospitalname(rs.getString("hospitalname"));
-				hospital.setRegDate(rs.getString("RegDate"));
+				hospital.setRegDate(rs.getDate("RegDate"));
 				hospital.setWebsite(rs.getString("website"));
 				hospital.setHasRadiology(rs.getBoolean("HasRadiology"));
 				hospital.setHasDiagnistics(rs.getBoolean("Hasdiagnistics"));

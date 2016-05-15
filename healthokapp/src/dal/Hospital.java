@@ -19,9 +19,6 @@ public class Hospital {
 			connection = Database.createConnection();
 			System.out.println("Connection Is Created");
 
-			// SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		//	java.sql.Date d = new java.sql.Date((hospital.getRegDate()).getTime());
-
 			String query = "Insert Into Hospital(Name,AddressId,HasER,Facilities,OPDFees,Beds,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,Website,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			System.out.println("Statement Is Created");
 			ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -38,6 +35,7 @@ public class Hospital {
 			ps.setString(9, hospital.getAddressLine3());
 			ps.setInt(10, hospital.getCityId());
 			ps.setString(11, hospital.getPincode());
+		
 		//	ps.setDate(12, (java.sql.Date) d);
 			 ps.setString(12,null);
 			ps.setString(13, hospital.getWebsite());
