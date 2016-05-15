@@ -17,14 +17,14 @@ public class Hospital {
 	private String addressLine3;
 	private int cityId;
 	private String pincode;
-	private Date regDate;
+	private String regDate;
 	private String website;
 	private String phonenumber;
 	private boolean hasRadiology;
 	private boolean hasDiagnistics;
 	private boolean hasAmbulance;
 	private String addmissionProcess;
-
+	public Hospital(){}
 	private ArrayList<HospitalPhoneNumber> hospitalPhoneNumbers;
 	private ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation;
 
@@ -56,11 +56,11 @@ public class Hospital {
 		return hospitalId;
 	}
 
-	public Date getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 

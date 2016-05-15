@@ -17,13 +17,15 @@ public class Hospital {
 
 		try {
 			connection = Database.createConnection();
+			System.out.println("Connection Is Created");
 
 			// SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			java.sql.Date d = new java.sql.Date((hospital.getRegDate()).getTime());
+		//	java.sql.Date d = new java.sql.Date((hospital.getRegDate()).getTime());
 
 			String query = "Insert Into Hospital(Name,AddressId,HasER,Facilities,OPDFees,Beds,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,Website,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			System.out.println("Statement Is Created");
 			ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
+			
 			ps.setString(1, hospital.getHospitalname());
 			ps.setInt(2, hospital.getAddressId());
 			ps.setBoolean(3, hospital.isHasER());
@@ -36,8 +38,8 @@ public class Hospital {
 			ps.setString(9, hospital.getAddressLine3());
 			ps.setInt(10, hospital.getCityId());
 			ps.setString(11, hospital.getPincode());
-			//ps.setDate(12, (java.sql.Date) d);
-			// ps.setDate(12,hsptl.getRegDate());
+		//	ps.setDate(12, (java.sql.Date) d);
+			 ps.setString(12,null);
 			ps.setString(13, hospital.getWebsite());
 			//ps.setString(14, hospital.getPhonenumber());
 			ps.setBoolean(14, hospital.isHasRadiology());
@@ -65,9 +67,10 @@ public class Hospital {
 
 					//ps = connection.prepareStatement(q1);
 					ps.setInt(1, hospital.getHospitalId());
-					System.out.println("DoctorPhone =" + hospital.getHospitalId());
+					
 					ps.setInt(2, hospitalphonenumber.getPhoneNumberType());
 					ps.setString(3, hospitalphonenumber.getPhoneNumber());
+					System.out.println("DoctorPhone =" + hospital.getPhonenumber());
 					ps.setString(4, hospitalphonenumber.getContact());
 					ps.setString(5, hospitalphonenumber.getComments());
 					ps.executeUpdate();
