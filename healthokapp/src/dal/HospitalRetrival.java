@@ -12,47 +12,46 @@ import util.Logging;
 
 public class HospitalRetrival {
 
-	public model.Hospital responseHospital(int hospitalId) {
+	public ArrayList<Hospital> responseHospital(int hospitalId) {
 
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String sql = "Select * from hospital where HospitalId=\"" + hospitalId + "\"";
+		ArrayList<Hospital> results = null;
 		model.Hospital hospital = null;
 
 		try {
 			connection = Database.createConnection();
+			// String sql = "Select * from hospital where HospitalId=\"" +
+			// hospitalId + "\"";
+			String sql = "Select * from hospital where HospitalId=?";
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, hospitalId);
 			rs = ps.executeQuery();
-			System.out.println(rs);
+			results = new ArrayList<model.Hospital>();
 			while (rs.next()) {
-				
-				hospital=new model.Hospital(hospitalId);
-				hospital.setHospitalId(hospitalId);
-				hospital.setHospitalname(rs.getString("hospitalname"));
-				hospital.setRegDate(rs.getDate("RegDate"));
-				hospital.setWebsite(rs.getString("website"));
-				hospital.setHasRadiology(rs.getBoolean("HasRadiology"));
-				hospital.setHasDiagnistics(rs.getBoolean("Hasdiagnistics"));
+				hospital = this.populateHospital(rs);
+				results.add(hospital);
 
 			}
+			return results;
 		} catch (SQLException e) {
 			Logging.Exception("HOSPITALDAL", "SQL Error " + e.getMessage());
 
 		} finally {
 			Database.closeConnection(connection);
 		}
-		return null;
+		return results;
+
 	}
 
 	// return all hospitals - Needs to be fixed to return arraylist of all
 	// hospitals.
 
 	public ArrayList<Hospital> allHospitals() {
-		ArrayList<model.Hospital> hosptl1 = new ArrayList<model.Hospital>();
-
+		ArrayList<Hospital> results1 = null;
+		model.Hospital hospital1 = null;
 		Connection connection;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -62,16 +61,47 @@ public class HospitalRetrival {
 			String sql = "Select * from hospital";
 			ps = connection.prepareStatement(sql);
 			rs = ps.executeQuery();
-			// System.out.println(rs1);
+
+			results1 = new ArrayList<model.Hospital>();
 			while (rs.next()) {
-				int hospitalId = rs.getInt("HospitalId");
-				hosptl1.add(new model.Hospital(hospitalId));
-				// add code to fill all details of hospital
+				hospital1 = this.populateHospital(rs);
+				results1.add(hospital1); // add code to fill all details of
+											// hospital
 			}
+			return results1;
 		} catch (SQLException e) {
-			System.out.println("SQL EXCEPTION**2");
+			Logging.Exception("HOSPITALDAL", "SQL Error " + e.getMessage());
 		}
-		return hosptl1;
+		return results1;
+
 	}
 
+	private model.Hospital populateHospital(ResultSet rs) {
+		model.Hospital hospital = new model.Hospital();
+		try {
+
+			hospital.setRegDate(rs.getDate("RegistrationDate"));
+			hospital.setWebsite(rs.getString("Website"));
+			hospital.setHasRadiology(rs.getBoolean("HasRadiology"));
+			hospital.setHasDiagnistics(rs.getBoolean("Hasdiagnistics"));
+			hospital.setHasAmbulance(rs.getBoolean("Hasambulance"));
+			hospital.setAddmissionProcess(rs.getString("AdmissionProcess"));
+			hospital.setHospitalname(rs.getString("Name"));
+			hospital.setHasER(rs.getBoolean("HasER"));
+			hospital.setFacilities(rs.getString("Facilities"));
+			hospital.setOpdFees(rs.getInt("OPDFees"));
+			hospital.setBed(rs.getInt("Beds"));
+			hospital.setAddressLine1(rs.getString("AddressLine1"));
+			hospital.setAddressLine2(rs.getString("AddressLine2"));
+			hospital.setAddressLine3(rs.getString("AddressLine3"));
+			hospital.setCityId(rs.getInt("CityId"));
+			hospital.setPincode(rs.getString("PinCode"));
+			return hospital;
+		} catch (SQLException se) {
+			Logging.Exception("FillDocModel", "Error Populating Hospital Model " + se.getMessage());
+
+		}
+		return hospital;
+
+	}
 }

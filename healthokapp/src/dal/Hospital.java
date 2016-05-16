@@ -19,31 +19,31 @@ public class Hospital {
 			connection = Database.createConnection();
 			System.out.println("Connection Is Created");
 
-			String query = "Insert Into Hospital(Name,AddressId,HasER,Facilities,OPDFees,Beds,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,Website,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "Insert Into Hospital(Name,HasER,Facilities,OPDFees,Beds,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,Website,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			System.out.println("Statement Is Created");
 			ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, hospital.getHospitalname());
-			ps.setInt(2, hospital.getAddressId());
-			ps.setBoolean(3, hospital.isHasER());
-			ps.setString(4, hospital.getFacilities());
-			ps.setInt(5, hospital.getOpdFees());
+//			ps.setInt(2, hospital.getAddressId());
+			ps.setBoolean(2, hospital.isHasER());
+			ps.setString(3, hospital.getFacilities());
+			ps.setInt(4, hospital.getOpdFees());
 			System.out.println("Opd Fees" + hospital.getOpdFees());
-			ps.setInt(6, hospital.getBed());
-			ps.setString(7, hospital.getAddressLine1());
-			ps.setString(8, hospital.getAddressLine2());
-			ps.setString(9, hospital.getAddressLine3());
-			ps.setInt(10, hospital.getCityId());
-			ps.setString(11, hospital.getPincode());
+			ps.setInt(5, hospital.getBed());
+			ps.setString(6, hospital.getAddressLine1());
+			ps.setString(7, hospital.getAddressLine2());
+			ps.setString(8, hospital.getAddressLine3());
+			ps.setInt(9, hospital.getCityId());
+			ps.setString(10, hospital.getPincode());
 		
 		//	ps.setDate(12, (java.sql.Date) d);
-			 ps.setString(12,null);
-			ps.setString(13, hospital.getWebsite());
+			 ps.setString(11,null);
+			ps.setString(12, hospital.getWebsite());
 			//ps.setString(14, hospital.getPhonenumber());
-			ps.setBoolean(14, hospital.isHasRadiology());
-			ps.setBoolean(15, hospital.isHasDiagnistics());
-			ps.setBoolean(16, hospital.isHasAmbulance());
-			ps.setString(17, hospital.getAddmissionProcess());
+			ps.setBoolean(13, hospital.isHasRadiology());
+			ps.setBoolean(14, hospital.isHasDiagnistics());
+			ps.setBoolean(15, hospital.isHasAmbulance());
+			ps.setString(16, hospital.getAddmissionProcess());
 
 			rw = ps.executeUpdate();
 			if (rw > 0) {

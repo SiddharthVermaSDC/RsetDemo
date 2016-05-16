@@ -17,11 +17,10 @@ public class HospitalUpdate {
 		try {
 			connection = Database.createConnection();
 //			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			java.sql.Date d = new java.sql.Date(hsptl1.getRegDate().getTime());
+		//	java.sql.Date d = new java.sql.Date(hsptl1.getRegDate().getTime());
 			String query = "Update Hospital set Name=?,AddressId=?,HasER=?,Facilities=?,OPDFees=?,Beds=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?,RegistrationDate=?,Website=?,Hospitalphonenumber=?,Hasradiology=?,Hasdiagnistics=?,Hasambulance=?,AdmissionProcess=? where HospitalId=?";
 			ps3 = connection.prepareStatement(query);
 			ps3.setString(1, hsptl1.getHospitalname());
-			ps3.setInt(2, hsptl1.getAddressId());
 			ps3.setBoolean(3, hsptl1.isHasER());
 			ps3.setString(4, hsptl1.getFacilities());
 			ps3.setInt(5, hsptl1.getOpdFees());
@@ -32,8 +31,8 @@ public class HospitalUpdate {
 			ps3.setString(9, hsptl1.getAddressLine3());
 			ps3.setInt(10, hsptl1.getCityId());
 			ps3.setString(11, hsptl1.getPincode());
-			ps3.setDate(12, (java.sql.Date) d);
-			// ps.setDate(12,hsptl.getRegDate());
+		//	ps3.setDate(12, (java.sql.Date) d);
+		    ps3.setDate(12,null);
 			ps3.setString(13, hsptl1.getWebsite());
 			ps3.setString(14, hsptl1.getPhonenumber());
 			ps3.setBoolean(15, hsptl1.isHasRadiology());

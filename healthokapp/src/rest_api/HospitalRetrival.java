@@ -11,19 +11,16 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/Hospital")
 
-// for retrieving whole data on giving hospitalid
+// for retrieving whole data on giving Hospital Id
 public class HospitalRetrival {
 	@Path("/Retrieval/{HospitalId}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static model.Hospital getHospital(@PathParam("HospitalId") int hospitalId) {
-		model.Hospital hospital = null;
-		hospital = new biz.HospitalRetrival().responseHospital(hospitalId);
-		return hospital;
-
+	public ArrayList<model.Hospital> getHospital(@PathParam("HospitalId") int hospitalId) {
+		return new biz.HospitalRetrival().responseHospital(hospitalId);
 	}
 
-	// for retrieving all hospitals
+	// for Retrieving all Hospitals Data
 	@Path("/Retrieval")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

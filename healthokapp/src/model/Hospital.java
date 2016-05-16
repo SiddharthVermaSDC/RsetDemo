@@ -7,7 +7,6 @@ public class Hospital {
 
 	private int hospitalId;
 	private String hospitalname;
-	private int addressId;
 	private boolean hasER;
 	private String facilities;
 	private int opdFees;
@@ -24,7 +23,10 @@ public class Hospital {
 	private boolean hasDiagnistics;
 	private boolean hasAmbulance;
 	private String addmissionProcess;
-	public Hospital(){}
+
+	public Hospital() {
+	}
+
 	private ArrayList<HospitalPhoneNumber> hospitalPhoneNumbers;
 	private ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation;
 
@@ -118,14 +120,6 @@ public class Hospital {
 
 	public void setHospitalname(String hospitalname) {
 		this.hospitalname = hospitalname;
-	}
-
-	public int getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
 	}
 
 	public boolean isHasER() {
