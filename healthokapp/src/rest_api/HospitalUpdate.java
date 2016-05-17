@@ -17,7 +17,7 @@ public class HospitalUpdate {
 	public static model.Result hospitalUpdate(@PathParam("hospitalId") int id, model.Hospital hsptl1) {
 		model.Result rs = new model.Result();
 		// hsptl1.setHospitalId(id);
-		int result = biz.HospitalUpdate.updateHospital(hsptl1);
+		int result = biz.HospitalUpdate.updateHospital(hsptl1,id);
 		rs.setStatus(result);
 		return rs;
 	}
