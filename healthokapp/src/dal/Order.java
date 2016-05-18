@@ -323,9 +323,6 @@ public class Order {
 				    order.setOrderDescription(rs1.getString("ddesc"));
 					orderList1.add(order);
 					
-				
-				
-				
 				model.Doctor doctor = new model.Doctor();
 				String q1="Select * from Doctor where DoctorId=?";
 				ps1=(PreparedStatement) connection.prepareStatement(q1);
@@ -347,7 +344,6 @@ public class Order {
 				doctor.setDoctorImageid(rs2.getInt("doctorImageId"));
 				doctor.setSpecialityId(rs2.getInt("SpecialityId"));
 				//doctor.setSpeciality(rs2.getString("SpecialityText"));
-				
 				doctor.setDegree(rs2.getString("Degree"));
 				doctor.setClinicTiming(rs2.getString("ClinicTiming"));
 				doctor.setOffDay(rs2.getString("OffDay"));
@@ -366,7 +362,7 @@ public class Order {
 				order.setDoctor(doctor);
 				}
 				
-				orderList1.add(order);
+			//	orderList1.add(order);
 				}
 				
 				return orderList1;

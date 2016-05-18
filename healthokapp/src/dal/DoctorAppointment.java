@@ -21,7 +21,6 @@ public class DoctorAppointment {
 		String str = "insert into DoctorAppointment(OrderId,DoctorId,AppointmentDate,Description) values (?,?,?,?)";
 
 		try {
-			
 
 			connection = Database.createConnection();
 
@@ -40,54 +39,43 @@ public class DoctorAppointment {
 
 			}
 
-		//	int rw1 = 0;
-			
+			// int rw1 = 0;
+
 		}
 
 		catch (SQLException se) {
 			Logging.Exception("AmbulanceOrderDAL",
 					"Error Creating Order " + ps.toString() + " Exception " + se.getMessage());
-		}
-
-		return doctorAppoinntmentId;
-	}
-	
-	
-	public model.Doctor accessDoctorName(model.Doctor doctor)
-	{
-		
-		Connection connection = null;
-		PreparedStatement ps1 = null;
-		ResultSet rs1 = null;
-		model.Doctor doc=null;
-		try
-		{
-			connection = Database.createConnection();
-			String q = "select FirstName,MiddleName,LastName from Doctor where DoctorId=?";
-			ps1 = connection.prepareStatement(q);
-			ps1.setInt(1, doctor.getDoctorId());
-			rs1 = ps1.executeQuery();
-			while(rs1.next())
-			{
-				doc=new model.Doctor();
-				doc.setDoctorId(doctor.getDoctorId());
-				doc.setFirstName(rs1.getString("FirstName"));
-				doc.setFirstName(rs1.getString("MiddleName"));
-				doc.setFirstName(rs1.getString("LastName"));
-				
-			}
-		}
-		
-		catch (SQLException se) {
-			Logging.Exception("DoctorDAL",
-					"Error Creating Order " + ps1.toString() + " Exception " + se.getMessage());
 		} finally {
 
 			Database.closeConnection(connection);
 		}
-		
-		return doc;
-		
+
+		return doctorAppoinntmentId;
+
+		/*
+		 * public model.Doctor accessDoctorName(model.Doctor doctor) {
+		 * 
+		 * Connection connection = null; PreparedStatement ps1 = null; ResultSet
+		 * rs1 = null; model.Doctor doc=null; try { connection =
+		 * Database.createConnection(); String q =
+		 * "select FirstName,MiddleName,LastName from Doctor where DoctorId=?";
+		 * ps1 = connection.prepareStatement(q); ps1.setInt(1,
+		 * doctor.getDoctorId()); rs1 = ps1.executeQuery(); while(rs1.next()) {
+		 * doc=new model.Doctor(); doc.setDoctorId(doctor.getDoctorId());
+		 * doc.setFirstName(rs1.getString("FirstName"));
+		 * doc.setFirstName(rs1.getString("MiddleName"));
+		 * doc.setFirstName(rs1.getString("LastName"));
+		 * 
+		 * } }
+		 * 
+		 * catch (SQLException se) { Logging.Exception("DoctorDAL",
+		 * "Error Creating Order " + ps1.toString() + " Exception " +
+		 * se.getMessage()); }
+		 */
+
+		// return doc;
+
 	}
 
 }
