@@ -78,7 +78,12 @@ public class Order {
 		}
 	
 
-	 
+	 @Path("/getuserappointment/{userId}")
+		@GET
+		@Produces (MediaType.APPLICATION_JSON)
+		public  ArrayList<model.OrderBase> getUserAppointment (@PathParam("userId") int userId){
+			return new biz.Order().getUserAppointment(userId);
+		}
 	 
 	 
 	@Path("/s")

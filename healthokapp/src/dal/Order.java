@@ -223,7 +223,7 @@ public class Order {
 				            + "  on MO.OrderId = o.orderId and LO.OrderId = o.OrderId and AO.OrderId = o.OrderId and   NO.OrderId = o.orderid and DA.OrderId = o.OrderId "
 				            +  " WHERE userid = ?";
 				
-				
+				Logging.Debug("ORDERDAL", str1);
 				connection =  Database.createConnection();
 				ps=(PreparedStatement) connection.prepareStatement(str1);
 				ps.setInt(1,userId);
@@ -240,7 +240,9 @@ public class Order {
 					order.setOrderCompletionDate(rs.getDate("OrderCompletionDate"));
 					order.setOrderStatusType(OrderStatusType.item(rs.getInt("OrderStatusTypeId")));
 					order.setOrderType(OrderType.item(rs.getInt("OrderTypeId")));
-				
+					order.setUserId(userId);
+					order.setDoctorId(rs.getInt("DoctorId"));
+				    
 					switch ( order.getOrderType() )
 					{
 					case AMBULANCE:
@@ -274,14 +276,113 @@ public class Order {
 			catch(SQLException se)
 			{
 				Logging.Error("ORDERDAL","Error in get order details" + se.getMessage());
+		  	    // Dont send a fake order object order = new model.Order(1,1,1,null,1,null,"as",1,1,1,1,"0000-00-00");
+				return null;
+			}
+			finally{
+				Database.closeConnection(connection);
+			}
+
+			//return null;
+		}
+		
+		public  ArrayList<model.OrderBase> getUserAppointment(int userId) {
+
+			Connection connection= null;
+			PreparedStatement ps1 = null;
+			ResultSet rs1,rs2 = null;
+
+			try{
+				
+				String str2="SELECT o.OrderId, o.OrderDate, o.OrderFulfillDate, o.OrderCompletionDate, o.OrderTypeId,o.OrderStatusTypeId,"
+						+"DA.DoctorId, DA.Description ddesc FROM `Order` "
+					    +" AS o Left Join (DoctorAppointment as DA)"  
+			            +" on O.OrderId=o.orderId and DA.OrderId = o.OrderId "
+			            +" WHERE userid = ?";
+
+				
+				
+				connection =  Database.createConnection();
+				ps1=(PreparedStatement) connection.prepareStatement(str2);
+				ps1.setInt(1,userId);
+				rs1=ps1.executeQuery();
+
+				ArrayList<model.OrderBase> orderList1 = new ArrayList<model.OrderBase>();
+				model.OrderBase order = null;
+				while ( rs1.next())
+				{
+				order = new model.OrderBase();
+					order.setOrderId(rs1.getInt("OrderId"));
+					order.setOrderDate(rs1.getDate("OrderDate"));
+					order.setOrderFulfillDate(rs1.getDate("OrderFulfillDate"));
+					order.setOrderCompletionDate(rs1.getDate("OrderCompletionDate"));
+					order.setOrderStatusType(OrderStatusType.item(rs1.getInt("OrderStatusTypeId")));
+					order.setOrderType(OrderType.item(rs1.getInt("OrderTypeId")));
+					order.setUserId(userId);
+					order.setDoctorId(rs1.getInt("DoctorId"));
+				    order.setOrderDescription(rs1.getString("ddesc"));
+					orderList1.add(order);
+					
+				
+				
+				
+				model.Doctor doctor = new model.Doctor();
+				String q1="Select * from Doctor where DoctorId=?";
+				ps1=(PreparedStatement) connection.prepareStatement(q1);
+				ps1.setInt(1,order.getDoctorId());
+				rs2=ps1.executeQuery();
+				if(rs2.next())
+				{
+				doctor.setDoctorId(rs2.getInt("DoctorId"));
+				doctor.setEmergencyFees(rs2.getInt("EmergencyFees"));
+				doctor.setBelongToAnyHospital(rs2.getBoolean("IsBelongToAnyHospital"));
+				doctor.setDoctorRegistrationDate(rs2.getDate("DoctorRegistrationDate"));
+				doctor.setEmailId(rs2.getString("EmailId"));
+				doctor.setProvideHomecare(rs2.getBoolean("IsProvideHomeCare"));
+				doctor.setPharmacy(rs2.getBoolean("IsPharmacy"));
+				doctor.setFirstName(rs2.getString("FirstName"));
+				doctor.setMiddleName(rs2.getString("MiddleName"));
+				doctor.setLastName(rs2.getString("LastName"));
+				doctor.setSpecialityId(rs2.getInt("SpecialityId"));
+				doctor.setDoctorImageid(rs2.getInt("doctorImageId"));
+				doctor.setSpecialityId(rs2.getInt("SpecialityId"));
+				//doctor.setSpeciality(rs2.getString("SpecialityText"));
+				
+				doctor.setDegree(rs2.getString("Degree"));
+				doctor.setClinicTiming(rs2.getString("ClinicTiming"));
+				doctor.setOffDay(rs2.getString("OffDay"));
+				doctor.setFees(rs2.getInt("Fees"));
+				doctor.setInPanel(rs2.getBoolean("InPanel"));
+				doctor.setAppointmnet(rs2.getBoolean("IsAppointmentEnabled"));
+				doctor.setVirtualReceptionist(rs2.getBoolean("isVirtualReceptionistEnabled"));
+				doctor.setPostcare(rs2.getBoolean("IsPostCareEnabled"));
+				doctor.setYearofExperience(rs2.getInt("YearsOfExperience"));
+				doctor.setAddressLine1(rs2.getString("AddressLine1"));
+				doctor.setAddressLine2(rs2.getString("AddressLine2"));
+				doctor.setAddressLine3(rs2.getString("AddressLine3"));
+				doctor.setCityId(rs2.getInt("CityId"));
+				doctor.setPincode(rs2.getString("PinCode"));
+				
+				order.setDoctor(doctor);
+				}
+				
+				orderList1.add(order);
+				}
+				
+				return orderList1;
+			}
+			catch(SQLException se)
+			{
+				Logging.Error("ORDERDAL","Error in get order details" + se.getMessage());
+				return null;
 		  	    // Dont send a fake order object order = new model.Order(1,1,1,null,1,null,"as",1,1,1,1,"0000-00-00");	
 			}
 			finally{
 				Database.closeConnection(connection);
 			}
 
-			return null;
-		}
+			
+		}    
 
 
 }

@@ -25,8 +25,8 @@ public  static  Connection createConnection()
 		
 		 		String port ="3306";
 				String dbname = "healthok";
-				String username = "adminuzuSCxp";
-				String password = "GQBXVWgreeuA";   
+				String username = "root";
+				String password = "1october";   
 		
 		// was trying this but didnt get it working. will need to see how to do this properly
 				//

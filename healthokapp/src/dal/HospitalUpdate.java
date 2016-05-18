@@ -6,21 +6,18 @@ import java.sql.PreparedStatement;
 import model.Hospital;
 import model.HospitalPhoneNumber;
 
-
-
-
 public class HospitalUpdate {
 
-
 	public static int updateHospital(model.Hospital hsptl1, int id) {
-		 Connection connection;
-		 PreparedStatement ps3;
+		Connection connection;
+		PreparedStatement ps3;
 
 		int result1 = 0;
 		try {
 			connection = Database.createConnection();
-//			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		//	java.sql.Date d = new java.sql.Date(hsptl1.getRegDate().getTime());
+			// SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			// java.sql.Date d = new
+			// java.sql.Date(hsptl1.getRegDate().getTime());
 			String query = "Update Hospital set Name=?,HasER=?,Facilities=?,OPDFees=?,Beds=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=?,RegistrationDate=?,Website=?,Hasradiology=?,Hasdiagnistics=?,Hasambulance=?,AdmissionProcess=? where HospitalId=\""
 					+ id + "\"";
 			ps3 = connection.prepareStatement(query);
@@ -35,16 +32,17 @@ public class HospitalUpdate {
 			ps3.setString(8, hsptl1.getAddressLine3());
 			ps3.setInt(9, hsptl1.getCityId());
 			ps3.setString(10, hsptl1.getPincode());
-		    ps3.setDate(11,null);
+			ps3.setDate(11, null);
 			ps3.setString(12, hsptl1.getWebsite());
 			ps3.setBoolean(13, hsptl1.isHasRadiology());
 			ps3.setBoolean(14, hsptl1.isHasDiagnistics());
 			ps3.setBoolean(15, hsptl1.isHasAmbulance());
 			ps3.setString(16, hsptl1.getAddmissionProcess());
 
-			ps3.executeUpdate();// fix code to use standard template. Check for rows updated > 0
+			ps3.executeUpdate();// fix code to use standard template. Check for
+								// rows updated > 0
 			result1 = 1;
-			
+
 			if (new model.HospitalPhoneNumber().getHospitalPhoneNumberId() <= 1) {
 				String q1 = "insert into HospitalPhoneNumbers(HospitalId,PhoneNumberType,PhoneNumber,Contact,Comments) values(?,?,?,?,?)";
 				for (model.HospitalPhoneNumber hospitalphonenumber : hsptl1.getHospitalPhoneNumbers()) {
@@ -62,7 +60,8 @@ public class HospitalUpdate {
 
 			else {
 				System.out.println("aaaaa = ");
-				String q1 = "Update HospitalPhoneNumbers set PhoneNumber=?,Contact=?,Comments=? where HospitalId \"" + id + "\"";
+				String q1 = "Update HospitalPhoneNumbers set PhoneNumber=?,Contact=?,Comments=? where HospitalId \""
+						+ id + "\"";
 				for (model.HospitalPhoneNumber Hospitalphonenumber : hsptl1.getHospitalPhoneNumbers()) {
 					ps3 = connection.prepareStatement(q1);
 
@@ -85,13 +84,12 @@ public class HospitalUpdate {
 				}
 			}
 		}
-				
-		 catch (Exception e) {
+
+		catch (Exception e) {
 			System.out.println(e);
 			result1 = 500;
 		}
 		return result1;
 	}
 
-	
 }

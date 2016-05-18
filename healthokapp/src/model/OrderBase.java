@@ -13,6 +13,16 @@ private Date orderFulfillDate;
 private String orderDescription; // this is entered when placing the order. 
 private int imageId; // this is id of image stored in database.
 private int doctorId; // used when ordering Doctor Appointment
+private Doctor doctor;
+
+public Doctor getDoctor() {
+	return doctor;
+}
+
+
+public void setDoctor(Doctor doctor) {
+	this.doctor = doctor;
+}
 
 
 public OrderBase(int userId, OrderType orderType, Date orderDate, OrderStatusType orderStatusType,

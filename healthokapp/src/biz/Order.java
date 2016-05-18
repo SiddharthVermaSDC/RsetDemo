@@ -3,6 +3,7 @@ package biz;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.OrderBase;
 import model.OrderStatusType;
 import model.OrderType;
 import notification.Notify;
@@ -135,6 +136,13 @@ public class Order {
 	{
 		
 		return new dal.Order().getUserOrders(userId);
+	}
+
+
+
+	public ArrayList<OrderBase> getUserAppointment(int userId) {
+		// TODO Auto-generated method stub
+		return new dal.Order(). getUserAppointment(userId);
 	}
 
 }
