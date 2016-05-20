@@ -22,7 +22,9 @@ public class Doctor {
 		try {
 			connection = Database.createConnection();
 
-			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,SpecialityId,Degree,DoctorRegistrationDate,ClinicTiming,offDay,Fees,EmergencyFees,IsPharmacy,IsProvideHomeCare,IsBelongToAnyHospital,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsPostCareEnabled,DoctorImageId,YearsofExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,ProvideEmergencyCare,IsTeleMedicineEnabled,HasOwnHospital,Website) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,SpecialityId,Degree,DoctorRegistrationDate,ClinicTiming,OffDay,Fees,EmergencyFees,IsPharmacy,IsProvideHomeCare,IsBelongToAnyHospitals,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsProvidePostCareEnabled,DoctorImageId,YearOfExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,ProvideEmergencyCare,IsTeleMedicineEnabled,HasOwnHospital,Website,"
+					+ "IsProvideHomeConsultationFees,IsDiagnostics,IsProvideAnsweringService,"
+					+ "IsProvidePostCallFollowup,Health_panel,Specialization) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(q, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString(1, doctor.getFirstName());
@@ -58,8 +60,14 @@ public class Doctor {
 			ps.setString(25, doctor.getPincode());
 			ps.setBoolean(26, doctor.isProvideEmergencyCare());
 			ps.setBoolean(27, doctor.isTaleMedicineEnabled());
-			ps.setInt(28, doctor.getHasOwnHospital());
+			ps.setString(28, doctor.getHasOwnHospital());
 			ps.setString(29, doctor.getWebSite());
+			ps.setBoolean(30,doctor.isProvideHomeConsultationFees());
+			ps.setBoolean(31, doctor.isIsDiagnostics());
+			ps.setBoolean(32,doctor.isIsProvideAnsweringService());
+			ps.setBoolean(33,doctor.isIsProvidePostCallFollowup());
+			ps.setBoolean(34, doctor.isHealth_panel());
+			ps.setString(35, doctor.getSpecialization());
 			System.out.println("Pin Code= " + doctor.getPincode());
 			result = 1;
 			int row1 = ps.executeUpdate();

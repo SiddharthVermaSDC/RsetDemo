@@ -140,22 +140,16 @@ public class DoctorRetrival {
 			doctor.setAddressLine3(rs.getString("AddressLine3"));
 			doctor.setCityId(rs.getInt("CityId"));
 			doctor.setPincode(rs.getString("PinCode"));
-			/*
-			 * fill in the rest. String degree = rs.getString("Degree");
-			 * 
-			 * String clinicTiming = rs.getString("ClinicTiming"); String offDay
-			 * = rs.getString("OffDay"); int fees = rs.getInt("Fees"); boolean
-			 * inPanel = rs.getBoolean("InPanel"); boolean appointmnet =
-			 * rs.getBoolean("IsAppointmentEnabled"); boolean
-			 * virtualReceptionist =
-			 * rs.getBoolean("isVirtualReceptionistEnabled"); boolean postcare =
-			 * rs.getBoolean("IsPostCareEnabled"); int yearofExperience =
-			 * rs.getInt("YearsOfExperience"); String addressLine1 =
-			 * rs.getString("AddressLine1"); String addressLine2 =
-			 * rs.getString("AddressLine2"); String addressLine3 =
-			 * rs.getString("AddressLine3");
-			 */
-
+			doctor.setProvideEmergencyCare(rs.getBoolean("ProvideEmergencyCare"));
+			doctor.setTaleMedicineEnabled(rs.getBoolean("IsTeleMedicineEnabled"));
+			doctor.setHasOwnHospital(rs.getString("HasOwnHospital"));
+			doctor.setWebSite(rs.getString("Website"));
+			doctor.setProvideHomeConsultationFees(rs.getBoolean("IsProvideHomeConsultationFees"));
+			doctor.setIsDiagnostics(rs.getBoolean("IsDiagnostics"));
+			doctor.setIsProvideAnsweringService(rs.getBoolean("IsProvideAnsweringService"));
+			doctor.setIsProvidePostCallFollowup(rs.getBoolean("IsProvidePostCallFollowup"));
+			doctor.setHealth_panel(rs.getBoolean("Health_panel"));
+			
 			return doctor;
 
 		} catch (SQLException se) {

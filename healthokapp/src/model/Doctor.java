@@ -37,8 +37,23 @@ public class Doctor {
 	private String Speciality;
 	private boolean provideEmergencyCare;
 	private boolean isTaleMedicineEnabled;
-	private int hasOwnHospital;
+	private String hasOwnHospital;
 	private String webSite;
+	private String specialization;
+
+	public String getSpecialization() {
+		return specialization;
+	}
+
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
+
+	private boolean isProvideHomeConsultationFees;
+	private boolean IsDiagnostics;
+	private boolean IsProvideAnsweringService;
+	private boolean IsProvidePostCallFollowup;
+	private boolean Health_panel;
 
 	private ArrayList<DoctorPhoneNumber> doctorPhoneNumbers;
 	private ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation;
@@ -267,22 +282,46 @@ public class Doctor {
 		Speciality = speciality;
 	}
 
-	public ArrayList<DoctorPhoneNumber> getDoctorPhoneNumbers() {
-		return doctorPhoneNumbers;
+	public boolean isProvideHomeConsultationFees() {
+		return isProvideHomeConsultationFees;
 	}
 
-	public void setDoctorPhoneNumbers(ArrayList<DoctorPhoneNumber> doctorPhoneNumbers) {
-		this.doctorPhoneNumbers = doctorPhoneNumbers;
+	public void setProvideHomeConsultationFees(boolean isProvideHomeConsultationFees) {
+		this.isProvideHomeConsultationFees = isProvideHomeConsultationFees;
 	}
 
-	public ArrayList<DoctorHospitalAffiliation> getDoctorHospitalAffiliation() {
-		return doctorHospitalAffiliation;
+	public boolean isIsDiagnostics() {
+		return IsDiagnostics;
 	}
 
-	public void setDoctorHospitalAffiliation(ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation) {
-		this.doctorHospitalAffiliation = doctorHospitalAffiliation;
+	public void setIsDiagnostics(boolean isDiagnostics) {
+		IsDiagnostics = isDiagnostics;
 	}
 
+	public boolean isIsProvideAnsweringService() {
+		return IsProvideAnsweringService;
+	}
+
+	public void setIsProvideAnsweringService(boolean isProvideAnsweringService) {
+		IsProvideAnsweringService = isProvideAnsweringService;
+	}
+
+	public boolean isIsProvidePostCallFollowup() {
+		return IsProvidePostCallFollowup;
+	}
+
+	public void setIsProvidePostCallFollowup(boolean isProvidePostCallFollowup) {
+		IsProvidePostCallFollowup = isProvidePostCallFollowup;
+	}
+
+	public boolean isHealth_panel() {
+		return Health_panel;
+	}
+
+	public void setHealth_panel(boolean health_panel) {
+		Health_panel = health_panel;
+	}
+	
 	public boolean isProvideEmergencyCare() {
 		return provideEmergencyCare;
 	}
@@ -299,11 +338,11 @@ public class Doctor {
 		this.isTaleMedicineEnabled = isTaleMedicineEnabled;
 	}
 
-	public int getHasOwnHospital() {
+	public String getHasOwnHospital() {
 		return hasOwnHospital;
 	}
 
-	public void setHasOwnHospital(int hasOwnHospital) {
+	public void setHasOwnHospital(String hasOwnHospital) {
 		this.hasOwnHospital = hasOwnHospital;
 	}
 
@@ -314,5 +353,23 @@ public class Doctor {
 	public void setWebSite(String webSite) {
 		this.webSite = webSite;
 	}
+
+	public ArrayList<DoctorPhoneNumber> getDoctorPhoneNumbers() {
+		return doctorPhoneNumbers;
+	}
+
+	public void setDoctorPhoneNumbers(ArrayList<DoctorPhoneNumber> doctorPhoneNumbers) {
+		this.doctorPhoneNumbers = doctorPhoneNumbers;
+	}
+
+	public ArrayList<DoctorHospitalAffiliation> getDoctorHospitalAffiliation() {
+		return doctorHospitalAffiliation;
+	}
+
+	public void setDoctorHospitalAffiliation(ArrayList<DoctorHospitalAffiliation> doctorHospitalAffiliation) {
+		this.doctorHospitalAffiliation = doctorHospitalAffiliation;
+	}
+
+	
 
 }
