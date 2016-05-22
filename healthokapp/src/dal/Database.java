@@ -19,9 +19,9 @@ public  static  Connection createConnection()
 		// This is the connection string to use before you deploy to openshift
 		
 
-			//	String host="127.0.0.1"; // with port forwarding or localhost -- This is the host to use when you run using port forwarding
+				String host="127.0.0.1"; // with port forwarding or localhost -- This is the host to use when you run using port forwarding
 				
-		     String host="127.3.104.130"; // on Openshift
+		    // String host="127.3.104.130"; // on Openshift
 		
 		 /*		String port ="3306";
 				String dbname = "healthok";

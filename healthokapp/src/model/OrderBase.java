@@ -24,7 +24,6 @@ public void setDoctor(Doctor doctor) {
 	this.doctor = doctor;
 }
 
-
 public OrderBase(int userId, OrderType orderType, Date orderDate, OrderStatusType orderStatusType,
 		Date orderCompletionDate, Date orderFulfillDate, String orderDescription) {
 	super();

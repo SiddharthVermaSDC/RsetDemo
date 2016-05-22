@@ -32,7 +32,14 @@ public class MedicineOrder{
 
 			ps=(PreparedStatement) connection.prepareStatement(str,Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1,order.getOrderId());
+			if ( order.getImageId() > 0 )
+			{
 			ps.setInt(2, order.getImageId());
+			}
+			else
+			{
+				ps.setNull(2, java.sql.Types.INTEGER);
+			}
 			ps.setString(3,order.getOrderDescription());
 
 			rw=ps.executeUpdate();

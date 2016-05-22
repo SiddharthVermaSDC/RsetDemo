@@ -27,6 +27,7 @@ public class Order {
 		orderId = orderDal.createOrder(order);
 		order.setOrderId(orderId);
 		
+		Logging.Debug("ORDERBIZ", order.getOrderType().toString());
 		switch (order.getOrderType() )
 		{
 		case AMBULANCE:
@@ -49,6 +50,10 @@ public class Order {
 		
 		}
 		
+		if (order.getOrderFulfillDate() == null )
+		{
+			order.setOrderFulfillDate(order.getOrderDate());
+		}
 		status = StatusCode.Success;
 
 		}

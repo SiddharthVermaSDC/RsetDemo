@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import util.Logging;
 import util.StatusCode;
 
 
@@ -24,6 +25,8 @@ public class Order {
 	// userId, orderType, fulfillDate, description, image, doctorId
 	public model.Result placeOrder(model.OrderBase order)
 	{
+	
+		Logging.Debug("RESTAPI-ORDER", order.getOrderType().toString());
 		model.Result result=new model.Result();
 		biz.Order orderBiz = new biz.Order();
 	

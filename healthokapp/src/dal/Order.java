@@ -42,8 +42,8 @@ public class Order {
 		    ps.setInt(2, order.getOrderType().getOrderType());
 			ps.setDate(3, orderDate);
 			ps.setInt(4,order.getOrderStatusType().getOrderStatusType());
-			ps.setString(5,order.getOrderDescription());
-			ps.setDate(6, orderFulfillDate );
+			//ps.setString(5,order.getOrderDescription());
+			ps.setDate(5, orderFulfillDate );
 			int rw=ps.executeUpdate();
 
 			   if(rw>0)
