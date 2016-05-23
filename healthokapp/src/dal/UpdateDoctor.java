@@ -21,7 +21,7 @@ public class UpdateDoctor {
 			ps5 = connection.prepareStatement(q);
 			ps5.setInt(1, doctor.getEmergencyFees());
 			System.out.println("EmergencyFees " + doctor.getEmergencyFees());
-			ps5.setBoolean(2, doctor.isBelongToAnyHospital());
+			ps5.setString(2, doctor.getIsBelongToAnyHospital());
 			// java.sql.Date(doctor.getDoctorRegistrationDate().getTime()));
 			ps5.setString(3, doctor.getEmailId());
 			System.out.println("EmailId " + doctor.getEmailId());

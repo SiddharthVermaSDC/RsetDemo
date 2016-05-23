@@ -113,7 +113,7 @@ public class DoctorRetrival {
 		try {
 			doctor.setDoctorId(rs.getInt("DoctorId"));
 			doctor.setEmergencyFees(rs.getInt("EmergencyFees"));
-			doctor.setBelongToAnyHospital(rs.getBoolean("IsBelongToAnyHospital"));
+			doctor.setIsBelongToAnyHospital(rs.getString("IsBelongToAnyHospitals"));
 			doctor.setDoctorRegistrationDate(rs.getDate("DoctorRegistrationDate"));
 			doctor.setEmailId(rs.getString("EmailId"));
 			doctor.setProvideHomecare(rs.getBoolean("IsProvideHomeCare"));
@@ -133,8 +133,8 @@ public class DoctorRetrival {
 			doctor.setInPanel(rs.getBoolean("InPanel"));
 			doctor.setAppointmnet(rs.getBoolean("IsAppointmentEnabled"));
 			doctor.setVirtualReceptionist(rs.getBoolean("isVirtualReceptionistEnabled"));
-			doctor.setPostcare(rs.getBoolean("IsPostCareEnabled"));
-			doctor.setYearofExperience(rs.getInt("YearsOfExperience"));
+			doctor.setPostcare(rs.getBoolean("IsProvidePostCareEnabled"));
+			doctor.setYearofExperience(rs.getInt("YearOfExperience"));
 			doctor.setAddressLine1(rs.getString("AddressLine1"));
 			doctor.setAddressLine2(rs.getString("AddressLine2"));
 			doctor.setAddressLine3(rs.getString("AddressLine3"));

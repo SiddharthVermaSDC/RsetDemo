@@ -332,7 +332,7 @@ public class Order {
 				{
 				doctor.setDoctorId(rs2.getInt("DoctorId"));
 				doctor.setEmergencyFees(rs2.getInt("EmergencyFees"));
-				doctor.setBelongToAnyHospital(rs2.getBoolean("IsBelongToAnyHospital"));
+				doctor.setIsBelongToAnyHospital(rs2.getString("IsBelongToAnyHospital"));
 				doctor.setDoctorRegistrationDate(rs2.getDate("DoctorRegistrationDate"));
 				doctor.setEmailId(rs2.getString("EmailId"));
 				doctor.setProvideHomecare(rs2.getBoolean("IsProvideHomeCare"));

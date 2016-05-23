@@ -23,7 +23,7 @@ public class Doctor {
 	private int fees;
 	private boolean isPharmacy;
 	private boolean isProvideHomecare;
-	private boolean isBelongToAnyHospital;
+	private String isBelongToAnyHospital;
 	private boolean inPanel;
 	private boolean appointmnet;
 	private boolean virtualReceptionist;
@@ -186,11 +186,13 @@ public class Doctor {
 		this.isProvideHomecare = isProvideHomecare;
 	}
 
-	public boolean isBelongToAnyHospital() {
+	
+
+	public String getIsBelongToAnyHospital() {
 		return isBelongToAnyHospital;
 	}
 
-	public void setBelongToAnyHospital(boolean isBelongToAnyHospital) {
+	public void setIsBelongToAnyHospital(String isBelongToAnyHospital) {
 		this.isBelongToAnyHospital = isBelongToAnyHospital;
 	}
 

@@ -45,7 +45,7 @@ public class Doctor {
 			ps.setInt(11, doctor.getEmergencyFees());
 			ps.setBoolean(12, doctor.isPharmacy());
 			ps.setBoolean(13, doctor.isProvideHomecare());
-			ps.setBoolean(14, doctor.isBelongToAnyHospital());
+			ps.setString(14, doctor.getIsBelongToAnyHospital());
 			ps.setBoolean(15, doctor.isInPanel());
 			ps.setBoolean(16, doctor.isAppointmnet());
 			ps.setBoolean(17, doctor.isVirtualReceptionist());
