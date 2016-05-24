@@ -22,9 +22,15 @@ public class Doctor {
 		try {
 			connection = Database.createConnection();
 
-			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,SpecialityId,Degree,DoctorRegistrationDate,ClinicTiming,OffDay,Fees,EmergencyFees,IsPharmacy,IsProvideHomeCare,IsBelongToAnyHospitals,InPanel,IsAppointmentEnabled,isVirtualReceptionistEnabled,IsProvidePostCareEnabled,DoctorImageId,YearOfExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,ProvideEmergencyCare,IsTeleMedicineEnabled,HasOwnHospital,Website,"
+			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,SpecialityId,Degree,"
+					+ "DoctorRegistrationDate,ClinicTiming,OffDay,Fees,EmergencyFees,IsPharmacy,"
+					+ "IsProvideHomeCare,IsBelongToAnyHospitals,InPanel,IsAppointmentEnabled,"
+					+ "isVirtualReceptionistEnabled,IsProvidePostCareEnabled,DoctorImageId,"
+					+ "YearOfExperience,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,"
+					+ "ProvideEmergencyCare,IsTeleMedicineEnabled,HasOwnHospital,Website,"
 					+ "IsProvideHomeConsultationFees,IsDiagnostics,IsProvideAnsweringService,"
-					+ "IsProvidePostCallFollowup,Health_panel,Specialization) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "IsProvidePostCallFollowup,Health_panel,Specialization)"
+					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(q, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString(1, doctor.getFirstName());

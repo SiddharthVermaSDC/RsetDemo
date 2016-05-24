@@ -15,8 +15,14 @@ public class UpdateDoctor {
 
 		try {
 			connection = Database.createConnection();
-
-			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospital=?,EmailId=?,IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,SpecialityId=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsPostCareEnabled=?,DoctorImageId=?,YearsOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,CityId=?,PinCode=? where DoctorId=\""
+			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospitals=?,EmailId=?,"
+					+ "IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,"
+					+ "SpecialityId=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,"
+					+ "IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsProvidePostCareEnabled=?,"
+					+ "DoctorImageId=?,YearOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,"
+					+ "CityId=?,PinCode=?,ProvideEmergencyCare=?,IsTeleMedicineEnabled=?,HasOwnHospital=?,"
+					+ "Website=?,IsProvideHomeConsultationFees=?,IsDiagnostics=?,IsProvideAnsweringService=?,"
+					+ "IsProvidePostCallFollowup=?,Health_panel=?,Specialization=? where DoctorId=\""
 					+ val + "\"";
 			ps5 = connection.prepareStatement(q);
 			ps5.setInt(1, doctor.getEmergencyFees());
@@ -48,7 +54,20 @@ public class UpdateDoctor {
 			ps5.setString(22, doctor.getAddressLine3());
 			ps5.setInt(23, doctor.getCityId());
 			ps5.setString(24, doctor.getPincode());
+			/* ProvideEmergencyCare,IsTeleMedicineEnabled,HasOwnHospital,Website,"
+					+ "IsProvideHomeConsultationFees,IsDiagnostics,IsProvideAnsweringService,"
+					+ "IsProvidePostCallFollowup,Health_panel,Specialization */
 			System.out.println("PinCode = " + doctor.getPincode());
+			ps5.setBoolean(25, doctor.isProvideEmergencyCare());
+			ps5.setBoolean(26,doctor.isTaleMedicineEnabled());
+			ps5.setString(27, doctor.getHasOwnHospital());
+			ps5.setString(28,doctor.getWebSite());
+			ps5.setBoolean(29, doctor.isProvideHomeConsultationFees());
+			ps5.setBoolean(30, doctor.isIsDiagnostics());
+			ps5.setBoolean(31,doctor.isIsProvideAnsweringService() );
+			ps5.setBoolean(32, doctor.isIsProvidePostCallFollowup());
+			ps5.setBoolean(33, doctor.isHealth_panel());
+			ps5.setString(34, doctor.getSpecialization());
 			result = 1;
 			ps5.executeUpdate();
 

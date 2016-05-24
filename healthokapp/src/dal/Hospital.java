@@ -19,12 +19,15 @@ public class Hospital {
 			connection = Database.createConnection();
 			System.out.println("Connection Is Created");
 
-			String query = "Insert Into Hospital(Name,HasER,Facilities,OPDFees,Beds,AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,Website,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "Insert Into Hospital(Name,HasER,Facilities,OPDFees,Beds,"
+					+ "AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,"
+					+ "Website,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) "
+					+ "Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			System.out.println("Statement Is Created");
 			ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			
+
 			ps.setString(1, hospital.getHospitalname());
-//			ps.setInt(2, hospital.getAddressId());
+			// ps.setInt(2, hospital.getAddressId());
 			ps.setBoolean(2, hospital.isHasER());
 			ps.setString(3, hospital.getFacilities());
 			ps.setInt(4, hospital.getOpdFees());
@@ -35,11 +38,11 @@ public class Hospital {
 			ps.setString(8, hospital.getAddressLine3());
 			ps.setInt(9, hospital.getCityId());
 			ps.setString(10, hospital.getPincode());
-		
-		//	ps.setDate(12, (java.sql.Date) d);
-			 ps.setString(11,null);
+
+			// ps.setDate(12, (java.sql.Date) d);
+			ps.setString(11, null);
 			ps.setString(12, hospital.getWebsite());
-			//ps.setString(14, hospital.getPhonenumber());
+			// ps.setString(14, hospital.getPhonenumber());
 			ps.setBoolean(13, hospital.isHasRadiology());
 			ps.setBoolean(14, hospital.isHasDiagnistics());
 			ps.setBoolean(15, hospital.isHasAmbulance());
@@ -53,43 +56,43 @@ public class Hospital {
 					hospital.setHospitalId(rs.getInt(1));
 				System.out.println("Hospital Id =" + hospital.getHospitalId());
 			}
-			
-			if(hospital.getHospitalPhoneNumbers()!=null)
-			{
-				String q1=new String("insert into HospitalPhoneNumbers(HospitalId,PhoneNumber,PhoneNumberType,Contact,Comments)"+"values(?,?,?,?,?);");
-				for(model.HospitalPhoneNumber hospitalphonenumber: hospital.getHospitalPhoneNumbers())
-				{
-					ps = connection.prepareStatement(q1);
-	              //  System.out.println(doctorphonenumber.getPhoneNumber());
-	              //  System.out.println(doctorphonenumber.getDoctorPhoneNumberId());
 
-					//ps = connection.prepareStatement(q1);
+			if (hospital.getHospitalPhoneNumbers() != null) {
+				String q1 = new String(
+						"insert into HospitalPhoneNumbers(HospitalId,PhoneNumber,PhoneNumberType,Contact,Comments)"
+								+ "values(?,?,?,?,?);");
+				for (model.HospitalPhoneNumber hospitalphonenumber : hospital.getHospitalPhoneNumbers()) {
+					ps = connection.prepareStatement(q1);
+					// System.out.println(doctorphonenumber.getPhoneNumber());
+					// System.out.println(doctorphonenumber.getDoctorPhoneNumberId());
+
+					// ps = connection.prepareStatement(q1);
 					ps.setInt(1, hospital.getHospitalId());
-					
-					ps.setInt(2, hospitalphonenumber.getPhoneNumberType());
-					ps.setString(3, hospitalphonenumber.getPhoneNumber());
-					System.out.println("DoctorPhone =" + hospital.getPhonenumber());
+
+					ps.setString(2, hospitalphonenumber.getPhoneNumber());
+					ps.setInt(3, hospitalphonenumber.getPhoneNumberType());
 					ps.setString(4, hospitalphonenumber.getContact());
 					ps.setString(5, hospitalphonenumber.getComments());
 					ps.executeUpdate();
 					result = 1;
 				}
 			}
-			
-			 if(hospital.getDoctorHospitalAffiliation()!=null)
-	            {
+
+			if (hospital.getDoctorHospitalAffiliation() != null) {
 				String q2 = "insert into doctorhospitalaffiliation(DoctorId,HospitalId,AdditionalDetails) values(?,?,?)";
 				for (model.DoctorHospitalAffiliation dochosappl : hospital.getDoctorHospitalAffiliation()) {
 					ps = connection.prepareStatement(q2);
 
 					ps = connection.prepareStatement(q2);
-					ps.setInt(1, dochosappl.getDoctorId() );
-					// System.out.println("DoctorPhone ="+dochosappl.getDoctorId());
-					ps.setInt(2, dochosappl.getHospitalId());
+					ps.setInt(1, dochosappl.getDoctorId());
+					// System.out.println("DoctorPhone
+					// ="+dochosappl.getDoctorId());
+					ps.setInt(2, hospital.getHospitalId());
+					
 					ps.setString(3, dochosappl.getAdditionalDetails());
 					ps.executeUpdate();
 				}
-	            }
+			}
 
 		} catch (Exception e) {
 			System.out.println(e);

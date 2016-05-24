@@ -48,7 +48,7 @@ public class HospitalUpdate {
 				for (model.HospitalPhoneNumber hospitalphonenumber : hsptl1.getHospitalPhoneNumbers()) {
 					ps3 = connection.prepareStatement(q1);
 
-					ps3.setInt(1, hsptl1.getHospitalId());
+					ps3.setInt(1, id);
 					ps3.setInt(2, hospitalphonenumber.getPhoneNumberType());
 					ps3.setString(3, hospitalphonenumber.getPhoneNumber());
 					ps3.setString(4, hospitalphonenumber.getContact());

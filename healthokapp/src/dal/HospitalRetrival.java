@@ -80,6 +80,7 @@ public class HospitalRetrival {
 		model.Hospital hospital = new model.Hospital();
 		try {
 
+			hospital.setHospitalId(rs.getInt("HospitalId"));
 			hospital.setRegDate(rs.getDate("RegistrationDate"));
 			hospital.setWebsite(rs.getString("Website"));
 			hospital.setHasRadiology(rs.getBoolean("HasRadiology"));
