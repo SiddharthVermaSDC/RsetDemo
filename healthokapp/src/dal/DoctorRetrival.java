@@ -122,9 +122,9 @@ public class DoctorRetrival {
 			doctor.setMiddleName(rs.getString("MiddleName"));
 			doctor.setLastName(rs.getString("LastName"));
 			doctor.setSpecialityId(rs.getInt("SpecialityId"));
-			doctor.setDoctorImageid(rs.getInt("doctorImageId"));
+			doctor.setDoctorImageid(rs.getInt("DoctorImageId"));
 			doctor.setSpecialityId(rs.getInt("SpecialityId"));
-			doctor.setSpeciality(rs.getString("SpecialityText"));
+			doctor.setSpeciality(rs.getString("Specialization"));
 			
 			doctor.setDegree(rs.getString("Degree"));
 			doctor.setClinicTiming(rs.getString("ClinicTiming"));

@@ -18,7 +18,7 @@ public class Hospital {
 		try {
 			connection = Database.createConnection();
 			System.out.println("Connection Is Created");
-
+			java.sql.Date hospitalDate = new java.sql.Date(hospital.getRegDate().getTime());
 			String query = "Insert Into Hospital(Name,HasER,Facilities,OPDFees,Beds,"
 					+ "AddressLine1,AddressLine2,AddressLine3,CityId,PinCode,RegistrationDate,"
 					+ "Website,Hasradiology,Hasdiagnistics,Hasambulance,AdmissionProcess) "
@@ -40,7 +40,7 @@ public class Hospital {
 			ps.setString(10, hospital.getPincode());
 
 			// ps.setDate(12, (java.sql.Date) d);
-			ps.setString(11, null);
+			ps.setDate(11, hospitalDate);
 			ps.setString(12, hospital.getWebsite());
 			// ps.setString(14, hospital.getPhonenumber());
 			ps.setBoolean(13, hospital.isHasRadiology());
@@ -79,7 +79,7 @@ public class Hospital {
 			}
 
 			if (hospital.getDoctorHospitalAffiliation() != null) {
-				String q2 = "insert into doctorhospitalaffiliation(DoctorId,HospitalId,AdditionalDetails) values(?,?,?)";
+				String q2 = "insert into DoctorHospitalAffiliation(DoctorId,HospitalId,AdditionalDetails) values(?,?,?)";
 				for (model.DoctorHospitalAffiliation dochosappl : hospital.getDoctorHospitalAffiliation()) {
 					ps = connection.prepareStatement(q2);
 

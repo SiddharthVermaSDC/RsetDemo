@@ -14,15 +14,17 @@ public class UpdateDoctor {
 		int result = 0;
 
 		try {
+			java.sql.Date doctorRegDate = new java.sql.Date(doctor.getDoctorRegistrationDate().getTime());
 			connection = Database.createConnection();
-			String q = "update doctor set EmergencyFees=?,IsBelongToAnyHospitals=?,EmailId=?,"
+			
+			String q = "update Doctor set EmergencyFees=?,IsBelongToAnyHospitals=?,EmailId=?,"
 					+ "IsProvideHomeCare=?,IsPharmacy=?,FirstName=?,MiddleName=?,LastName=?,"
 					+ "SpecialityId=?,Degree=?,ClinicTiming=?,OffDay=?,Fees=?,InPanel=?,"
 					+ "IsAppointmentEnabled=?,isVirtualReceptionistEnabled=?,IsProvidePostCareEnabled=?,"
 					+ "DoctorImageId=?,YearOfExperience=?,AddressLine1=?,AddressLine2=?,AddressLine3=?,"
 					+ "CityId=?,PinCode=?,ProvideEmergencyCare=?,IsTeleMedicineEnabled=?,HasOwnHospital=?,"
 					+ "Website=?,IsProvideHomeConsultationFees=?,IsDiagnostics=?,IsProvideAnsweringService=?,"
-					+ "IsProvidePostCallFollowup=?,Health_panel=?,Specialization=? where DoctorId=\""
+					+ "IsProvidePostCallFollowup=?,Health_panel=?,Specialization=?,DoctorRegistrationDate=? where DoctorId=\""
 					+ val + "\"";
 			ps5 = connection.prepareStatement(q);
 			ps5.setInt(1, doctor.getEmergencyFees());
@@ -68,6 +70,7 @@ public class UpdateDoctor {
 			ps5.setBoolean(32, doctor.isIsProvidePostCallFollowup());
 			ps5.setBoolean(33, doctor.isHealth_panel());
 			ps5.setString(34, doctor.getSpecialization());
+			ps5.setDate(35, doctorRegDate);
 			result = 1;
 			ps5.executeUpdate();
 

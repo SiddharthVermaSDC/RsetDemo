@@ -21,8 +21,8 @@ public class Doctor {
 
 		try {
 			connection = Database.createConnection();
-
-			String q = "insert into doctor (FirstName,MiddleName,LastName,EmailId,SpecialityId,Degree,"
+			java.sql.Date doctorDate = new java.sql.Date(doctor.getDoctorRegistrationDate().getTime());
+			String q = "insert into Doctor (FirstName,MiddleName,LastName,EmailId,SpecialityId,Degree,"
 					+ "DoctorRegistrationDate,ClinicTiming,OffDay,Fees,EmergencyFees,IsPharmacy,"
 					+ "IsProvideHomeCare,IsBelongToAnyHospitals,InPanel,IsAppointmentEnabled,"
 					+ "isVirtualReceptionistEnabled,IsProvidePostCareEnabled,DoctorImageId,"
@@ -42,7 +42,7 @@ public class Doctor {
 			ps.setString(6, doctor.getDegree());
 			System.out.println("Degree=" + doctor.getDegree());
 			// doctor.getDoctorRegistrationDate().getTime()));
-			ps.setDate(7, null);
+			ps.setDate(7, doctorDate);
 		//	System.out.println("Date =" + doctor.getDoctorRegistrationDate());
 			ps.setString(8, doctor.getClinicTiming());
 		//	System.out.println("Clinic Time =" + doctor.getClinicTiming());
@@ -108,7 +108,7 @@ public class Doctor {
 			}
             if(doctor.getDoctorHospitalAffiliation()!=null)
             {
-			String q2 = "insert into doctorhospitalaffiliation(DoctorId,HospitalId,AdditionalDetails) values(?,?,?)";
+			String q2 = "insert into DoctorHospitalAffiliation(DoctorId,HospitalId,AdditionalDetails) values(?,?,?)";
 			for (model.DoctorHospitalAffiliation dochosappl : doctor.getDoctorHospitalAffiliation()) {
 				ps = connection.prepareStatement(q2);
 

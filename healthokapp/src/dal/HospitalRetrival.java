@@ -25,7 +25,7 @@ public class HospitalRetrival {
 			connection = Database.createConnection();
 			// String sql = "Select * from hospital where HospitalId=\"" +
 			// hospitalId + "\"";
-			String sql = "Select * from hospital where HospitalId=?";
+			String sql = "Select * from Hospital where HospitalId=?";
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, hospitalId);
 			rs = ps.executeQuery();
@@ -58,7 +58,7 @@ public class HospitalRetrival {
 
 		try {
 			connection = Database.createConnection();
-			String sql = "Select * from hospital";
+			String sql = "Select * from Hospital";
 			ps = connection.prepareStatement(sql);
 			rs = ps.executeQuery();
 
