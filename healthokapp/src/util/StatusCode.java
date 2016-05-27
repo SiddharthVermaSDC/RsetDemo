@@ -2,8 +2,8 @@ package util;
 
 public  enum StatusCode {
 	UnknownError(-2),
-	Error(-1),
-	Success(0);
+	Error(-500),
+	Success(1);
 	
 	private final int statusCode;
 	

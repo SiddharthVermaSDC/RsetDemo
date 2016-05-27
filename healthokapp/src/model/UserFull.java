@@ -27,7 +27,14 @@ public class UserFull {
 		private String PinCode;
 		
 		private ArrayList<MemberDetail> memberDetail;
+		private ArrayList<UserPhoneNumber> userPhoneNumber;
 		
+		public ArrayList<UserPhoneNumber> getUserPhoneNumber() {
+			return userPhoneNumber;
+		}
+		public void setUserPhoneNumber(ArrayList<UserPhoneNumber> userPhoneNumber) {
+			this.userPhoneNumber = userPhoneNumber;
+		}
 		public String getFirstName() {
 			return FirstName;
 		}
