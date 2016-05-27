@@ -11,16 +11,13 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class MedicineOrderDetails{
 //for insert order
-	static Connection con=null;
-	static PreparedStatement ps=null;
-	static ResultSet rs=null;
-	static Connection con3;
-	static PreparedStatement ps3=null;
-	static ResultSet rs3=null;
 public static int insertMedicineOrderDetails(model.MedicineOrderDetails medicineorderdetails){
 		int result = 0;
-		Database database = new Database();
-		con=(Connection) database.createConnection();
+		 Connection con=null;
+		 PreparedStatement ps=null;
+		 ResultSet rs=null;
+
+		con=(Connection) Database.createConnection();
 		String str1="insert into MedicineOrderDetails(MedicineOrderId,MedicineName,Dosage,Quantity,Price) values (?,?,?,?,?)";
 		try{
 			 ps=(PreparedStatement) con.prepareStatement(str1);
@@ -48,22 +45,26 @@ public static int insertMedicineOrderDetails(model.MedicineOrderDetails medicine
 	}
 public static ArrayList<model.MedicineOrderDetails> responseMedicineOrderDetails(int medicineorderdetailsid)
 {
-	ArrayList<model.MedicineOrderDetails> medicineorderdetails=new ArrayList<model.MedicineOrderDetails>();
-	long i=1;
+	 Connection con=null;
+	 PreparedStatement ps=null;
+	 ResultSet rs=null;
+
+	 ArrayList<model.MedicineOrderDetails> medicineorderdetails=new ArrayList<model.MedicineOrderDetails>();
+	int i=1;
 	Database database = new Database();
 	con=(Connection) database.createConnection();
-	String str3="select * from address where MedicineOrderDetailsId=?";
+	String str="select * from address where MedicineOrderDetailsId=?";
 	try{
-		ps3=(PreparedStatement) con.prepareStatement(str3); 
-		ps3.setInt(1,medicineorderdetailsid);
-		rs3=ps3.executeQuery();
-		while(rs3.next()){
-        int medicineorderdetailsid1=rs3.getInt("MedicineOrderDetailsId");
-        int medicineorderid=rs3.getInt("MedicineOrderId");
-        String medicinename=rs3.getString("MedicineName");
-        String dosage=rs3.getString("Dosage");
-        int quantity=rs3.getInt("Quantity");
-        float price=rs3.getFloat("Price");
+		ps=(PreparedStatement) con.prepareStatement(str); 
+		ps.setInt(1,medicineorderdetailsid);
+		rs=ps.executeQuery();
+		while(rs.next()){
+        int medicineorderdetailsid1=rs.getInt("MedicineOrderDetailsId");
+        int medicineorderid=rs.getInt("MedicineOrderId");
+        String medicinename=rs.getString("MedicineName");
+        String dosage=rs.getString("Dosage");
+        int quantity=rs.getInt("Quantity");
+        float price=rs.getFloat("Price");
         medicineorderdetails.add(new model.MedicineOrderDetails(medicineorderdetailsid1,medicineorderid,medicinename,dosage,quantity,price));
         
 		}

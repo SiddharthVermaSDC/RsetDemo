@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 public class Laborderdetails {
 	
 	//create laborderdetails healthok
-	// This needs to change to accept a POST and an Array. 
+	// This needs to change to accept a POST and an Array SAME AS MEDICINEORDERDETAILS 
 	
 	@Path("/create/{LabOrderId}/{TestName}/{Price}")
 	@GET
@@ -32,6 +32,9 @@ public class Laborderdetails {
 	}	
 	
 	//updating laboder after report image healthok
+
+	
+	// THIS SHOULD BE A POST AND ACCEPT LABORDERID AND IMAGEID
 	
 	@Path("/update/{LabOrderId}/{ResultImage}")
 	@GET
@@ -48,10 +51,12 @@ public class Laborderdetails {
 	 return res;
 	}	
 	 // deleting laborderdetails healthok
+	
+	// CHANGE THIS TO A POST. NEED SIMILAR METHOD FOR MEDICIENORDERDETAIL
 	@Path("/delete/{LabOrderId}")
 	@GET
 	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Result deletelaborder(@PathParam("LabOrderId") int laborderid){
+	public  model.Result deletelaborder(@PathParam("LabOrderId") int laborderid){
 		
 	    model.Result res=new model.Result();
 	
@@ -63,6 +68,8 @@ public class Laborderdetails {
 	
 	
   // updating info laborderdetails by healthok
+	
+// PROBABLY NOT NEEDED.
 	
 	@Path("/update/{LabOrderId}/{TestName}/{Price}")
 	@GET

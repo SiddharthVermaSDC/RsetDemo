@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 
 import model.Result;
 
+// THIS CODE IS NOT NEEDED AND COULD BE DELETED.
+
 @Path("/medicineorder")
 public class MedicineOrder {
 	

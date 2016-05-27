@@ -19,22 +19,26 @@ public class MedicineOrderDetails {
 	@POST
 	@Produces (MediaType.APPLICATION_JSON)
 	@Consumes (MediaType.APPLICATION_JSON)
-	public static model.Result medicineorderdetails(model.MedicineOrderDetails morder){
+	public  model.Result medicineorderdetails(ArrayList<model.MedicineOrderDetails> medicineOrderDetails){
 	//model.MedicineOrderDetails medicineorderdetails=new model.MedicineOrderDetails();
 	model.Result res=new model.Result();
 	
-	
-	 res.setStatus(dal.MedicineOrderDetails.insertMedicineOrderDetails(morder));
+	// ADD BIZ METHOD TO GET THE ARRAY LIST AND DO INSERT / UPDATE BASED ON IF MedicineOrderDetailId > 0
+	// EXACT SAME LOGIC IS NEEDED FOR LAB ORDERS
+//	 res.setStatus(dal.MedicineOrderDetails.insertMedicineOrderDetails(morder));
 	 return res;
 	}	
 	 @Path("/{medicineorderid}")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
 		public static ArrayList<model.MedicineOrderDetails> responseMedicineOrderDetails(@PathParam("medicineorderid") int medicineorderid){
-			ArrayList<model.MedicineOrderDetails> add=new ArrayList<model.MedicineOrderDetails>();
+		//	ArrayList<model.MedicineOrderDetails> add=new ArrayList<model.MedicineOrderDetails>();
 		//	add=dal.MedicineOrderDetails.responseMedicineOrderDetails(medicineorderdetailsid);
 			
-			return add;
+		//	return add;
+		 return null;// this will be removed. 
+		 
+		 // Make call to Biz Tier that will return all Medicine Order Details given a Medicine Order ID. 
 		}
 	
 	
