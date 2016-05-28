@@ -117,7 +117,7 @@ public class Order {
 		}
 		catch(SQLException se)
 		{
-			result=40;
+			result=500;
 		}
 		finally{
 			Database.closeConnection(connection);

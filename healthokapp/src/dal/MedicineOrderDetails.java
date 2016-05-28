@@ -18,23 +18,23 @@ public class MedicineOrderDetails{
 	static PreparedStatement ps3=null;
 	static ResultSet rs3=null;
 public static int insertMedicineOrderDetails(model.MedicineOrderDetails medicineorderdetails){
-		int result=0;
+		int result = 0;
 		Database database = new Database();
 		con=(Connection) database.createConnection();
-		String str1="insert into MedicineOrderDetails(MedicineOrderDetailsId,MedicineOrderId,MedicineName,Dosage,Quantity,Price) values (?,?,?,?,?,?)";
+		String str1="insert into MedicineOrderDetails(MedicineOrderId,MedicineName,Dosage,Quantity,Price) values (?,?,?,?,?)";
 		try{
 			 ps=(PreparedStatement) con.prepareStatement(str1);
-			   ps.setInt(1, medicineorderdetails.getMedicineOrderDetailsId());
-			   ps.setInt(2, medicineorderdetails.getMedicineOrderId());
-			   ps.setString(3, medicineorderdetails.getMedicineName());
-			   ps.setString(4, medicineorderdetails.getDosage());
-			   ps.setInt(5, medicineorderdetails.getQuantity());
-			   ps.setFloat(6, medicineorderdetails.getPrice());
+		//	   ps.setInt(1, medicineorderdetails.getMedicineOrderDetailsId());
+			   ps.setInt(1, medicineorderdetails.getMedicineOrderId());
+			   ps.setString(2, medicineorderdetails.getMedicineName());
+			   ps.setString(3, medicineorderdetails.getDosage());
+			   ps.setInt(4, medicineorderdetails.getQuantity());
+			   ps.setFloat(5, medicineorderdetails.getPrice());
 			   int rw=ps.executeUpdate();
 			  
 			   if(rw>0)
 			   {
-				   result = 2;
+				   result = 1;
 			   }
 			   else{
 				   result=-1;
@@ -42,7 +42,7 @@ public static int insertMedicineOrderDetails(model.MedicineOrderDetails medicine
 		}
 		catch(SQLException se)
 		   {
-			   
+			   System.out.println(se);
 		   }
 		return result; 
 	}

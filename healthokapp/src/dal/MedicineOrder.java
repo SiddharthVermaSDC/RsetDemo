@@ -22,7 +22,7 @@ public class MedicineOrder{
 		ResultSet rs=null;
 
 		int rw= 0;
-		int labOrderId = -1;
+		int medicineId = -1;
 		String str="insert into MedicineOrder(OrderId,PrescriptionImageId,Description) values (?,?,?)";
 
 		try{
@@ -48,7 +48,7 @@ public class MedicineOrder{
 			{
 				rs = ps.getGeneratedKeys();
 				if(rs.next())
-					labOrderId = rs.getInt(1);
+					medicineId = rs.getInt(1);
 
 			}
 		}
@@ -62,7 +62,7 @@ public class MedicineOrder{
 			Database.closeConnection(connection);
 		}
 
-		return labOrderId;
+		return medicineId;
 	}
 	
 
