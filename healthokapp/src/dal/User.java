@@ -563,7 +563,7 @@ public class User {
 		ResultSet rs = null;
 		ResultSet rs1 = null;
 
-		String queryUser = "select * from User";
+		String queryUser = "select * from User limit 50";
 		String queryMemberDetail = "select * from MemberDetails where userid = ?";
 
 		model.UserFull user = null;

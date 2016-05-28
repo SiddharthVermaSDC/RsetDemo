@@ -10,10 +10,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/user")
+@Path("/users")
 public class User {
 	
-	@Path("/all")
+//	@Path("/all")
 	//@POST
 	//@Consumes(MediaType.APPLICATION_JSON)
 	@GET
