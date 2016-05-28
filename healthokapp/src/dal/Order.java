@@ -206,6 +206,86 @@ public class Order {
 
 
 
+		public  ArrayList<model.OrderBase> getOrders(OrderStatusType orderStatusType) {
+
+			Connection connection= null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			try{
+				
+						
+				
+				String str1="SELECT o.OrderId, o.OrderDate, o.OrderFulfillDate, o.OrderCompletionDate, o.OrderTypeId,o.OrderStatusTypeId,o.UserId,"
+						    + " MO.PrescriptionImageId, MO.Description mdesc, LO.PrescriptionImageId labPrescription, LO.Description ldesc, DA.DoctorId, DA.Description ddesc, AO.Description adesc, NO.Description ndesc FROM `Order` "
+						    + "  AS o Left Join (MedicineOrder AS MO, LabOrder as LO, AmbulanceOrder as AO, NurseOrder as NO, DoctorAppointment as DA) " 
+				            + "  on MO.OrderId = o.orderId and LO.OrderId = o.OrderId and AO.OrderId = o.OrderId and   NO.OrderId = o.orderid and DA.OrderId = o.OrderId "
+				            +  " WHERE orderstatustypeid = ?";
+				
+				Logging.Debug("ORDERDAL", str1);
+				connection =  Database.createConnection();
+				ps=(PreparedStatement) connection.prepareStatement(str1);
+				ps.setInt(1,orderStatusType.getOrderStatusType());
+				Logging.Debug("ORDERDAL", "Order status Type =" + orderStatusType.getOrderStatusType());
+				rs=ps.executeQuery();
+
+				ArrayList<model.OrderBase> orderList = new ArrayList<model.OrderBase>();
+				model.OrderBase order = null;
+				while ( rs.next())
+				{
+				order = new model.OrderBase();
+					order.setOrderId(rs.getInt("OrderId"));
+					order.setOrderDate(rs.getDate("OrderDate"));
+					order.setOrderFulfillDate(rs.getDate("OrderFulfillDate"));
+					order.setOrderCompletionDate(rs.getDate("OrderCompletionDate"));
+					order.setOrderStatusType(OrderStatusType.item(rs.getInt("OrderStatusTypeId")));
+					order.setOrderType(OrderType.item(rs.getInt("OrderTypeId")));
+					order.setUserId(rs.getInt("UserId"));
+					order.setDoctorId(rs.getInt("DoctorId"));
+				    
+					switch ( order.getOrderType() )
+					{
+					case AMBULANCE:
+						order.setOrderDescription(rs.getString("adesc"));
+						break;
+					case APPT:
+						order.setOrderDescription(rs.getString("adesc"));
+						break;
+					case LAB:
+						order.setOrderDescription(rs.getString("ldesc"));
+						order.setImageId(rs.getInt("LabPrescription") );
+						break;
+					case MEDICINE:
+						order.setOrderDescription(rs.getString("mdesc"));
+						order.setImageId(rs.getInt("PrescriptionImageId") );
+						break;
+					case NURSE:
+						break;
+					default:
+						break;
+					
+					
+					}
+					
+					orderList.add(order);
+					
+				}
+				
+				return orderList;
+			}
+			catch(SQLException se)
+			{
+				Logging.Error("ORDERDAL","Error in get order details" + se.getMessage());
+		  	    // Dont send a fake order object order = new model.Order(1,1,1,null,1,null,"as",1,1,1,1,"0000-00-00");
+				return null;
+			}
+			finally{
+				Database.closeConnection(connection);
+			}
+
+			//return null;
+		}
+
 
 		public  ArrayList<model.OrderBase> getUserOrders(int userId) {
 

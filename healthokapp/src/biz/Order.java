@@ -136,6 +136,13 @@ public class Order {
 		return orderDal.getOrderDetail(orderid);
 	}
 	
+	public  ArrayList<model.OrderBase> getOrders(OrderStatusType orderStatusType)
+	{
+		
+		dal.Order orderDal = new dal.Order();
+		return orderDal.getOrders(orderStatusType);
+	}
+
 	
 	public ArrayList<model.OrderBase> getUserOrders(int userId) 
 	{

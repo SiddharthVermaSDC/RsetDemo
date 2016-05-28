@@ -72,6 +72,14 @@ public class Order {
 		}
 	
 
+	 @Path("/fetchordersbystatus/{OrderStatus}")
+		@GET
+		@Produces (MediaType.APPLICATION_JSON)
+		public  ArrayList<model.OrderBase> getOrders(@PathParam("OrderStatus") model.OrderStatusType orderStatus){
+			return new biz.Order().getOrders(orderStatus);
+		}
+
+	 
 	 
 	 @Path("/getuserorders/{userId}")
 		@GET
@@ -87,6 +95,8 @@ public class Order {
 		public  ArrayList<model.OrderBase> getUserAppointment (@PathParam("userId") int userId){
 			return new biz.Order().getUserAppointment(userId);
 		}
+	 
+	 
 	 
 	 
 	@Path("/s")
