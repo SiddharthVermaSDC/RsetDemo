@@ -9,13 +9,14 @@ import java.util.Map;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import util.Logging;
+
 public class MedicineOrderDetails {
 	// for insert order
 	public int insertMedicineOrderDetails(ArrayList<model.MedicineOrderDetails> medicineOrderDetails) {
 		int result = 0;
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
 
 		try {
 			con = (Connection) Database.createConnection();
@@ -23,28 +24,18 @@ public class MedicineOrderDetails {
 
 			ps = (PreparedStatement) con.prepareStatement(str1);
 			for (model.MedicineOrderDetails ms : medicineOrderDetails) {
-				// ps.setInt(1,
-				// medicineorderdetails.getMedicineOrderDetailsId());
-				ps.setInt(1, ms.getMedicineOrderDetailsId());
-				System.out.println("MD Id= "+ms.getMedicineOrderDetailsId());
+				ps.setInt(1, ms.getMedicineOrderId());
 				ps.setString(2, ms.getMedicineName());
-				System.out.println("MD Name= "+ ms.getMedicineName());
 				ps.setString(3, ms.getDosage());
-				System.out.println("MD Doage= "+ms.getDosage());
 				ps.setInt(4, ms.getQuantity());
-				System.out.println("MD Quantity= "+ms.getQuantity());
 				ps.setFloat(5, ms.getPrice());
-				System.out.println("MD Price= "+ms.getPrice());
-				int rw = ps.executeUpdate();
+				ps.executeUpdate();
 
-				if (rw > 0) {
-					result = 1;
-				} else {
-					result = -1;
-				}
 			}
+			result = 1;
 		} catch (SQLException se) {
-			System.out.println(se);
+			Logging.Debug("Medicine Order Details", se.getMessage());
+			result = 500;
 		}
 		return result;
 	}
@@ -55,10 +46,10 @@ public class MedicineOrderDetails {
 		ResultSet rs = null;
 
 		ArrayList<model.MedicineOrderDetails> medicineorderdetails = new ArrayList<model.MedicineOrderDetails>();
-		Database database = new Database();
-		con = (Connection) database.createConnection();
-		String str = "select * from address where MedicineOrderDetailsId=?";
+
 		try {
+			con = (Connection) Database.createConnection();
+			String str = "select * from MedicineOrderDetails where MedicineOrderDetailsId=?";
 			ps = (PreparedStatement) con.prepareStatement(str);
 			ps.setInt(1, medicineorderdetailsid);
 			rs = ps.executeQuery();
