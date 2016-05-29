@@ -11,6 +11,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import util.Logging;
+
 
 @Path("/medicineorderdetails")
 public class MedicineOrderDetails {
@@ -21,13 +23,22 @@ public class MedicineOrderDetails {
 	@Consumes (MediaType.APPLICATION_JSON)
 	public  model.Result medicineorderdetails(ArrayList<model.MedicineOrderDetails> medicineOrderDetails){
 	//model.MedicineOrderDetails medicineorderdetails=new model.MedicineOrderDetails();
+		
+		Logging.Debug("MEDICINEDETAILREST", "number of entries = " + medicineOrderDetails.size());
+		Logging.Debug("MEDICINEDETAILREST",  "first medicine is " + medicineOrderDetails.get(0).getMedicineName());
 	model.Result res=new model.Result();
 	
-	// ADD BIZ METHOD TO GET THE ARRAY LIST AND DO INSERT / UPDATE BASED ON IF MedicineOrderDetailId > 0
+	res.setStatus(new biz.MedicineOrderDetails().medicineOrderDetail( medicineOrderDetails));// ADD BIZ METHOD TO GET THE ARRAY LIST AND DO INSERT / UPDATE BASED ON IF MedicineOrderDetailId > 0
 	// EXACT SAME LOGIC IS NEEDED FOR LAB ORDERS
 //	 res.setStatus(dal.MedicineOrderDetails.insertMedicineOrderDetails(morder));
 	 return res;
 	}	
+	
+	
+	
+	
+	
+	
 	 @Path("/{medicineorderid}")
 		@GET
 		@Produces (MediaType.APPLICATION_JSON)
