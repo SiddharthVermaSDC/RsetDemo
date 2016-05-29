@@ -542,7 +542,6 @@ public class User {
 			user.setMemberDetail(memberDetails); // Assign member details array
 													// to user object
 
-			return user;
 
 		} catch (SQLException se) {
 			Logging.Exception("UserDal-GetToken", se.getMessage());
@@ -554,5 +553,117 @@ public class User {
 
 		return user;
 	}
+
+
+	public ArrayList<model.UserFull> getAllUsers() {
+
+		Connection connection = null;
+		PreparedStatement psUser = null;
+		PreparedStatement psMemberDetail = null;
+		ResultSet rs = null;
+		ResultSet rs1 = null;
+
+		String queryUser = "select * from User";
+		String queryMemberDetail = "select * from MemberDetails where userid = ?";
+
+		model.UserFull user = null;
+		ArrayList<model.UserFull> userArray = null;
+
+		try {
+
+			connection = Database.createConnection();
+			psUser = connection.prepareStatement(queryUser);
+			psMemberDetail = connection.prepareStatement(queryMemberDetail);
+
+			Logging.Debug("UserDal", psUser.toString());
+
+			rs = psUser.executeQuery();
+
+			userArray = new ArrayList<model.UserFull>();
+			
+			while (rs.next()) {
+
+				user = new model.UserFull(); // since this is query by PK will
+												// get only one row.
+
+				user.setUserId(rs.getInt("UserId"));
+				user.setMemberID(rs.getString("MemberId"));
+				user.setFirstName(rs.getString("FirstName"));
+				user.setLastName(rs.getString("LastName"));
+				user.setEmailId(rs.getString("EmailId"));
+				user.setAddressLine1(rs.getString("Addressline1"));
+				user.setAddressLine2(rs.getString("Addressline2"));
+				user.setAddressLine3(rs.getString("Addressline3"));
+				user.setCashbackBonusBalance(rs.getInt("CashbackBonusBalance"));
+				user.setCityId(rs.getInt("CityId"));
+				user.setComments(rs.getString("Comments"));
+				user.setDoctorGenerallyVisited(rs.getString("DoctorsGenerallyVisited"));
+				user.setMobile(rs.getString("Mobile"));
+				user.setPinCode(rs.getString("PinCode"));
+				user.setPrepaidBalance(rs.getInt("PrepaidBalance"));
+				user.setPrimaryDoctor(rs.getInt("PrimaryDoctor"));
+				user.setTotalDiscount(rs.getInt("TotalDiscount"));
+				user.setMembershipTypeId(model.MembershipType.item(rs.getInt("MembershipTypeId")));
+
+			
+
+			Logging.Debug("User-Dal", "user is " + user.getFirstName() + " " + user.getLastName());
+
+			
+			psMemberDetail.setInt(1, user.getUserId());
+
+			rs1 = psMemberDetail.executeQuery();
+
+			ArrayList<model.MemberDetail> memberDetails = new ArrayList<model.MemberDetail>();
+
+			model.MemberDetail memberDetail = null;
+
+			while (rs1.next()) {
+
+				memberDetail = new MemberDetail();
+
+				memberDetail.setMemberDetailId(rs1.getInt("MemberDetailId"));
+				memberDetail.setUserid(rs1.getInt("Userid"));
+				memberDetail.setFirstName(rs1.getString("FirstName"));
+				memberDetail.setAllergies(rs1.getString("Allergies"));
+				memberDetail.setBloodGroup(rs1.getString("BloodGroup"));
+				memberDetail.setBP(MedicalCondition.item(rs1.getInt("BP")));
+				memberDetail.setComments(rs1.getString("Comments"));
+				memberDetail.setCurrentMedications(rs1.getString("CurrentMedications"));
+				memberDetail.setDateOfBirth(rs1.getDate("DOB"));
+				memberDetail.setDiabetic(MedicalCondition.item(rs1.getInt("Diabetic")));
+				memberDetail.setHeartProblems(MedicalCondition.item(rs1.getInt("HeartProblems")));
+				memberDetail.setLastName(rs1.getString("LastName"));
+				memberDetail.setLongTermCareNeeds(rs1.getString("LongTermCareNeeds"));
+				memberDetail.setRecurringTests(rs1.getString("RecurringTests"));
+				memberDetail.setSex(rs1.getString("Sex"));
+
+				memberDetails.add(memberDetail);
+
+			}
+
+			user.setMemberDetail(memberDetails); // Assign member details array
+													// to user object
+			rs1.close();
+			
+			userArray.add(user);
+			}
+
+
+		} 
+
+		catch (SQLException se) 
+		{
+			Logging.Exception("UserDal-GetToken", se.getMessage());
+			userArray = null;
+		} 
+		finally 
+		{
+			Database.closeConnection(connection);
+			
+		}
+		return userArray;
+	}
+
 
 }

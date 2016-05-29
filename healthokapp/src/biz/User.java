@@ -1,6 +1,8 @@
 package biz;
 
 
+import java.util.ArrayList;
+
 import model.GetSetLogin;
 import model.GetSetMemberRegistration;
 import rest_api.ReturnUserDetails;
@@ -71,6 +73,13 @@ public class User {
 	{
 		
 		return new dal.User().getUserDetails(userId);
+	}
+	
+	public ArrayList<model.UserFull> getAllUsers ()
+
+	{
+		
+		return new dal.User().getAllUsers();
 	}
 	
 	
