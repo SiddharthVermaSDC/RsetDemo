@@ -6,7 +6,7 @@ public class UserFull {
 
 
 		private int UserId;
-		private String MemberID=null;
+		private String MemberId=null;
 		private MembershipType MembershipTypeId;
 		private String FirstName=null;
 		private String LastName=null;
@@ -96,11 +96,11 @@ public class UserFull {
 		public void setUserId(int userId) {
 			UserId = userId;
 		}
-		public String getMemberID() {
-			return MemberID;
+		public String getMemberId() {
+			return MemberId;
 		}
-		public void setMemberID(String memberID) {
-			MemberID = memberID;
+		public void setMemberId(String memberId) {
+			MemberId = memberId;
 		}
 		public MembershipType getMembershipTypeId() {
 			return MembershipTypeId;

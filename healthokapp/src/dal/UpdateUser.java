@@ -34,7 +34,7 @@ public class UpdateUser {
 							+ " where UserId=" + userid);
 			preparedstatement = (PreparedStatement) connection.prepareStatement(queryToUpdate);
 
-			preparedstatement.setString(1, user.getMemberID());
+			preparedstatement.setString(1, user.getMemberId());
 			preparedstatement.setString(2, user.getFirstName());
 			preparedstatement.setString(3, user.getLastName());
 			preparedstatement.setString(4, user.getMobile());

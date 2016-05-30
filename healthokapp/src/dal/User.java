@@ -48,7 +48,7 @@ public class User {
 				r = resultset.getInt("UserId");
 
 				String queryToUpdate = new String(
-						"update user set MemberID=?,FirstName=?,LastName=?,Mobile=?,EmailId=?,AddressLine1=?,AddressLine2=?,CityId=?,PinCode=?,DoctorsGenerallyVisited=?,MembershipTypeId=?,"
+						"update user set MemberId=?,FirstName=?,LastName=?,Mobile=?,EmailId=?,AddressLine1=?,AddressLine2=?,CityId=?,PinCode=?,DoctorsGenerallyVisited=?,MembershipTypeId=?,"
 								+ " Password=?,PrimaryDoctor=?,PrepaidBalance=?,CashbackBonusBalance=?,TotalDiscount=?,Comments=?"
 								+ " where UserId=" + resultset.getInt("UserId"));
 				preparedstatement = (PreparedStatement) connection.prepareStatement(queryToUpdate);
@@ -58,7 +58,7 @@ public class User {
 			else {
 
 				queryToInsert = new String(
-						"insert into user(MemberID,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
+						"insert into user(MemberId,FirstName,LastName,Mobile,EmailId,AddressLine1,AddressLine2,CityId,PinCode,DoctorsGenerallyVisited,MembershipTypeId,"
 								+ "Password,PrimaryDoctor,PrepaidBalance,CashbackBonusBalance,TotalDiscount,Comments)"
 
 								+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
@@ -68,7 +68,7 @@ public class User {
 
 			}
 
-			preparedstatement.setString(1, us.getMemberID());
+			preparedstatement.setString(1, us.getMemberId());
 			preparedstatement.setString(2, us.getFirstName());
 			preparedstatement.setString(3, us.getLastName());
 			preparedstatement.setString(4, us.getMobile());
@@ -487,7 +487,7 @@ public class User {
 												// get only one row.
 
 				user.setUserId(userId);
-				user.setMemberID(rs.getString("MemberId"));
+				user.setMemberId(rs.getString("MemberId"));
 				user.setFirstName(rs.getString("FirstName"));
 				user.setLastName(rs.getString("LastName"));
 				user.setEmailId(rs.getString("EmailId"));
@@ -563,7 +563,7 @@ public class User {
 		ResultSet rs = null;
 		ResultSet rs1 = null;
 
-		String queryUser = "select * from User limit 50";
+		String queryUser = "select * from User limit 20";
 		String queryMemberDetail = "select * from MemberDetails where userid = ?";
 
 		model.UserFull user = null;
@@ -587,7 +587,7 @@ public class User {
 												// get only one row.
 
 				user.setUserId(rs.getInt("UserId"));
-				user.setMemberID(rs.getString("MemberId"));
+				user.setMemberId(rs.getString("MemberId"));
 				user.setFirstName(rs.getString("FirstName"));
 				user.setLastName(rs.getString("LastName"));
 				user.setEmailId(rs.getString("EmailId"));
@@ -645,7 +645,7 @@ public class User {
 			user.setMemberDetail(memberDetails); // Assign member details array
 													// to user object
 			rs1.close();
-			
+	
 			userArray.add(user);
 			}
 
