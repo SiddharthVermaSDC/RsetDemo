@@ -4,7 +4,14 @@ import java.util.ArrayList;
 
 public class UserFull {
 
-
+private int id;
+		public int getId() {
+	return UserId;
+}
+public void setId(int id) {
+	this.id = id;
+	this.UserId = id;
+}
 		private int UserId;
 		private String MemberId=null;
 		private MembershipType MembershipTypeId;
