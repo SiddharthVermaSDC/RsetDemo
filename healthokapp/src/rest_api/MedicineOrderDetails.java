@@ -22,10 +22,6 @@ public class MedicineOrderDetails {
 	public model.Result medicineorderdetails(ArrayList<model.MedicineOrderDetails> medicineOrderDetails) {
 		model.Result res = new model.Result();
 		res.setStatus(new biz.MedicineOrderDetails().medicineOrderDetail(medicineOrderDetails));
-		// ADD BIZ METHOD TO GET THE ARRAY LIST AND DO INSERT / UPDATE BASED ON
-		// IF MedicineOrderDetailId > 0
-		// EXACT SAME LOGIC IS NEEDED FOR LAB ORDERS
-		// res.setStatus(dal.MedicineOrderDetails.insertMedicineOrderDetails(morder));
 		return res;
 	}
 

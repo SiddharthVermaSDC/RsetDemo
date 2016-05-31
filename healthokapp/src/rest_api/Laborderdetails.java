@@ -1,7 +1,11 @@
 package rest_api;
 
+import java.util.ArrayList;
+
+import javax.ws.rs.Consumes;
 //import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,27 +18,19 @@ import javax.ws.rs.core.MediaType;
 
 public class Laborderdetails {
 	
-	//create laborderdetails healthok
-	// This needs to change to accept a POST and an Array SAME AS MEDICINEORDERDETAILS 
-	
-	@Path("/create/{LabOrderId}/{TestName}/{Price}")
-	@GET
-	@Produces (MediaType.APPLICATION_JSON)
-	public static model.Result createlaborder(@PathParam("LabOrderId") int laborderid,@PathParam("TestName") String testname,@PathParam("Price") float price){
-	model.LabOrderDetail labOrderDetail=new model.LabOrderDetail();
-	model.Result res=new model.Result();
-	
-	labOrderDetail.setLaborderId(laborderid);
-	labOrderDetail.setTestname(testname);
-	labOrderDetail.setPrice(price);
-//    res.setStatus(biz.LabOrderDetails.placeLabOrderd(labOrderDetail));
-	 return res;
-	}	
-	
-	//updating laboder after report image healthok
-
-	
-	// THIS SHOULD BE A POST AND ACCEPT LABORDERID AND IMAGEID
+	@Path("/placeorder")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public model.Result laborderdetails(ArrayList<model.LabOrderDetail> labOrderDetails) {
+		model.Result res = new model.Result();
+		res.setStatus(new biz.LabOrderDetails().placeLabOrderdetails(labOrderDetails));
+		// ADD BIZ METHOD TO GET THE ARRAY LIST AND DO INSERT / UPDATE BASED ON
+		// IF MedicineOrderDetailId > 0
+		// EXACT SAME LOGIC IS NEEDED FOR LAB ORDERS
+		// res.setStatus(dal.MedicineOrderDetails.insertMedicineOrderDetails(morder));
+		return res;
+	}
 	
 	@Path("/update/{LabOrderId}/{ResultImage}")
 	@GET
