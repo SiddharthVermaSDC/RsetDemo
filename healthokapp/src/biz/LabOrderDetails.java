@@ -11,7 +11,7 @@ public class LabOrderDetails {
 		return dal.LabOrderDetails.deleteLabOrder(laborderid);
 	}
 
-	public StatusCode placeLabOrderdetails(ArrayList<model.LabOrderDetail> labOrderDetails) {
+	public int placeLabOrderdetails(ArrayList<model.LabOrderDetail> labOrderDetails) {
 		
 		return new dal.LabOrderDetails().placeLabOrderdetails(labOrderDetails);
 	}
