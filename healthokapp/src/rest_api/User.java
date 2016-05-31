@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/users")
 public class User {
 	
-//	@Path("/all")
+	//@Path("/all")
 	//@POST
 	//@Consumes(MediaType.APPLICATION_JSON)
 	@GET
@@ -39,7 +39,7 @@ public class User {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public static model.Result update(@PathParam("id") int userid, model.UserFull user) {
+	public  model.Result update(@PathParam("id") int userid, model.UserFull user) {
 		model.Result rs = new model.Result();
 		int rsult = biz.UpdateUser.update(user, userid);
 		rs.setStatus(rsult);
