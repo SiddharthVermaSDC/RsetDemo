@@ -14,22 +14,26 @@ import util.Logging;
 
 public class HospitalRetrival {
 
-	Connection connection = null;
-	PreparedStatement ps = null;
-	PreparedStatement ps1 = null;
-	PreparedStatement ps2 = null;
-	ResultSet rs = null;
-	ResultSet rs1 = null;
-	ResultSet rs2 = null;
 
-	model.Hospital hospital = null;
 
-	public ArrayList<Hospital> responseHospital(int hospitalId) {
+	public Hospital responseHospital(int hospitalId) {
 
-		ArrayList<Hospital> results = null;
+		model.Hospital hospital = null;
+
+		Connection connection = null;
+		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+
+		
+		
+		//ArrayList<Hospital> results = null;
 		String sql = "Select * from Hospital where HospitalId=?";
-		String sql1 = "Select * from Hospitalphonenumbers where HospitalId=?";
-		String sql2 = "Select * from Doctorhospitalaffiliation where HospitalId=?";
+		String sql1 = "Select * from HospitalPhoneNumbers where HospitalId=?";
+		String sql2 = "Select * from DoctorHospitalAffiliation where HospitalId=?";
 
 		try {
 			connection = Database.createConnection();
@@ -42,11 +46,10 @@ public class HospitalRetrival {
 			ps.setInt(1, hospitalId);
 			rs = ps.executeQuery();
 
-			results = new ArrayList<model.Hospital>();
+			//results = new ArrayList<model.Hospital>();
 			while (rs.next()) {
 				hospital = this.populateHospital(rs);
 
-				results.add(hospital);
 				Logging.Debug("Hospital-Dal", "Hospital is " + hospital.getHospitalname() + "");
 				ps1.setInt(1, hospitalId);
 				rs1 = ps1.executeQuery();
@@ -77,7 +80,7 @@ public class HospitalRetrival {
 		} finally {
 			Database.closeConnection(connection);
 		}
-		return results;
+		return hospital;
 
 	}
 
@@ -87,12 +90,22 @@ public class HospitalRetrival {
 	public ArrayList<Hospital> allHospitals() {
 		// Connection connection = null;
 
+		model.Hospital hospital = null;
+
+		Connection connection = null;
+		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+
 		ArrayList<Hospital> results = null;
 		try {
 			connection = Database.createConnection();
 			String sql = "Select * from Hospital ";
-			String sql1 = "Select * from Hospitalphonenumbers where HospitalId=?";
-			String sql2 = "Select * from Doctorhospitalaffiliation where HospitalId=?";
+			String sql1 = "Select * from HospitalPhoneNumbers where HospitalId=?";
+			String sql2 = "Select * from DoctorHospitalAffiliation where HospitalId=?";
 
 			ps = connection.prepareStatement(sql);
 			ps1 = connection.prepareStatement(sql1);

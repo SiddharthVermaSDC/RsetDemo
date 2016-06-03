@@ -16,7 +16,7 @@ public class HospitalRetrival {
 	@Path("/Retrieval/{HospitalId}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<model.Hospital> getHospital(@PathParam("HospitalId") int hospitalId) {
+	public model.Hospital getHospital(@PathParam("HospitalId") int hospitalId) {
 		return new biz.HospitalRetrival().responseHospital(hospitalId);
 	}
 

@@ -17,14 +17,14 @@ public class Hospital {
 	@Path("/{HospitalId}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<model.Hospital> getHospital(@PathParam("HospitalId") int hospitalId) {
+	public model.Hospital getHospital(@PathParam("HospitalId") int hospitalId) {
 		return new biz.HospitalRetrival().responseHospital(hospitalId);
 	}
 
 	// for Retrieving all Hospitals Data
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public static ArrayList<model.Hospital> getHospitals() {
+	public  ArrayList<model.Hospital> getHospitals() {
 		ArrayList<model.Hospital> hospitals = null;
 		hospitals = new biz.HospitalRetrival().allHospitals();
 		return hospitals;
