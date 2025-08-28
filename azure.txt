@@ -1,0 +1,4 @@
+WebJobs
+
+app insight
+Azure devapps

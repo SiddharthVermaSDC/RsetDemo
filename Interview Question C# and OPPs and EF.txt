@@ -1,0 +1,118 @@
+C# and OPPs and EF
+What are the advantages of OOPS?
+1.Reuse of code using inheritance.
+2.Flexibility of code using polymorphism.
+3.Secure application by using Encapsulation.
+4.Easily scalable from small to large applications.
+5.Easier troubleshooting of code because of modularity.
+
+Is it possible to prevent object creation of a class in C#?
+Object creation of a class can be prevented by:
+1.Abstract Class
+2.Private Class
+3.Static Class
+
+What is Inheritance? When to use Inheritance?
+Inheritance is creating a PARENT-CHILD relationship between two classes, where child class will automatically get the properties and methods of the parent.
+Inheritance is good for: REUSABILITY and ABSTRACTION of code
+
+How to prevent a class from being Inherited?
+By using SEALED keyword in class
+By using STATIC keyword in base class
+What is Difference between sealed & static class?
+Difference between sealed & static is, you can create the object of sealed class, but you cannot create the object of static class.
+
+What is the difference between Abstraction and Encapsulation?
+
+If two methods are same except return type, then methods are overloaded or what will happen?
+No, this will show compile time error.
+
+What is the use of Overriding? When should I override the method in real applications?
+
+Do abstract class have Constructors in C#?
+YES, Abstract class can have constructors
+The reason is, when the abstract class is inherited in the derived class, and whenever the object of the derived class is created then FIRST the constructor of the abstract/ base class will be called and then only the constructor of derived class will be called.
+Can Abstract class be Sealed or Static in C#?
+NO. Abstract class are used for inheritance, but sealed and static both will not allow the class to be inherited.
+
+What is the difference between “throw ex” and “throw”? Which one to use in real applications?
+
+Explain Generics in C#? When and why to use them in real applications?
+Generics allows us to make classes and methods - type independent or type safe.
+The problem is, it involves Boxing from converting string (value) to object (reference) type. This will impact the performance.
+
+What isIEnumerable and IQuerable in C#?
+
+What are Extension Methods in C#? When to use extension methods in real applications
+USE - Use them when you want to add a method in a class which code you don’t have.
+
+What are Delegates in C#? When to use delegates in real applications?
+When to use delegate?
+When we need to pass a method as a parameter.
+
+What are the differences between Events and Delegates?
+The event is a notification mechanism that depends on delegates
+An event is dependent on a delegate and cannot be created without delegates.
+Event is like a wrapper over the delegate to improve its security.
+
+What is the difference between “Readonly” and “Constant” variables
+1.Using constant, we must assign values with declaration itself. But readonly fields can be assigned in declaration as well as in the constructor part.
+2.Constant field value cannot be changed, but Readonly field value can be changed.
+3.“const” keyword for Constant and “readonly” keyword is used for Readonly.
+4.Constant is a COMPILE time constant, and ReadOnly is a RUNTIME constant.
+
+What is LINQ? When to use LINQ in real applications?
+What is the difference between First and FirstOrDefault methods in LINQ?
+
+What is the difference between “Dispose” and “Finalize”?
+
+What are the different return types of action method in controller    -----  5,
+What are Filters and their types in MVC
+What are the types of Authentication in ASP.NET MVC
+What is Routing in MVC
+What are Areas in MVC?
+What is Bundling and Minification in MVC?
+
+What is a Constraint in SQL? What are the types of constraints
+What is the difference between Primary key and Unique key
+What are Triggers and types of triggers?
+What are Joins in SQL?
+What are Indexes in SQL Server
+What is the difference between Stored Procedure and Functions
+How to optimize a Stored Procedure or SQL Query
+What is the difference between scope_identity and @@identity?
+What is CTE in SQL Server?
+What are Magic Tables in SQL Server?
+
+1. What is abstartion and encapsulation explain both with real time example
+2. What is ploymarphsim what is real use in your project.
+3. what is abstract class and interface. In which sceniro you will use abstarct class and interface.
+4. can we create the object of abstarct class if yes than how and if no than why?
+5. What is generic in C# and where you use of generic in your pevoius project.
+6. Write a code to find the no of occurenc of a charactor in a string.
+7. what is use of using in C#.
+8. How GC decide which object is in used and which object need to distory.
+9. What is deligate and event. explain with the help of example.
+10. What is SOLID principle.
+11. What is design patern.
+12. Explain Liskope subsututed and DIP with help of example. (One senario based question on solid principle)
+13. Write the code to impement the signleton design patern.
+14. what is entity framwork write a code to find employee data from database based on employee id.
+15. what is step that is followed to create a table in database using model use code 1st approch.
+SQL Question
+1. What is difference between Stored procedure and function and how to handle the errro in Stored procedure.
+2. What is temp table and how many type of temp table.
+3. What is CTE and what diff. between temp table and CTE.
+4. Write a query and explain it to find the 5th highest salary.
+5. Write a query to find the Manager of a employe on given table.
+
+Angular and dot net core.
+1. What is middleware and how it different from MVC filter.
+2. How to use dependency injection in dot net core app.
+3. what is life span of service object (AddSingleton, AddScoped, AddTransit)
+4. What is use(), map(), run() method.
+5. How to pass data in angular.
+6. how to consume the web api in your angular app.
+7. explain about JWT token how to use in login.
+8. what is obserble and promise and what is diff between them.
+9. what is view incapsulation.
