@@ -1,4 +1,114 @@
 WebJobs
-
 app insight
 Azure devapps
+what are WebJobs and types
+app insight
+Azure devapps
+Azure app services
+Azure Storage account
+
+Azure App Service
+https://learn.microsoft.com/en-us/azure/app-service/overview
+Can you give me a summery of what scrum is in Project Management?
+
+Give me 20 potential for a role in I.T Senior Dot Net Developer as part of interview preprations 
+Can you give me answer of question above
+Can you please explain the f5 load balancer. what is used for?
+
+SQL Server performance tuning is a key aspect of database management and optimization, ensuring that queries and stored procedures execute efficiently. Here are some strategies for optimizing stored procedures and improving SQL Server performance:
+
+1. Indexing
+Use Appropriate Indexes: Indexes can dramatically speed up data retrieval. Make sure you're indexing the columns that are frequently used in JOIN, WHERE, and ORDER BY clauses.
+
+Clustered vs. Non-Clustered Indexes:
+
+Use clustered indexes on columns that are frequently used in range queries (e.g., BETWEEN, >=, <=).
+
+Use non-clustered indexes for frequently queried columns.
+
+Index Maintenance: Regularly rebuild or reorganize indexes to minimize fragmentation.
+
+2. Query Optimization
+*Avoid SELECT : Select only the necessary columns in queries. This reduces the I/O overhead and improves query performance.
+
+Use INNER JOIN instead of OUTER JOIN where possible: INNER JOIN can be more efficient than LEFT JOIN or RIGHT JOIN.
+
+Use EXISTS over IN: When checking for the existence of records, EXISTS is typically more efficient than IN for subqueries.
+
+Use Proper Filtering: Ensure that filters are applied as early as possible to reduce the amount of data being processed.
+
+Avoid Scalar Functions in WHERE/JOIN: Functions in these clauses can cause performance issues because they are evaluated row by row.
+
+3. Stored Procedure Optimization
+Avoid Cursors: Cursors can lead to poor performance since they process each row individually. Where possible, try to use set-based operations.
+
+Avoid Loops: Like cursors, loops can lead to performance degradation. If you need to perform operations on multiple rows, try using UPDATE, MERGE, or INSERT operations instead.
+
+Use Temporary Tables or Table Variables Carefully: Temporary tables can be useful for breaking down complex logic, but they should be indexed appropriately and dropped when no longer needed. Table variables are usually faster but limited in their ability to be indexed.
+
+4. Execution Plans
+Analyze Execution Plans: Always analyze the execution plan of your queries and stored procedures using SQL Server Management Studio (SSMS). Look for missing indexes, costly operations, and high I/O scans.
+
+Use Query Hints: Query hints can be used to instruct the SQL Server on how to optimize a query. For example, OPTION (RECOMPILE) can force SQL Server to generate a fresh execution plan.
+
+Parameter Sniffing: SQL Server caches execution plans, which can lead to performance problems if the plan created for one set of parameters doesn't work well for others. You can use the OPTIMIZE FOR hint or OPTION (RECOMPILE) to mitigate this.
+
+5. Avoiding Deadlocks
+Locking and Isolation Levels: Review the database isolation levels and locks that are being acquired during stored procedure execution. Use READ COMMITTED SNAPSHOT isolation level or NOLOCK hints where appropriate to avoid blocking.
+
+Order of Operations: Access tables in the same order across all stored procedures to avoid deadlocks. This reduces the chances of two processes locking the same resources in opposite order.
+
+6. Reduce Network Traffic
+Batching Operations: Instead of executing many small transactions, consider grouping operations into a single batch.
+
+Avoid Large Result Sets: Be cautious about returning large result sets to the client. Use pagination techniques to return data in smaller chunks.
+
+7. Parameterization
+Parameterized Queries: Always use parameterized queries in stored procedures to avoid issues with plan caching and prevent SQL injection attacks.
+
+Use sp_executesql: This system stored procedure allows you to execute dynamic SQL with parameters, which enhances performance and security over simple EXEC statements.
+
+8. Concurrency and Locking
+Optimistic Concurrency: Where possible, consider using optimistic concurrency control (e.g., checking for row versions) instead of pessimistic locking.
+
+Lock Hints: Use appropriate locking hints, such as WITH (NOLOCK) to avoid unnecessary blocking, but use with caution as it might lead to dirty reads.
+
+9. Use SET NOCOUNT ON
+Set NOCOUNT ON in Stored Procedures: This reduces the overhead of sending the row count information for each query execution, improving performance, especially when executing large stored procedures.
+
+10. Database Maintenance Tasks
+Regular Statistics Update: Ensure that your statistics are regularly updated. SQL Server relies on statistics to generate the most optimal query plan.
+
+Database Consistency Checks: Run DBCC CHECKDB regularly to ensure data integrity.
+
+Database Shrinking: Regularly shrink the database if necessary, but don't overdo it, as it can cause fragmentation.
+
+11. SQL Server Profiler and Extended Events
+Use SQL Profiler and Extended Events: These tools can help identify bottlenecks in query execution, high CPU usage, long-running queries, and other performance issues.
+
+12. In-memory OLTP (Hekaton)
+Use In-Memory Tables: For high-performance OLTP workloads, consider using SQL Server's in-memory OLTP (Hekaton) feature. This can help with speed, especially for workloads that require high transaction rates.
+
+Example of a Performance-Tuned Stored Procedure
+Here’s an example of a stored procedure with some of these optimizations:
+
+sql
+Copy
+CREATE PROCEDURE GetCustomerOrders
+    @CustomerID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Avoid unnecessary result sets
+    SELECT OrderID, OrderDate, TotalAmount
+    FROM Orders WITH (NOLOCK)
+    WHERE CustomerID = @CustomerID
+    ORDER BY OrderDate DESC;
+
+    -- Perform additional work only if necessary
+    -- More optimized queries here
+END
+Conclusion
+By following these best practices, you can significantly improve SQL Server stored procedure performance, reduce query execution time, and enhance overall system efficiency.
+Always profile and analyze your queries, use proper indexing, and avoid unnecessary operations to ensure optimal performance.
