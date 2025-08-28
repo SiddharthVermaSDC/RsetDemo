@@ -1,0 +1,105 @@
+-----------------------------------------------------------------------------------------------------------------
+/api/Account/deposit
+-----------------------------------------------------------------------------------------------------------------
+
+Parameters:-
+
+accountNumber                      SAV395256
+string
+(query)
+
+amount              		       1000
+number($double)
+(query)
+
+
+Response body:-
+
+Deposit successful.
+
+-----------------------------------------------------------------------------------------------------------------
+/api/User/login
+-----------------------------------------------------------------------------------------------------------------
+
+Request body
+
+{
+  "username": "amitverma",
+  "password": "Secure@123"
+}
+
+Response body:-
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFtaXR2ZXJtYSIsIm5hbWVpZCI6IjIiLCJuYmYiOjE3NDAwNTM3MTQsImV4cCI6MTc0MDA1NzMxNCwiaWF0IjoxNzQwMDUzNzE0LCJpc3MiOiJ5b3VyZG9tYWluLmNvbSIsImF1ZCI6InlvdXJkb21haW4uY29tIn0.36NFpFrghh3ZEb-GOJ0HYbRLzRaiiyOmPt8ZJIX6HA8",
+  "id": 2
+}
+
+-----------------------------------------------------------------------------------------------------------------
+/api/User/register
+-----------------------------------------------------------------------------------------------------------------
+
+Request body:-
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "maidenName": "string",
+  "age": 0,
+  "gender": "string",
+  "email": "string",
+  "phone": "string",
+  "username": "string",
+  "password": "string",
+  "birthDate": "2025-02-20T12:21:43.344Z",
+  "image": "string",
+  "bloodGroup": "string",
+  "height": 0,
+  "weight": 0,
+  "eyeColor": "string",
+  "hair": {
+    "color": "string",
+    "type": "string"
+  },
+  "address": {
+    "addressLine": "string",
+    "city": "string",
+    "state": "string",
+    "stateCode": "string",
+    "postalCode": "string",
+    "country": "string"
+  },
+  "macAddress": "string",
+  "university": "string",
+  "company": {
+    "department": "string",
+    "name": "string",
+    "title": "string",
+    "address": {
+      "addressLine": "string",
+      "city": "string",
+      "state": "string",
+      "stateCode": "string",
+      "postalCode": "string",
+      "country": "string"
+    }
+  },
+  "ein": "string",
+  "ssn": "string",
+  "userAgent": "string",
+  "crypto": {
+    "coin": "string",
+    "wallet": "string",
+    "network": "string"
+  },
+  "role": "string",
+  "accountType": "string"
+}
+
+Response body:-
+
+	
+{
+  "message": "User registered successfully",
+  "userId": 3
+}

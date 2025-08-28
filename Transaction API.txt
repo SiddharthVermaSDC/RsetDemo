@@ -1,0 +1,82 @@
+----------------------------------------------------------------------------------------
+https://localhost:7182/api/User/transactions/{accountnumber}
+----------------------------------------------------------------------------------------
+
+----------------
+Parameters
+----------------
+
+Name				Description
+
+accountNumber * 		SAV569965
+
+---------------------------------------------------------------------------------------
+Response body
+---------------------------------------------------------------------------------------
+
+[
+  {
+    "transactionId": 22,
+    "accountNumber": "SAV569965",
+    "amount": 1000,
+    "transactionType": "Credited",
+    "transactionDate": "2025-02-26T10:42:19.5138845",
+    "description": "Deposit of 1000."
+  },
+  {
+    "transactionId": 24,
+    "accountNumber": "SAV569965",
+    "amount": 15000,
+    "transactionType": "Credited",
+    "transactionDate": "2025-02-26T10:51:48.3268979",
+    "description": "Deposit of 15000."
+  },
+  {
+    "transactionId": 26,
+    "accountNumber": "SAV569965",
+    "amount": 15000,
+    "transactionType": "Credited",
+    "transactionDate": "2025-02-26T10:52:06.9864454",
+    "description": "Deposit of 15000."
+  },
+  {
+    "transactionId": 28,
+    "accountNumber": "SAV569965",
+    "amount": 100,
+    "transactionType": "Credited",
+    "transactionDate": "2025-02-26T10:55:16.6212589",
+    "description": "Deposit of 100."
+  },
+  {
+    "transactionId": 29,
+    "accountNumber": "SAV569965",
+    "amount": 1000,
+    "transactionType": "Credited",
+    "transactionDate": "2025-02-26T11:24:23.6255931",
+    "description": "Deposit of 1000."
+  },
+  {
+    "transactionId": 30,
+    "accountNumber": "SAV569965",
+    "amount": 1000,
+    "transactionType": "Credited",
+    "transactionDate": "2025-02-26T11:24:39.348407",
+    "description": "Deposit of 1000."
+  },
+  {
+    "transactionId": 31,
+    "accountNumber": "SAV569965",
+    "amount": 1000,
+    "transactionType": "Debited",
+    "transactionDate": "2025-02-27T11:39:10.5848768",
+    "description": "Withdrawal of 1000."
+  },
+  {
+    "transactionId": 32,
+    "accountNumber": "SAV569965",
+    "amount": 100,
+    "transactionType": "Debited",
+    "transactionDate": "2025-02-27T11:39:29.9049018",
+    "description": "Withdrawal of 100."
+  }
+]				
